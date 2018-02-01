@@ -174,6 +174,7 @@ $arrayAddonsDB = array(
     '{8e05f2af-03be-443e-a2b5-b4375a3a1930}' => 'cookie-permissions',
     'profileswitcher@projects.binaryoutcast.com' => 'profile-switcher',
     'pmforum-smart-preview@Off.JustOff' => 'pmforum-smart-preview',
-    'halloween@whatever.fyb' => 'halloween'
+    'halloween@whatever.fyb' => 'halloween',
+    '{1f14e1f1-c178-46cd-8131-292e820a52c2}' => 'activetabcolor'
 );
 ?>
