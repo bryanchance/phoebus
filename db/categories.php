@@ -69,6 +69,7 @@ $arrayCategoryList02 = array(
     'lighttheme-mgr',
     'blank-private-browsing-page',
     'theme-tweaker',
+    'activetabcolor',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
