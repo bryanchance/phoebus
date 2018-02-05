@@ -70,6 +70,7 @@ $arrayCategoryList02 = array(
     'blank-private-browsing-page',
     'theme-tweaker',
     'activetabcolor',
+    'activetoolbarsvisibility',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
