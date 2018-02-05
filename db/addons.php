@@ -176,6 +176,6 @@ $arrayAddonsDB = array(
     'pmforum-smart-preview@Off.JustOff' => 'pmforum-smart-preview',
     'halloween@whatever.fyb' => 'halloween',
     '{1f14e1f1-c178-46cd-8131-292e820a52c2}' => 'activetabcolor',
-    '{ad063cc3-2519-42a5-9551-d1570959cb35}' => 'activetoolbarsvisibility"
+    '{ad063cc3-2519-42a5-9551-d1570959cb35}' => 'activetoolbarsvisibility'
 );
 ?>
