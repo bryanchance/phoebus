@@ -483,6 +483,7 @@ $arrayCategoryList11 = array(
     'multi-links-plus',
     'tabkit2',
     'superstart-moon-edition',
+    'lull-the-tabs',
     'externals' => array(
         'speed-start' => array(
             'id' => 'ex-010',
