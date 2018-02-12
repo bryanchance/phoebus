@@ -71,7 +71,6 @@
                 <ul>
                     <li><a href="/addon/pasteemail/">Paste Email (original)</a></li>
                     <li><a href="/addon/pasteemailplus/">Paste Email Plus</a></li>
-                    <li>Play/Pause</li>
                     <li><a href="/addon/print-pages-to-pdf/">Print pages to PDF</a></li>
                     <li>QuickPasswords</li>
                     <li>Reload Plus</li>
@@ -167,7 +166,7 @@
                 <ul>
                     <li>Add to Search Bar<br /><small>Use <a href="/addon/add-to-search-bar/">Add to Search Bar (Pseudo-Static)</a></small></li>
                     <li>Archive.is Now<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
-                    <li>Blacken<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/blacken/versions/2.1.14.1-signed" target="_blank">2.1.14</a></small></li>
+                    <li>Blacken<br /><small>Install version <a href="https://addons.mozilla.org/en-US/firefox/addon/blacken/versions/2.2.28" target="_blank">2.1.14</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Blur<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/donottrackplus/versions/4.5.1334.1-signed" target="_blank">4.5.1334.1</a></small></li>
                     <li>CacheViewer<br /><small>Use CacheViewer2 version <a href="https://addons.mozilla.org/firefox/addon/cacheviewer2/versions/1.6.1-signed.1-signed" target="_blank">1.6</a></small></li>
                     <li>Clippings<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/clippings/versions/5.0.2" target="_blank">5.0.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
@@ -178,7 +177,7 @@
                     <li>Disconnect Search<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>DownThemAll!<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/downthemall/versions/2.0.18.1-signed.1-let-fixed" target="_blank">2.0.18</a></small></li>
                     <li>DragIt (formerly Drag de Go)<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/dragit-formerly-drag-de-go/versions/3.2.1.1-signed.1-signed" target="_blank">3.2.1.1</a></small></li>
-                    <li>DuckDuckGo Plus<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/duckduckgo-for-firefox/versions/1.1.5" target="_blank">1.1.5</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
+                    <li>DuckDuckGo Privacy Essentials<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/duckduckgo-for-firefox/versions/1.1.5" target="_blank">1.1.5</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Element Hiding Helper for Adblock Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/elemhidehelper/versions/1.3.2.1-signed" target="_blank">1.3.2</a> in combination with <a href="/addon/adblock-latitude/">Adblock Latitude</a></small></li>
                     <li>External Application<br />Buttons 2<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/external-application-button/versions/0.11.1-signed.1-signed" target="_blank">0.11.1</a></small></li>
                     <li>Feedly Notifier<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/feedly-notifier/versions/2.11.2" target="_blank">2.11.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
@@ -205,6 +204,7 @@
                     <li>Open Bookmarks in New Tab<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/open-bookmarks-in-new-tab/versions/0.1.2012122901.1-signed" target="_blank">0.1.2012122901.1</a></small></li>
                     <li>Open With<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/open-with/versions/6.8.6" target="_blank">6.8.6</a></small></li>
                     <li>Personas Rotator<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/personas-rotator/versions/47.1" target="_blank">47.1</a></small></li>
+                    <li>Play/Pause<br /><small>Install version <a href="https://addons.mozilla.org/en-US/firefox/addon/play-pause/versions/1.2.11" target="_blank">1.2.11</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li> 
                     <li>PrefBar<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/prefbar/versions/6.5.0.1-signed.1-signed" target="_blank">6.5.0.1</a></small></li>
                     <li>Pure URL<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/redirect-remover/" target="_blank">Redirect Remover</a></small></li>
                     <li>QuickJava<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/quickjava/versions/2.0.4.1-signed" target="_blank">2.0.4.1</a></small></li>
