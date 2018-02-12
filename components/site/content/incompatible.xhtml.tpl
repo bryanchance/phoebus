@@ -18,7 +18,7 @@
 
 <h3>List of add-ons with known compatibility issues</h3>
 
-<p><strong>Last updated: 2018-01-22</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
+<p><strong>Last updated: 2018-02-12</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
 
 <p><strong>FIXED</strong></p>
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -165,7 +165,6 @@
         <tr>
             <td style="vertical-align:top; width:33%">
                 <ul>
-                    <li>1Password<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Add to Search Bar<br /><small>Use <a href="/addon/add-to-search-bar/">Add to Search Bar (Pseudo-Static)</a></small></li>
                     <li>Archive.is Now<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Blacken<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/blacken/versions/2.1.14.1-signed" target="_blank">2.1.14</a></small></li>
@@ -178,17 +177,17 @@
                     <li>Copy goo.gl URL<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/googl-lite/" target="_blank">goo.gl lite</a></small></li>
                     <li>Disconnect Search<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>DownThemAll!<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/downthemall/versions/2.0.18.1-signed.1-let-fixed" target="_blank">2.0.18</a></small></li>
-                    <li>DragIt (formerly Drag de Go)<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/dragit-formerly-drag-de-go/versions/3.2.1.1-signed" target="_blank">3.2.1.1</a></small></li>
+                    <li>DragIt (formerly Drag de Go)<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/dragit-formerly-drag-de-go/versions/3.2.1.1-signed.1-signed" target="_blank">3.2.1.1</a></small></li>
                     <li>DuckDuckGo Plus<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/duckduckgo-for-firefox/versions/1.1.5" target="_blank">1.1.5</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Element Hiding Helper for Adblock Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/elemhidehelper/versions/1.3.2.1-signed" target="_blank">1.3.2</a> in combination with <a href="/addon/adblock-latitude/">Adblock Latitude</a></small></li>
-                    <li>External Application<br />Buttons 2<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/external-application-button/versions/0.11.1-signed" target="_blank">0.11.1</a></small></li>
+                    <li>External Application<br />Buttons 2<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/external-application-button/versions/0.11.1-signed.1-signed" target="_blank">0.11.1</a></small></li>
                     <li>Feedly Notifier<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/feedly-notifier/versions/2.11.2" target="_blank">2.11.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>FireGestures<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/firegestures/versions/1.8.7.1-signed" target="_blank">1.8.7.1</a></small></li>
                     <li>Faster Video<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/faster-video/versions/2.1.2" target="_blank">2.1.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li> 
                     <li>Googlebar Lite<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
-                    <li>Google Privacy<br /><small>Use Google search link fix<br />version <a href="https://addons.mozilla.org/firefox/addon/google-search-link-fix/versions/1.4.9.1-signed" target="_blank">1.4.9.1</a></li>
+                    <li>Google Privacy<br /><small>Use Google search link fix<br />version <a href="https://addons.mozilla.org/firefox/addon/google-search-link-fix/versions/1.4.9.1-signed" target="_blank">1.4.9.1</a></small></li>
                     <li>gTranslate<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/s3google-translator/" target="_blank">S3.Google Translator</a></small></li>
-                    <li>Hide Caption Titlebar Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/hide-caption-titlebar-plus-sma/versions/?page=2#version-2.8.7rc" target="_blank">2.8.7rc</a></small></li>
+                    <li>Hide Caption Titlebar Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/hide-caption-titlebar-plus-sma/versions/2.8.7rc" target="_blank">2.8.7rc</a></small></li>
                     <li>History Submenus II<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/history-submenus-2/versions/3.1.2.1" target="_blank">3.1.2.1</a></small></li>
                 </ul>
             </td>
@@ -204,9 +203,9 @@
                     <li>Multifox<br /><small>Use version <a href="https://github.com/hultmann/multifox/releases/tag/2.0.7" target="_blank">2.0.7</a></small></li>
                     <li>OmniSidebar<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/omnisidebar/versions/1.4.7.1-signed" target="_blank">1.4.7.1</a></small></li>
                     <li>Open Bookmarks in New Tab<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/open-bookmarks-in-new-tab/versions/0.1.2012122901.1-signed" target="_blank">0.1.2012122901.1</a></small></li>
-                    <li>Open With<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/open-with/versions/6.8.6>6.8.6</a></small></li>
+                    <li>Open With<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/open-with/versions/6.8.6" target="_blank">6.8.6</a></small></li>
                     <li>Personas Rotator<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/personas-rotator/versions/47.1" target="_blank">47.1</a></small></li>
-                    <li>PrefBar<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/prefbar/versions/6.5.0.1-signed" target="_blank">6.5.0.1</a></small></li>
+                    <li>PrefBar<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/prefbar/versions/6.5.0.1-signed.1-signed" target="_blank">6.5.0.1</a></small></li>
                     <li>Pure URL<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/redirect-remover/" target="_blank">Redirect Remover</a></small></li>
                     <li>QuickJava<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/quickjava/versions/2.0.4.1-signed" target="_blank">2.0.4.1</a></small></li>
                     <li>Random Agent Spoofer<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/random-agent-spoofer/versions/0.9.5.5" target="_blank">0.9.5.5</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
@@ -229,11 +228,11 @@
                     <li>Simple Clocks<br /><small>Use <a href="/addon/foxclocks/">FoxClocks</a></small></li>
                     <li>Social Fixer<br /><small>Use <a href="https://socialfixer.com/download.html" target="_blank">GreaseMonkey version</a></small></li>
                     <li>Stay-Open Menu<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/stay-open-menu/versions/2.2.2rc" target="_blank">2.2.2rc</a></small></li>
-                    <li>Sticky Notes<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/sticky-notes/versions/0.4.6.1-signed" target="_blank">0.4.6.1</a></small></li>
+                    <li>Sticky Notes<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/sticky-notes/versions/0.10.24" target="_blank">0.10.24</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Stylish<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/stylish/versions/2.1.1" target="_blank">2.1.1</a></small></li>
                     <li>StylRRR<br /><small>Install using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Tab Groups Manager<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/tabgroups-manager-revived/" target="_blank">TabGroups Manager revived</a></small></li>
-                    <li>Tab Scope<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/tab-scope/versions/1.6.1.1-signed" target="_blank">1.6.1.1</a></small></li>
+                    <li>Tab Scope<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/tab-scope/versions/1.6.1.1-signed.1-signed" target="_blank">1.6.1.1</a></small></li>
                     <li>The Camelizer<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/the-camelizer-price-history-ch/versions/2.9.2" target="_blank">2.9.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Thumbnail Zoom Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/thumbnail-zoom-plus/versions/3.7" target="_blank">3.7</a></small></li>
                     <li>Twitch Now<br /><small>Install version <a href=https://addons.mozilla.org/firefox/addon/twitch-now/versions/1.1.187 target="_blank">1.1.187</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
