@@ -71,6 +71,7 @@ $arrayCategoryList02 = array(
     'theme-tweaker',
     'activetabcolor',
     'activetoolbarsvisibility',
+    'urlbar-readability',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
