@@ -178,6 +178,7 @@ $arrayAddonsDB = array(
     '{1f14e1f1-c178-46cd-8131-292e820a52c2}' => 'activetabcolor',
     '{ad063cc3-2519-42a5-9551-d1570959cb35}' => 'activetoolbarsvisibility',
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
-    '{0080df42-a94a-49f3-aa4b-867ecf837367}' => 'urlbar-readability'
+    '{0080df42-a94a-49f3-aa4b-867ecf837367}' => 'urlbar-readability',
+	'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures'
 );
 ?>
