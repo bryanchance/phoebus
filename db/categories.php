@@ -485,7 +485,8 @@ $arrayCategoryList11 = array(
     'tabkit2',
     'superstart-moon-edition',
     'lull-the-tabs',
-	'tabkit-mouse-gestures',
+    'tabkit-mouse-gestures',
+    'tabkit-tab-highlighter',
     'externals' => array(
         'speed-start' => array(
             'id' => 'ex-010',
