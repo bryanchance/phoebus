@@ -18,7 +18,7 @@
 
 <h3>List of add-ons with known compatibility issues</h3>
 
-<p><strong>Last updated: 2018-02-12</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
+<p><strong>Last updated: 2018-02-24</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
 
 <p><strong>FIXED</strong></p>
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -42,12 +42,12 @@
                     <li>DOM Inspector</li>
                     <li>Enjoy Reading</li>
                     <li><a href="/addon/febe/">FEBE</a></li>
+                    <li>Fierr</li>
                 </ul>
             </td>
 
             <td style="vertical-align:top; width:33%">
                 <ul>
-                    <li>Fierr</li>
                     <li><a href="/addon/fireftp">FireFTP</a></li>
                     <li>Fire IE</li>
                     <li><a href="/addon/firessh">FireSSH</a></li>
@@ -64,19 +64,22 @@
                     <li><a href="/addon/noscript/">NoScript Security Suite</a></li>
                     <li><a href="/addon/opie/">OPIE</a></li>
                     <li><a href="/addon/opie2/">OPIE2</a></li>
+                    <li><a href="/addon/pasteemail/">Paste Email (original)</a></li>
+                    <li><a href="/addon/pasteemailplus/">Paste Email Plus</a></li>
                 </ul>
             </td>
 
             <td style="vertical-align:top; width:33%">
                 <ul>
-                    <li><a href="/addon/pasteemail/">Paste Email (original)</a></li>
-                    <li><a href="/addon/pasteemailplus/">Paste Email Plus</a></li>
                     <li><a href="/addon/print-pages-to-pdf/">Print pages to PDF</a></li>
                     <li>QuickPasswords</li>
                     <li>Reload Plus</li>
                     <li>Secret Agent</li>
                     <li>Tab Groups Helper</li>
-                    <li><a href="/addon/tab-mix-plus">Tab Mix Plus</a></li>
+                    <li><a href="/addon/tabkit2/">Tab Kit 2</a></li>
+                    <li><a href="/addon/tabkit-mouse-gestures/">Tab Kit - Mouse Gestures</a></li>
+                    <li><a href="/addon/tabkit-tab-highlighter/">Tab Kit - Tab Highlighter</a></li>
+                    <li><a href="/addon/tab-mix-plus/">Tab Mix Plus</a></li>
                     <li><a href="/addon/thinbookmarks/">Thin Bookmarks</a></li>
                     <li><a href="/addon/thintabs/">Thin Tabs</a></li>
                     <li>TimerFox</li>
