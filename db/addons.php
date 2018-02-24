@@ -179,6 +179,7 @@ $arrayAddonsDB = array(
     '{ad063cc3-2519-42a5-9551-d1570959cb35}' => 'activetoolbarsvisibility',
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
     '{0080df42-a94a-49f3-aa4b-867ecf837367}' => 'urlbar-readability',
-	'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures'
+    'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
+    'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter'
 );
 ?>
