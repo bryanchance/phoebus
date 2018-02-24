@@ -13,30 +13,6 @@ $arrayCategoryList01 = array(
             'shortDescription' => 'Displays a country flag depicting the location of the current website&amp;s server.',
             'url' => 'https://addons.mozilla.org/firefox/addon/flagfox/'
         ),
-        'gmail-watcher' => array(
-            'id' => 'ex-001',
-            'name' => 'Gmail Watcher',
-            'shortDescription' => 'Monitors your Gmail account(s) and notifies you when you have new mail.',
-            'url' => 'https://sites.google.com/site/sonthakit/gmailwatcher'
-        ),
-        'hotmail-watcher' => array(
-            'id' => 'ex-002',
-            'name' => 'Hotmail Watcher',
-            'shortDescription' => 'Monitors your Hotmail account(s) and notifies you when you have new mail.',
-            'url' => 'https://sites.google.com/site/sonthakit/hotmailwatcher'
-        ),
-        'yahoo-mail-watcher' => array(
-            'id' => 'ex-003',
-            'name' => 'Yahoo! Mail Watcher',
-            'shortDescription' => 'Monitors your Yahoo! Mail account(s) and notifies you when you have new mail.',
-            'url' => 'https://sites.google.com/site/sonthakit/yahoomailwatcher'
-        ),
-        'yandex-mail-watcher' => array(
-            'id' => 'ex-004',
-            'name' => 'Yandex Mail Watcher',
-            'shortDescription' => 'Monitors your Yandex Mail account(s) and notifies you when you have new mail.',
-            'url' => 'https://sites.google.com/site/sonthakit/yandexmailwatcher'
-        ),
     ),
 );
 
@@ -451,12 +427,6 @@ $arrayCategoryList10 = array(
             'name' => 'Fire IE',
             'shortDescription' => 'Embeds Internet Explorer (IE) in Pale Moon to use the powerful add-ons.',
             'url' => 'https://addons.mozilla.org/firefox/addon/fire-ie/'
-        ),
-        's3google-translator' => array(
-            'id' => 'fx-285546',
-            'name' => 'S3.Google Translator',
-            'shortDescription' => 'S3.Google Translator adds the power of Google Translate’s automatic translations to your browser! ',
-            'url' => 'https://addons.mozilla.org/firefox/addon/s3google-translator/'
         ),
         'thumbnail-zoom-plus' => array(
             'id' => 'fx-337643',
