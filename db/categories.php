@@ -326,6 +326,7 @@ $arrayCategoryList08 = array(
     'config-comments',
     'scroll-to-top',
     'profile-switcher',
+    'keyconfig',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
