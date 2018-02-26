@@ -180,6 +180,7 @@ $arrayAddonsDB = array(
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
     '{0080df42-a94a-49f3-aa4b-867ecf837367}' => 'urlbar-readability',
     'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
-    'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter'
+    'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter',
+    'keyconfig@mozilla.dorando.at' => 'keyconfig'
 );
 ?>
