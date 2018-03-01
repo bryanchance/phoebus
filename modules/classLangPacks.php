@@ -29,6 +29,9 @@ class classLangPacks {
                 !file_exists($_strDatastoreBasePath . $_strPaleMoonTemp)) {
                 $_boolProcess = true;
                 $_boolRegenerate = true;
+                // Lock processing
+                $_fileTemp = fopen($_strDatastoreBasePath . $_strPaleMoonTemp, 'w');
+                fclose($_fileTemp);
             }
             elseif (file_exists($_strDatastoreBasePath . $_strPaleMoonManifest)) {
                 $_arrayLangPacks = $this->funcReadJSON($_strDatastoreBasePath . $_strPaleMoonManifest);
