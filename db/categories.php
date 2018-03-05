@@ -381,6 +381,7 @@ $arrayCategoryList09 = array(
     'fireftp',
     'firessh',
     'fireftpbutton',
+    'esrc-explorer',
     'externals' => array(
         'alertip' => array(
             'id' => 'default',

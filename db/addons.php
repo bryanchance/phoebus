@@ -181,6 +181,7 @@ $arrayAddonsDB = array(
     '{0080df42-a94a-49f3-aa4b-867ecf837367}' => 'urlbar-readability',
     'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
     'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter',
-    'keyconfig@mozilla.dorando.at' => 'keyconfig'
+    'keyconfig@mozilla.dorando.at' => 'keyconfig',
+    'esrc-explorer@Off.JustOff' => 'esrc-explorer'
 );
 ?>
