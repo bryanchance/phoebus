@@ -2,7 +2,7 @@
 
 <h3>What are Add-ons?</h3>
 <p>Add-ons let you customize Pale Moon with extra functionality or a different look.</p>
-<p>There are <em>several</em> types of add-ons. <em>Extensions</em> expand the capabilities of the browser, <em>themes</em> allow you to personalize Pale Moon's visual aesthetic, and <em>plugins</em> further extend the browser with specialized external components such as the <a href="http://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player</a>.</p>
+<p>There are <em>several</em> types of add-ons. <a href="/extensions/"><em>Extensions</em></a> expand the capabilities of the browser, <a href="/themes/"><em>themes</em></a> allow you to personalize Pale Moon's visual aesthetic, and <em>plugins</em> further extend the browser with specialized external components such as the <a href="http://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player</a>.</p>
 
 <h3>Search (Engine) Plugins</h3>
 <p>Looking for that Google Search plugin? Perhaps you want to easily search YouTube or just want to ask why Ask.com got rid of Jeeves from your browser's search box. Head over <a href="/search-plugins/">here</a> to grab your favorite search plugin. More are on the way so check back frequently!</p>
