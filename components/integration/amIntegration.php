@@ -42,8 +42,7 @@ if ($strRequestVersion != null) {
 
 // Start the logic to fulfill the request
 if ($strRequestType == 'internal') {
-    if ($strRequestReq == 'get') {
-        // This request deals primarily with Sync. It may never return.. Send blank response
+    if ($strRequestReq == 'get' || $strRequestReq == 'search') {
         funcSendHeader('xml');
         print(
             '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
@@ -51,18 +50,6 @@ if ($strRequestType == 'internal') {
             '</searchresults>'
         );
         exit();
-    }
-    elseif ($strRequestReq == 'search') {
-        funcRedirect(
-            $strAMOServicesURL .
-            $strRequestLocale .
-            $strAMOServicesAPIPath .
-            'search/' .
-            $strRequestSearchQuery .
-            '/all/10/' .
-            $strRequestOS .
-            '/' . $_strFirefoxVersion
-        );
     }
     elseif ($strRequestReq == 'recommended') {
         // This doesn't even seem to be a used request anymore.. Send blank response
@@ -81,9 +68,8 @@ if ($strRequestType == 'internal') {
 elseif ($strRequestType == 'external') {
     if ($strRequestReq == 'search') {
         funcRedirect(
-            'https://addons.mozilla.org/firefox/search?q=' .
-            $strRequestSearchQuery .
-            '&appver=' . $_strFirefoxVersion
+            'https://addons-dev.palemoon.org/search/?terms=' .
+            $strRequestSearchQuery
         );
     }
     elseif ($strRequestReq == 'recommended') {

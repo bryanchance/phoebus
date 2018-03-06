@@ -54,7 +54,8 @@ $strRequestMozXPIUpdate = funcHTTPGetValue('Moz-XPI-Update');
 // == | funcGenerateUpdateXML | ===============================================
 
 function funcGenerateUpdateXML($_addonManifest) {
-    $_strUpdateXMLHead = '<?xml version="1.0"?>' . "\n" . '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">';
+    $_strUpdateXMLHead = '<?xml version="1.0"?>' . "\n" . 
+      '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">';
     $_strUpdateXMLTail = '</RDF:RDF>';
 
     funcSendHeader('xml');
@@ -63,7 +64,7 @@ function funcGenerateUpdateXML($_addonManifest) {
 
     if ($_addonManifest != null) {
             print("\n");
-            
+
             $_strUpdateXMLBody = '<RDF:Description about="urn:mozilla:{%ADDON_TYPE}:{%ADDON_ID}">
     <em:updates>
       <RDF:Seq>
@@ -128,11 +129,7 @@ if ($strRequestAddonID == null || $strRequestAddonVersion == null ||
     }
 }
 
-// Ensure compatibility paths for older milestone versions
-require_once($arrayModules['vc']);
-$intVcResult = ToolkitVersionComparator::compare($strRequestAppVersion, $strMinimumApplicationVersion);
-
-if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || $intVcResult < 0 || ($boolDebugMode == true && $strRequestMozXPIUpdate == true)) {
+if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || ($boolDebugMode == true && $strRequestMozXPIUpdate == true)) {
     $boolMozXPIUpdate = true;
 }
 
@@ -162,7 +159,7 @@ if ($strRequestAppID == $strPaleMoonID) {
     if (array_key_exists($strRequestAddonID, $arrayLangPackDB)) {        
         funcGenerateUpdateXML($arrayLangPackDB[$strRequestAddonID]);
     }
-    // Search SQL else send to AMO
+    // Search SQL else send blank xml
     else {
         $readManifest = new classReadManifest();
         $addonManifest = $readManifest->getAddonByID($strRequestAddonID);
@@ -172,25 +169,7 @@ if ($strRequestAppID == $strPaleMoonID) {
             funcGenerateUpdateXML($addonManifest);
         }
         else {
-            if ($boolAMOKillSwitch == false) {
-                $_strFirefoxVersion = $strFirefoxVersion;
-                
-                if ($intVcResult < 0) {
-                    $_strFirefoxVersion = $strFirefoxOldVersion;
-                }
-                
-                $strAMOLink = 'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2' .
-                '&id=' . $strRequestAddonID .
-                '&version=' . $strRequestAddonVersion .
-                '&appID=' . $strFirefoxID .
-                '&appVersion=' . $_strFirefoxVersion .
-                '&compatMode=' . $strRequestCompatMode;
-                
-                funcRedirect($strAMOLink);
-            }
-            else {
-                funcGenerateUpdateXML(null);
-            }
+            funcGenerateUpdateXML(null);
         }
     }
 }
