@@ -200,6 +200,8 @@ function funcGeneratePage($_array) {
     // Merge the stylesheet and the content template into the site template
     $_strSiteTemplate = str_replace('{%PAGE_CONTENT}', $_strContentTemplate, $_strSiteTemplate);
     $_strSiteTemplate = str_replace('{%SITE_STYLESHEET}', $_strStyleSheet, $_strSiteTemplate);
+    $_randomDownloadButtonName = 'PM-' . bin2hex(openssl_random_pseudo_bytes(4));
+    $_strSiteTemplate = str_replace('dllink_green', $_randomDownloadButtonName, $_strSiteTemplate);
     unset($_strStyleSheet);
     unset($_strContentTemplate);
 
