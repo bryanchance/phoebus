@@ -48,6 +48,7 @@ $arrayCategoryList02 = array(
     'activetabcolor',
     'activetoolbarsvisibility',
     'urlbar-readability',
+    'cutebuttons',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
@@ -96,12 +97,6 @@ $arrayCategoryList02 = array(
             'name' => 'Browser Backgrounds',
             'shortDescription' => 'Browser Backgrounds is the new Pale Moon extension that lets you install backgrounds directly on your browser.',
             'url' => 'https://addons.mozilla.org/firefox/addon/browser-backgrounds/'
-        ),
-        'cutebuttons-crystal-svg' => array(
-            'id' => 'ex-026',
-            'name' => 'CuteButtons',
-            'shortDescription' => 'Adds icons to buttons and/or menus.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/cutebuttons-crystal-svg/'
         ),
         'fierr' => array(
             'id' => 'ex-030',
@@ -327,6 +322,7 @@ $arrayCategoryList08 = array(
     'scroll-to-top',
     'profile-switcher',
     'keyconfig',
+    'stylish-custom',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
@@ -345,12 +341,6 @@ $arrayCategoryList08 = array(
             'name' => 'WheelClear',
             'shortDescription' => 'Clear any text field by rolling the mousewheel over it.',
             'url' => 'https://addons.mozilla.org/firefox/addon/wheelclear/'
-        ),
-        'stylish-custom' => array(
-            'id' => 'ex-027',
-            'name' => 'Stylish-Custom',
-            'shortDescription' => 'Custom additions to Stylish extension.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/stylish-custom/'
         ),
         'greasemonkey' => array(
             'id' => 'ex-028',
