@@ -182,6 +182,8 @@ $arrayAddonsDB = array(
     'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
     'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter',
     'keyconfig@mozilla.dorando.at' => 'keyconfig',
-    'esrc-explorer@Off.JustOff' => 'esrc-explorer'
+    'esrc-explorer@Off.JustOff' => 'esrc-explorer',
+    'CuteButtonsCrystalSVG@ChoGGi' => 'cutebuttons',
+    'Stylish-Custom@ChoGGi' => 'stylish-custom'
 );
 ?>
