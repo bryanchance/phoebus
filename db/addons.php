@@ -184,6 +184,7 @@ $arrayAddonsDB = array(
     'keyconfig@mozilla.dorando.at' => 'keyconfig',
     'esrc-explorer@Off.JustOff' => 'esrc-explorer',
     'CuteButtonsCrystalSVG@ChoGGi' => 'cutebuttons',
-    'Stylish-Custom@ChoGGi' => 'stylish-custom'
+    'Stylish-Custom@ChoGGi' => 'stylish-custom',
+    'scrapbookx@addons.mozilla.org' => 'scrapbook-x'
 );
 ?>
