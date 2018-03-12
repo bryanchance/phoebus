@@ -102,9 +102,14 @@ foreach($arrayIncludes as $_value) {
 }
 unset($arrayIncludes);
 
-// classLangPacks
-$langPacks = new classLangPacks;
-$arrayLangPackDB = $langPacks->funcGetLanguagePacks();
+if ($GLOBALS['boolDebugMode'] == true) {
+    // classLangPacks
+    $langPacks = new classLangPacks;
+    $arrayLangPackDB = $langPacks->funcGetLanguagePacks();
+}
+else {
+    $arrayLangPackDB = array();
+}
 
 // Search for add-ons in our databases
 // Language Packs

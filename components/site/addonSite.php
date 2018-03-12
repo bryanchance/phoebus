@@ -321,11 +321,16 @@ elseif (startsWith($strRequestPath, '/extensions/') || startsWith($strRequestPat
     }
 }
 elseif ($strRequestPath == '/language-packs/') {
-    require_once($arrayModules['langPacks']);
-    $langPacks = new classLangPacks;
-    $arrayLangPackDB = $langPacks->funcGetLanguagePacks();
-    
-    funcGeneratePage(funcGenCategoryOtherContent('language-pack', $arrayLangPackDB));
+    if ($boolDebugMode == true) {
+        funcError('Languge Packs have been disabled when debugging due to potental conflicts in generation');
+    }
+    else {
+        require_once($arrayModules['langPacks']);
+        $langPacks = new classLangPacks;
+        $arrayLangPackDB = $langPacks->funcGetLanguagePacks();
+        
+        funcGeneratePage(funcGenCategoryOtherContent('language-pack', $arrayLangPackDB));
+    }
 }
 elseif ($strRequestPath == '/search-plugins/') {
     require_once($arrayModules['dbSearchPlugins']);
