@@ -8,16 +8,11 @@
 // This function simply relays an error message and dies
 function funcError($_value) {
     ob_get_clean();
-    header('Content-Type: text/plain', false);
-    die(
-        '=== | ' .
-        $GLOBALS['strProductName'] .
-        ' ' .
-        $GLOBALS['strApplicationVersion'] .
-        ' | ===' .
-        "\n\n" .
-        $_value
-    );
+    header('Content-Type: text/html', false);   
+    print(file_get_contents('./skin/default/template-header.xhtml'));
+    print('<h2>' . $GLOBALS['strProductName'] . $GLOBALS['strApplicationVersion'] . '</h2>');
+    print('<p>' . $_value '</p>')
+    print(file_get_contents('./skin/default/template-footer.xhtml'));
     
     // We are done here
     exit();

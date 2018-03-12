@@ -5,15 +5,15 @@
 
 // == | Setup | ===============================================================
 
-// Include basicFunctions
-require_once('./modules/basicFunctions.php');
-
 // Debug inital state
 $boolDebugMode = false;
 
 // Version
 $strProductName = 'Phoebus';
 $strApplicationVersion = '2.0.0a1';
+
+// Include basicFunctions
+require_once('./modules/basicFunctions.php');
 
 // URLs
 $strApplicationLiveURL = 'addons.palemoon.org';
