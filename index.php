@@ -57,12 +57,12 @@ $arrayComponents = array(
 
 // Define Modules
 $arrayModules = array(
-    'vc' => $strModulesPath . 'nsIVersionComparator.php',
-    'addonManifest' => $strModulesPath . 'classAddonManifest.php',
     'readManifest' => $strModulesPath . 'classReadManifest.php',
     'generatePage' => $strModulesPath . 'classGeneratePage.php',
-    'langPacks' => $strModulesPath . 'classLangPacks.php',
-    'ftpAuth' => $strModulesPath . 'classFTPAuth.php'
+    'vc' => $strModulesPath . 'nsIVersionComparator.php',
+    'addonManifest' => $strModulesPath . 'depercated/classAddonManifest.php',
+    'langPacks' => $strModulesPath . 'depercated/classLangPacks.php',
+    'ftpAuth' => $strModulesPath . 'depercated/classFTPAuth.php'
 );
 
 // Define Skins
