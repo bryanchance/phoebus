@@ -12,7 +12,7 @@ function funcError($_value) {
     print(file_get_contents('./skin/default/template-header.xhtml'));
     print('<h2>' . $GLOBALS['strProductName'] . ' ' . $GLOBALS['strApplicationVersion'] . '</h2>');
     print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
-    print('<p>' . $_value . '</p>');
+    print('<ul><li>' . $_value . '</li></ul>');
     print(file_get_contents('./skin/default/template-footer.xhtml'));
     
     // We are done here
