@@ -60,9 +60,9 @@ $arrayModules = array(
     'readManifest' => $strModulesPath . 'classReadManifest.php',
     'generatePage' => $strModulesPath . 'classGeneratePage.php',
     'vc' => $strModulesPath . 'nsIVersionComparator.php',
-    'addonManifest' => $strModulesPath . 'depercated/classAddonManifest.php',
-    'langPacks' => $strModulesPath . 'depercated/classLangPacks.php',
-    'ftpAuth' => $strModulesPath . 'depercated/classFTPAuth.php'
+    'addonManifest' => $strModulesPath . 'deprecated/classAddonManifest.php',
+    'langPacks' => $strModulesPath . 'deprecated/classLangPacks.php',
+    'ftpAuth' => $strModulesPath . 'deprecated/classFTPAuth.php'
 );
 
 // Define Skins
