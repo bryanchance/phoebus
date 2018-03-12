@@ -11,7 +11,7 @@ function funcError($_value) {
     header('Content-Type: text/html', false);   
     print(file_get_contents('./skin/default/template-header.xhtml'));
     print('<h2>' . $GLOBALS['strProductName'] . $GLOBALS['strApplicationVersion'] . '</h2>');
-    print('<p>' . $_value . '</p>')
+    print('<p>' . $_value . '</p>');
     print(file_get_contents('./skin/default/template-footer.xhtml'));
     
     // We are done here
