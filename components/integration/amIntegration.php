@@ -27,69 +27,69 @@ $_strFirefoxVersion = $strFirefoxVersion;
 
 // Sanity
 if ($strRequestType == null || $strRequestReq == null) {
-    funcError('Missing minimum arguments (type or request)');
+  funcError('Missing minimum arguments (type or request)');
 }
 
 // Maintain Pale Moon <26 Compatibility
 if ($strRequestVersion != null) {
-    require_once($arrayModules['vc']);
-    $intVcResult = ToolkitVersionComparator::compare($strRequestVersion, $strMinimumApplicationVersion);
+  require_once($arrayModules['vc']);
+  $intVcResult = ToolkitVersionComparator::compare($strRequestVersion, $strMinimumApplicationVersion);
 
-    if ($intVcResult < 0) {
-        $_strFirefoxVersion = $strFirefoxOldVersion;
-    }
+  if ($intVcResult < 0) {
+    $_strFirefoxVersion = $strFirefoxOldVersion;
+  }
 }
 
 // Start the logic to fulfill the request
 if ($strRequestType == 'internal') {
-    if ($strRequestReq == 'get' || $strRequestReq == 'search') {
-        funcSendHeader('xml');
-        print(
-            '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
-            '<searchresults total_results="0">' . "\n" .
-            '</searchresults>'
-        );
-        exit();
-    }
-    elseif ($strRequestReq == 'recommended') {
-        // This doesn't even seem to be a used request anymore.. Send blank response
-        funcSendHeader('xml');
-        print(
-            '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
-            '<addons>' . "\n" .
-            '</addons>'
-        );
-        exit();
-    }
-    else {
-        funcError('Unknown Internal Request');
-    }
+  if ($strRequestReq == 'get' || $strRequestReq == 'search') {
+    funcSendHeader('xml');
+    print(
+      '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
+      '<searchresults total_results="0">' . "\n" .
+      '</searchresults>'
+    );
+    exit();
+  }
+  elseif ($strRequestReq == 'recommended') {
+    // This doesn't even seem to be a used request anymore.. Send blank response
+    funcSendHeader('xml');
+    print(
+      '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
+      '<addons>' . "\n" .
+      '</addons>'
+    );
+    exit();
+  }
+  else {
+    funcError('Unknown Internal Request');
+  }
 }
 elseif ($strRequestType == 'external') {
-    if ($strRequestReq == 'search') {
-        funcRedirect(
-            'https://addons-dev.palemoon.org/search/?terms=' .
-            $strRequestSearchQuery
-        );
-    }
-    elseif ($strRequestReq == 'recommended') {
-        funcRedirect('/');
-    }
-    elseif ($strRequestReq == 'themes') {
-        funcRedirect('/themes/');
-    }
-    elseif ($strRequestReq == 'searchplugins') {
-        funcRedirect('/search-plugins/');
-    }
-    elseif ($strRequestReq == 'devtools') {
-        funcRedirect('/extensions/category/web-development/');
-    }
-    else {
-        funcError('Unknown External Request');
-    }
+  if ($strRequestReq == 'search') {
+    funcRedirect(
+      'https://addons-dev.palemoon.org/search/?terms=' .
+      $strRequestSearchQuery
+    );
+  }
+  elseif ($strRequestReq == 'recommended') {
+    funcRedirect('/');
+  }
+  elseif ($strRequestReq == 'themes') {
+    funcRedirect('/themes/');
+  }
+  elseif ($strRequestReq == 'searchplugins') {
+    funcRedirect('/search-plugins/');
+  }
+  elseif ($strRequestReq == 'devtools') {
+    funcRedirect('/extensions/category/web-development/');
+  }
+  else {
+    funcError('Unknown External Request');
+  }
 }
 else {
-    funcError('Unknown scope'); 
+  funcError('Unknown scope'); 
 }
 
 // ============================================================================

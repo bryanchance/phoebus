@@ -32,44 +32,44 @@ $strSkinPath = $strRootPath . '/skin/';
 
 // Define Libs
 $arrayLibs = array(
-    'smarty' => $strLibPath . 'smarty/Smarty.class.php',
-    'rdf' => $strLibPath . 'rdf/RdfComponent.php',
-    'sql' => $strLibPath . 'safemysql/safemysql.class.php'
+  'smarty' => $strLibPath . 'smarty/Smarty.class.php',
+  'rdf' => $strLibPath . 'rdf/RdfComponent.php',
+  'sql' => $strLibPath . 'safemysql/safemysql.class.php'
 );
 
 // Define Database Arrays
 $arrayDatabases = array(
-    'dbAddons' => $strDatabasesPath . 'addons.php',
-    'dbSearchPlugins' => $strDatabasesPath . 'searchPlugins.php',
-    'dbCategories' => $strDatabasesPath . 'categories.php'
+  'dbAddons' => $strDatabasesPath . 'addons.php',
+  'dbSearchPlugins' => $strDatabasesPath . 'searchPlugins.php',
+  'dbCategories' => $strDatabasesPath . 'categories.php'
 );
 
 // Define Components
 $arrayComponents = array(
-    'aus' => $strComponentsPath . 'aus/addonUpdateService.php',
-    'discover' => $strComponentsPath . 'discover/discoverPane.php',
-    'download' => $strComponentsPath . 'download/addonDownload.php',
-    'integration' => $strComponentsPath . 'integration/amIntegration.php',
-    'license' => $strComponentsPath . 'license/addonLicense.php',
-    'site' => $strComponentsPath . 'site/addonSite.php',
-    'special' => $strComponentsPath . 'special/special.php'
+  'aus' => $strComponentsPath . 'aus/addonUpdateService.php',
+  'discover' => $strComponentsPath . 'discover/discoverPane.php',
+  'download' => $strComponentsPath . 'download/addonDownload.php',
+  'integration' => $strComponentsPath . 'integration/amIntegration.php',
+  'license' => $strComponentsPath . 'license/addonLicense.php',
+  'site' => $strComponentsPath . 'site/addonSite.php',
+  'special' => $strComponentsPath . 'special/special.php'
 );
 
 // Define Modules
 $arrayModules = array(
-    'readManifest' => $strModulesPath . 'classReadManifest.php',
-    'generatePage' => $strModulesPath . 'classGeneratePage.php',
-    'vc' => $strModulesPath . 'nsIVersionComparator.php',
-    'addonManifest' => $strModulesPath . 'deprecated/classAddonManifest.php',
-    'langPacks' => $strModulesPath . 'deprecated/classLangPacks.php',
-    'ftpAuth' => $strModulesPath . 'deprecated/classFTPAuth.php'
+  'readManifest' => $strModulesPath . 'classReadManifest.php',
+  'generatePage' => $strModulesPath . 'classGeneratePage.php',
+  'vc' => $strModulesPath . 'nsIVersionComparator.php',
+  'addonManifest' => $strModulesPath . 'deprecated/classAddonManifest.php',
+  'langPacks' => $strModulesPath . 'deprecated/classLangPacks.php',
+  'ftpAuth' => $strModulesPath . 'deprecated/classFTPAuth.php'
 );
 
 // Define Skins
 $arraySkins = array(
-    'default' => $strSkinPath . 'default',
-    'palemoon' => $strSkinPath . 'palemoon',
-    'basilisk' => $strSkinPath . 'basilisk'
+  'default' => $strSkinPath . 'default',
+  'palemoon' => $strSkinPath . 'palemoon',
+  'basilisk' => $strSkinPath . 'basilisk'
 );
 
 // Known Client GUIDs
@@ -96,22 +96,22 @@ $strRequestPath = funcHTTPGetValue('path');
 
 // Define a Debug/Developer Mode
 if ($_SERVER['SERVER_NAME'] == $strApplicationDevURL) {
-    // Flip the var
-    $boolDebugMode = true;
-    
-    // Use dev URL
-    $strApplicationURL = $strApplicationDevURL;
+  // Flip the var
+  $boolDebugMode = true;
+  
+  // Use dev URL
+  $strApplicationURL = $strApplicationDevURL;
 
-    // Use RELEASE DB Arrays
-    $arrayDatabases['dbAddons'] = '../' . $strApplicationLiveURL . '/db/addons.php';
-    $arrayDatabases['dbCategories'] = '../' . $strApplicationLiveURL . '/db/categories.php';
-    
-    // Enable all errors
-    error_reporting(E_ALL);
-    ini_set("display_errors", "on");
+  // Use RELEASE DB Arrays
+  $arrayDatabases['dbAddons'] = '../' . $strApplicationLiveURL . '/db/addons.php';
+  $arrayDatabases['dbCategories'] = '../' . $strApplicationLiveURL . '/db/categories.php';
+  
+  // Enable all errors
+  error_reporting(E_ALL);
+  ini_set("display_errors", "on");
 }
 else {
-    error_reporting(0);
+  error_reporting(0);
 }
 
 // Merge Libs and Databases into Modules then unset
@@ -125,40 +125,40 @@ require_once($arrayModules['sql']);
 
 // Set inital URL-based entry points
 if ($_SERVER['REQUEST_URI'] == '/') {
-    // Root (/) won't send a component or path
-    $strRequestComponent = 'site';
-    $strRequestPath = '/';
+  // Root (/) won't send a component or path
+  $strRequestComponent = 'site';
+  $strRequestPath = '/';
 }
 elseif (startsWith($_SERVER['REQUEST_URI'], '/special/')) {
-    // The special component is well.. Special load it up
-    $strRequestComponent = 'special';
+  // The special component is well.. Special load it up
+  $strRequestComponent = 'special';
 }
 elseif ($strRequestComponent != 'site' && $strRequestPath != null) {
-    // If for some reason the SITE component was sent but no path.. 404
-    funcSendHeader('404');
+  // If for some reason the SITE component was sent but no path.. 404
+  funcSendHeader('404');
 }
 
 // Load component based on strRequestComponent
 if ($strRequestComponent != null) {
-    if (array_key_exists($strRequestComponent, $arrayComponents)) {
-        require_once($arrayComponents[$strRequestComponent]);
+  if (array_key_exists($strRequestComponent, $arrayComponents)) {
+    require_once($arrayComponents[$strRequestComponent]);
+  }
+  else {
+    if ($boolDebugMode == true) {
+      funcError($strRequestComponent . ' is an unknown component');
     }
     else {
-        if ($boolDebugMode == true) {
-            funcError($strRequestComponent . ' is an unknown component');
-        }
-        else {
-            funcSendHeader('404');
-        }
+      funcSendHeader('404');
     }
+  }
 }
 else {
-    if ($boolDebugMode == true) {
-        funcError('You did not specify a component');
-    }
-    else {
-        funcSendHeader('404');
-    }
+  if ($boolDebugMode == true) {
+    funcError('You did not specify a component');
+  }
+  else {
+    funcSendHeader('404');
+  }
 }
 
 // ============================================================================

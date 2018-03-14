@@ -12,17 +12,17 @@ $strRequest = funcHTTPGetValue('view');
 // == | Main | ================================================================
 
 if ($strRequest == null) {
-    $strRequest = 'vars';
+  $strRequest = 'vars';
 }
 
 if ($strRequest == 'all') {
-    phpinfo();
+  phpinfo();
 }
 elseif ($strRequest == 'vars') {
-    phpinfo(32);
+  phpinfo(32);
 }
 else {
-    funcError('Unknown type');
+  funcError('Unknown type');
 }
 
 // ============================================================================

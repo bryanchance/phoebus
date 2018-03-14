@@ -24,15 +24,15 @@ $isAuthorized = $FTPAuth->doAuth();
 $arrayAddonsDB = $FTPAuth->arrayFinalAddons;
 
 if ($strRequest != null) {
-    if ($FTPAuth->boolIsAdmin == true) {
-        $arrayAddonsDB = array($strRequest);
-    }
-    elseif (in_array($strRequest, $arrayAddonsDB)) {
-        $arrayAddonsDB = array($strRequest);
-    }
-    else {
-        funcSendHeader('404');
-    }
+  if ($FTPAuth->boolIsAdmin == true) {
+    $arrayAddonsDB = array($strRequest);
+  }
+  elseif (in_array($strRequest, $arrayAddonsDB)) {
+    $arrayAddonsDB = array($strRequest);
+  }
+  else {
+    funcSendHeader('404');
+  }
 }
 
 require_once($arrayModules['addonManifest']);
@@ -48,34 +48,34 @@ print('<div class="description">Did you know that Phoebus is another name for Ap
 print('<h2>Add-on status</h2>');
 
 foreach ($arrayAddonsDB as $_value) {
-    $_addonManifest = $addonManifest->funcGetManifest($_value, true);
-    $_addonErrors = $addonManifest->addonErrors;
-    $_checkURL = $_value;
-    
-    if ($strRequest == null) {
-        $_checkURL = '<a href="' . $_SERVER['REQUEST_URI'] . '?slug=' . $_value . '">' . $_value . '</a>';
-    }
-    
-    if ($_addonManifest != null) {
-        print($_checkURL . $_addonStatusOK);
-    }
-    else {
-        print($_checkURL . $_addonStatusFail);
-    }
-    
-    if ($_addonErrors != null) {
-        print('-!- ' . implode('<br />-!- ', $_addonErrors) . '<br />');
-    }
+  $_addonManifest = $addonManifest->funcGetManifest($_value, true);
+  $_addonErrors = $addonManifest->addonErrors;
+  $_checkURL = $_value;
+  
+  if ($strRequest == null) {
+    $_checkURL = '<a href="' . $_SERVER['REQUEST_URI'] . '?slug=' . $_value . '">' . $_value . '</a>';
+  }
+  
+  if ($_addonManifest != null) {
+    print($_checkURL . $_addonStatusOK);
+  }
+  else {
+    print($_checkURL . $_addonStatusFail);
+  }
+  
+  if ($_addonErrors != null) {
+    print('-!- ' . implode('<br />-!- ', $_addonErrors) . '<br />');
+  }
 }
 
 if ($strRequest != null && $_addonManifest != null) {
-    unset($_addonManifest['phoebus']);
-    //$_addonManifest['xpinstall'] = json_encode($_addonManifest['xpinstall'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-    print(
-        '<h2>Add-on data structure</h2><pre>' .
-        htmlentities(var_export($_addonManifest, true), ENT_XHTML) .
-        '</pre>'
-    );
+  unset($_addonManifest['phoebus']);
+  //$_addonManifest['xpinstall'] = json_encode($_addonManifest['xpinstall'], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  print(
+    '<h2>Add-on data structure</h2><pre>' .
+    htmlentities(var_export($_addonManifest, true), ENT_XHTML) .
+    '</pre>'
+  );
 }
 
 print(file_get_contents($strSkinPath . 'default/template-footer.xhtml'));

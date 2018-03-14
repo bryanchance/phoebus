@@ -18,10 +18,10 @@ $strSpecialComponentsPath = $strRootPath . '/components/special/';
 
 // Define Components
 $arraySpecialFunctions = array(
-    'phpinfo' => $strSpecialComponentsPath . 'phpInfo.php',
-    'addon-status' => $strSpecialComponentsPath . 'addonStatusReport.php',
-    'validate' => $strSpecialComponentsPath . 'addonValidator.php',
-    'manifest-test' => $strSpecialComponentsPath . 'manifestTest.php'
+  'phpinfo' => $strSpecialComponentsPath . 'phpInfo.php',
+  'addon-status' => $strSpecialComponentsPath . 'addonStatusReport.php',
+  'validate' => $strSpecialComponentsPath . 'addonValidator.php',
+  'manifest-test' => $strSpecialComponentsPath . 'manifestTest.php'
 );
 
 // ============================================================================
@@ -30,17 +30,17 @@ $arraySpecialFunctions = array(
 
 // URL to Function assignment
 if (startsWith($strRequestPath, '/special/')) {
-    $strStrippedPath = str_replace('/', '', str_replace('/special/', '', $strRequestPath));
-    
-    if (array_key_exists($strStrippedPath, $arraySpecialFunctions)) {
-        require_once($arraySpecialFunctions[$strStrippedPath]);
-    }
-    else {
-        funcSendHeader('404');
-    }
+  $strStrippedPath = str_replace('/', '', str_replace('/special/', '', $strRequestPath));
+  
+  if (array_key_exists($strStrippedPath, $arraySpecialFunctions)) {
+    require_once($arraySpecialFunctions[$strStrippedPath]);
+  }
+  else {
+    funcSendHeader('404');
+  }
 }
 else {
-    funcSendHeader('404');
+  funcSendHeader('404');
 }
 
 // ============================================================================
