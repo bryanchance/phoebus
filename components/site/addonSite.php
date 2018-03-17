@@ -122,7 +122,7 @@ if (startsWith($strRequestPath, '/addon/')) {
   $strStrippedPath = str_replace('/', '', str_replace('/addon/', '', $strRequestPath));  
   $arrayAddonMetadata = $addonManifest->getAddonBySlug($_strAddonSlug);
 
-  if ($_arrayAddonMetadata != null) {     
+  if ($arrayAddonMetadata != null) {     
     $arrayPage = array(
       'title' => $arrayAddonMetadata['name'],
       'contentTemplate' => $strApplicationSkin . 'single-addon.tpl',
