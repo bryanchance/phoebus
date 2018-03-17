@@ -259,11 +259,6 @@ function funcGeneratePage($_array) {
 
 // Debug Conditions
 if ($boolDebugMode == true) {
-  // Do not allow public access to the site component when on addons-dev
-  require_once($arrayModules['ftpAuth']);
-  $FTPAuth = new classFTPAuth;
-  //$isAuthorized = $FTPAuth->doAuth(true);
-
   // Git stuff
   if (file_exists('./.git/HEAD')) {
     $_strGitHead = file_get_contents('./.git/HEAD');

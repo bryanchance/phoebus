@@ -19,7 +19,6 @@ $strSpecialComponentsPath = $strRootPath . '/components/special/';
 // Define Components
 $arraySpecialFunctions = array(
   'phpinfo' => $strSpecialComponentsPath . 'phpInfo.php',
-  'addon-status' => $strSpecialComponentsPath . 'addonStatusReport.php',
   'validate' => $strSpecialComponentsPath . 'addonValidator.php',
   'manifest-test' => $strSpecialComponentsPath . 'manifestTest.php'
 );
