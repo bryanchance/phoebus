@@ -6,9 +6,8 @@
 // == | Vars | ================================================================
 
 $strApplicationSiteName = 'Pale Moon - Add-ons';
-$strApplicationSkin = 'palemoon';
+$strApplicationSkin = $arraySkins['palemoon'];
 $strContentBasePath = './components/site/content/';
-$strSkinBasePath = './skin/' . $strApplicationSkin . '/';
 $strObjDirSmartyCachePath = $strObjDirPath . 'smarty/frontend/';
 
 $strRequestSmartyDebug = funcHTTPGetValue('smartyDebug');
@@ -37,9 +36,10 @@ $arrayStaticPages = array(
 // == | funcGeneratePage | ====================================================
 
 function funcGeneratePage($_array) {
+  $_strSkinBasePath = str_replace($GLOBALS['strRootPath'], '', $GLOBALS['strApplicationSkin']);
   // Get the required template files
-  $_strSiteTemplate = file_get_contents($GLOBALS['strSkinBasePath'] . 'template.tpl');
-  $_strStyleSheet = file_get_contents($GLOBALS['strSkinBasePath'] . 'stylesheet.tpl');
+  $_strSiteTemplate = file_get_contents($GLOBALS['strApplicationSkin'] . 'template.tpl');
+  $_strStyleSheet = file_get_contents($GLOBALS['strApplicationSkin'] . 'stylesheet.tpl');
   $_strContentTemplate = file_get_contents($_array['contentTemplate']);
 
   // Merge the stylesheet and the content template into the site template
@@ -74,7 +74,7 @@ function funcGeneratePage($_array) {
   $libSmarty->assign('SITE_DOMAIN', '//' . $GLOBALS['strApplicationURL']);
   $libSmarty->assign('PAGE_TITLE', $_array['title']);
   $libSmarty->assign('PAGE_PATH', $GLOBALS['strRequestPath']);
-  $libSmarty->assign('BASE_PATH', substr($GLOBALS['strSkinBasePath'], 1));
+  $libSmarty->assign('BASE_PATH', $_strSkinBasePath);
   $libSmarty->assign('PHOEBUS_VERSION', $GLOBALS['strApplicationVersion']);
   
   if (array_key_exists('contentData', $_array)) {
@@ -125,7 +125,7 @@ if (startsWith($strRequestPath, '/addon/')) {
   if ($_arrayAddonMetadata != null) {     
     $arrayPage = array(
       'title' => $arrayAddonMetadata['name'],
-      'contentTemplate' => $strSkinBasePath . 'single-addon.tpl',
+      'contentTemplate' => $strApplicationSkin . 'single-addon.tpl',
       'contentData' => $arrayAddonMetadata
     );
   }
@@ -146,7 +146,7 @@ elseif ($strRequestPath == '/extensions/') {
     $arrayPage = array(
       'title' => 'Extensions',
       'contentType' => 'cat-all-extensions',
-      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentTemplate' => $strApplicationSkin . 'category-addons.tpl',
       'contentData' => $arrayCategory
     );
   }
@@ -185,7 +185,7 @@ elseif (startsWith($strRequestPath, '/extensions/')) {
       $arrayPage = array(
         'title' => $arrayCategoriesDB[$strStrippedPath],
         'contentType' => 'cat-extensions',
-        'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+        'contentTemplate' => $strApplicationSkin . 'category-addons.tpl',
         'contentData' => $arrayCategory
       );
     }
@@ -211,7 +211,7 @@ elseif ($strRequestPath == '/themes/') {
   if ($arrayCategory != null) {
     $arrayPage = array(
       'title' => 'Themes',
-      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentTemplate' => $strApplicationSkin . 'category-addons.tpl',
       'contentType' => 'cat-themes',
       'contentData' => $arrayCategory
     );
@@ -237,7 +237,7 @@ elseif ($strRequestPath == '/search-plugins/') {
   if ($arrayCategory != null) {
     $arrayPage = array(
       'title' => 'Search Plugins',
-      'contentTemplate' => $strSkinBasePath . 'category-searchPlugins.tpl',
+      'contentTemplate' => $strApplicationSkin . 'category-searchPlugins.tpl',
       'contentType' => 'cat-themes',
       'contentData' => $arrayCategory
     );
@@ -261,7 +261,7 @@ elseif ($strRequestPath == '/search/') {
     $arrayPage = array(
       'title' => 'No Results',
       'contentType' => 'search',
-      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentTemplate' => $strApplicationSkin . 'category-addons.tpl',
       'contentData' => null
     );
   }
@@ -269,7 +269,7 @@ elseif ($strRequestPath == '/search/') {
     $arrayPage = array(
       'title' => 'Search Results for "' . $strSearchTearms . '"',
       'contentType' => 'search',
-      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentTemplate' => $strApplicationSkin . 'category-addons.tpl',
       'contentData' => $arrayResults
     );
   }

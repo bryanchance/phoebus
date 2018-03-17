@@ -17,13 +17,8 @@
     href="{$key.url}"
 {if $key.type == 'external'}
     target="_blank"
-{if strstr($key.url, 'addons.mozilla.org')}
-    title="This add-on is hosted on Mozilla's Add-ons Site"
-    class="fake-table-row category-addon amo-externals"
-{else}
     title="This add-on is hosted independently"
     class="fake-table-row category-addon real-externals"
-{/if}
 {else}
     class="fake-table-row category-addon hosted-extensions"
 {/if}
@@ -37,11 +32,7 @@
     
     <div class="category-addon-content"><strong>{$key.name}</strong>
 {if $key.type == 'external'}
-{if strstr($key.url, 'addons.mozilla.org')}
-      <small>[AMO]</small>
-{else}
       <small>[External]</small>
-{/if}
 {/if}
       <br />
       <small>{$key.description}</small>
@@ -67,11 +58,6 @@
     <a href="/extensions/tools-and-utilities/">Tools &amp; Utilities</a><br />
     <a href="/extensions/web-development/">Web Development</a><br />
     <a href="/extensions/other/">Other</a><br />
-{if $APPLICATION_DEBUG == true}
-    <p>
-      <a href="#" id="addonHideExternals" onclick="var externals = document.getElementsByClassName('amo-externals'); for (var i = 0; i < externals.length; i++){ externals[i].style.display = 'none'; } document.getElementById('addonHideExternals').style.display = 'none';"><small>Temporarily hide all [AMO] listings</small></a><br />
-    </p>
-{/if}
   </div>
   <div class="clearfix"></div>
 {/if}

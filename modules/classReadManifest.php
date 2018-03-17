@@ -5,10 +5,6 @@
 // private methods use the global func* prefix
 // public methods do not use the func* prefix
 
-// Include creds
-// XXX: Move elsewhere
-require_once('./datastore/pm-admin/rdb.php');
-
 class classReadManifest {
   // We want a prop that warning and error messages can be sent to
   public $addonErrors;
@@ -192,6 +188,24 @@ class classReadManifest {
     // Return Add-on Manifest to orginal caller
     return $addonManifest;
     
+  }
+
+  // ------------------------------------------------------------------------
+
+  public function getSearchPlugins($arraySearchPluginsDB) {
+    $datastorePath = $GLOBALS['strApplicationDatastore'] . '/searchplugins/';
+    $arraySearchPlugins = array();
+    
+    foreach ($arraySearchPluginsDB as $_key => $_value) {
+      $arraySearchPluginXML = simplexml_load_file($datastorePath . $_value);
+      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['type'] = 'search-plugin';
+      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['id'] = $_key;
+      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['name'] = (string)$arraySearchPluginXML->ShortName;
+      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['slug'] = substr($_value, 0, -4);
+      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['icon'] = (string)$arraySearchPluginXML->Image;
+    }
+    
+    return $arraySearchPlugins;
   }
 
   // ------------------------------------------------------------------------

@@ -5,9 +5,6 @@
 
 // == | Vars | ================================================================
 
-$strAMOServicesURL = 'https://services.addons.mozilla.org/';
-$strAMOServicesAPIPath = '/firefox/api/1.5/';
-
 // Main Entry Points
 $strRequestType = funcHTTPGetValue('type');
 $strRequestReq = funcHTTPGetValue('request');
@@ -19,8 +16,6 @@ $strRequestLocale = funcHTTPGetValue('locale');
 $strRequestOS = funcHTTPGetValue('os');
 $strRequestVersion = funcHTTPGetValue('version');
 
-$_strFirefoxVersion = $strFirefoxVersion;
-
 // ============================================================================
 
 // == | Main | ================================================================
@@ -28,16 +23,6 @@ $_strFirefoxVersion = $strFirefoxVersion;
 // Sanity
 if ($strRequestType == null || $strRequestReq == null) {
   funcError('Missing minimum arguments (type or request)');
-}
-
-// Maintain Pale Moon <26 Compatibility
-if ($strRequestVersion != null) {
-  require_once($arrayModules['vc']);
-  $intVcResult = ToolkitVersionComparator::compare($strRequestVersion, $strMinimumApplicationVersion);
-
-  if ($intVcResult < 0) {
-    $_strFirefoxVersion = $strFirefoxOldVersion;
-  }
 }
 
 // Start the logic to fulfill the request
@@ -68,7 +53,7 @@ if ($strRequestType == 'internal') {
 elseif ($strRequestType == 'external') {
   if ($strRequestReq == 'search') {
     funcRedirect(
-      'https://addons-dev.palemoon.org/search/?terms=' .
+      '/search/?terms=' .
       $strRequestSearchQuery
     );
   }
@@ -82,7 +67,7 @@ elseif ($strRequestType == 'external') {
     funcRedirect('/search-plugins/');
   }
   elseif ($strRequestReq == 'devtools') {
-    funcRedirect('/extensions/category/web-development/');
+    funcRedirect('/extensions/web-development/');
   }
   else {
     funcError('Unknown External Request');

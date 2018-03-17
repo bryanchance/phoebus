@@ -37,11 +37,6 @@ $boolMozXPIUpdate = false;
 $boolAMOKillSwitch = false;
 $intVcResult = null;
 
-$arrayIncludes = array(
-  $arrayModules['langPacks'],
-  $arrayModules['readManifest'],
-);
-
 $strRequestAddonID = funcHTTPGetValue('id');
 $strRequestAddonVersion = funcHTTPGetValue('version');
 $strRequestAppID = funcHTTPGetValue('appID');
@@ -145,10 +140,7 @@ if ($boolMozXPIUpdate == false) {
 // Check for Updates
 if ($strRequestAppID == $strPaleMoonID) {
   // Include modules
-  foreach($arrayIncludes as $_value) {
-    require_once($_value);
-  }
-  unset($arrayIncludes);
+  require_once($arrayModules['readManifest']);
 
   if ($GLOBALS['boolDebugMode'] == true) {
     // classLangPacks

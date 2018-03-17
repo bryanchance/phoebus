@@ -6,8 +6,6 @@
 // == | Vars | ================================================================
 
 $arrayIncludes = array(
-  $arrayModules['dbAddons'],
-  $arrayModules['langPacks'],
   $arrayModules['dbSearchPlugins'],
   $arrayModules['readManifest'],
 );
@@ -102,20 +100,7 @@ foreach($arrayIncludes as $_value) {
 }
 unset($arrayIncludes);
 
-if ($GLOBALS['boolDebugMode'] == true) {
-  // classLangPacks
-  $langPacks = new classLangPacks;
-  $arrayLangPackDB = $langPacks->funcGetLanguagePacks();
-}
-else {
-  $arrayLangPackDB = array();
-}
-
 // Search for add-ons in our databases
-// Language Packs
-if (array_key_exists($strRequestAddonID, $arrayLangPackDB)) {
-  funcDownloadXPI($arrayLangPackDB[$strRequestAddonID], $strRequestAddonVersion);
-}
 // Search Plugins
 elseif (array_key_exists($strRequestAddonID, $arraySearchPluginsDB)) {
   funcDownloadSearchPlugin($arraySearchPluginsDB[$strRequestAddonID]);
