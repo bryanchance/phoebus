@@ -210,24 +210,6 @@ class classReadManifest {
 
   // ------------------------------------------------------------------------
 
-  public function getSearchPlugins($arraySearchPluginsDB) {
-    $datastorePath = $GLOBALS['strApplicationDatastore'] . '/searchplugins/';
-    $arraySearchPlugins = array();
-    
-    foreach ($arraySearchPluginsDB as $_key => $_value) {
-      $arraySearchPluginXML = simplexml_load_file($datastorePath . $_value);
-      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['type'] = 'search-plugin';
-      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['id'] = $_key;
-      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['name'] = (string)$arraySearchPluginXML->ShortName;
-      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['slug'] = substr($_value, 0, -4);
-      $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['icon'] = (string)$arraySearchPluginXML->Image;
-    }
-    
-    return $arraySearchPlugins;
-  }
-
-  // ------------------------------------------------------------------------
-
   // This is where we do any post-processing on an Add-on Manifest
   private function funcProcessManifest($addonManifest) {
     // Cast the int-strings to bool
