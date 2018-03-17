@@ -120,7 +120,7 @@ $addonManifest = new classReadManifest();
 // Single Add-on Pages
 if (startsWith($strRequestPath, '/addon/')) {
   $strStrippedPath = str_replace('/', '', str_replace('/addon/', '', $strRequestPath));  
-  $arrayAddonMetadata = $addonManifest->getAddonBySlug($_strAddonSlug);
+  $arrayAddonMetadata = $addonManifest->getAddonBySlug($strStrippedPath);
 
   if ($arrayAddonMetadata != null) {     
     $arrayPage = array(
