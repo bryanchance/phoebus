@@ -102,7 +102,7 @@ unset($arrayIncludes);
 
 // Search for add-ons in our databases
 // Search Plugins
-elseif (array_key_exists($strRequestAddonID, $arraySearchPluginsDB)) {
+if (array_key_exists($strRequestAddonID, $arraySearchPluginsDB)) {
   funcDownloadSearchPlugin($arraySearchPluginsDB[$strRequestAddonID]);
 }
 else {

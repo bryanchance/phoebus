@@ -142,32 +142,16 @@ if ($strRequestAppID == $strPaleMoonID) {
   // Include modules
   require_once($arrayModules['readManifest']);
 
-  if ($GLOBALS['boolDebugMode'] == true) {
-    // classLangPacks
-    $langPacks = new classLangPacks;
-    $arrayLangPackDB = $langPacks->funcGetLanguagePacks();
-  }
-  else {
-    $arrayLangPackDB = array();
-  }
-
   // Search for add-ons in our database
-  // Language Packs
-  if (array_key_exists($strRequestAddonID, $arrayLangPackDB)) {    
-    funcGenerateUpdateXML($arrayLangPackDB[$strRequestAddonID]);
+  $readManifest = new classReadManifest();
+  $addonManifest = $readManifest->getAddonByID($strRequestAddonID);
+  
+  if ($addonManifest != null) {
+    $addonManifest['release'] = $addonManifest['releaseXPI'];
+    funcGenerateUpdateXML($addonManifest);
   }
-  // Search SQL else send blank xml
   else {
-    $readManifest = new classReadManifest();
-    $addonManifest = $readManifest->getAddonByID($strRequestAddonID);
-    
-    if ($addonManifest != null) {
-      $addonManifest['release'] = $addonManifest['releaseXPI'];
-      funcGenerateUpdateXML($addonManifest);
-    }
-    else {
-      funcGenerateUpdateXML(null);
-    }
+    funcGenerateUpdateXML(null);
   }
 }
 elseif ($strRequestAppID == $strFossaMailID) {
