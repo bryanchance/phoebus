@@ -11,21 +11,21 @@
 
 // FULL GET Arguments for AUS are as follows:
 
-// [query]      [Description]     [Example]             [Used]
+// [query]          [Description]       [Example]                       [Used]
 // ----------------------------------------------------------------------------
-// reqVersion     Request Version   '2'               false
-// id         Add-on ID       '{GUID}' or 'user@host.tld'   true
-// version      Add-on Version    '1.2.3a1'             amo
-// maxAppVersion            '26.5.0'            false
-// status       Add-on Status     'userEnabled'           false
-// appID      Client ID       'toolkit@mozilla.org'       true
-// appVersion     Client Version    '27.2.1'            true
-// appOS      Client OS       'WINNT'             false
-// appABI       Client ABI      'x86-gcc3'            false
-// locale       Client Locale     'en-US'             false  
-// currentAppVersion          '27.4.2'            false
-// updateType     Update Type     '32' or '64'          false
-// compatMode     Compatibility Mode  'normal', 'ignore', or 'strict' amo
+// reqVersion       Request Version     '2'                             false
+// id               Add-on ID           '{GUID}' or 'user@host.tld'     true
+// version          Add-on Version      '1.2.3a1'                       amo
+// maxAppVersion                        '26.5.0'                        false
+// status           Add-on Status       'userEnabled'                   false
+// appID            Client ID           'toolkit@mozilla.org'           true
+// appVersion       Client Version      '27.2.1'                        true
+// appOS            Client OS           'WINNT'                         false
+// appABI           Client ABI          'x86-gcc3'                      false
+// locale           Client Locale       'en-US'                         false    
+// currentAppVersion                    '27.4.2'                        false
+// updateType       Update Type         '32' or '64'                    false
+// compatMode       Compatibility Mode  'normal', 'ignore', or 'strict' amo
 
 // See: https://developer.mozilla.org/Add-ons/Install_Manifests#updateURL
 
