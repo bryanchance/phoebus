@@ -167,6 +167,7 @@ elseif (startsWith($strRequestPath, '/extensions/')) {
   $arrayCategoriesDB = array(
     'alerts-and-updates' => 'Alerts & Updates',
     'appearance' => 'Appearance',
+    'bookmarks-and-tabs' => 'Bookmarks & Tabs',
     'download-management' => 'Download Management',
     'feeds-news-and-blogging' => 'Feeds, News, & Blogging',
     'privacy-and-security' => 'Privacy & Security',
@@ -174,8 +175,7 @@ elseif (startsWith($strRequestPath, '/extensions/')) {
     'social-and-communication' => 'Social & Communication',
     'tools-and-utilities' => 'Tools & Utilities',
     'web-development' => 'Web Development',
-    'other' => 'Other',
-    'bookmarks-and-tabs' => 'Bookmarks & Tabs',
+    'other' => 'Other'
   );
   
   if (array_key_exists($strStrippedPath, $arrayCategoriesDB))  {

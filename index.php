@@ -46,7 +46,6 @@ $arrayModules = array(
   'readManifest' => $strModulesPath . 'classReadManifest.php',
   'generatePage' => $strModulesPath . 'classGeneratePage.php',
   'vc' => $strModulesPath . 'nsIVersionComparator.php',
-  'langPacks' => $strModulesPath . 'deprecated/classLangPacks.php',
   'dbSearchPlugins' => $strDatabasesPath . 'searchPlugins.php',
   'smarty' => $strLibPath . 'smarty/Smarty.class.php',
   'rdf' => $strLibPath . 'rdf/RdfComponent.php',
