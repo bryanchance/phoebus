@@ -182,6 +182,7 @@ $arrayAddonsDB = array(
     'esrc-explorer@Off.JustOff' => 'esrc-explorer',
     'CuteButtonsCrystalSVG@ChoGGi' => 'cutebuttons',
     'Stylish-Custom@ChoGGi' => 'stylish-custom',
-    'scrapbookx@addons.mozilla.org' => 'scrapbook-x'
+    'scrapbookx@addons.mozilla.org' => 'scrapbook-x',
+    '{fd127522-63a6-40ef-a259-7f7a0ba811bc}' => 'lighttheme-maker'
 );
 ?>

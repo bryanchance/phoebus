@@ -47,6 +47,7 @@ $arrayCategoryList02 = array(
     'activetoolbarsvisibility',
     'urlbar-readability',
     'cutebuttons',
+    'lighttheme-maker',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
