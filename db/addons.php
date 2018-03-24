@@ -183,6 +183,7 @@ $arrayAddonsDB = array(
     'CuteButtonsCrystalSVG@ChoGGi' => 'cutebuttons',
     'Stylish-Custom@ChoGGi' => 'stylish-custom',
     'scrapbookx@addons.mozilla.org' => 'scrapbook-x',
-    '{fd127522-63a6-40ef-a259-7f7a0ba811bc}' => 'lighttheme-maker'
+    '{fd127522-63a6-40ef-a259-7f7a0ba811bc}' => 'lighttheme-maker',
+    'blockcont@mdsy' => 'block-content'
 );
 ?>
