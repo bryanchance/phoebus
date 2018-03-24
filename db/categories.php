@@ -203,6 +203,7 @@ $arrayCategoryList05 = array(
     'classic-password-editor',
     'sdc-moon-edition',
     'cookie-permissions',
+    'block-content',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
