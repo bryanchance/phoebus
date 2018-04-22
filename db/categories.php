@@ -129,18 +129,13 @@ $arrayCategoryList03 = array(
     'showdownloadswts',
     'downloadstatusbar-pm',
     'scrapbook-x',
+    'opendownload2',
     'externals' => array(
         'imagehost-grabber' => array(
             'id' => 'ex-005',
             'name' => 'ImageHost Grabber',
             'shortDescription' => 'Download entire galleries of hosted images with just a few clicks.',
             'url' => 'https://imagehostgrabber.com/'
-        ),
-        'opendownload2' => array(
-            'id' => 'fx-10902',
-            'name' => 'OpenDownload²',
-            'shortDescription' => 'OpenDownload² extends the "Save" dialog by a "Run" button to open the file directly.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/opendownload-10902/'
         ),
         'download-manager-s3' => array(
             'id' => 'ex-015',

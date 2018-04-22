@@ -184,6 +184,7 @@ $arrayAddonsDB = array(
     'Stylish-Custom@ChoGGi' => 'stylish-custom',
     'scrapbookx@addons.mozilla.org' => 'scrapbook-x',
     '{fd127522-63a6-40ef-a259-7f7a0ba811bc}' => 'lighttheme-maker',
-    'blockcont@mdsy' => 'block-content'
+    'blockcont@mdsy' => 'block-content',
+    '{210249CE-F888-11DD-B868-4CB456D89593}' => 'opendownload2'
 );
 ?>
