@@ -228,7 +228,7 @@ function funcGeneratePage($_array) {
     // Assign data to Smarty
     $libSmarty->assign('APPLICATION_DEBUG', $GLOBALS['boolDebugMode']);
     $libSmarty->assign('SITE_NAME', $GLOBALS['strApplicationSiteName']);
-    $libSmarty->assign('SITE_DOMAIN', '//' . $GLOBALS['strApplicationURL']);
+    $libSmarty->assign('SITE_DOMAIN', $GLOBALS['strRequestScheme'] . '://' . $GLOBALS['strApplicationURL']);
     $libSmarty->assign('PAGE_TITLE', $_array['title']);
     $libSmarty->assign('PAGE_PATH', $GLOBALS['strRequestPath']);
     $libSmarty->assign('BASE_PATH', substr($GLOBALS['strSkinBasePath'], 1));
