@@ -80,6 +80,9 @@ $strFirefoxOldVersion = '24.9';
 $strRequestComponent = funcHTTPGetValue('component');
 $strRequestPath = funcHTTPGetValue('path');
 
+// HTTP Scheme
+$strRequestScheme = $_SERVER['SCHEME'];
+
 // ============================================================================
 
 // == | Main | ================================================================
