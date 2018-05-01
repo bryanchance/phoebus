@@ -92,6 +92,7 @@ $arrayAddonsDB = array(
     'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
     'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter',
     'tabkit2@pikachuexe.amateur.hk' => 'tabkit2',
+    'tabutils@angrydroid.com' => 'tab-utilities-phoenix',
     'tgsidebar@franklindm' => 'tgsidebar',
     'themeshim@lootyhoof-pm' => 'theme-shim',
     'thinbookmarks@bonsaimind.org' => 'thinbookmarks',
