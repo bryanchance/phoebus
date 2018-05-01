@@ -22,7 +22,6 @@ $arrayCategoryList02 = array(
     'aviary-addons-manager',
     'blue-moon-linux',
     'compact-moon-options',
-    'custom-toolbars-plus',
     'history-menu-button',
     'noia-moon-options',
     'pentadactyl',
@@ -120,7 +119,6 @@ $arrayCategoryList02 = array(
 
 $arrayCategoryList03 = array(
     'title' => 'Download Management',
-    'base64-encoder',
     'image-toolbox',
     'mozarchiver',
     'complete-yt-saver',
@@ -438,6 +436,7 @@ $arrayCategoryList11 = array(
     'lull-the-tabs',
     'tabkit-mouse-gestures',
     'tabkit-tab-highlighter',
+    'tab-utilities-phoenix',
     'externals' => array(
         'speed-start' => array(
             'id' => 'ex-010',
@@ -450,12 +449,6 @@ $arrayCategoryList11 = array(
             'name' => 'Tab Groups Helper',
             'shortDescription' => 'Provides an alternative interface for the Tab Groups feature. (Requires the Tab Groups add-on!)',
             'url' => 'https://addons.mozilla.org/firefox/addon/tab-groups-helper/'
-        ),
-        'tab-utilities-phoenix' => array(
-            'id' => 'ex-014',
-            'name' => 'Tab Utilities Phoenix',
-            'shortDescription' => 'Open Bookmarks/History/URL/Search in new tabs, and more utilities for tabbed browsing.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/tab-utilities-phoenix/'
         ),
     ),
 );
