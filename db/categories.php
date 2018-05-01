@@ -22,7 +22,6 @@ $arrayCategoryList02 = array(
     'aviary-addons-manager',
     'blue-moon-linux',
     'compact-moon-options',
-    'custom-toolbars-plus',
     'history-menu-button',
     'noia-moon-options',
     'pentadactyl',
@@ -120,7 +119,6 @@ $arrayCategoryList02 = array(
 
 $arrayCategoryList03 = array(
     'title' => 'Download Management',
-    'base64-encoder',
     'image-toolbox',
     'mozarchiver',
     'complete-yt-saver',
