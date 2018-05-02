@@ -47,6 +47,10 @@ $arrayCategoryList02 = array(
     'urlbar-readability',
     'cutebuttons',
     'lighttheme-maker',
+    'cstbb',
+    'glassmyfox',
+    'hidescrollbars',
+    'newscrollbars',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
