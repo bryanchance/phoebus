@@ -100,6 +100,7 @@ $arrayAddonsDB = array(
     'thinbookmarks@bonsaimind.org' => 'thinbookmarks',
     'thintabs@bonsaimind.org' => 'thintabs',
     'throbberinurlbar@srazzano.com' => 'throbber-in-urlbar',
+    'toggleDocumentColors@darkoshi' => 'toggle-document-colors',
     'toolbarize-menu-button@wsdfhjxc' => 'toolbarize-menu-button',
     'treestyletabforpm@oinkoink' => 'treestyletabforpm',
     'ublock0-updater@Off.JustOff' => 'ublock0-updater',
