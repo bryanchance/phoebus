@@ -51,6 +51,7 @@ $arrayCategoryList02 = array(
     'glassmyfox',
     'hidescrollbars',
     'newscrollbars',
+    'toggle-document-colors',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
@@ -81,12 +82,6 @@ $arrayCategoryList02 = array(
             'name' => 'Page Colors & Fonts Buttons',
             'shortDescription' => 'Adds toolbar buttons to switch between page-defined and user-defined colors/fonts for web pages.',
             'url' => 'https://addons.mozilla.org/firefox/addon/page-colors-fonts-buttons/'
-        ),
-        'toggledocumentcolors' => array(
-            'id' => 'fx-198916',
-            'name' => 'ToggleDocumentColors',
-            'shortDescription' => 'Adds a toolbar button to switch between page-defined and user-defined colors for web pages.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/toggledocumentcolors-198916/'
         ),
         'xclear' => array(
             'id' => 'default',
