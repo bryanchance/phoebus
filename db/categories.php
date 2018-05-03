@@ -52,6 +52,8 @@ $arrayCategoryList02 = array(
     'hidescrollbars',
     'newscrollbars',
     'toggle-document-colors',
+    'classic-rsgb',
+    'noiabuttons',
     'externals' => array(
         'active-stop-button' => array(
             'id' => 'fx-2025',
