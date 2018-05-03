@@ -18,7 +18,7 @@
 
 <h3>List of add-ons with known compatibility issues</h3>
 
-<p><strong>Last updated: 2018-02-24</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
+<p><strong>Last updated: 2018-05-03</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
 
 <p><strong>FIXED</strong></p>
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -100,14 +100,14 @@
         <tr>
             <td style="vertical-align:top; width:33%">
                 <ul>
-                    <li>Add Bookmark Here &sup2;<br /><small>As <a href="/addon/add-bookmark-here-2-me/">Add Bookmark Here &sup2; (Moon Edition)</a></small></li>
+                    <li>Add Bookmark Here &sup2;<br /><small>As <a href="/addon/add-bookmark-here-2-me/">Add Bookmark Helper</a></small></li>
                     <li>Adblock Plus<br /><small>As <a href="/addon/adblock-latitude/">Adblock Latitude</a></small></li>
                     <li>All-in-One Sidebar<br /><small>As <a href="/addon/tgsidebar/">The Good 'ol Sidebar</a></small></li>
                     <li>BarTab<br /><small>As <a href="/addon/bartab-tycho/">BarTab Tycho</a></small></li>
-                    <li>Behind The Overlay<br /><small>As <a href="/addon/behind-the-overlay-me/">Behind The Overlay (Moon Edition)</a></small></li>
+                    <li>Behind The Overlay<br /><small>As <a href="/addon/behind-the-overlay-me/">Dismiss The Overlay</a></small></li>
                     <li>Change Referer Button<br /><small>As <a href="/addon/change-referer-button/">Change Referer Button</a></small></li>
                     <li>Console&sup2;<br /><small>As <a href="/addon/error-console2/">Error Console&sup2;</a></small></li>
-                    <li>colorPicker<br /><small>As <a href="/colorpicker-moonedition/">Color Identifier</a></small></li>
+                    <li>colorPicker<br /><small>As <a href="/addon/colorpicker-moonedition/">Color Identifier</a></small></li>
                     <li>Cookie Monster<br /><small>As <a href="/addon/cookiemasters/">Cookie Masters</a></small></li>
                     <li>Dark Background and Light Text<br /><small>As <a href="/addon/advanced-night-mode/">Advanced Night Mode</a></small></li>
                     <li>Dir Up<br /><small>As <a href="/addon/dir-up-moon-edition/">Directory Up</a></small></li>
@@ -126,7 +126,6 @@
                     <li>Google Translator for Firefox<br /><small>As <a href="/addon/gtranslator-moon-edition"/>Google Translator for Pale Moon</a></small></li>
                     <li>Google™ Weather<br /><small>As <a href="/addon/fcstweatherbutton/">Forecast & Weather on the Button</a></small></li>
                     <li>Greasemonkey<br /><small>As <a href="https://github.com/janekptacijarabaci/greasemonkey/releases/latest/" target="_blank">Greasemonkey for Pale Moon</a></small></li>
-                    <li>HTTPS Everywhere<br /><small>As <a href="/addon/encrypted-web/">Encrypted Web</a> (<strong>NOTE</strong>: This extension has been abandoned and will not work on Pale Moon 27 or above)</small></li>
                     <li>Image Toolbar<br /><small>As <a href="/addon/image-toolbox/">Image Toolbox</a></small></li>
                     <li>infoRSS<br /><small>As <a href="/addon/inforss-reloaded/">infoRSS Reloaded</a></small></li>
                     <li>Integrated Authentication for Firefox<br /><small>As <a href="/addon/integrated-authentication/">Integrated Authentication for SeaMonkey and Pale Moon</a></small></li>
@@ -142,12 +141,12 @@
                     <li>One Click Popup Dictionary<br /><small>As <a href="/addon/popup-english-dictionary/">Popup English Dictionary with Audio</a></small></li>
                     <li>Password Exporter<br /><small>As <a href="/addon/password-backup-tool/">Password Backup Tool</a></small></li>
                     <li>Pentadactyl<br /><small>As <a href="/addon/pentadactyl/">Pentadactyl</a></small></li>
-                    <li>Permit Cookies 2<br /><small>As <a href="/addon/cookie-permissions/">Cookie Permissions</a></small></li>
+                    <li>Permit Cookies 2<br /><small>As <a href="/addon/cookie-permissions/">Cookie Permissions Button</a></small></li>
                     <li>PDF.js<br /><small>As <a href="/addon/moon-pdf-viewer/">Moon PDF Viewer</a></small></li>
                     <li>Quick Locale Switcher<br /><small>As <a href="/addon/rosetta-qls/">Rosetta Quick Locale Switcher</a></small></li>
-                    <li>Save Images<br /><small>As <a href="/addon/save-images-me/">Save Images (Moon Edition)</a></small></li>
+                    <li>Save Images<br /><small>As <a href="/addon/save-images-me/">Save All Images</a></small></li>
                     <li>Self-Destructing Cookies<br /><small>As <a href="/addon/sdc-moon-edition/">Self-Destructing Cookies for Pale Moon</a></small></li>
-                    <li>Send Tab to Device<br /><small>As <a href="/addon/send-tab-to-device/">Send Tab to Device (Moon Edition)</a></small></li>
+                    <li>Send Tab to Device<br /><small>As <a href="/addon/send-tab-to-device/">Send Link to Device</a></small></li>
                     <li>Sidebars List<br /><small>As <a href=/addon/sidebartogglemenu/">Sidebar Toggle & Menu</a></small></li>
                     <li>Space Next<br /><small>As <a href="/addon/space-advance/">Space Advance</a></small></li>
                     <li>Splash!<br /><small>As <a href="/addon/splashed/">Splashed!</a></small></li>
