@@ -148,6 +148,7 @@ $arrayAddonsDB = array(
     '{73a6fe31-595d-460b-a920-fcc0f8843232}' => 'noscript',
     '{74c822b8-b6d5-4a81-872c-067338334a74}' => 'showdownloadswts',
     '{77d97525-e813-48d0-9bba-9c43df19baf9}' => 'winstripe-moon',
+    '{819ee8c5-b9cd-4cbc-8942-b0fbe018ab33}' => 'newmime',
     '{81c983b9-ebe4-4b2e-b98e-98e62085837f}' => 'white-moon',
     '{854a7ddc-f008-4263-b98e-98e62085837f}' => 'littlemoon',
     '{8701e193-7b0a-4871-b1f8-8f89857c46a1}' => 'translatethis',

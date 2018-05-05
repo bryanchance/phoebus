@@ -312,6 +312,7 @@ $arrayCategoryList08 = array(
     'profile-switcher',
     'keyconfig',
     'stylish-custom',
+    'newmime',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
