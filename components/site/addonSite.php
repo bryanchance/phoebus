@@ -242,7 +242,7 @@ function funcGeneratePage($_array) {
         $libSmarty->assign('PAGE_TYPE', $_array['contentType']);
     }
     
-    $libSmarty->clearCompiledTemplate('', '', 5);
+    $libSmarty->clearCompiledTemplate(null, null, 5);
     
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
