@@ -244,7 +244,7 @@ function funcGeneratePage($_array) {
     
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
-    $smarty->compile_id = str_replace('/', '_', $GLOBALS['strRequestPath']);
+    $smarty->compile_id = hash('sha1', $_strSiteTemplate);
     $libSmarty->display('string:' . $_strSiteTemplate);
 
     // We are done here...
