@@ -212,7 +212,7 @@ function funcGeneratePage($_array) {
     // Configure Smarty
     $libSmarty->caching = 0;
     $libSmarty->setCacheDir($GLOBALS['arraySmartyPaths']['cache'])
-        ->setCompileDir($GLOBALS['arraySmartyPaths']['compile'])
+        ->setCompileDir('/dev/null')
         ->setConfigDir($GLOBALS['arraySmartyPaths']['config'])
         ->addPluginsDir($GLOBALS['arraySmartyPaths']['plugins'])
         ->setTemplateDir($GLOBALS['arraySmartyPaths']['templates']);
@@ -244,7 +244,6 @@ function funcGeneratePage($_array) {
     
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
-    $smarty->compile_id = hash('sha1', $_strSiteTemplate);
     $libSmarty->display('string:' . $_strSiteTemplate);
 
     // We are done here...
