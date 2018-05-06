@@ -241,10 +241,13 @@ function funcGeneratePage($_array) {
     if (array_key_exists('contentType', $_array)) {
         $libSmarty->assign('PAGE_TYPE', $_array['contentType']);
     }
-    
+
+    // Clear old compiled templates after five minutes
+    $libSmarty->clearCompiledTemplate(null, null, 300);
+
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
-    $libSmarty->display('string:' . $_strSiteTemplate, null, str_replace('/', '_', $GLOBALS['strRequestPath']));
+    $libSmarty->display('string:' . $_strSiteTemplate);
 
     // We are done here...
     exit();
