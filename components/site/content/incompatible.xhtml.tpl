@@ -83,6 +83,7 @@
                     <li><a href="/addon/thinbookmarks/">Thin Bookmarks</a></li>
                     <li><a href="/addon/thintabs/">Thin Tabs</a></li>
                     <li>TimerFox</li>
+                    <li><a href="/addon/toggle-document-colors/">toggleDocumentColors</a></li>
                     <li>uBlock Origin</li>
                     <li>Who stole my pictures?</li>
                     <li>YesScript</li>
@@ -238,7 +239,7 @@
                     <li>The Camelizer<br /><small>Install version <a href="https://addons.mozilla.org/firefox/addon/the-camelizer-price-history-ch/versions/2.9.2" target="_blank">2.9.2</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
                     <li>Thumbnail Zoom Plus<br /><small>Use version <a href="https://addons.mozilla.org/firefox/addon/thumbnail-zoom-plus/versions/3.7" target="_blank">3.7</a></small></li>
                     <li>Twitch Now<br /><small>Install version <a href=https://addons.mozilla.org/firefox/addon/twitch-now/versions/1.1.187 target="_blank">1.1.187</a> using <a href="/addon/moon-tester-tool/">Moon Tester Tool</a></small></li>
-                    <li>Toggle Document Colors<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/toggledocumentcolors-198916/" target="_blank">ToggleDocumentColors_</a><br />or <a href="https://addons.mozilla.org/firefox/addon/page-colors-fonts-buttons/" target="_blank">Page Colors & Fonts Buttons</a></small></li>
+                    <li>Toggle Document Colors<br /><small>Use <a href="http://addons.palemoon.org/addon/toggle-document-colors/" target="_blank">toggleDocumentColors</a><br />or <a href="https://addons.mozilla.org/firefox/addon/page-colors-fonts-buttons/" target="_blank">Page Colors & Fonts Buttons</a></small></li>
                     <li>Toggle Document Fonts<br /><small>Use <a href="https://addons.mozilla.org/firefox/addon/page-colors-fonts-buttons/" target="_blank">Page Colors & Fonts Buttons</a></small></li>
                     <li>Toggle Javascript<br /><small>Use <a href="http://addons.palemoon.org/addon/togglejscript/" target="_blank">Toggle JavaScript [Enabled/Disabled]</a> or <a href="https://addons.mozilla.org/firefox/addon/quickjs/" target="_blank">QuickJS</a></small></li>
                     <li>uMatrix<br /><small>Use version <a href="https://github.com/gorhill/uMatrix/releases/tag/1.1.4" target="_blank">1.1.4</a></small></li>
