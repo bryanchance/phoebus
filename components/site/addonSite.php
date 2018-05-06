@@ -247,7 +247,7 @@ function funcGeneratePage($_array) {
     
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
-    $libSmarty->display('string:' . $_strSiteTemplate, null, str_replace('/', '_', $GLOBALS['strRequestPath']));
+    $libSmarty->display('string:' . $_strSiteTemplate);
 
     // We are done here...
     exit();
