@@ -242,8 +242,8 @@ function funcGeneratePage($_array) {
         $libSmarty->assign('PAGE_TYPE', $_array['contentType']);
     }
     
-    // Clear old compiled templates after five minutes
-    $libSmarty->clearCompiledTemplate(null, null, 300);
+    // Clear old compiled templates after one minute
+    $libSmarty->clearCompiledTemplate(null, null, 60);
     
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
