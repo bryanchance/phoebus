@@ -54,13 +54,8 @@ $arrayCategoryList02 = array(
     'toggle-document-colors',
     'classic-rsgb',
     'noiabuttons',
+    'active-stop-button',
     'externals' => array(
-        'active-stop-button' => array(
-            'id' => 'fx-2025',
-            'name' => 'Active Stop Button',
-            'shortDescription' => 'Stop gif animation with button, context menu or Esc key.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/active-stop-button/'
-        ),
         'all-menus-button' => array(
             'id' => 'fx-621692',
             'name' => 'All Menus Button',
@@ -198,6 +193,9 @@ $arrayCategoryList05 = array(
     'sdc-moon-edition',
     'cookie-permissions',
     'block-content',
+    'cookies-exterminator',
+    'modify-http-response',
+    'proxy-privacy-ruler',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
@@ -210,24 +208,6 @@ $arrayCategoryList05 = array(
             'name' => 'YesScript',
             'shortDescription' => 'YesScript lets you make a blacklist of sites that aren&amp;t allowed to run JavaScript.',
             'url' => 'https://addons.mozilla.org/firefox/addon/yesscript/'
-        ),
-        'cookies-exterminator' => array(
-            'id' => 'ex-008',
-            'name' => 'Cookies Exterminator',
-            'shortDescription' => 'Auto delete cookies, localStorage and IndexedDB objects as soon as they become unused.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/cookies-exterminator/'
-        ),
-        'modify-http-response' => array(
-            'id' => 'ex-009',
-            'name' => 'Modify HTTP Response',
-            'shortDescription' => 'Rewrite HTTP response body using search & replace patterns.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/modify-http-response/'
-        ),
-        'proxy-privacy-ruler' => array(
-            'id' => 'ex-011',
-            'name' => 'Proxy Privacy Ruler',
-            'shortDescription' => 'Restrict Proxy by Private Windows, Tabs and Domain List.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/proxy-privacy-ruler/'
         ),
         'uir-header' => array(
             'id' => 'ex-036',
@@ -439,13 +419,8 @@ $arrayCategoryList11 = array(
     'tabkit-mouse-gestures',
     'tabkit-tab-highlighter',
     'tab-utilities-phoenix',
+    'speed-start',
     'externals' => array(
-        'speed-start' => array(
-            'id' => 'ex-010',
-            'name' => 'Speed Start',
-            'shortDescription' => 'Speed Dial & Start Page with flexible layout for fast access to sites via visual bookmarks.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/speed-start/'
-        ),
         'tab-groups-helper' => array(
             'id' => 'fx-473368',
             'name' => 'Tab Groups Helper',
