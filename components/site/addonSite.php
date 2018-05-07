@@ -26,10 +26,6 @@ $arrayStaticPages = array(
         'title' => 'Your browser, your way!',
         'contentTemplate' => $strContentBasePath . 'frontpage.xhtml.tpl',
     ),
-    '/search/' => array(
-        'title' => 'Search',
-        'contentTemplate' => $strContentBasePath . 'search.xhtml.tpl',
-    ),
     '/incompatible/' => array(
         'title' => 'Known Incompatible Add-ons',
         'contentTemplate' => $strContentBasePath . 'incompatible.xhtml.tpl',
@@ -149,6 +145,7 @@ function funcGenCategoryContent($_type, $_array) {
             unset($_arrayAddonMetadata);
         }
     }
+    
     ksort($arrayCategory, SORT_NATURAL | SORT_FLAG_CASE);
     
     if ($_type == 'extension') {
@@ -323,6 +320,52 @@ elseif ($strRequestPath == '/search-plugins/') {
     require_once($arrayModules['dbSearchPlugins']);
     
     funcGeneratePage(funcGenCategoryContent('search-plugin', $arraySearchPluginsDB));
+}
+elseif ($strRequestPath == '/search/') { 
+  $strSearchTearms = funcHTTPGetValue('terms');
+  $arrayResults = null;
+  $arrayFinalResults = null;
+  
+  if ($strSearchTearms != null) {
+    require_once($strApplicationDatastore . '/pm-admin/sql-read.php');
+    require_once($arrayModules['sql']);
+    $libSQL = new SafeMysql($arraySQLCreds);
+    $arrayResults = funcCheckVar(
+      $libSQL->getCol(
+        "SELECT `slug` FROM `search` WHERE MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)",
+        $strSearchTearms
+      )
+    );
+  }
+
+  if ($strSearchTearms == null || $arrayResults == null) {
+    $arrayPage = array(
+      'title' => 'No Search Results',
+      'contentType' => 'search',
+      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentData' => null
+    );
+  }
+  else {
+    require_once($arrayModules['addonManifest']);
+    $addonManifest = new classAddonManifest();
+    foreach ($arrayResults as $_value) {
+      $arrayAddonMetadata = $addonManifest->funcGetManifest($_value);
+        if ($arrayAddonMetadata != null) {
+            $arrayFinalResults[] = $arrayAddonMetadata;
+            unset($arrayAddonMetadata);
+        }
+    }
+
+    $arrayPage = array(
+      'title' => 'Search Results for "' . $strSearchTearms . '"',
+      'contentType' => 'search',
+      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentData' => $arrayFinalResults
+    );
+  }
+  
+  funcGeneratePage($arrayPage);
 }
 else {
     if (array_key_exists($strRequestPath, $arrayStaticPages)) {
