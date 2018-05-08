@@ -56,13 +56,15 @@
                             <li class="li_nc"><a href="/incompatible/">Incompatible Extensions</a></li>
                             <li class="li_nc"><a href="/special/validate/" target="_blank">Add-on Validator Tool</a></li>
                             <li class="li_nc"><a href="http://developer.palemoon.org/" target="_blank">Add-on Development</a></li>
-                            <li class="li_nc"><a href="https://addons.mozilla.org/firefox/" target="_blank">Mozilla's Add-ons Site</a></li>
                         </ul>
                     </li>
                 </ul>
             </span>
-            <span class="alignright" style="margin-top: 2px; margin-right: 15px;">
-            </span>
+          <span class="alignright" style="margin-top: 2px; margin-right: 15px;">
+            <form id="addonSearchForm" method="get" action="/search/">
+                <input type="text" class="addonSearchInput" name="terms" placeholder="Find add-ons..." size="21" maxlength="120"> <input type="submit" value="Search" class="addonSearchButton">
+            </form>
+          </span>
             </div>
             <div id="PM-Content">
                 <div id="PM-Content-Body">

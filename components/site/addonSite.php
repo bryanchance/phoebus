@@ -26,10 +26,6 @@ $arrayStaticPages = array(
         'title' => 'Your browser, your way!',
         'contentTemplate' => $strContentBasePath . 'frontpage.xhtml.tpl',
     ),
-    '/search/' => array(
-        'title' => 'Search',
-        'contentTemplate' => $strContentBasePath . 'search.xhtml.tpl',
-    ),
     '/incompatible/' => array(
         'title' => 'Known Incompatible Add-ons',
         'contentTemplate' => $strContentBasePath . 'incompatible.xhtml.tpl',
@@ -149,6 +145,7 @@ function funcGenCategoryContent($_type, $_array) {
             unset($_arrayAddonMetadata);
         }
     }
+    
     ksort($arrayCategory, SORT_NATURAL | SORT_FLAG_CASE);
     
     if ($_type == 'extension') {
@@ -241,10 +238,10 @@ function funcGeneratePage($_array) {
     if (array_key_exists('contentType', $_array)) {
         $libSmarty->assign('PAGE_TYPE', $_array['contentType']);
     }
-
-    // Clear old compiled templates after five minutes
-    $libSmarty->clearCompiledTemplate(null, null, 300);
-
+    
+    // Clear old compiled templates after one minute
+    $libSmarty->clearCompiledTemplate(null, null, 60);
+    
     // Send html header and pass the final template to Smarty
     funcSendHeader('html');
     $libSmarty->display('string:' . $_strSiteTemplate);
@@ -259,11 +256,6 @@ function funcGeneratePage($_array) {
 
 // Debug Conditions
 if ($boolDebugMode == true) {
-    // Do not allow public access to the site component when on addons-dev
-    require_once($arrayModules['ftpAuth']);
-    $FTPAuth = new classFTPAuth;
-    $isAuthorized = $FTPAuth->doAuth(true);
-
     // Git stuff
     if (file_exists('./.git/HEAD')) {
         $_strGitHead = file_get_contents('./.git/HEAD');
@@ -328,6 +320,52 @@ elseif ($strRequestPath == '/search-plugins/') {
     require_once($arrayModules['dbSearchPlugins']);
     
     funcGeneratePage(funcGenCategoryContent('search-plugin', $arraySearchPluginsDB));
+}
+elseif ($strRequestPath == '/search/') { 
+  $strSearchTearms = funcHTTPGetValue('terms');
+  $arrayResults = null;
+  $arrayFinalResults = null;
+  
+  if ($strSearchTearms != null) {
+    require_once($strApplicationDatastore . '/pm-admin/sql-read.php');
+    require_once($arrayModules['sql']);
+    $libSQL = new SafeMysql($arraySQLCreds);
+    $arrayResults = funcCheckVar(
+      $libSQL->getCol(
+        "SELECT `slug` FROM `search` WHERE MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)",
+        $strSearchTearms
+      )
+    );
+  }
+
+  if ($strSearchTearms == null || $arrayResults == null) {
+    $arrayPage = array(
+      'title' => 'No Search Results',
+      'contentType' => 'search',
+      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentData' => null
+    );
+  }
+  else {
+    require_once($arrayModules['addonManifest']);
+    $addonManifest = new classAddonManifest();
+    foreach ($arrayResults as $_value) {
+      $arrayAddonMetadata = $addonManifest->funcGetManifest($_value);
+        if ($arrayAddonMetadata != null) {
+            $arrayFinalResults[] = $arrayAddonMetadata;
+            unset($arrayAddonMetadata);
+        }
+    }
+
+    $arrayPage = array(
+      'title' => 'Search Results for "' . $strSearchTearms . '"',
+      'contentType' => 'search',
+      'contentTemplate' => $strSkinBasePath . 'category-addons.tpl',
+      'contentData' => $arrayFinalResults
+    );
+  }
+  
+  funcGeneratePage($arrayPage);
 }
 else {
     if (array_key_exists($strRequestPath, $arrayStaticPages)) {

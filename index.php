@@ -13,7 +13,7 @@ $boolDebugMode = false;
 
 // Version
 $strProductName = 'Phoebus';
-$strApplicationVersion = '1.7.5';
+$strApplicationVersion = '1.9.2';
 
 // URLs
 $strApplicationLiveURL = 'addons.palemoon.org';
@@ -34,6 +34,7 @@ $strSkinPath = $strRootPath . '/skin/';
 $arrayLibs = array(
     'smarty' => $strLibPath . 'smarty/Smarty.class.php',
     'rdf' => $strLibPath . 'rdf/RdfComponent.php',
+    'sql' => $strLibPath . 'safemysql/safemysql.class.php'
 );
 
 // Define Database Arrays
@@ -59,7 +60,7 @@ $arrayModules = array(
     'vc' => $strModulesPath . 'nsIVersionComparator.php',
     'addonManifest' => $strModulesPath . 'classAddonManifest.php',
     'langPacks' => $strModulesPath . 'classLangPacks.php',
-    'ftpAuth' => $strModulesPath . 'classFTPAuth.php'
+    'ftpAuth' => $strModulesPath . 'classFTPAuth.php',
 );
 
 // Known Client GUIDs

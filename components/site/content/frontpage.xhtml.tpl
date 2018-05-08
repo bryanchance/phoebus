@@ -13,8 +13,5 @@
 <h3>Some of your add-ons not working since you updated to Pale Moon 27?</h3>
 <p>Please check out <a href="/incompatible/">Known Incompatible Add-ons</a>.
 
-<h3>Not finding what you are looking for?</h3>
-<p>We are working hard to populate the Pale Moon Add-ons Site but some add-ons may not yet be on the site or are not listed because they still work. If you cannot find something, please make sure to try the <a href="https://addons.mozilla.org/firefox/" target="_blank">Mozilla Add-ons Site</a>. Please note however that support within Pale Moon for the Mozilla Add-ons Site will be going away in all its forms on <strong>May 8th, 2018</strong> (2018-05-08). For more details, please <a href="https://forum.palemoon.org/viewtopic.php?f=44&t=17829" target="_blank">read here</a>.</p>
-
 <h3>Want your add-on listed here?</h3>
 <p>If you are a developer and want to have your add-on listed on the Pale Moon Add-ons Site, please see <a href="http://developer.palemoon.org/Add-ons:Site">here</a>.</p>

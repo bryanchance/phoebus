@@ -30,20 +30,9 @@ if ($strRequestType == null || $strRequestReq == null) {
     funcError('Missing minimum arguments (type or request)');
 }
 
-// Maintain Pale Moon <26 Compatibility
-if ($strRequestVersion != null) {
-    require_once($arrayModules['vc']);
-    $intVcResult = ToolkitVersionComparator::compare($strRequestVersion, $strMinimumApplicationVersion);
-
-    if ($intVcResult < 0) {
-        $_strFirefoxVersion = $strFirefoxOldVersion;
-    }
-}
-
 // Start the logic to fulfill the request
 if ($strRequestType == 'internal') {
-    if ($strRequestReq == 'get') {
-        // This request deals primarily with Sync. It may never return.. Send blank response
+    if ($strRequestReq == 'get' || $strRequestReq == 'search') {
         funcSendHeader('xml');
         print(
             '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
@@ -52,20 +41,7 @@ if ($strRequestType == 'internal') {
         );
         exit();
     }
-    elseif ($strRequestReq == 'search') {
-        funcRedirect(
-            $strAMOServicesURL .
-            $strRequestLocale .
-            $strAMOServicesAPIPath .
-            'search/' .
-            $strRequestSearchQuery .
-            '/all/10/' .
-            $strRequestOS .
-            '/' . $_strFirefoxVersion
-        );
-    }
     elseif ($strRequestReq == 'recommended') {
-        // This doesn't even seem to be a used request anymore.. Send blank response
         funcSendHeader('xml');
         print(
             '<?xml version="1.0" encoding="utf-8" ?>' . "\n" .
@@ -80,11 +56,7 @@ if ($strRequestType == 'internal') {
 }
 elseif ($strRequestType == 'external') {
     if ($strRequestReq == 'search') {
-        funcRedirect(
-            'https://addons.mozilla.org/firefox/search?q=' .
-            $strRequestSearchQuery .
-            '&appver=' . $_strFirefoxVersion
-        );
+        funcRedirect('https://addons.palemoon.org/extensions/');
     }
     elseif ($strRequestReq == 'recommended') {
         funcRedirect('/');
@@ -96,7 +68,7 @@ elseif ($strRequestType == 'external') {
         funcRedirect('/search-plugins/');
     }
     elseif ($strRequestReq == 'devtools') {
-        funcRedirect('/extensions/category/web-development/');
+        funcRedirect('/extensions/web-development/');
     }
     else {
         funcError('Unknown External Request');
