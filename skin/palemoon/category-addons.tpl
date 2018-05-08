@@ -10,9 +10,12 @@
 </p>
 {/if}
 
-{if $PAGE_TYPE == 'cat-extensions' || $PAGE_TYPE == 'cat-all-extensions' || $PAGE_TYPE == 'cat-themes'}
+{if $PAGE_TYPE == 'cat-extensions' || $PAGE_TYPE == 'cat-all-extensions' || $PAGE_TYPE == 'cat-themes' || $PAGE_TYPE == 'search'}
 <div>
 {foreach $PAGE_DATA as $key}
+{if strstr($key.url, 'addons.mozilla.org')}
+{continue}
+{/if}
     <a
         href="{$key.url}"
 {if $key.type == 'external'}
@@ -67,11 +70,6 @@
         <a href="/extensions/tools-and-utilities/">Tools &amp; Utilities</a><br />
         <a href="/extensions/web-development/">Web Development</a><br />
         <a href="/extensions/other/">Other</a><br />
-{if $APPLICATION_DEBUG == true}
-        <p>
-            <a href="#" id="addonHideExternals" onclick="var externals = document.getElementsByClassName('amo-externals'); for (var i = 0; i < externals.length; i++){ externals[i].style.display = 'none'; } document.getElementById('addonHideExternals').style.display = 'none';"><small>Temporarily hide all [AMO] listings</small></a><br />
-        </p>
-{/if}
     </div>
     <div class="clearfix"></div>
 {/if}

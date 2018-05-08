@@ -149,11 +149,7 @@ if ($strRequestAddonID == '{972ce4c6-7e08-4474-a285-3208198ce6fd}') {
     exit();
 }
 
-// Ensure compatibility paths for older milestone versions
-require_once($arrayModules['vc']);
-$intVcResult = ToolkitVersionComparator::compare($strRequestAppVersion, $strMinimumApplicationVersion);
-
-if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || $intVcResult < 0 || ($boolDebugMode == true && $strRequestMozXPIUpdate == true)) {
+if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || ($boolDebugMode == true && $strRequestMozXPIUpdate == true)) {
     $boolMozXPIUpdate = true;
 }
 
@@ -190,27 +186,9 @@ if ($strRequestAppID == $strPaleMoonID) {
     elseif (array_key_exists($strRequestAddonID, $arrayLangPackDB)) {        
         funcGenerateUpdateXML($arrayLangPackDB[$strRequestAddonID]);
     }
-    // Unknown - Send to AMO or to 'bad' update xml
+    // Unknown - Send to 'bad' update xml
     else {
-        if ($boolAMOKillSwitch == false) {
-            $_strFirefoxVersion = $strFirefoxVersion;
-            
-            if ($intVcResult < 0) {
-                $_strFirefoxVersion = $strFirefoxOldVersion;
-            }
-            
-            $strAMOLink = 'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2' .
-            '&id=' . $strRequestAddonID .
-            '&version=' . $strRequestAddonVersion .
-            '&appID=' . $strFirefoxID .
-            '&appVersion=' . $_strFirefoxVersion .
-            '&compatMode=' . $strRequestCompatMode;
-            
-            funcRedirect($strAMOLink);
-        }
-        else {
-            funcGenerateUpdateXML(null);
-        }
+      funcGenerateUpdateXML(null);
     }
 }
 elseif ($strRequestAppID == $strFossaMailID) {
