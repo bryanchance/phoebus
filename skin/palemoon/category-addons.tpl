@@ -16,7 +16,7 @@
       class="addonSearchInput"
       name="terms"
 {if $SEARCH_TERMS}
-      value="$SEARCH_TERMS"
+      value="{$SEARCH_TERMS}"
 {else}
       placeholder="Find add-ons..."
 {/if}
