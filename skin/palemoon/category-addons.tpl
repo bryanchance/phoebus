@@ -9,7 +9,7 @@
   Themes allow you to change the look and feel of the user interface and personalize it to your tastes. A theme can simply change the colors of the UI or it can change every aspect of its appearance.
 </p>
 {elseif $PAGE_TYPE == 'search'}
-<p>
+<p style="margin-left: 20px;>
   <form id="addonSearchForm" method="get" action="/search/">
     <input
       type="text"
@@ -19,8 +19,8 @@
       value="{$SEARCH_TERMS}"
 {/if}
       placeholder="Find add-ons..."
-      size="42"
-      maxlength="120"
+      size="44"
+      maxlength="64"
     >
     <input type="submit" value="Search" class="addonSearchButton">
   </form>
