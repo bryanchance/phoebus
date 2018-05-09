@@ -17,9 +17,8 @@
       name="terms"
 {if $SEARCH_TERMS}
       value="{$SEARCH_TERMS}"
-{else}
-      placeholder="Find add-ons..."
 {/if}
+      placeholder="Find add-ons..."
       size="42"
       maxlength="120"
     >
