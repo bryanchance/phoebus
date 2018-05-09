@@ -56,7 +56,6 @@
               <li class="li_nc"><a href="/incompatible/">Incompatible Extensions</a></li>
               <li class="li_nc"><a href="/special/validate/" target="_blank">Add-on Validator Tool</a></li>
               <li class="li_nc"><a href="http://developer.palemoon.org/" target="_blank">Add-on Development</a></li>
-              <li class="li_nc"><a href="https://addons.mozilla.org/firefox/" target="_blank">Mozilla's Add-ons Site</a></li>
             </ul>
           </li>
         </ul>
