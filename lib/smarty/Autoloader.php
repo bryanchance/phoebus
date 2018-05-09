@@ -11,12 +11,11 @@
  * @package    Smarty
  * @author     Uwe Tews
  *             Usage:
- *                  require_once '...path/Autoloader.php';
- *                  Smarty_Autoloader::register();
- *             or
- *                  include '...path/bootstarp.php';
- *
- *                  $smarty = new Smarty();
+ *             require_once '...path/Autoloader.php';
+ *             Smarty_Autoloader::register();
+ *             $smarty = new Smarty();
+ *             Note:       This autoloader is not needed if you use Composer.
+ *             Composer will automatically add the classes of the Smarty package to it common autoloader.
  */
 class Smarty_Autoloader
 {
@@ -25,14 +24,14 @@ class Smarty_Autoloader
      *
      * @var string
      */
-    public static $SMARTY_DIR = null;
+    public static $SMARTY_DIR = '';
 
     /**
      * Filepath to Smarty internal plugins
      *
      * @var string
      */
-    public static $SMARTY_SYSPLUGINS_DIR = null;
+    public static $SMARTY_SYSPLUGINS_DIR = '';
 
     /**
      * Array with Smarty core classes and their filename
@@ -90,17 +89,15 @@ class Smarty_Autoloader
      */
     public static function autoload($class)
     {
-        if ($class[ 0 ] !== 'S' && strpos($class, 'Smarty') !== 0) {
+        $_class = strtolower($class);
+        if (strpos($_class, 'smarty') !== 0) {
             return;
         }
-        $_class = strtolower($class);
-        if (isset(self::$rootClasses[ $_class ])) {
+        $file = self::$SMARTY_SYSPLUGINS_DIR . $_class . '.php';
+        if (is_file($file)) {
+            include $file;
+        } else if (isset(self::$rootClasses[ $_class ])) {
             $file = self::$SMARTY_DIR . self::$rootClasses[ $_class ];
-            if (is_file($file)) {
-                include $file;
-            }
-        } else {
-            $file = self::$SMARTY_SYSPLUGINS_DIR . $_class . '.php';
             if (is_file($file)) {
                 include $file;
             }

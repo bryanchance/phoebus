@@ -31,7 +31,7 @@ class Smarty_Internal_Method_UnregisterResource
      */
     public function unregisterResource(Smarty_Internal_TemplateBase $obj, $type)
     {
-        $smarty = $obj->_getSmartyObj();
+        $smarty = isset($obj->smarty) ? $obj->smarty : $obj;
         if (isset($smarty->registered_resources[ $type ])) {
             unset($smarty->registered_resources[ $type ]);
         }

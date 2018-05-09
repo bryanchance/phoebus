@@ -33,7 +33,7 @@ class Smarty_Internal_Method_AssignGlobal
         if ($varName != '') {
             Smarty::$global_tpl_vars[ $varName ] = new Smarty_Variable($value, $nocache);
             $ptr = $data;
-            while ($ptr->_isTplObj()) {
+            while ($ptr->_objType == 2) {
                 $ptr->tpl_vars[ $varName ] = clone Smarty::$global_tpl_vars[ $varName ];
                 $ptr = $ptr->parent;
             }

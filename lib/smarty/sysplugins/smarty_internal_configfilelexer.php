@@ -29,13 +29,6 @@ class Smarty_Internal_Configfilelexer
     public $data;
 
     /**
-     * Source length
-     *
-     * @var int
-     */
-    public $dataLength = null;
-
-    /**
      * byte counter
      *
      * @var int
@@ -116,7 +109,7 @@ class Smarty_Internal_Configfilelexer
     /**
      * storage for assembled token patterns
      *
-     * @var string
+     * @var sring
      */
     private $yy_global_pattern1 = null;
 
@@ -146,8 +139,9 @@ class Smarty_Internal_Configfilelexer
      */
     function __construct($data, Smarty_Internal_Config_File_Compiler $compiler)
     {
+        // set instance object
+        self::instance($this);
         $this->data = $data . "\n"; //now all lines are \n-terminated
-        $this->dataLength = strlen($data);
         $this->counter = 0;
         if (preg_match('/^\xEF\xBB\xBF/', $this->data, $match)) {
             $this->counter += strlen($match[ 0 ]);
@@ -156,6 +150,15 @@ class Smarty_Internal_Configfilelexer
         $this->compiler = $compiler;
         $this->smarty = $compiler->smarty;
         $this->configBooleanize = $this->smarty->config_booleanize;
+    }
+
+    public static function &instance($new_instance = null)
+    {
+        static $instance = null;
+        if (isset($new_instance) && is_object($new_instance)) {
+            $instance = $new_instance;
+        }
+        return $instance;
     }
 
     public function PrintTrace()
@@ -220,19 +223,17 @@ class Smarty_Internal_Configfilelexer
             $this->yy_global_pattern1 =
                 "/\G(#|;)|\G(\\[)|\G(\\])|\G(=)|\G([ \t\r]+)|\G(\n)|\G([0-9]*[a-zA-Z_]\\w*)|\G([\S\s])/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern1, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -254,7 +255,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token
@@ -327,19 +328,17 @@ class Smarty_Internal_Configfilelexer
             $this->yy_global_pattern2 =
                 "/\G([ \t\r]+)|\G(\\d+\\.\\d+(?=[ \t\r]*[\n#;]))|\G(\\d+(?=[ \t\r]*[\n#;]))|\G(\"\"\")|\G('[^'\\\\]*(?:\\\\.[^'\\\\]*)*'(?=[ \t\r]*[\n#;]))|\G(\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"(?=[ \t\r]*[\n#;]))|\G([a-zA-Z]+(?=[ \t\r]*[\n#;]))|\G([^\n]+?(?=[ \t\r]*\n))|\G(\n)/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern2, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -361,7 +360,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token
@@ -453,19 +452,17 @@ class Smarty_Internal_Configfilelexer
         if (!isset($this->yy_global_pattern3)) {
             $this->yy_global_pattern3 = "/\G([^\n]+?(?=[ \t\r]*\n))/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern3, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -487,7 +484,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token
@@ -515,19 +512,17 @@ class Smarty_Internal_Configfilelexer
         if (!isset($this->yy_global_pattern4)) {
             $this->yy_global_pattern4 = "/\G([ \t\r]+)|\G([^\n]+?(?=[ \t\r]*\n))|\G(\n)/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern4, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -549,7 +544,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token
@@ -589,19 +584,17 @@ class Smarty_Internal_Configfilelexer
         if (!isset($this->yy_global_pattern5)) {
             $this->yy_global_pattern5 = "/\G(\\.)|\G(.*?(?=[\.=[\]\r\n]))/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern5, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -623,7 +616,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token
@@ -657,19 +650,17 @@ class Smarty_Internal_Configfilelexer
         if (!isset($this->yy_global_pattern6)) {
             $this->yy_global_pattern6 = "/\G(\"\"\"(?=[ \t\r]*[\n#;]))|\G([\S\s])/isS";
         }
-        if (!isset($this->dataLength)) {
-            $this->dataLength = strlen($this->data);
-        }
-        if ($this->counter >= $this->dataLength) {
+        if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
 
         do {
             if (preg_match($this->yy_global_pattern6, $this->data, $yymatches, null, $this->counter)) {
-                if (!isset($yymatches[ 0 ][ 1 ])) {
-                    $yymatches = preg_grep("/(.|\s)+/", $yymatches);
+                $yysubmatches = $yymatches;
+                if (strlen($yysubmatches[ 0 ]) < 200) {
+                    $yymatches = preg_grep("/(.|\s)+/", $yysubmatches);
                 } else {
-                    $yymatches = array_filter($yymatches);
+                    $yymatches = array_filter($yymatches, 'strlen');
                 }
                 if (empty($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' . ' an empty string.  Input "' .
@@ -691,7 +682,7 @@ class Smarty_Internal_Configfilelexer
                 } elseif ($r === false) {
                     $this->counter += strlen($this->value);
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= $this->dataLength) {
+                    if ($this->counter >= strlen($this->data)) {
                         return false; // end of input
                     }
                     // skip this token

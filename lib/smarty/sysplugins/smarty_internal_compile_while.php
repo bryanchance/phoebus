@@ -41,6 +41,7 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
         if (is_array($parameter[ 'if condition' ])) {
             if ($compiler->nocache) {
+                $_nocache = ',true';
                 // create nocache var to make it know for further compiling
                 if (is_array($parameter[ 'if condition' ][ 'var' ])) {
                     $var = $parameter[ 'if condition' ][ 'var' ][ 'var' ];
@@ -48,19 +49,20 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase
                     $var = $parameter[ 'if condition' ][ 'var' ];
                 }
                 $compiler->setNocacheInVariable($var);
+            } else {
+                $_nocache = '';
             }
-            $prefixVar = $compiler->getNewPrefixVariable();
             $assignCompiler = new Smarty_Internal_Compile_Assign();
             $assignAttr = array();
-            $assignAttr[][ 'value' ] = "{$prefixVar}";
+            $assignAttr[][ 'value' ] = $parameter[ 'if condition' ][ 'value' ];
             if (is_array($parameter[ 'if condition' ][ 'var' ])) {
                 $assignAttr[][ 'var' ] = $parameter[ 'if condition' ][ 'var' ][ 'var' ];
-                $_output = "<?php while ({$prefixVar} = " . $parameter[ 'if condition' ][ 'value' ] . ") {?>";
+                $_output = "<?php while (" . $parameter[ 'if condition' ][ 'value' ] . ") {?>";
                 $_output .= $assignCompiler->compile($assignAttr, $compiler,
                                                      array('smarty_internal_index' => $parameter[ 'if condition' ][ 'var' ][ 'smarty_internal_index' ]));
             } else {
                 $assignAttr[][ 'var' ] = $parameter[ 'if condition' ][ 'var' ];
-                $_output = "<?php while ({$prefixVar} = " . $parameter[ 'if condition' ][ 'value' ] . ") {?>";
+                $_output = "<?php while (" . $parameter[ 'if condition' ][ 'value' ] . ") {?>";
                 $_output .= $assignCompiler->compile($assignAttr, $compiler, array());
             }
 

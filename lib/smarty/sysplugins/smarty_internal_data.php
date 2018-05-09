@@ -14,12 +14,10 @@
  * @package    Smarty
  * @subpackage Template
  *
- * @property int    $scope
- * @property Smarty $smarty
+ * @property int $scope
  * The following methods will be dynamically loaded by the extension handler when they are called.
  * They are located in a corresponding Smarty_Internal_Method_xxxx class
  *
- * @method mixed getConfigVariable(string $varName, bool $errorEnable = true)
  * @method mixed getConfigVars(string $varName = null, bool $searchParents = true)
  * @method mixed getGlobal(string $varName = null)
  * @method mixed getStreamVariable(string $variable)
@@ -101,7 +99,7 @@ class Smarty_Internal_Data
             }
         } else {
             if ($tpl_var != '') {
-                if ($this->_objType === 2) {
+                if ($this->_objType == 2) {
                     /** @var  Smarty_Internal_Template $this */
                     $this->_assignInScope($tpl_var, $value, $nocache);
                 } else {
@@ -227,46 +225,6 @@ class Smarty_Internal_Data
         if (isset($this->parent)) {
             $this->parent->_mergeVars($data);
         }
-    }
-
-    /**
-     * Return true if this instance is a Data obj
-     *
-     * @return bool
-     */
-    public function _isDataObj()
-    {
-        return $this->_objType === 4;
-    }
-
-    /**
-     * Return true if this instance is a template obj
-     *
-     * @return bool
-     */
-    public function _isTplObj()
-    {
-        return $this->_objType === 2;
-    }
-
-    /**
-     * Return true if this instance is a Smarty obj
-     *
-     * @return bool
-     */
-    public function _isSmartyObj()
-    {
-        return $this->_objType === 1;
-    }
-
-    /**
-     * Get Smarty object
-     *
-     * @return Smarty
-     */
-    public function _getSmartyObj()
-    {
-        return $this->smarty;
     }
 
     /**

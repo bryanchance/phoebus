@@ -231,7 +231,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_Compile_Private_Fo
         if (isset($itemAttr[ 'last' ])) {
             $output .= "{$itemVar}->last = {$itemVar}->iteration == {$itemVar}->total;\n";
         }
-        if (isset($foreachVar)) {
+        if ($this->isNamed) {
             if (isset($namedAttr[ 'iteration' ])) {
                 $output .= "{$foreachVar}->value['iteration']++;\n";
             }
@@ -251,18 +251,6 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_Compile_Private_Fo
         $output .= "?>";
 
         return $output;
-    }
-
-    /**
-     * Compiles code for to restore saved template variables
-     *
-     * @param int $levels number of levels to restore
-     *
-     * @return string compiled code
-     */
-    public function compileRestore($levels)
-    {
-        return "\$_smarty_tpl->smarty->ext->_foreach->restore(\$_smarty_tpl, {$levels});\n";
     }
 }
 
@@ -335,9 +323,7 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase
             $output .= "}\n";
         }
         $output .= "}\n";
-        /* @var Smarty_Internal_Compile_Foreach $foreachCompiler */
-        $foreachCompiler = $compiler->getTagCompiler('foreach');
-        $output .= $foreachCompiler->compileRestore(1);
+        $output .= "\$_smarty_tpl->smarty->ext->_foreach->restore(\$_smarty_tpl);\n";
         $output .= "?>\n";
         return $output;
     }

@@ -111,11 +111,11 @@ class Smarty_Internal_Config_File_Compiler
             $this->smarty->_debug->start_compile($this->template);
         }
         // init the lexer/parser to compile the config file
-        /* @var Smarty_Internal_ConfigFileLexer $this->lex */
-        $this->lex = new $this->lexer_class(str_replace(array("\r\n", "\r"), "\n", $template->source->getContent()) . "\n",
+        /* @var Smarty_Internal_ConfigFileLexer $lex */
+        $lex = new $this->lexer_class(str_replace(array("\r\n", "\r"), "\n", $template->source->getContent()) . "\n",
                                       $this);
-        /* @var Smarty_Internal_ConfigFileParser $this->parser */
-        $this->parser = new $this->parser_class($this->lex, $this);
+        /* @var Smarty_Internal_ConfigFileParser $parser */
+        $parser = new $this->parser_class($lex, $this);
 
         if (function_exists('mb_internal_encoding') && ((int) ini_get('mbstring.func_overload')) & 2) {
             $mbEncoding = mb_internal_encoding();
@@ -125,17 +125,17 @@ class Smarty_Internal_Config_File_Compiler
         }
 
         if ($this->smarty->_parserdebug) {
-            $this->parser->PrintTrace();
+            $parser->PrintTrace();
         }
         // get tokens from lexer and parse them
-        while ($this->lex->yylex()) {
+        while ($lex->yylex()) {
             if ($this->smarty->_parserdebug) {
-                echo "<br>Parsing  {$this->parser->yyTokenName[$this->lex->token]} Token {$this->lex->value} Line {$this->lex->line} \n";
+                echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
             }
-            $this->parser->doParse($this->lex->token, $this->lex->value);
+            $parser->doParse($lex->token, $lex->value);
         }
         // finish parsing process
-        $this->parser->doParse(0, 0);
+        $parser->doParse(0, 0);
 
         if ($mbEncoding) {
             mb_internal_encoding($mbEncoding);
@@ -166,6 +166,8 @@ class Smarty_Internal_Config_File_Compiler
      */
     public function trigger_config_file_error($args = null)
     {
+        $this->lex = Smarty_Internal_Configfilelexer::instance();
+        $this->parser = Smarty_Internal_Configfileparser::instance();
         // get config source line which has error
         $line = $this->lex->line;
         if (isset($args)) {

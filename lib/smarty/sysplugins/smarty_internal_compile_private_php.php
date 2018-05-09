@@ -42,6 +42,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
         $compiler->has_code = false;
         if ($_attr[ 'type' ] == 'xml') {
             $compiler->tag_nocache = true;
+            $save = $compiler->template->compiled->has_nocache_code;
             $output = addcslashes($_attr[ 'code' ], "'\\");
             $compiler->parser->current_buffer->append_subtree($compiler->parser,
                                                               new Smarty_Internal_ParseTree_Tag($compiler->parser,
@@ -49,6 +50,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
                                                                                                                               $output .
                                                                                                                               "';?>",
                                                                                                                               true)));
+            $compiler->template->compiled->has_nocache_code = $save;
             return '';
         }
         if ($_attr[ 'type' ] != 'tag') {
@@ -63,6 +65,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
                 return '';
             } elseif ($compiler->php_handling == Smarty::PHP_PASSTHRU || $_attr[ 'type' ] == 'unmatched') {
                 $compiler->tag_nocache = true;
+                $save = $compiler->template->compiled->has_nocache_code;
                 $output = addcslashes($_attr[ 'code' ], "'\\");
                 $compiler->parser->current_buffer->append_subtree($compiler->parser,
                                                                   new Smarty_Internal_ParseTree_Tag($compiler->parser,
@@ -70,6 +73,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
                                                                                                                                   $output .
                                                                                                                                   "';?>",
                                                                                                                                   true)));
+                $compiler->template->compiled->has_nocache_code = $save;
                 return '';
             } elseif ($compiler->php_handling == Smarty::PHP_ALLOW) {
                 if (!($compiler->smarty instanceof SmartyBC)) {
@@ -117,7 +121,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
         $closeTag = '?>';
         if (strpos($lex->value, '<?xml') === 0) {
             $lex->is_xml = true;
-            $lex->phpType = 'xml';
+            $lex->token = Smarty_Internal_Templateparser::TP_NOCACHE;
             return;
         } elseif (strpos($lex->value, '<?') === 0) {
             $lex->phpType = 'php';
@@ -129,7 +133,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
         } elseif (strpos($lex->value, '?>') === 0) {
             if ($lex->is_xml) {
                 $lex->is_xml = false;
-                $lex->phpType = 'xml';
+                $lex->token = Smarty_Internal_Templateparser::TP_NOCACHE;
                 return;
             }
             $lex->phpType = 'unmatched';

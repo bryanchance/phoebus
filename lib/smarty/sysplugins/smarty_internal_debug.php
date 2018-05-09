@@ -52,7 +52,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
      */
     public function start_template(Smarty_Internal_Template $template, $mode = null)
     {
-        if (isset($mode) && !$template->_isSubTpl()) {
+        if (isset($mode)) {
             $this->index ++;
             $this->offset ++;
             $this->template_data[ $this->index ] = null;
@@ -201,7 +201,11 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
             $savedIndex = $this->index;
             $this->index = 9999;
         }
-        $smarty = $obj->_getSmartyObj();
+        if ($obj->_objType == 1) {
+            $smarty = $obj;
+        } else {
+            $smarty = $obj->smarty;
+        }
         // create fresh instance of smarty for displaying the debug console
         // to avoid problems if the application did overload the Smarty class
         $debObj = new Smarty();
@@ -236,7 +240,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
         $debugging = $smarty->debugging;
 
         $_template = new Smarty_Internal_Template($debObj->debug_tpl, $debObj);
-        if ($obj->_isTplObj()) {
+        if ($obj->_objType == 2) {
             $_template->assign('template_name', $obj->source->type . ':' . $obj->source->name);
         }
         if ($obj->_objType == 1 || $full) {
@@ -270,9 +274,9 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
         $config_vars = array();
         foreach ($obj->config_vars as $key => $var) {
             $config_vars[ $key ][ 'value' ] = $var;
-            if ($obj->_isTplObj()) {
+            if ($obj->_objType == 2) {
                 $config_vars[ $key ][ 'scope' ] = $obj->source->type . ':' . $obj->source->name;
-            } elseif ($obj->_isDataObj()) {
+            } elseif ($obj->_objType == 4) {
                 $tpl_vars[ $key ][ 'scope' ] = $obj->dataObjectName;
             } else {
                 $config_vars[ $key ][ 'scope' ] = 'Smarty object';
@@ -295,9 +299,9 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data
                     }
                 }
             }
-            if ($obj->_isTplObj()) {
+            if ($obj->_objType == 2) {
                 $tpl_vars[ $key ][ 'scope' ] = $obj->source->type . ':' . $obj->source->name;
-            } elseif ($obj->_isDataObj()) {
+            } elseif ($obj->_objType == 4) {
                 $tpl_vars[ $key ][ 'scope' ] = $obj->dataObjectName;
             } else {
                 $tpl_vars[ $key ][ 'scope' ] = 'Smarty object';

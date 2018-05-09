@@ -84,7 +84,8 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_Compile_Shared_Inh
                 $this->compileEndChild($compiler);
             }
         } else {
-            $this->compileEndChild($compiler, $_attr[ 'file' ]);
+            $this->compileEndChild($compiler);
+            $this->compileInclude($compiler, $_attr[ 'file' ]);
         }
         $compiler->has_code = false;
         return '';
@@ -94,35 +95,24 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_Compile_Shared_Inh
      * Add code for inheritance endChild() method to end of template
      *
      * @param \Smarty_Internal_TemplateCompilerBase $compiler
-     * @param null|string                           $template optional inheritance parent template
      */
-    private function compileEndChild(Smarty_Internal_TemplateCompilerBase $compiler, $template = null)
+    private function compileEndChild(Smarty_Internal_TemplateCompilerBase $compiler)
     {
-        $inlineUids = '';
-        if (isset($template) && $compiler->smarty->merge_compiled_includes) {
-            $code = $compiler->compileTag('include', array($template, array('scope' => 'parent')));
-            if (preg_match("/([,][\s]*['][a-z0-9]+['][,][\s]*[']content.*['])[)]/", $code, $match)) {
-                $inlineUids = $match[ 1 ];
-            }
-        }
         $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag($compiler->parser,
-                                                                                  "<?php \$_smarty_tpl->inheritance->endChild(\$_smarty_tpl" .
-                                                                                  (isset($template) ?
-                                                                                      ', ' . $template . $inlineUids :
-                                                                                      '') . ");\n?>\n");
+                                                                                  "<?php \$_smarty_tpl->inheritance->endChild();\n?>\n");
     }
 
     /**
      * Add code for including subtemplate to end of template
      *
      * @param \Smarty_Internal_TemplateCompilerBase $compiler
-     * @param  string                               $template subtemplate name
+     * @param  string                               $file subtemplate name
      */
-    private function compileInclude(Smarty_Internal_TemplateCompilerBase $compiler, $template)
+    private function compileInclude(Smarty_Internal_TemplateCompilerBase $compiler, $file)
     {
         $compiler->parser->template_postfix[] = new Smarty_Internal_ParseTree_Tag($compiler->parser,
                                                                                   $compiler->compileTag('include',
-                                                                                                        array($template,
+                                                                                                        array($file,
                                                                                                               array('scope' => 'parent'))));
     }
 
