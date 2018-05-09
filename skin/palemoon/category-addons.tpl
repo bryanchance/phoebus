@@ -8,6 +8,24 @@
 <p>
   Themes allow you to change the look and feel of the user interface and personalize it to your tastes. A theme can simply change the colors of the UI or it can change every aspect of its appearance.
 </p>
+{elseif $PAGE_TYPE == 'search'}
+<p>
+  <form id="addonSearchForm" method="get" action="/search/">
+    <input
+      type="text"
+      class="addonSearchInput"
+      name="terms"
+{if $SEARCH_TERMS}
+      value="$SEARCH_TERMS"
+{else}
+      placeholder="Find add-ons..."
+{/if}
+      size="42"
+      maxlength="120"
+    >
+    <input type="submit" value="Search" class="addonSearchButton">
+  </form>
+</p>
 {/if}
 
 {if $PAGE_TYPE == 'cat-extensions' || $PAGE_TYPE == 'cat-all-extensions' || $PAGE_TYPE == 'cat-themes' || $PAGE_TYPE == 'search'}
