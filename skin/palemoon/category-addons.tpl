@@ -19,8 +19,8 @@
       value="{$SEARCH_TERMS}"
 {/if}
       placeholder="Find add-ons..."
-      size="44"
-      maxlength="64"
+      size="32"
+      maxlength="48"
     >
     <input type="submit" value="Search" class="addonSearchButton">
   </form>
