@@ -76,10 +76,7 @@ function funcGeneratePage($_array) {
   $libSmarty->assign('PAGE_PATH', $GLOBALS['strRequestPath']);
   $libSmarty->assign('BASE_PATH', $_strSkinBasePath);
   $libSmarty->assign('PHOEBUS_VERSION', $GLOBALS['strApplicationVersion']);
-  
-  if (funcHTTPGetValue('terms')) {
-    $libSmarty->assign('SEARCH_TERMS', funcHTTPGetValue('terms'));
-  }
+  $libSmarty->assign('SEARCH_TERMS', funcHTTPGetValue('terms'));
   
   if (array_key_exists('contentData', $_array)) {
     $libSmarty->assign('PAGE_DATA', $_array['contentData']);
