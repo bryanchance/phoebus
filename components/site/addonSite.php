@@ -107,7 +107,8 @@ if ($boolDebugMode == true) {
     $_strGitBranch = substr($_strGitHead, 16, -1);
     $strApplicationSiteName = 'Phoebus Development - Version: ' . $strApplicationVersion . ' - ' .
       'Branch: ' . $_strGitBranch . ' - ' .
-      'Commit: ' . substr($_strGitSHA1, 0, 7);
+      'Commit: ' . substr($_strGitSHA1, 0, 7) . ' - ' .
+      $_SERVER['HTTP_USER_AGENT'];
   }
   else {
     $strApplicationSiteName = 'Phoebus Development - Version: ' . $strApplicationVersion;
