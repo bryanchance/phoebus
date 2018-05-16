@@ -143,13 +143,8 @@ $arrayCategoryList03 = array(
 $arrayCategoryList04 = array(
     'title' => 'Feeds, News, & Blogging',
     'inforss-reloaded',
+    'bamboo-feed-reader',
     'externals' => array(
-        'bamboo-feed-reader' => array(
-            'id' => 'fx-337410',
-            'name' => 'Bamboo Feed Reader',
-            'shortDescription' => 'Feed reader | RSS - ATOM - OPML',
-            'url' => 'https://addons.mozilla.org/firefox/addon/bamboo-feed-reader/'
-        ),
         'newsfox' => array(
             'id' => 'fx-629',
             'name' => 'NewsFox',
