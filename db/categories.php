@@ -469,6 +469,12 @@ $arrayCategoryList50 = array(
             'shortDescription' => 'A dark, simple, grayscale theme for Pale Moon.',
             'url' => 'https://realityripple.com/Software/Themes/In-The-Dark/Pale-Moon/'
         ),
+		'in-the-dark-be' => array(
+            'id' => 'ex-039',
+            'name' => 'In The Dark (Bloodmoon Edition)',
+            'shortDescription' => 'A dark, simple, red-tinted theme for Pale Moon.',
+            'url' => 'https://realityripple.com/Software/Themes/In-The-Dark/Pale-Moon/Bloodmoon-Edition/'
+        ),
     ),
 );
 
