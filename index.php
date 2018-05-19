@@ -97,6 +97,7 @@ const CONFIG = array(
 // Define and array for configuration that can change during runtime
 $arrayConfig = array(
   'application' => array(
+    'name' => CONFIG['sites']['palemoon']['name'],
     'url' => CONFIG['sites']['palemoon']['liveURL'],
     'debug' => false
   ),
@@ -109,14 +110,10 @@ $arrayConfig = array(
 // ----------------------------------------------------------------------------
 
 // Temporary backwards compatible vars
-$boolDebugMode = $arrayConfig['application']['debug'];
-$strProductName = CONFIG['application']['name'];
-$strApplicationVersion = CONFIG['application']['version'];
 $strApplicationLiveURL = CONFIG['sites']['palemoon']['liveURL'];
 $strApplicationDevURL = CONFIG['sites']['palemoon']['devURL'];
 $strApplicationURL = $arrayConfig['application']['url'];
 $strRootPath = $_SERVER['DOCUMENT_ROOT'];
-$strObjDirPath = $strRootPath . '/.obj/';
 $strApplicationDatastore = './datastore/';
 $strLibPath = $strRootPath . '/lib/';
 $strComponentsPath = $strRootPath . '/components/';

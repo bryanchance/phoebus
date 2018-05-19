@@ -8,7 +8,7 @@
 $strApplicationSiteName = 'Pale Moon - Add-ons';
 $strApplicationSkin = $arraySkins['palemoon'];
 $strContentBasePath = './components/site/content/';
-$strObjDirSmartyCachePath = $strObjDirPath . 'smarty/frontend/';
+$strObjDirSmartyCachePath = CONFIG['application']['obj'] . 'smarty/frontend/';
 
 $strRequestSmartyDebug = funcHTTPGetValue('smartyDebug');
 
@@ -70,12 +70,12 @@ function funcGeneratePage($_array) {
   
   // Assign data to Smarty
   $libSmarty->assign('APPLICATION_DEBUG', $GLOBALS['arrayConfig']['application']['debug']);
-  $libSmarty->assign('SITE_NAME', $GLOBALS['strApplicationSiteName']);
-  $libSmarty->assign('SITE_DOMAIN', '//' . $GLOBALS['strApplicationURL']);
+  $libSmarty->assign('SITE_NAME', $GLOBALS['arrayConfig']['application']['name']);
+  $libSmarty->assign('SITE_DOMAIN', '//' . $GLOBALS['arrayConfig']['application']['url']);
   $libSmarty->assign('PAGE_TITLE', $_array['title']);
-  $libSmarty->assign('PAGE_PATH', $GLOBALS['strRequestPath']);
+  $libSmarty->assign('PAGE_PATH', $GLOBALS['arrayConfig']['request']['path']);
   $libSmarty->assign('BASE_PATH', $_strSkinBasePath);
-  $libSmarty->assign('PHOEBUS_VERSION', $GLOBALS['strApplicationVersion']);
+  $libSmarty->assign('PHOEBUS_VERSION', CONFIG['application']['version']);
   $libSmarty->assign('SEARCH_TERMS', funcHTTPGetValue('terms'));
   
   if (array_key_exists('contentData', $_array)) {
@@ -88,7 +88,7 @@ function funcGeneratePage($_array) {
   
   // Send html header and pass the final template to Smarty
   funcSendHeader('html');
-  $libSmarty->display('string:' . $_strSiteTemplate, null, str_replace('/', '_', $GLOBALS['strRequestPath']));
+  $libSmarty->display('string:' . $_strSiteTemplate, null, str_replace('/', '_', $GLOBALS['arrayConfig']['request']['path']));
 
   // We are done here...
   exit();
@@ -105,12 +105,12 @@ if ($arrayConfig['application']['debug'] == true) {
     $_strGitHead = file_get_contents('./.git/HEAD');
     $_strGitSHA1 = file_get_contents('./.git/' . substr($_strGitHead, 5, -1));
     $_strGitBranch = substr($_strGitHead, 16, -1);
-    $strApplicationSiteName = 'Phoebus Development - Version: ' . $strApplicationVersion . ' - ' .
+    $strApplicationSiteName = 'Phoebus Development - Version: ' . CONFIG['application']['version'] . ' - ' .
       'Branch: ' . $_strGitBranch . ' - ' .
       'Commit: ' . substr($_strGitSHA1, 0, 7);
   }
   else {
-    $strApplicationSiteName = 'Phoebus Development - Version: ' . $strApplicationVersion;
+    $strApplicationSiteName = 'Phoebus Development - Version: ' . CONFIG['application']['version'];
   }  
 }
 

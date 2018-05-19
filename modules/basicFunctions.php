@@ -11,7 +11,7 @@ function funcError($_value, $_asText = null) {
     ob_get_clean();
     header('Content-Type: text/html', false);   
     print(file_get_contents('./skin/default/template-header.xhtml'));
-    print('<h2>' . $GLOBALS['strProductName'] . ' ' . $GLOBALS['strApplicationVersion'] . '</h2>');
+    print('<h2>' . CONFIG['application']['name'] . ' ' . CONFIG['application']['version'] . '</h2>');
     print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
     print('<ul><li>' . $_value . '</li></ul>');
     print(file_get_contents('./skin/default/template-footer.xhtml'));
