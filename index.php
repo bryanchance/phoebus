@@ -9,84 +9,86 @@
 require_once('./modules/basicFunctions.php');
 
 // Define an constant array for configuration that does not change during runtime
-define(CONFIG, array(
-  'application' => array(
-    'name' => 'Phoebus',
-    'version' => '2.0.0a1',
-    'root' => $_SERVER['DOCUMENT_ROOT'],
-    'datastore' => $_SERVER['DOCUMENT_ROOT'] . '/datastore/',
-    'obj' => $_SERVER['DOCUMENT_ROOT'] . '/.obj/'
-  ),
-  'components' => array(
-    'aus' => $_SERVER['DOCUMENT_ROOT'] . '/components/aus/addonUpdateService.php',
-    'discover' => $_SERVER['DOCUMENT_ROOT'] . '/components/discover/discoverPane.php',
-    'download' => $_SERVER['DOCUMENT_ROOT'] . '/components/download/addonDownload.php',
-    'integration' => $_SERVER['DOCUMENT_ROOT'] . '/components/integration/amIntegration.php',
-    'license' => $_SERVER['DOCUMENT_ROOT'] . '/components/license/addonLicense.php',
-    'site' => $_SERVER['DOCUMENT_ROOT'] . '/components/site/addonSite.php',
-    'special' => $_SERVER['DOCUMENT_ROOT'] . '/components/special/special.php'
-  ),
-  'modules' => array(
-    'readManifest' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classReadManifest.php',
-    'generatePage' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classGeneratePage.php',
-    'vc' => $_SERVER['DOCUMENT_ROOT'] . '/modules/nsIVersionComparator.php',
-    'dbSearchPlugins' => $_SERVER['DOCUMENT_ROOT'] . '/modules/searchPlugins.php',
-    'smarty' => $_SERVER['DOCUMENT_ROOT'] . '/lib/smarty/Smarty.class.php',
-    'rdf' => $_SERVER['DOCUMENT_ROOT'] . '/lib/rdf/RdfComponent.php',
-    'sql' => $_SERVER['DOCUMENT_ROOT'] . '/lib/safemysql/safemysql.class.php'
-  ),
-  'skins' => array(
-    'default' => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/',
-    'palemoon' => $_SERVER['DOCUMENT_ROOT'] . '/skin/palemoon/',
-    'basilisk'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/basilisk/',
-    'borealis'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/'
-  ),
-  'sites' => array(
-    'palemoon' => array(
-      'name' => 'Pale Moon - Add-ons - ',
-      'liveURL' => 'addons.palemoon.org',
-      'devURL' => 'addons-dev.palemoon.org',
-      'httpsEnabled' => true,
-      'extensionsEnabled' => true,
-      'themesEnabled' => true,
-      'langpacksEnabled' => true,
-      'searchpluginsEnabled' => true
+define('CONFIG',
+  array(
+    'application' => array(
+      'name' => 'Phoebus',
+      'version' => '2.0.0a1',
+      'root' => $_SERVER['DOCUMENT_ROOT'],
+      'datastore' => $_SERVER['DOCUMENT_ROOT'] . '/datastore/',
+      'obj' => $_SERVER['DOCUMENT_ROOT'] . '/.obj/'
     ),
-    'basilisk' => array(
-      'name' => 'Basilisk Add-ons: ',
-      'liveURL' => 'addons.basilisk-browser.org',
-      'devURL' => 'addons-dev.basilisk-browser.org',
-      'httpsEnabled' => true,
-      'extensionsEnabled' => true,
-      'themesEnabled' => false,
-      'langpacksEnabled' => false,
-      'searchpluginsEnabled' => true
+    'components' => array(
+      'aus' => $_SERVER['DOCUMENT_ROOT'] . '/components/aus/addonUpdateService.php',
+      'discover' => $_SERVER['DOCUMENT_ROOT'] . '/components/discover/discoverPane.php',
+      'download' => $_SERVER['DOCUMENT_ROOT'] . '/components/download/addonDownload.php',
+      'integration' => $_SERVER['DOCUMENT_ROOT'] . '/components/integration/amIntegration.php',
+      'license' => $_SERVER['DOCUMENT_ROOT'] . '/components/license/addonLicense.php',
+      'site' => $_SERVER['DOCUMENT_ROOT'] . '/components/site/addonSite.php',
+      'special' => $_SERVER['DOCUMENT_ROOT'] . '/components/special/special.php'
     ),
-    'borealis' => array(
-      'name' => 'Add-ons - Borealis - Projects - Binary Outcast',
-      'liveURL' => 'borealis-addons.binaryoutcast.com',
-      'devURL' => 'borealis-addons-dev.binaryoutcast.com',
-      'httpsEnabled' => false,
-      'extensionsEnabled' => true,
-      'themesEnabled' => false,
-      'langpacksEnabled' => false,
-      'searchpluginsEnabled' => true
-    )
-  ),
-  'addons' => array(
-    'appID' => array(
-      'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
-      'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-      'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
-      'borealis' => '{}'
+    'modules' => array(
+      'readManifest' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classReadManifest.php',
+      'generatePage' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classGeneratePage.php',
+      'vc' => $_SERVER['DOCUMENT_ROOT'] . '/modules/nsIVersionComparator.php',
+      'dbSearchPlugins' => $_SERVER['DOCUMENT_ROOT'] . '/modules/searchPlugins.php',
+      'smarty' => $_SERVER['DOCUMENT_ROOT'] . '/lib/smarty/Smarty.class.php',
+      'rdf' => $_SERVER['DOCUMENT_ROOT'] . '/lib/rdf/RdfComponent.php',
+      'sql' => $_SERVER['DOCUMENT_ROOT'] . '/lib/safemysql/safemysql.class.php'
     ),
-    'legacyAppID' => array(
-      'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-      'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
-      'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}'
+    'skins' => array(
+      'default' => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/',
+      'palemoon' => $_SERVER['DOCUMENT_ROOT'] . '/skin/palemoon/',
+      'basilisk'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/basilisk/',
+      'borealis'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/'
+    ),
+    'sites' => array(
+      'palemoon' => array(
+        'name' => 'Pale Moon - Add-ons - ',
+        'liveURL' => 'addons.palemoon.org',
+        'devURL' => 'addons-dev.palemoon.org',
+        'httpsEnabled' => true,
+        'extensionsEnabled' => true,
+        'themesEnabled' => true,
+        'langpacksEnabled' => true,
+        'searchpluginsEnabled' => true
+      ),
+      'basilisk' => array(
+        'name' => 'Basilisk Add-ons: ',
+        'liveURL' => 'addons.basilisk-browser.org',
+        'devURL' => 'addons-dev.basilisk-browser.org',
+        'httpsEnabled' => true,
+        'extensionsEnabled' => true,
+        'themesEnabled' => false,
+        'langpacksEnabled' => false,
+        'searchpluginsEnabled' => true
+      ),
+      'borealis' => array(
+        'name' => 'Add-ons - Borealis - Projects - Binary Outcast',
+        'liveURL' => 'borealis-addons.binaryoutcast.com',
+        'devURL' => 'borealis-addons-dev.binaryoutcast.com',
+        'httpsEnabled' => false,
+        'extensionsEnabled' => true,
+        'themesEnabled' => false,
+        'langpacksEnabled' => false,
+        'searchpluginsEnabled' => true
+      )
+    ),
+    'addons' => array(
+      'appID' => array(
+        'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
+        'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+        'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+        'borealis' => '{}'
+      ),
+      'legacyAppID' => array(
+        'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+        'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+        'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}'
+      )
     )
   )
-));
+);
 
 // Define and array for configuration that can change during runtime
 $arrayConfig = array(
