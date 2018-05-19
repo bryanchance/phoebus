@@ -11,6 +11,7 @@ require_once('./modules/basicFunctions.php');
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 const ROOT2 = ROOT;
 funcError(ROOT2);
+/*
 // Define an constant array for configuration that does not change during runtime
 const CONFIG = 
   array(
@@ -103,7 +104,7 @@ $arrayConfig = array(
     'path' => funcHTTPGetValue('path'),
   )
 );
-
+*/
 // ----------------------------------------------------------------------------
 
 // Temporary backwards compatible vars
