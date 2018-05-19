@@ -62,7 +62,7 @@ const CONFIG = array(
       'devURL' => 'addons-dev.basilisk-browser.org',
       'httpsEnabled' => true,
       'extensionsEnabled' => true,
-      'themesEnabled' => false,
+      'themesEnabled' => true,
       'langpacksEnabled' => false,
       'searchpluginsEnabled' => true
     ),
