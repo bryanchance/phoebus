@@ -6,14 +6,20 @@
 // == | Function: funcError | =================================================
 
 // This function simply relays an error message and dies
-function funcError($_value) {
-  ob_get_clean();
-  header('Content-Type: text/html', false);   
-  print(file_get_contents('./skin/default/template-header.xhtml'));
-  print('<h2>' . $GLOBALS['strProductName'] . ' ' . $GLOBALS['strApplicationVersion'] . '</h2>');
-  print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
-  print('<ul><li>' . $_value . '</li></ul>');
-  print(file_get_contents('./skin/default/template-footer.xhtml'));
+function funcError($_value, $_asText = null) {
+  if (!$_asText) {
+    ob_get_clean();
+    header('Content-Type: text/html', false);   
+    print(file_get_contents('./skin/default/template-header.xhtml'));
+    print('<h2>' . $GLOBALS['strProductName'] . ' ' . $GLOBALS['strApplicationVersion'] . '</h2>');
+    print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
+    print('<ul><li>' . $_value . '</li></ul>');
+    print(file_get_contents('./skin/default/template-footer.xhtml'));
+  }
+  else {
+    header('Content-Type: text/plain', false);
+    print($_value);
+  }
   
   // We are done here
   exit();
