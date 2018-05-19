@@ -9,7 +9,7 @@
 require_once('./modules/basicFunctions.php');
 
 // Define an constant array for configuration that does not change during runtime
-const CONFIG = array(
+define(CONFIG, array(
   'application' => array(
     'name' => 'Phoebus',
     'version' => '2.0.0a1',
@@ -86,7 +86,7 @@ const CONFIG = array(
       'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}'
     )
   )
-);
+));
 
 // Define and array for configuration that can change during runtime
 $arrayConfig = array(
