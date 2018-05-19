@@ -106,7 +106,7 @@ $arrayConfig = array(
   )
 );
 
-funcError(var_export(CONFIG, true));
+funcError(var_export(CONFIG, true), true);
 
 // ----------------------------------------------------------------------------
 
