@@ -62,14 +62,14 @@ function funcGeneratePage($_array) {
 
   // Smarty Debug
   if ($GLOBALS['strRequestSmartyDebug']) {
-    $libSmarty->debugging = $GLOBALS['boolDebugMode'];
+    $libSmarty->debugging = $GLOBALS['arrayConfig']['application']['debug'];
   }
   else {
     $libSmarty->debugging = false;
   }
   
   // Assign data to Smarty
-  $libSmarty->assign('APPLICATION_DEBUG', $GLOBALS['boolDebugMode']);
+  $libSmarty->assign('APPLICATION_DEBUG', $GLOBALS['arrayConfig']['application']['debug']);
   $libSmarty->assign('SITE_NAME', $GLOBALS['strApplicationSiteName']);
   $libSmarty->assign('SITE_DOMAIN', '//' . $GLOBALS['strApplicationURL']);
   $libSmarty->assign('PAGE_TITLE', $_array['title']);
@@ -99,7 +99,7 @@ function funcGeneratePage($_array) {
 // == | Main | ================================================================
 
 // Debug Conditions
-if ($boolDebugMode == true) {
+if ($arrayConfig['application']['debug'] == true) {
   // Git stuff
   if (file_exists('./.git/HEAD')) {
     $_strGitHead = file_get_contents('./.git/HEAD');
@@ -131,7 +131,7 @@ if (startsWith($strRequestPath, '/addon/')) {
     );
   }
   else {
-    if ($GLOBALS['boolDebugMode'] == true) {
+    if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
       funcError('The requested add-on has a problem');
     }
     else {
@@ -152,7 +152,7 @@ elseif ($strRequestPath == '/extensions/') {
     );
   }
   else {
-    if ($GLOBALS['boolDebugMode'] == true) {
+    if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
       funcError('The requested category has a problem');
     }
     else {
@@ -191,7 +191,7 @@ elseif (startsWith($strRequestPath, '/extensions/')) {
       );
     }
     else {
-      if ($GLOBALS['boolDebugMode'] == true) {
+      if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
         funcError('The requested category has a problem');
       }
       else {
@@ -218,7 +218,7 @@ elseif ($strRequestPath == '/themes/') {
     );
   }
   else {
-    if ($GLOBALS['boolDebugMode'] == true) {
+    if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
       funcError('The requested category has a problem');
     }
     else {
@@ -244,7 +244,7 @@ elseif ($strRequestPath == '/search-plugins/') {
     );
   }
   else {
-    if ($GLOBALS['boolDebugMode'] == true) {
+    if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
       funcError('The requested category has a problem');
     }
     else {

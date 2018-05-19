@@ -116,7 +116,7 @@ funcCheckUserAgent();
 if ($strRequestAddonID == null || $strRequestAddonVersion == null ||
   $strRequestAppID == null || $strRequestAppVersion == null ||
   $strRequestCompatMode == null) {
-  if ($GLOBALS['boolDebugMode'] == true) {
+  if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
     funcError('Missing minimum required arguments.');
   }
   else {
@@ -129,7 +129,7 @@ if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || ($boolDebugMode == true
 }
 
 if ($boolMozXPIUpdate == false) {
-  if ($GLOBALS['boolDebugMode'] == true) {
+  if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
     funcError('Compatibility check failed.');
   }
   else {
@@ -182,7 +182,7 @@ elseif ($strRequestAppID == $strFossaMailID) {
   }
 }
 else {
-  if ($GLOBALS['boolDebugMode'] == true) {
+  if ($GLOBALS['arrayConfig']['application']['debug'] == true) {
     funcError('Invalid Application ID');
   }
   else {

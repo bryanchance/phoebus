@@ -467,7 +467,7 @@ class classReadManifest {
     // Disable Fatal status completely but leave the mechinism in place
     $_fatal = null;
 
-    if ($_fatal == true && $GLOBALS['boolDebugMode'] == true) {
+    if ($_fatal == true && $GLOBALS['arrayConfig']['application']['debug'] == true) {
       $_fatalErrors = implode("\n", $this->addonErrors);
       funcError($_fatalErrors);
     }

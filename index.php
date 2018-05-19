@@ -139,7 +139,7 @@ $strRequestPath = $arrayConfig['request']['path'];
 // Define a Debug/Developer Mode
 if ($_SERVER['SERVER_NAME'] == $strApplicationDevURL) {
   // Flip the var
-  $boolDebugMode = true;
+  $arrayConfig['application']['debug'] = true;
   
   // Use dev URL
   $strApplicationURL = $strApplicationDevURL;
@@ -177,7 +177,7 @@ if ($strRequestComponent != null) {
     require_once($arrayComponents[$strRequestComponent]);
   }
   else {
-    if ($boolDebugMode == true) {
+    if ($arrayConfig['application']['debug']) {
       funcError($strRequestComponent . ' is an unknown component');
     }
     else {
@@ -186,7 +186,7 @@ if ($strRequestComponent != null) {
   }
 }
 else {
-  if ($boolDebugMode == true) {
+  if ($arrayConfig['application']['debug']) {
     funcError('You did not specify a component');
   }
   else {
