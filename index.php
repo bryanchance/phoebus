@@ -121,10 +121,10 @@ $strSkinPath = $strRootPath . '/skin/';
 $arrayComponents = CONFIG['components'];
 $arrayModules = CONFIG['modules'];
 $arraySkins = CONFIG['skins'];
-$strPaleMoonID = CONFIG['appID']['palemoon'];
-$strFossaMailID = CONFIG['appID']['fossamail'];
-$strThunderbirdID = CONFIG['legacyAppID']['thunderbird']; // {3550f703-e582-4d05-9a08-453d09bdfdc6}
-$strClientID = CONFIG['appID']['palemoon'];
+$strPaleMoonID = CONFIG['addons']['appID']['palemoon'];
+$strFossaMailID = CONFIG['addons']['appID']['fossamail'];
+$strThunderbirdID = CONFIG['addons']['legacyAppID']['thunderbird']; // {3550f703-e582-4d05-9a08-453d09bdfdc6}
+$strClientID = CONFIG['addons']['appID']['palemoon'];
 $strRequestComponent = $arrayConfig['request']['component'];
 $strRequestPath = $arrayConfig['request']['path'];
 
