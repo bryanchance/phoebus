@@ -8,6 +8,8 @@
 // Include basicFunctions
 require_once('./modules/basicFunctions.php');
 
+const TEST1 = $_SERVER['DOCUMENT_ROOT'];
+
 // Define an constant array for configuration that does not change during runtime
 const CONFIG = 
   array(
