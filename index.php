@@ -10,7 +10,7 @@ require_once('./modules/basicFunctions.php');
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 const ROOT2 = ROOT;
-func_error(ROOT2);
+funcError(ROOT2);
 // Define an constant array for configuration that does not change during runtime
 const CONFIG = 
   array(
