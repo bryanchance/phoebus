@@ -5,22 +5,110 @@
 
 // == | Setup | ===============================================================
 
-// Debug inital state
-$boolDebugMode = false;
-
-// Version
-$strProductName = 'Phoebus';
-$strApplicationVersion = '2.0.0a1';
-
 // Include basicFunctions
 require_once('./modules/basicFunctions.php');
 
-// URLs
-$strApplicationLiveURL = 'addons.palemoon.org';
-$strApplicationDevURL = 'addons-dev.palemoon.org';
-$strApplicationURL = $strApplicationLiveURL;
+// Define an constant array for configuration that does not change during runtime
+const CONFIG = array(
+  'application' => array(
+    'name' => 'Phoebus',
+    'version' => '2.0.0a1',
+    'root' => $_SERVER['DOCUMENT_ROOT'],
+    'datastore' => $_SERVER['DOCUMENT_ROOT'] . '/datastore/',
+    'obj' => $_SERVER['DOCUMENT_ROOT'] . '/.obj/'
+  ),
+  'components' => array(
+    'aus' => $_SERVER['DOCUMENT_ROOT'] . '/components/aus/addonUpdateService.php',
+    'discover' => $_SERVER['DOCUMENT_ROOT'] . '/components/discover/discoverPane.php',
+    'download' => $_SERVER['DOCUMENT_ROOT'] . '/components/download/addonDownload.php',
+    'integration' => $_SERVER['DOCUMENT_ROOT'] . '/components/integration/amIntegration.php',
+    'license' => $_SERVER['DOCUMENT_ROOT'] . '/components/license/addonLicense.php',
+    'site' => $_SERVER['DOCUMENT_ROOT'] . '/components/site/addonSite.php',
+    'special' => $_SERVER['DOCUMENT_ROOT'] . '/components/special/special.php'
+  ),
+  'modules' => array(
+    'readManifest' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classReadManifest.php',
+    'generatePage' => $_SERVER['DOCUMENT_ROOT'] . '/modules/classGeneratePage.php',
+    'vc' => $_SERVER['DOCUMENT_ROOT'] . '/modules/nsIVersionComparator.php',
+    'dbSearchPlugins' => $_SERVER['DOCUMENT_ROOT'] . '/modules/searchPlugins.php',
+    'smarty' => $_SERVER['DOCUMENT_ROOT'] . '/lib/smarty/Smarty.class.php',
+    'rdf' => $_SERVER['DOCUMENT_ROOT'] . '/lib/rdf/RdfComponent.php',
+    'sql' => $_SERVER['DOCUMENT_ROOT'] . '/lib/safemysql/safemysql.class.php'
+  ),
+  'skins' => array(
+    'default' => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/',
+    'palemoon' => $_SERVER['DOCUMENT_ROOT'] . '/skin/palemoon/',
+    'basilisk'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/basilisk/',
+    'borealis'  => $_SERVER['DOCUMENT_ROOT'] . '/skin/default/'
+  ),
+  'sites' => array(
+    'palemoon' => array(
+      'name' => 'Pale Moon - Add-ons - ',
+      'liveURL' => 'addons.palemoon.org',
+      'devURL' => 'addons-dev.palemoon.org',
+      'httpsEnabled' => true,
+      'extensionsEnabled' => true,
+      'themesEnabled' => true,
+      'langpacksEnabled' => true,
+      'searchpluginsEnabled' => true
+    ),
+    'basilisk' => array(
+      'name' => 'Basilisk Add-ons: ',
+      'liveURL' => 'addons.basilisk-browser.org',
+      'devURL' => 'addons-dev.basilisk-browser.org',
+      'httpsEnabled' => true,
+      'extensionsEnabled' => true,
+      'themesEnabled' => false,
+      'langpacksEnabled' => false,
+      'searchpluginsEnabled' => true
+    ),
+    'borealis' => array(
+      'name' => 'Add-ons - Borealis - Projects - Binary Outcast',
+      'liveURL' => 'borealis-addons.binaryoutcast.com',
+      'devURL' => 'borealis-addons-dev.binaryoutcast.com',
+      'httpsEnabled' => false,
+      'extensionsEnabled' => true,
+      'themesEnabled' => false,
+      'langpacksEnabled' => false,
+      'searchpluginsEnabled' => true
+    )
+  ),
+  'addons' => array(
+    'appID' => array(
+      'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
+      'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+      'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+      'borealis' => '{}'
+    ),
+    'legacyAppID' => array(
+      'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+      'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+      'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}'
+    )
+  )
+);
 
-// Define application paths
+// Define and array for configuration that can change during runtime
+$arrayConfig = array(
+  'application' => array(
+    'url' => CONFIG['sites']['palemoon']['liveURL'],
+    'debug' => false
+  ),
+  'request' => array(
+    'component' => funcHTTPGetValue('component'),
+    'path' => funcHTTPGetValue('path'),
+  )
+);
+
+// ----------------------------------------------------------------------------
+
+// Temporary backwards compatible vars
+$boolDebugMode = $arrayConfig['application']['debug'];
+$strProductName = CONFIG['application']['name'];
+$strApplicationVersion = CONFIG['application']['version'];
+$strApplicationLiveURL = CONFIG['sites']['palemoon']['liveURL'];
+$strApplicationDevURL = CONFIG['sites']['palemoon']['devURL'];
+$strApplicationURL = $arrayConfig['application']['url'];
 $strRootPath = $_SERVER['DOCUMENT_ROOT'];
 $strObjDirPath = $strRootPath . '/.obj/';
 $strApplicationDatastore = './datastore/';
@@ -28,48 +116,15 @@ $strLibPath = $strRootPath . '/lib/';
 $strComponentsPath = $strRootPath . '/components/';
 $strModulesPath = $strRootPath . '/modules/';
 $strSkinPath = $strRootPath . '/skin/';
-
-// Define Components
-$arrayComponents = array(
-  'aus' => $strComponentsPath . 'aus/addonUpdateService.php',
-  'discover' => $strComponentsPath . 'discover/discoverPane.php',
-  'download' => $strComponentsPath . 'download/addonDownload.php',
-  'integration' => $strComponentsPath . 'integration/amIntegration.php',
-  'license' => $strComponentsPath . 'license/addonLicense.php',
-  'site' => $strComponentsPath . 'site/addonSite.php',
-  'special' => $strComponentsPath . 'special/special.php'
-);
-
-// Define Modules
-$arrayModules = array(
-  'readManifest' => $strModulesPath . 'classReadManifest.php',
-  'generatePage' => $strModulesPath . 'classGeneratePage.php',
-  'vc' => $strModulesPath . 'nsIVersionComparator.php',
-  'dbSearchPlugins' => $strModulesPath . 'searchPlugins.php',
-  'smarty' => $strLibPath . 'smarty/Smarty.class.php',
-  'rdf' => $strLibPath . 'rdf/RdfComponent.php',
-  'sql' => $strLibPath . 'safemysql/safemysql.class.php'
-);
-
-// Define Skins
-$arraySkins = array(
-  'default' => $strSkinPath . 'default/',
-  'palemoon' => $strSkinPath . 'palemoon/',
-  'basilisk' => $strSkinPath . 'basilisk/'
-);
-
-// Known Client GUIDs
-$strPaleMoonID = '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}';
-$strFossaMailID = '{3550f703-e582-4d05-9a08-453d09bdfdc6}';
-$strBasiliskID = '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}';
-$strFirefoxID = $strBasiliskID; // {ec8030f7-c20a-464f-9b0e-13a3a9e97384}
-$strThunderbirdID = $strFossaMailID; // {3550f703-e582-4d05-9a08-453d09bdfdc6}
-$strSeaMonkeyID = '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}';
-$strClientID = $strPaleMoonID;
-
-// $_GET and Path Magic
-$strRequestComponent = funcHTTPGetValue('component');
-$strRequestPath = funcHTTPGetValue('path');
+$arrayComponents = CONFIG['components'];
+$arrayModules = CONFIG['modules'];
+$arraySkins = CONFIG['skins'];
+$strPaleMoonID = CONFIG['appID']['palemoon'];
+$strFossaMailID = CONFIG['appID']['fossamail'];
+$strThunderbirdID = CONFIG['legacyAppID']['thunderbird']; // {3550f703-e582-4d05-9a08-453d09bdfdc6}
+$strClientID = CONFIG['appID']['palemoon'];
+$strRequestComponent = $arrayConfig['request']['component'];
+$strRequestPath = $arrayConfig['request']['path'];
 
 // ============================================================================
 
