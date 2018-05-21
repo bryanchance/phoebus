@@ -7,8 +7,7 @@
 
 // This has to be defined using the function at runtime because it is based
 // on a variable. However, constants defined with the language construct
-// can use this constant with by some strange voodoo. Keep an eye on this.
-// Additionally, Using the define function can have a performance impact.
+// can use this constant by some strange voodoo. Keep an eye on this.
 // NOTE: DOCUMENT_ROOT does NOT have a trailing slash.
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 
