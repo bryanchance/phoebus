@@ -162,6 +162,7 @@ function funcRedirect($_strURL) {
 *
 * @param $haystack  string
 * @param $needle    substring
+* @returns          true if substring exists in string else false
 ******************************************************************************/
 
 function startsWith($haystack, $needle) {
