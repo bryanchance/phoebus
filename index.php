@@ -65,11 +65,11 @@ function funcError($_value, $_mode = 0) {
       print('<ul><li>' . $_value . '</li></ul>');
       break;
     case 1:
-      print('<p2>Output:</p>');
+      print('<p>Output:</p>');
       print('<pre>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</pre>');
       break;
     case 2:
-      print('<p2>Output:</p>');
+      print('<p>Output:</p>');
       print('<pre>' . var_export($_value, true) . '</pre>');
       break;
   }
