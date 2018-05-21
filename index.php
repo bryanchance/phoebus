@@ -57,18 +57,21 @@ function funcError($_value, $_mode = 0) {
   ob_get_clean();
   header('Content-Type: text/html', false);   
   print(file_get_contents('./components/special/skin/default/template-header.xhtml'));
-  print('<h2>' . $GLOBALS['strProductName'] . ' ' . $GLOBALS['strApplicationVersion'] . '</h2>');
+  print('<h2>' . APPLICATION_NAME . ' ' . APPLICATION_VERSION . '</h2>');
 
   switch($_mode) {
     case 0:
       print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
       print('<ul><li>' . $_value . '</li></ul>');
+      break;
     case 1:
       print('<p2>Output:</p>');
       print('<pre>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</pre>');
+      break;
     case 2:
       print('<p2>Output:</p>');
       print('<pre>' . var_export($_value, true) . '</pre>');
+      break;
   }
 
   print(file_get_contents('./components/special/skin/default/template-footer.xhtml'));
