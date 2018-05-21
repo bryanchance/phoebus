@@ -23,12 +23,12 @@ const LIB_RELPATH = '/lib/';
 
 // Define components
 const COMPONENTS = array(
-  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/src/placeholder.txt';
-  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/src/placeholder.txt';
-  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/src/placeholder.txt';
-  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/src/placeholder.txt';
-  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/src/placeholder.txt';
-  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/src/placeholder.txt';
+  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/src/placeholder.txt',
+  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/src/placeholder.txt',
+  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/src/placeholder.txt',
+  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/src/placeholder.txt',
+  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/src/placeholder.txt',
+  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/src/placeholder.txt'
 );
 
 // Define modules
