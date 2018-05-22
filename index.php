@@ -301,10 +301,14 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
 }
 
 // Override currentApplication by query
-if ($arraySoftwareState['requestApplication']) {
-  if (array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
+if ($arraySoftwareState['requestApplication'] &&
+    array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
+  if (TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled'] == true) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
+  }
+  else {
+    funcError('Invalid application');
   }
 }
 
