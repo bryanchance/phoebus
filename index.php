@@ -302,7 +302,7 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
 
 // Override currentApplication by query
 if ($arraySoftwareState['requestApplication']) {
-  if (array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) {
+  if (array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
   }
