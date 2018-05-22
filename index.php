@@ -26,9 +26,9 @@ const LIB_RELPATH = '/lib/';
 const COMPONENTS = array(
   'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/src/placeholder.txt',
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/src/placeholder.txt',
-  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/src/placeholder.txt',
+  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/src/discoverPane.php',
   'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/src/placeholder.txt',
-  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/src/placeholder.txt',
+  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/src/addonSite.php',
   'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/src/placeholder.txt'
 );
 
