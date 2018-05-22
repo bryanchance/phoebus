@@ -51,7 +51,7 @@ class classReadManifest {
     WHERE `slug` = ?s
     AND NOT `type` = 'external'
   ";
-
+funcError(SQL_ADDON_FULL, 1);
   // ------------------------------------------------------------------------
 
   // Initalize class
