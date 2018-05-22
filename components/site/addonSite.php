@@ -76,7 +76,7 @@ if ($arraySoftwareState['requestPath'] == '/') {
   funcError(array('Front Page', $arraySoftwareState), 1);
 }
 // Extensions Category or Subcategory
-elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/') {
+elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == '/extensions/') {
     funcError(array('Extensions Category', $arraySoftwareState), 1);
@@ -91,7 +91,7 @@ elseif ($arraySoftwareState['requestPath'] == '/') {
   funcError(array('Themes Category', $arraySoftwareState), 1);
 }
 // Add-on Page
-elseif (startsWith($arraySoftwareState['requestPath'], '/addon/') {
+elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
   if ($arraySoftwareState['requestPath'] == '/addon/') {
     funcRedirect('/');
   }
@@ -100,7 +100,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/addon/') {
   funcError(array('Add-on Page: ' . $strSlug, $arraySoftwareState), 1);
 }
 // Add-on Releases
-elseif (startsWith($arraySoftwareState['requestPath'], '/releases/') {
+elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {
   if ($arraySoftwareState['requestPath'] == '/releases/') {
     funcRedirect('/');
   }
@@ -109,7 +109,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/releases/') {
   funcError(array('Add-on Releases ' . $strSlug, $arraySoftwareState), 1);
 }
 // Add-on License
-elseif (startsWith($arraySoftwareState['requestPath'], '/license/') {
+elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
   if ($arraySoftwareState['requestPath'] == '/license/') {
     funcRedirect('/');
   }
