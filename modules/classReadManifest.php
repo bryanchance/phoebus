@@ -51,12 +51,13 @@ class classReadManifest {
     WHERE `slug` = ?s
     AND NOT `type` = 'external'
   ";
-funcError(SQL_ADDON_FULL, 1);
+
   // ------------------------------------------------------------------------
 
   // Initalize class
   // You should put this in every public method entry point
   private function funcInit() {
+    funcError(SQL_ADDON_FULL, 1);
     // Be sure to clear out errors in case we reuse the class
     $this->addonErrors = null;
     
