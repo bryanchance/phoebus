@@ -43,7 +43,7 @@ $arrayCategorySlug = array(
   'other' => 'Other'
 );
 
- $addonManifest = new classReadManifest();
+ $readManifest = new classReadManifest();
 
 // ----------------------------------------------------------------------------
 
@@ -101,7 +101,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/addon/');
-  funcError(array('Add-on Page: ' . $strSlug, $arraySoftwareState), 1);
+  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on Releases
 elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {

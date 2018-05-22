@@ -193,7 +193,7 @@ class classReadManifest {
   // ------------------------------------------------------------------------
 
   public function getSearchPlugins($arraySearchPluginsDB) {
-    $datastorePath = $GLOBALS['strApplicationDatastore'] . '/searchplugins/';
+    $datastorePath = ROOT_PATH . DATASTORE_RELPATH . '/searchplugins/';
     $arraySearchPlugins = array();
     
     foreach ($arraySearchPluginsDB as $_key => $_value) {
@@ -266,7 +266,7 @@ class classReadManifest {
     if ($addonManifest['type'] != 'external') {
       $addonManifest['baseURL'] =
         'http://' .
-        $GLOBALS['strApplicationURL'] .
+        $GLOBALS['arraySoftwareState']['currentDomain'] .
         '/?component=download&version=latest&id=';
     }
 
@@ -277,7 +277,7 @@ class classReadManifest {
 
       // Set basePath
       $addonManifest['basePath'] =
-        $GLOBALS['strApplicationDatastore'] . 'addons/' . $_oldID . '/';
+        '.' . DATASTORE_RELPATH . 'addons/' . $_oldID . '/';
 
       // Set reletive url paths
       $_addonPath = substr($addonManifest['basePath'], 1);
@@ -286,7 +286,7 @@ class classReadManifest {
     else {
       // Set basePath
       $addonManifest['basePath'] =
-        $GLOBALS['strApplicationDatastore'] . 'addons/' . $addonManifest['slug'] . '/';
+        '.' . DATASTORE_RELPATH . 'addons/' . $addonManifest['slug'] . '/';
 
       // Set reletive url paths
       $_addonPath = substr($addonManifest['basePath'], 1);
@@ -467,7 +467,7 @@ class classReadManifest {
     // Disable Fatal status completely but leave the mechinism in place
     $_fatal = null;
 
-    if ($_fatal == true && $GLOBALS['boolDebugMode'] == true) {
+    if ($_fatal == true && $GLOBALS['arraySoftwareState']['debugMode'] == true) {
       $_fatalErrors = implode("\n", $this->addonErrors);
       funcError($_fatalErrors);
     }
