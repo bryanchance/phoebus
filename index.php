@@ -137,7 +137,7 @@ function funcError($_value, $_mode = 0) {
       break;
     case 1:
       print('<p>Output:</p>');
-      print('<pre>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</pre>');
+      print('<pre><code>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</code></pre>');
       break;
     case 2:
       print('<p>Output:</p>');
