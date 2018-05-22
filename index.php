@@ -321,7 +321,7 @@ if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
 }
 
-  funcError($arraySoftwareState, 1);
+funcError($arraySoftwareState, 1);
 
 // ----------------------------------------------------------------------------
 
