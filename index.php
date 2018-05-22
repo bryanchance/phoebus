@@ -49,6 +49,7 @@ const MODULES = array(
 const TARGET_APPLICATION_SITE = array(
   'palemoon' => array(
     'enabled' => true,
+    'name' => 'Pale Moon - Add-ons',
     'url' => array(
       'live' => 'addons.palemoon.org',
       'dev' => 'addons-dev.palemoon.org'
@@ -60,6 +61,7 @@ const TARGET_APPLICATION_SITE = array(
   ),
   'basilisk' => array(
     'enabled' => false,
+    'name' => 'Basilisk: add-ons',
     'url' => array(
       'live' => 'addons.basilisk-browser.org',
       'dev' => 'addons-dev.basilisk-browser.org'
@@ -70,6 +72,7 @@ const TARGET_APPLICATION_SITE = array(
   ),
   'borealis' => array(
     'enabled' => false,
+    'name' => 'Add-ons - Borealis - Binary Outcast'
     'url' => array(
       'live' => 'borealis-addons.binaryoutcast.com',
       'dev' => null
@@ -258,13 +261,25 @@ function contains($haystack, $needle) {
 
 // == | Vars | ================================================================
 
-$constants = get_defined_constants(true);
+// Define an array that will hold the current application state
+$arrayApplicationState = array(
+  'currentApplication' => null,
+  'currentName' => null,
+  'currentURL' => null,
+  'currentComponent' => null,
+  'currentPath' => null,
+  'debugMode' => false,
+  'phpServerName' => $_SERVER['SERVER_NAME'],
+  'phpRequestURI' => $_SERVER['REQUEST_URI'],
+  'requestComponent' => funcHTTPGetValue('component'),
+  'requestPath' => funcHTTPGetValue('path'),  
+);
 
 // ============================================================================
 
 // == | Main | ================================================================
 
-funcError($constants['user'], 1);
+funcError($arrayApplicationState, 1);
 
 // ============================================================================
 ?>
