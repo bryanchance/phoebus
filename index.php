@@ -50,7 +50,7 @@ const TARGET_APPLICATION_SITE = array(
   'palemoon' => array(
     'enabled' => true,
     'name' => 'Pale Moon - Add-ons',
-    'url' => array(
+    'domain' => array(
       'live' => 'addons.palemoon.org',
       'dev' => 'addons-dev.palemoon.org'
     ),
@@ -62,7 +62,7 @@ const TARGET_APPLICATION_SITE = array(
   'basilisk' => array(
     'enabled' => false,
     'name' => 'Basilisk: add-ons',
-    'url' => array(
+    'domain' => array(
       'live' => 'addons.basilisk-browser.org',
       'dev' => 'addons-dev.basilisk-browser.org'
     ),
@@ -73,7 +73,7 @@ const TARGET_APPLICATION_SITE = array(
   'borealis' => array(
     'enabled' => false,
     'name' => 'Add-ons - Borealis - Binary Outcast',
-    'url' => array(
+    'domain' => array(
       'live' => 'borealis-addons.binaryoutcast.com',
       'dev' => null
     ),
@@ -201,7 +201,7 @@ function funcSendHeader($_value) {
     header($_arrayHeaders['phoebus']);
     header($_arrayHeaders[$_value]);
     
-    if ($_value == '404') {
+    if ($_value == '404' || $_value == '501') {
       // We are done here
       exit();
     }
@@ -239,6 +239,8 @@ function startsWith($haystack, $needle) {
    return (substr($haystack, 0, $length) === $needle);
 }
 
+// ----------------------------------------------------------------------------
+
 function endsWith($haystack, $needle) {
   $length = strlen($needle);
   if ($length == 0) {
@@ -247,6 +249,8 @@ function endsWith($haystack, $needle) {
 
   return (substr($haystack, -$length) === $needle);
 }
+
+// ----------------------------------------------------------------------------
 
 function contains($haystack, $needle) {
   if (strpos($haystack, $needle) > -1) {
@@ -262,24 +266,87 @@ function contains($haystack, $needle) {
 // == | Vars | ================================================================
 
 // Define an array that will hold the current application state
-$arrayApplicationState = array(
+$arraySoftwareState = array(
   'currentApplication' => null,
+  'orginalApplication' => null,
   'currentName' => null,
-  'currentURL' => null,
-  'currentComponent' => null,
-  'currentPath' => null,
-  'debugMode' => false,
+  'currentDomain' => null,
+  'debugMode' => null,
   'phpServerName' => $_SERVER['SERVER_NAME'],
   'phpRequestURI' => $_SERVER['REQUEST_URI'],
   'requestComponent' => funcHTTPGetValue('component'),
-  'requestPath' => funcHTTPGetValue('path'),  
+  'requestPath' => funcHTTPGetValue('path'),
+  'requestApplication' => funcHTTPGetValue('application')
 );
 
 // ============================================================================
 
 // == | Main | ================================================================
 
-funcError($arrayApplicationState, 1);
+// Decide which application by domain that the software will be serving
+// and if debug is enabled
+foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
+  if ($arraySoftwareState['phpRequestURI'] == $_value['domain']['live']) {
+    $arraySoftwareState['currentApplication'] = $_key;
+    $arraySoftwareState['currentName'] = $_value['name'];
+    $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
+    break;
+  }
+  elseif ($arraySoftwareState['phpRequestURI'] == $_value['domain']['dev']) {
+    $arraySoftwareState['currentApplication'] = $_key;
+    $arraySoftwareState['debugMode'] = true;
+    $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
+    break;
+  }
+}
+
+// Override currentApplication by query
+if ($arraySoftwareState['requestApplication']) {
+  if (array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) {
+    $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
+    $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
+  }
+}
+
+if (!$arraySoftwareState['currentApplication']) {
+  funcError('Unknown domain or application');
+}
+
+funcError($arraySoftwareState, 1);
+
+// ----------------------------------------------------------------------------
+
+// Set entry points for URI based components
+// Root (/) won't set a component or path
+if ($arraySoftwareState['phpRequestURI'] == '/') {
+  $arraySoftwareState['requestComponent'] = 'site';
+  $arraySoftwareState['requestPath'] = '/';
+}
+// The SPECIAL component overrides the SITE component
+elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
+  $arraySoftwareState['requestComponent'] = 'special';
+}
+// requestPath should NEVER be set if the component isn't SITE
+// or already handled like SPECIAL
+elseif ($arraySoftwareState['requestComponent'] != 'site' &&
+        !$arraySoftwareState['requestPath']) {
+  funcSendHeader('404');
+}
+
+// ----------------------------------------------------------------------------
+
+// Load component based on requestComponent
+if ($arraySoftwareState['requestComponent'] &&
+    array_key_exists($arraySoftwareState['requestComponent', COMPONENTS)) {
+  require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
+}
+else {
+  if (!$arraySoftwareState['debugMode']) {
+    funcSendHeader('404');
+  }
+  funcError('Unknown or non-existant component');
+}
 
 // ============================================================================
+
 ?>
