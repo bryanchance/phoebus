@@ -362,7 +362,7 @@ else {
   if (!$arraySoftwareState['debugMode']) {
     funcSendHeader('404');
   }
-  funcError('Unknown or non-existant component');
+  funcError('Invalid component');
 }
 
 // ============================================================================
