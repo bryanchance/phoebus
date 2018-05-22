@@ -5,6 +5,9 @@
 
 // == | Setup | ===============================================================
 
+// Disable all error reporting
+error_reporting(0);
+
 // This has to be defined using the function at runtime because it is based
 // on a variable. However, constants defined with the language construct
 // can use this constant by some strange voodoo. Keep an eye on this.
@@ -319,6 +322,14 @@ if (!$arraySoftwareState['currentApplication'] ||
     $arraySoftwareState['requestApplication'] ||
     ($arraySoftwareState['currentApplication'] == $arraySoftwareState['orginalApplication'])) {
   funcError('Invalid domain or application');
+}
+
+// ----------------------------------------------------------------------------
+
+if ($arraySoftwareState['debugMode') {
+  // Enable all errors
+  error_reporting(E_ALL);
+  ini_set("display_errors", "on");
 }
 
 // ----------------------------------------------------------------------------
