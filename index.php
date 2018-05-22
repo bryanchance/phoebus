@@ -314,11 +314,11 @@ if ($arraySoftwareState['requestApplication'] &&
 }
 
 // If there is no valid currentApplication or currentDomain
-// then error out
+// or if requestApplication is still set then error out
 if (!$arraySoftwareState['currentApplication'] ||
     !$arraySoftwareState['currentDomain'] ||
     $arraySoftwareState['requestApplication']) {
-  funcError('Unknown domain or application');
+  funcError('Invalid domain or application');
 }
 
 funcError($arraySoftwareState, 1);
