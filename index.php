@@ -326,7 +326,7 @@ if (!$arraySoftwareState['currentApplication'] ||
 
 // ----------------------------------------------------------------------------
 
-if ($arraySoftwareState['debugMode') {
+if ($arraySoftwareState['debugMode']) {
   // Enable all errors
   error_reporting(E_ALL);
   ini_set("display_errors", "on");
