@@ -72,7 +72,7 @@ const TARGET_APPLICATION_SITE = array(
   ),
   'borealis' => array(
     'enabled' => false,
-    'name' => 'Add-ons - Borealis - Binary Outcast'
+    'name' => 'Add-ons - Borealis - Binary Outcast',
     'url' => array(
       'live' => 'borealis-addons.binaryoutcast.com',
       'dev' => null
