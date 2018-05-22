@@ -321,8 +321,6 @@ if (!$arraySoftwareState['currentApplication'] ||
   funcError('Invalid domain or application');
 }
 
-funcError($arraySoftwareState, 1);
-
 // ----------------------------------------------------------------------------
 
 // Set entry points for URI based components
@@ -341,6 +339,8 @@ elseif ($arraySoftwareState['requestComponent'] != 'site' &&
         !$arraySoftwareState['requestPath']) {
   funcSendHeader('404');
 }
+
+funcError($arraySoftwareState, 1);
 
 // ----------------------------------------------------------------------------
 
