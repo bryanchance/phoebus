@@ -39,6 +39,31 @@ const MODULES = array(
   'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php'
 );
 
+// Define Application IDs
+// Application IDs are normally in the form of a GUID, however, they
+// can be in the form of a user@host ID as well.
+// Basilisk/Firefox have the same ID
+// FossaMail/Thunderbird have the same ID
+const TARGET_APPLICATION_ID = array(
+  // MCP
+  'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
+  'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  // BinOC
+  'borealis' => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
+  // Mozilla
+  'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}',
+  'fennic-xul' => '{a23983c0-fd0e-11dc-95ff-0800200c9a66}',
+  'fennic-native' => '{aa3c5121-dab2-40e2-81ca-7ea25febc110}',
+  'sunbird' => '{718e30fb-e89b-41dd-9da7-e25a45638b28}',
+  // Adblock Plus
+  'adblock-browser' => '{55aba3ac-94d3-41a8-9e25-5c21fe874539}',
+  // Common
+  'toolkit' => 'toolkit@mozilla.org'
+);
+
 // ============================================================================
 
 // == | Functions | ===========================================================
