@@ -316,7 +316,7 @@ if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
 }
 
-funcError($arraySoftwareState, 1);
+funcError(array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE), 1);
 
 // ----------------------------------------------------------------------------
 
