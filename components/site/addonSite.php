@@ -80,32 +80,6 @@ else {
 if ($arraySoftwareState['requestPath'] == '/') {
   funcError(array('Front Page', $arraySoftwareState), 1);
 }
-// Extensions Category or Subcategory
-elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
-  // Extensions Category
-  if ($arraySoftwareState['requestPath'] == '/extensions/') {
-    funcError(array('Extensions Category', $arraySoftwareState), 1);
-  }
-
-  // Extensions Subcategory
-  // Strip the path to get the slug
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/extensions/');
-
-  // See if the slug exists in the category array
-  if (array_key_exists($strSlug, $arrayCategorySlug)) {
-    funcError(array('Extensions Category: ' . $arrayCategorySlug[$strSlug], $arraySoftwareState), 1);
-  }
-  else {
-    if (!$arraySoftwareState['debugMode']) {
-      funcSendHeader('404');
-    }
-    funcError('404 - Not Found');
-  }
-}
-// Themes Category
-elseif ($arraySoftwareState['requestPath'] == '/themes/') {
-  funcError(array('Themes Category', $arraySoftwareState), 1);
-}
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
   if ($arraySoftwareState['requestPath'] == '/addon/') {
@@ -133,6 +107,40 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
   funcError(array('Add-on License: ' . $strSlug, $arraySoftwareState), 1);
+}
+// Extensions Category or Subcategory
+elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
+  // Extensions Category
+  if ($arraySoftwareState['requestPath'] == '/extensions/') {
+    funcError(array('Extensions Category', $arraySoftwareState), 1);
+  }
+
+  // Extensions Subcategory
+  // Strip the path to get the slug
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/extensions/');
+
+  // See if the slug exists in the category array
+  if (array_key_exists($strSlug, $arrayCategorySlug)) {
+    funcError(array('Extensions Category: ' . $arrayCategorySlug[$strSlug], $arraySoftwareState), 1);
+  }
+  else {
+    if (!$arraySoftwareState['debugMode']) {
+      funcSendHeader('404');
+    }
+    funcError('404 - Not Found');
+  }
+}
+// Themes Category
+elseif ($arraySoftwareState['requestPath'] == '/themes/') {
+  funcError(array('Themes Category', $arraySoftwareState), 1);
+}
+// Search Plugins
+elseif ($arraySoftwareState['requestPath'] == '/search-plugins/') {
+  funcError(array('Search Plugins Category', $arraySoftwareState), 1);
+}
+// Language Packs
+elseif ($arraySoftwareState['requestPath'] == '/search-plugins/') {
+  funcError(array('Search Plugins Category', $arraySoftwareState), 1);
 }
 // There are no matches so error out
 else {
