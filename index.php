@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | Basic Setup | =========================================================
+// == | Setup | ===============================================================
 
 // This has to be defined using the function at runtime because it is based
 // on a variable. However, constants defined with the language construct
@@ -21,6 +21,8 @@ const MODULES_RELPATH = '/modules/';
 const LIB_RELPATH = '/lib/';
 
 // Define components
+// Components are considered to be the main code that drives the site and
+// do the direct work of calling modules and outputting content
 const COMPONENTS = array(
   'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/src/placeholder.txt',
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/src/placeholder.txt',
@@ -31,12 +33,48 @@ const COMPONENTS = array(
 );
 
 // Define modules
+// Modules are largely independent and reusable chunks of code that do not
+// directly output content. Libs are also considered modules for simplicity.
+// The exception to this would be smarty.
 const MODULES = array(
   'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
   'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
   'rdf' => ROOT_PATH . LIB_RELPATH . 'rdf/RdfComponent.php',
   'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php'
+);
+
+// Define the target applications that the site will accomidate with
+// the enabled site features
+const TARGET_APPLICATION_SITE = array(
+  'palemoon' => array(
+    'url' => array(
+      'live' => 'addons.palemoon.org',
+      'dev' => 'addons-dev.palemoon.org'
+    ),
+    'features' => array(
+      'https', 'extensions', 'extensions-cat', 'themes',
+      'language-packs', 'search-plugins'
+    )
+  ),
+  'basilisk' => array(
+    'url' => array(
+      'live' => 'addons.basilisk-browser.org',
+      'dev' => 'addons-dev.basilisk-browser.org'
+    ),
+    'features' => array(
+      'https', 'extensions', 'themes', 'search-plugins'
+    )
+  ),
+  'borealis' => array(
+    'url' => array(
+      'live' => 'borealis-addons.binaryoutcast.org',
+      'dev' => null
+    ),
+    'features' => array(
+      'extensions', 'themes', 'search-plugins'
+    )
+  ),
 );
 
 // Define Application IDs
