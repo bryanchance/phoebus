@@ -314,7 +314,7 @@ if ($arraySoftwareState['requestApplication'] &&
   }
 }
 else {
-  $arraySoftwareState['currentApplication'] = null;
+  $arraySoftwareState['currentApplication'] = 'Invalid';
 }
 
 if (!$arraySoftwareState['currentApplication']) {
