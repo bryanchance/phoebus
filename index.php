@@ -60,7 +60,7 @@ const TARGET_APPLICATION_SITE = array(
     )
   ),
   'basilisk' => array(
-    'enabled' => false,
+    'enabled' => true,
     'name' => 'Basilisk: add-ons',
     'domain' => array(
       'live' => 'addons.basilisk-browser.org',
@@ -314,7 +314,7 @@ if ($arraySoftwareState['requestApplication'] &&
   }
 }
 else {
-  $arraySoftwareState['currentApplication'] = 'Invalid';
+  $arraySoftwareState['currentApplication'] = null;
 }
 
 if (!$arraySoftwareState['currentApplication']) {
