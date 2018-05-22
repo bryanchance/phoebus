@@ -310,11 +310,14 @@ if ($arraySoftwareState['requestApplication'] &&
     TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
+    $arraySoftwareState['requestApplication'] = null;
 }
 
 // If there is no valid currentApplication or currentDomain
 // then error out
-if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentDomain']) {
+if (!$arraySoftwareState['currentApplication'] ||
+    !$arraySoftwareState['currentDomain'] ||
+    $arraySoftwareState['requestApplication']) {
   funcError('Unknown domain or application');
 }
 
