@@ -43,6 +43,8 @@ $arrayCategorySlug = array(
   'other' => 'Other'
 );
 
+$addonManifest = new classAddonManifest;
+
 // ----------------------------------------------------------------------------
 
 // Site Name
