@@ -336,7 +336,8 @@ if ($arraySoftwareState['debugMode']) {
 
 // Set entry points for URI based components
 // Root (/) won't set a component or path
-if ($arraySoftwareState['phpRequestURI'] == '/') {
+if ($arraySoftwareState['phpRequestURI'] == '/' ||
+    startsWith($arraySoftwareState['phpRequestURI'], '/?')) {
   $arraySoftwareState['requestComponent'] = 'site';
   $arraySoftwareState['requestPath'] = '/';
 }
