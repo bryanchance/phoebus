@@ -333,12 +333,6 @@ if ($arraySoftwareState['phpRequestURI'] == '/') {
 elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
   $arraySoftwareState['requestComponent'] = 'special';
 }
-// requestPath should NEVER be set if the component isn't SITE
-// or already handled like SPECIAL
-elseif ($arraySoftwareState['requestComponent'] != 'site' &&
-        !$arraySoftwareState['requestPath']) {
-  funcSendHeader('404');
-}
 
 funcError($arraySoftwareState, 1);
 
