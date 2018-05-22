@@ -48,6 +48,7 @@ const MODULES = array(
 // the enabled site features
 const TARGET_APPLICATION_SITE = array(
   'palemoon' => array(
+    'enabled' => true,
     'url' => array(
       'live' => 'addons.palemoon.org',
       'dev' => 'addons-dev.palemoon.org'
@@ -58,6 +59,7 @@ const TARGET_APPLICATION_SITE = array(
     )
   ),
   'basilisk' => array(
+    'enabled' => false,
     'url' => array(
       'live' => 'addons.basilisk-browser.org',
       'dev' => 'addons-dev.basilisk-browser.org'
@@ -67,6 +69,7 @@ const TARGET_APPLICATION_SITE = array(
     )
   ),
   'borealis' => array(
+    'enabled' => false,
     'url' => array(
       'live' => 'borealis-addons.binaryoutcast.org',
       'dev' => null
