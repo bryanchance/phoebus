@@ -16,7 +16,7 @@ $arrayPageMetadata = array(
 
 // == | Main | ================================================================
 
-$strHTMLTemplate = file_get_contents(dirname(COMPONENTS['discover']) . 'content/template.xhtml');   
+$strHTMLTemplate = file_get_contents(dirname(COMPONENTS['discover']) . '/content/template.xhtml');   
 
 $arrayFilterSubstitute = array(
   '{%PAGE_TITLE}' => $arrayPageMetadata['title'],
