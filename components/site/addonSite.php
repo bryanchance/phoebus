@@ -88,8 +88,19 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
   }
 
   // Extensions Subcategory
+  // Strip the path to get the slug
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/extensions/');
-  funcError(array('Extensions Category: ' . $strSlug, $arraySoftwareState), 1);
+
+  // See if the slug exists in the category array
+  if (array_key_exists($strSlug, $arrayCategorySlug)) {
+    funcError(array('Extensions Category: ' . $arrayCategorySlug[$strSlug], $arraySoftwareState), 1);
+  }
+  else {
+    if (!$arraySoftwareState['debugMode']) {
+      funcSendHeader('404');
+    }
+    funcError('404 - Not Found');
+  }
 }
 // Themes Category
 elseif ($arraySoftwareState['requestPath'] == '/themes/') {

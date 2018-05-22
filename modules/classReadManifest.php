@@ -11,6 +11,38 @@ class classReadManifest {
   private $addonSQL;
   private $addonInit;
   private $classSQL;
+  
+  const SQL_CATEGORY_SINGLE = "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE `category` = ?s ORDER BY `name`";
+  const SQL_CATEGORY_ALL_EXTENSIONS = "
+    SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`,
+           `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    WHERE `id` = ?s
+    AND NOT
+    `type` = 'external'
+  ";
+  const SQL_SEARCH = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`,
+           `active`
+    FROM `addon`
+    WHERE MATCH(`tags`)
+    AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
+  const SQL_ADDON_BASIC = "
+    SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`,
+           `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    WHERE `id` = ?s
+    AND NOT
+    `type` = 'external'
+  ";
+  const SQL_ADDON_FULL = "
+    SELECT *
+    FROM `addon`
+    WHERE `slug` = ?s
+    AND NOT
+    `type` = 'external'
+  ";
 
   // ------------------------------------------------------------------------
 
@@ -167,9 +199,8 @@ class classReadManifest {
     $this->funcInit();
     
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
-        $this->addonSQL['addonComplete'], $_addonSlug)
-      );
+      $this->classSQL->getRow(SQL_ADDON_FULL, $_addonSlug)
+    );
     
     if ($addonManifest != null) {
       $addonManifest = $this->funcProcessManifest($addonManifest);
