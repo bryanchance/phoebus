@@ -87,7 +87,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
   funcError(array('Extensions Category: ' . $strSlug, $arraySoftwareState), 1);
 }
 // Themes Category
-elseif ($arraySoftwareState['requestPath'] == '/') {
+elseif ($arraySoftwareState['requestPath'] == '/themes/') {
   funcError(array('Themes Category', $arraySoftwareState), 1);
 }
 // Add-on Page
