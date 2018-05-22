@@ -312,7 +312,7 @@ if ($arraySoftwareState['requestApplication'] &&
   }
 }
 
-funcError(TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled'], 1);
+funcError($arraySoftwareState['currentApplication'], 1);
 
 if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
