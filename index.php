@@ -279,7 +279,8 @@ $arraySoftwareState = array(
   'phpRequestURI' => $_SERVER['REQUEST_URI'],
   'requestComponent' => funcHTTPGetValue('component'),
   'requestPath' => funcHTTPGetValue('path'),
-  'requestApplication' => funcHTTPGetValue('application')
+  'requestApplication' => funcHTTPGetValue('application'),
+  'requestDebugOff' => funcHTTPGetValue('debugOff')
 );
 
 // ============================================================================
@@ -327,9 +328,14 @@ if (!$arraySoftwareState['currentApplication'] ||
 // ----------------------------------------------------------------------------
 
 if ($arraySoftwareState['debugMode']) {
-  // Enable all errors
-  error_reporting(E_ALL);
-  ini_set("display_errors", "on");
+  if ($arraySoftwareState['requestDebugOff']) {
+    $arraySoftwareState['debugMode'] = null;
+  }
+  else {
+    // Enable all errors
+    error_reporting(E_ALL);
+    ini_set("display_errors", "on");
+  }
 }
 
 // ----------------------------------------------------------------------------
