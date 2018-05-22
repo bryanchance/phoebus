@@ -73,6 +73,7 @@ class classLangPacks {
                 'pt-PT' => 'Portuguese (Portugal)',
                 'ru' => 'Russian',
                 'sv-SE' => 'Swedish (Sweden)',
+                'tl' => 'Filipino (Tagalog)',
                 'tr' => 'Turkish',
                 'uk' => 'Ukrainian',
                 'zh-CN' => 'Chinese (Simplified)'
