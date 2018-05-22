@@ -300,6 +300,8 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
   }
 }
 
+funcError($arraySoftwareState['currentApplication'], 1);
+
 // Override currentApplication by query
 if ($arraySoftwareState['requestApplication'] &&
     array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
@@ -311,8 +313,6 @@ if ($arraySoftwareState['requestApplication'] &&
     $arraySoftwareState['currentApplication'] = null;
   }
 }
-
-funcError($arraySoftwareState['currentApplication'], 1);
 
 if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
