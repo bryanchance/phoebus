@@ -299,7 +299,7 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
     break;
   }
 }
-funcError(array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE), 1);
+
 // Override currentApplication by query
 if ($arraySoftwareState['requestApplication'] &&
     array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
@@ -308,10 +308,10 @@ if ($arraySoftwareState['requestApplication'] &&
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
   }
   else {
-    funcError('Invalid application');
+    $arraySoftwareState['currentApplication'] = null;
   }
 }
-
+funcError($arraySoftwareState['requestApplication'], 1);
 if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
 }
