@@ -286,12 +286,12 @@ $arraySoftwareState = array(
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
 foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
-  if ($arraySoftwareState['phpRequestURI'] == $_value['domain']['live']) {
+  if ($arraySoftwareState['phpServerName'] == $_value['domain']['live']) {
     $arraySoftwareState['currentApplication'] = $_key;
     $arraySoftwareState['currentName'] = $_value['name'];
     $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
   }
-  elseif ($arraySoftwareState['phpRequestURI'] == $_value['domain']['dev']) {
+  elseif ($arraySoftwareState['phpServerName'] == $_value['domain']['dev']) {
     $arraySoftwareState['currentApplication'] = $_key;
     $arraySoftwareState['debugMode'] = true;
     $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
