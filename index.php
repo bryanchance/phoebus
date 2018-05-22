@@ -276,7 +276,7 @@ function contains($haystack, $needle) {
 
 // ============================================================================
 
-// == | Vars | ================================================================
+// == | Main | ================================================================
 
 // Define an array that will hold the current application state
 $arraySoftwareState = array(
@@ -293,9 +293,7 @@ $arraySoftwareState = array(
   'requestDebugOff' => funcHTTPGetValue('debugOff')
 );
 
-// ============================================================================
-
-// == | Main | ================================================================
+// ----------------------------------------------------------------------------
 
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
