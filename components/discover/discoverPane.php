@@ -15,6 +15,10 @@ $arrayPageMetadata = array(
 
 // == | Main | ================================================================
 
+if ($arraySoftwareState['currentApplication'] != 'palemoon') {
+  funcSendHeader('501');
+}
+
 $strHTMLTemplate = file_get_contents(dirname(COMPONENTS['discover']) . '/content/template.xhtml');   
 
 $arrayFilterSubstitute = array(
