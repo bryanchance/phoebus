@@ -43,7 +43,7 @@ $arrayCategorySlug = array(
   'other' => 'Other'
 );
 
-$addonManifest = new classAddonManifest;
+ $addonManifest = new classReadManifest();
 
 // ----------------------------------------------------------------------------
 
