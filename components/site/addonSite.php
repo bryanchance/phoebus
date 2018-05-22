@@ -106,7 +106,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/releases/');
-  funcError(array('Add-on Releases ' . $strSlug, $arraySoftwareState), 1);
+  funcError(array('Add-on Releases: ' . $strSlug, $arraySoftwareState), 1);
 }
 // Add-on License
 elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
@@ -115,7 +115,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
-  funcError(array('Add-on License ' . $strSlug, $arraySoftwareState), 1);
+  funcError(array('Add-on License: ' . $strSlug, $arraySoftwareState), 1);
 }
 // There are no matches so error out
 else {
