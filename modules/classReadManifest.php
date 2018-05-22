@@ -57,7 +57,7 @@ class classReadManifest {
   // Initalize class
   // You should put this in every public method entry point
   private function funcInit() {
-    funcError(SQL_ADDON_FULL, 1);
+    funcError(SQL_ADDON_BASIC, 1);
     // Be sure to clear out errors in case we reuse the class
     $this->addonErrors = null;
     
