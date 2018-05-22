@@ -286,7 +286,7 @@ $arraySoftwareState = array(
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
 foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
-  funcError($_key);
+  funcError($_value, 1);
   if ($arraySoftwareState['phpRequestURI'] == $_value['domain']['live']) {
     $arraySoftwareState['currentApplication'] = $_key;
     $arraySoftwareState['currentName'] = $_value['name'];
