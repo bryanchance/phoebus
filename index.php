@@ -337,7 +337,7 @@ elseif ($arraySoftwareState['requestComponent'] != 'site' &&
 
 // Load component based on requestComponent
 if ($arraySoftwareState['requestComponent'] &&
-    array_key_exists($arraySoftwareState['requestComponent', COMPONENTS)) {
+    array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
   require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
 }
 else {
