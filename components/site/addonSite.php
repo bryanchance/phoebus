@@ -5,20 +5,24 @@
 
 // == | Functions | ===========================================================
 
+/******************************************************************************
+* Strips path to obtain the slug
+*
+* @param $_path     $arraySoftwareState['requestPath']
+* @param $_prefix   Prefix to strip 
+* @returns          slug
+******************************************************************************/
+function funcStripPath($_path, $_prefix) {
+  return str_replace('/', '', str_replace($_prefix, '', $_path));
+}
+
+// ----------------------------------------------------------------------------
+
+
+
 // ============================================================================
 
 // == | Vars | ================================================================
-
-// These are valid URIs
-$arraySiteURI = array(
-  'frontpage' => '/',
-  'addonPage' => '/addon/',
-  'addonReleases' => '/releases/',
-  'addonLicense' => '/license/',
-  'extensions' => '/extensions/',
-  'themes' => '/themes/',
-  'search' => '/search/',
-);
 
 // These are Category Slugs with their titles
 $arrayCategorySlug = array(
@@ -66,7 +70,62 @@ else {
 
 // ----------------------------------------------------------------------------
 
-funcError($arraySoftwareState, 1);
+// Decide what kind of page is being requested
+// The front page
+if ($arraySoftwareState['requestPath'] == '/') {
+  funcError(array('Front Page', $arraySoftwareState), 1);
+}
+// Extensions Category or Subcategory
+elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/') {
+  // Extensions Category
+  if ($arraySoftwareState['requestPath'] == '/extensions/') {
+    funcError(array('Extensions Category', $arraySoftwareState), 1);
+  }
+
+  // Extensions Subcategory
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/extensions/');
+  funcError(array('Extensions Category: ' . $strSlug, $arraySoftwareState), 1);
+}
+// Themes Category
+elseif ($arraySoftwareState['requestPath'] == '/') {
+  funcError(array('Themes Category', $arraySoftwareState), 1);
+}
+// Add-on Page
+elseif (startsWith($arraySoftwareState['requestPath'], '/addon/') {
+  if ($arraySoftwareState['requestPath'] == '/addon/') {
+    funcRedirect('/');
+  }
+
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/addon/');
+  funcError(array('Add-on Page: ' . $strSlug, $arraySoftwareState), 1);
+}
+// Add-on Releases
+elseif (startsWith($arraySoftwareState['requestPath'], '/releases/') {
+  if ($arraySoftwareState['requestPath'] == '/releases/') {
+    funcRedirect('/');
+  }
+
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/releases/');
+  funcError(array('Add-on Releases ' . $strSlug, $arraySoftwareState), 1);
+}
+// Add-on License
+elseif (startsWith($arraySoftwareState['requestPath'], '/license/') {
+  if ($arraySoftwareState['requestPath'] == '/license/') {
+    funcRedirect('/');
+  }
+
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
+  funcError(array('Add-on License ' . $strSlug, $arraySoftwareState), 1);
+}
+// There are no matches so error out
+else {
+  if (!$arraySoftwareState['debugMode']) {
+    funcSendHeader('404');
+  }
+  funcError('404 - Not Found');
+}
+
+
 
 // ============================================================================
 
