@@ -7,6 +7,7 @@
 
 // Include modules
 require_once(MODULES['sql']);
+require_once(ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/rdb.php');
 require_once(MODULES['readManifest']);
 
 // ============================================================================
