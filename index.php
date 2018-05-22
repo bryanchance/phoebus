@@ -317,7 +317,8 @@ if ($arraySoftwareState['requestApplication'] &&
 // or if requestApplication is still set then error out
 if (!$arraySoftwareState['currentApplication'] ||
     !$arraySoftwareState['currentDomain'] ||
-    $arraySoftwareState['requestApplication']) {
+    $arraySoftwareState['requestApplication'] ||
+    ($arraySoftwareState['currentApplication'] == $arraySoftwareState['requestApplication'])) {
   funcError('Invalid domain or application');
 }
 
