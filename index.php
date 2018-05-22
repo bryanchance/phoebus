@@ -304,24 +304,15 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
 
 // Override currentApplication by query
 // If requestApplication is set and it exists in the array constant check if it is
-// enabled and if so set the currentApplication to that else currentApplication is not
-// valid and will be flipped back to null
+// enabled and if so set the currentApplication to that
 if ($arraySoftwareState['requestApplication'] &&
-    array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
-  if (TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
+    array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
+    TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
-  }
-  else {
-    $arraySoftwareState['currentApplication'] = null;
-  }
-}
-// We do not want people specifing an application while on the domain for that application
-elseif ($arraySoftwareState['currentApplication'] == $arraySoftwareState['requestApplication']) {
-  $arraySoftwareState['currentApplication'] = null;
 }
 
-// If there is still no valid currentApplication or currentDomain
+// If there is no valid currentApplication or currentDomain
 // then error out
 if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentDomain']) {
   funcError('Unknown domain or application');
