@@ -288,13 +288,12 @@ $arraySoftwareState = array(
 foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
   if ($arraySoftwareState['phpServerName'] == $_value['domain']['live']) {
     $arraySoftwareState['currentApplication'] = $_key;
-    $arraySoftwareState['currentName'] = $_value['name'];
     $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
   }
   elseif ($arraySoftwareState['phpServerName'] == $_value['domain']['dev']) {
     $arraySoftwareState['currentApplication'] = $_key;
-    $arraySoftwareState['debugMode'] = true;
     $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
+    $arraySoftwareState['debugMode'] = true;
   }
 
   if ($arraySoftwareState['currentApplication']) {
