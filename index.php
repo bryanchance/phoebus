@@ -12,8 +12,8 @@
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 
 // Define basic constants for the application
-const APPLICATION_NAME = 'Phoebus';
-const APPLICATION_VERSION = '2.0.0a1';
+const SOFTWARE_NAME = 'Phoebus';
+const SOFTWARE_VERSION = '2.0.0a1';
 const DATASTORE_RELPATH = '/datastore/';
 const OBJ_RELPATH = '/.obj/';
 const COMPONENTS_RELPATH = '/components/';
@@ -125,7 +125,7 @@ function funcError($_value, $_mode = 0) {
   ob_get_clean();
   header('Content-Type: text/html', false);   
   print(file_get_contents('./components/special/skin/default/template-header.xhtml'));
-  print('<h2>' . APPLICATION_NAME . ' ' . APPLICATION_VERSION . '</h2>');
+  print('<h2>' . SOFTWARE_NAME . ' ' . SOFTWARE_VERSION . '</h2>');
 
   switch($_mode) {
     case 0:
