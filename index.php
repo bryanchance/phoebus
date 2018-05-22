@@ -313,6 +313,9 @@ if ($arraySoftwareState['requestApplication'] &&
     $arraySoftwareState['currentApplication'] = null;
   }
 }
+else {
+  $arraySoftwareState['currentApplication'] = null;
+}
 
 if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
