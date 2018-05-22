@@ -339,8 +339,6 @@ elseif ($arraySoftwareState['requestComponent'] != 'site' &&
   funcSendHeader('404');
 }
 
-funcError($arraySoftwareState, 1);
-
 // ----------------------------------------------------------------------------
 
 // Load component based on requestComponent
