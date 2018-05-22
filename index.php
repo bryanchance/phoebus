@@ -286,17 +286,18 @@ $arraySoftwareState = array(
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
 foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
-  funcError($_value, 1);
   if ($arraySoftwareState['phpRequestURI'] == $_value['domain']['live']) {
     $arraySoftwareState['currentApplication'] = $_key;
     $arraySoftwareState['currentName'] = $_value['name'];
     $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
-    break;
   }
   elseif ($arraySoftwareState['phpRequestURI'] == $_value['domain']['dev']) {
     $arraySoftwareState['currentApplication'] = $_key;
     $arraySoftwareState['debugMode'] = true;
     $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
+  }
+
+  if ($arraySoftwareState['currentApplication']) {
     break;
   }
 }
@@ -317,7 +318,7 @@ if (!$arraySoftwareState['currentApplication']) {
   funcError('Unknown domain or application');
 }
 
-
+  funcError($arraySoftwareState, 1);
 
 // ----------------------------------------------------------------------------
 
