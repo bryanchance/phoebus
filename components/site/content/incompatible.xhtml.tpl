@@ -18,7 +18,7 @@
 
 <h3>List of add-ons with known compatibility issues</h3>
 
-<p><strong>Last updated: 2018-05-03</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
+<p><strong>Last updated: 2018-05-25</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
 
 <p><strong>FIXED</strong></p>
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -30,7 +30,7 @@
                     <li>Add URL to Window Title</li>
                     <li><a href="/addon/auto-sort-bookmarks/">Auto-Sort Bookmarks</a></li>
                     <li><a href="/addon/backtotop/">Back To Top</a></li>
-                    <li>Bamboo Feed Reader</li>
+                    <li><a href="/addon/bamboo-feed-reader/">Bamboo Feed Reader</a></li>
                     <li><a href="/addon/calendate/">Calendate</a></li>
                     <li><a href="/addon/classic-password-editor/">Classic Password Editor</a></li>
                     <li><a href="/addon/cleo/">CLEO</a></li>
@@ -61,7 +61,7 @@
                     <li>Lucifox</li>
                     <li><a href="/addon/multi-links-plus/">Multi Links Plus</a></li>
                     <li>NewsFox</li>
-                    <li><a href="/addon/noscript/">NoScript Security Suite</a></li>
+                    <li>NoScript Classic</li>
                     <li><a href="/addon/opie/">OPIE</a></li>
                     <li><a href="/addon/opie2/">OPIE2</a></li>
                     <li><a href="/addon/pasteemail/">Paste Email (original)</a></li>

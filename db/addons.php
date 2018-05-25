@@ -147,7 +147,6 @@ $arrayAddonsDB = array(
     '{669920c8-3426-4071-b98e-98e62085837f}' => 'tangerinemoon',
     '{6a2ffbbc-4f20-42f0-b98e-98e62085837f}' => 'australium',
     '{6e1d3ac8-6069-4b8a-b98e-98e62085837f}' => 'compact-moon-theme',
-    '{73a6fe31-595d-460b-a920-fcc0f8843232}' => 'noscript',
     '{74c822b8-b6d5-4a81-872c-067338334a74}' => 'showdownloadswts',
     '{77d97525-e813-48d0-9bba-9c43df19baf9}' => 'winstripe-moon',
     '{819ee8c5-b9cd-4cbc-8942-b0fbe018ab33}' => 'newmime',

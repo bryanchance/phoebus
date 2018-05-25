@@ -173,7 +173,6 @@ $arrayCategoryList05 = array(
     'isadmin',
     'integrated-authentication',
     'eclipsedmoon',
-    'noscript',
     'ublock0-updater',
     'cookiemasters',
     'cleo',
@@ -208,6 +207,12 @@ $arrayCategoryList05 = array(
             'name' => 'UIR Header',
             'shortDescription' => 'Add the Upgrade-Insecure-Requests header to all HTTP requests.',
             'url' => 'https://realityripple.com/Software/Mozilla-Extensions/UIR-Header/'
+        ),
+        'noscript' => array(
+            'id' => 'ex-040',
+            'name' => 'NoScript Classic',
+            'shortDescription' => 'Allow active content to run only from sites you trust, and protect yourself against XSS and Clickjacking attacks, "Spectre", "Meltdown" and other JavaScript exploits.',
+            'url' => 'https://noscript.net/getit'
         ),
     ),
 );
