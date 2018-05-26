@@ -200,8 +200,8 @@ class classReadManifest {
     
     $addonManifest = funcCheckVar(
       $this->classSQL->getRow(
-        $GLOBALS['arraySoftwareState']['currentApplication'],
         self::SQL_ADDON_BY_SLUG,
+        $GLOBALS['arraySoftwareState']['currentApplication'],
         $_addonSlug
       )
     );
