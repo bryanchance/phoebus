@@ -48,7 +48,7 @@ class classReadManifest {
   const SQL_ADDON_BY_SLUG = "
     SELECT *
     FROM `addon`
-    JOIN `client` ON addon.id = client.id
+    JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `slug` = ?s
     AND NOT `type` = 'external'
