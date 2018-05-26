@@ -16,7 +16,9 @@ class classReadManifest {
     SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
            `reviewed`, `active`
     FROM `addon`
-    WHERE `category` = ?s
+    JOIN `client` ON addon.id = client.id
+    WHERE ?n = 1
+    AND `category` = ?s
     ORDER BY `name`
   ";
   // Gets All Extensions
@@ -46,7 +48,9 @@ class classReadManifest {
   const SQL_ADDON_BY_SLUG = "
     SELECT *
     FROM `addon`
-    WHERE `slug` = ?s
+    JOIN `client` ON addon.id = client.id
+    WHERE ?n = 1
+    AND `slug` = ?s
     AND NOT `type` = 'external'
   ";
   // Gets search results
