@@ -16,7 +16,7 @@ class classReadManifest {
     SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
            `reviewed`, `active`
     FROM `addon`
-    JOIN `client` ON addon.id = client.id
+    JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `category` = ?s
     ORDER BY `name`
