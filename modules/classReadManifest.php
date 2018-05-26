@@ -26,7 +26,9 @@ class classReadManifest {
     SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
            `reviewed`, `active`
     FROM `addon`
-    WHERE `type` = 'extension'
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `type` = 'extension'
     AND NOT `category` = 'unlisted'
     OR (
       `type` = 'external'
@@ -40,7 +42,9 @@ class classReadManifest {
     SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`,
            `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
     FROM `addon`
-    WHERE `id` = ?s
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `id` = ?s
     AND NOT `type` = 'external'
   ";
   // Gets a single Add-on by Slug
@@ -58,7 +62,9 @@ class classReadManifest {
     SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
            `reviewed`, `active`
     FROM `addon`
-    WHERE MATCH(`tags`)
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND MATCH(`tags`)
     AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
 
@@ -84,7 +90,11 @@ class classReadManifest {
     $searchManifest = array();
 
     $searchSQL = funcCheckVar(
-      $this->classSQL->getAll(self::SQL_SEARCH_RESULTS, $_searchTerms)
+      $this->classSQL->getAll(
+        self::SQL_SEARCH_RESULTS,
+        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $_searchTerms
+      )
     );
 
     if ($searchSQL != null) {
@@ -115,7 +125,11 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(self::SQL_CATEGORY, $_categorySlug)
+      $this->classSQL->getAll(
+        self::SQL_CATEGORY,
+        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $_categorySlug
+      )
     );
 
     if ($categorySQL != null) {
@@ -146,7 +160,9 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(self::SQL_ALL_EXTENSIONS)
+      $this->classSQL->getAll(
+        self::SQL_ALL_EXTENSIONS,
+        $GLOBALS['arraySoftwareState']['currentApplication'])
     );
 
     if ($categorySQL != null) {
@@ -175,7 +191,11 @@ class classReadManifest {
     $this->funcInit();
 
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(self::SQL_ADDON_BY_ID, $_addonID)
+      $this->classSQL->getRow(
+        self::SQL_ADDON_BY_ID,
+        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $_addonID
+      )
     );
 
     if ($addonManifest != null) {

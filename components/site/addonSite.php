@@ -97,7 +97,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/releases/');
-  funcError(array('Add-on Releases: ' . $strSlug, $arraySoftwareState), 1);
+  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  funcError(array('Add-on Releases: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on License
 elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
@@ -106,13 +107,15 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
-  funcError(array('Add-on License: ' . $strSlug, $arraySoftwareState), 1);
+  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  funcError(array('Add-on License: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == '/extensions/') {
-    funcError(array('Extensions Category', $arraySoftwareState), 1);
+    $categoryManifest = $readManifest->getAllExtensions();
+    funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
   // Extensions Subcategory
@@ -121,7 +124,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
 
   // See if the slug exists in the category array
   if (array_key_exists($strSlug, $arrayCategorySlug)) {
-    funcError(array('Extensions Category: ' . $arrayCategorySlug[$strSlug], $arraySoftwareState), 1);
+    $categoryManifest = $readManifest->getCategory($strSlug);
+    funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
   }
   else {
     if (!$arraySoftwareState['debugMode']) {
@@ -132,7 +136,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
 }
 // Themes Category
 elseif ($arraySoftwareState['requestPath'] == '/themes/') {
-  funcError(array('Themes Category', $arraySoftwareState), 1);
+  $categoryManifest = $readManifest->getCategory('themes');
+  funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
 }
 // Search Plugins
 elseif ($arraySoftwareState['requestPath'] == '/search-plugins/') {
