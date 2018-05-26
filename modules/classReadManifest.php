@@ -8,9 +8,55 @@
 class classReadManifest {
   // We want a prop that warning and error messages can be sent to
   public $addonErrors;
-  private $addonSQL;
   private $addonInit;
   private $classSQL;
+
+  // Gets Add-ons by Category
+  const SQL_CATEGORY = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
+           `reviewed`, `active`
+    FROM `addon`
+    WHERE `category` = ?s
+    ORDER BY `name`
+  ";
+  // Gets All Extensions
+  const SQL_ALL_EXTENSIONS = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
+           `reviewed`, `active`
+    FROM `addon`
+    WHERE `type` = 'extension'
+    AND NOT `category` = 'unlisted'
+    OR (
+      `type` = 'external'
+      AND NOT `category` = 'theme'
+    )
+    ORDER BY `name`
+  ";
+  // Gets a single Add-on by ID
+  // Result is a reduced manifest for use with AUS and DOWNLOAD
+  const SQL_ADDON_BY_ID = "
+    SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`,
+           `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    WHERE `id` = ?s
+    AND NOT `type` = 'external'
+  ";
+  // Gets a single Add-on by Slug
+  // Result is the full manifest
+  const SQL_ADDON_BY_SLUG = "
+    SELECT *
+    FROM `addon`
+    WHERE `slug` = ?s
+    AND NOT `type` = 'external'
+  ";
+  // Gets search results
+  const SQL_SEARCH_RESULTS = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
+           `reviewed`, `active`
+    FROM `addon`
+    WHERE MATCH(`tags`)
+    AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
 
   // ------------------------------------------------------------------------
 
@@ -19,21 +65,7 @@ class classReadManifest {
   private function funcInit() {
     // Be sure to clear out errors in case we reuse the class
     $this->addonErrors = null;
-
-    // These are the SQL Query strings we will use to accomplish basic functions
-    $this->addonSQL = array(
-      'categorySingle' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE `category` = ?s ORDER BY `name`",
-      'searchResults' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)",
-      'categoryAllExtensions' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE `type` = 'extension' AND NOT `category` = 'unlisted' OR (`type` = 'external' AND NOT `category` = 'theme') ORDER BY `name`",
-      'addonBasic' =>
-        "SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`, `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall` FROM `addon` WHERE `id` = ?s AND NOT `type` = 'external'",
-      'addonComplete' =>
-        "SELECT * FROM `addon` WHERE `slug` = ?s AND NOT `type` = 'external'"
-    );
-    
+   
     // Create a new instance of the SafeMysql class
     $this->classSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
@@ -48,9 +80,8 @@ class classReadManifest {
     $searchManifest = array();
 
     $searchSQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['searchResults'], $_searchTerms)
-      );
+      $this->classSQL->getAll(self::SQL_SEARCH_RESULTS, $_searchTerms)
+    );
 
     if ($searchSQL != null) {
       foreach ($searchSQL as $_value) {
@@ -80,9 +111,8 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['categorySingle'], $_categorySlug)
-      );
+      $this->classSQL->getAll(self::SQL_CATEGORY, $_categorySlug)
+    );
 
     if ($categorySQL != null) {
       foreach ($categorySQL as $_value) {
@@ -112,9 +142,8 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['categoryAllExtensions'])
-      );
+      $this->classSQL->getAll(self::SQL_ALL_EXTENSIONS)
+    );
 
     if ($categorySQL != null) {
       foreach ($categorySQL as $_value) {
@@ -136,15 +165,14 @@ class classReadManifest {
 
   // ------------------------------------------------------------------------
 
-  // Gets a single basic add-on manifest by ID
+  // Gets a reduced add-on manifest by ID
   public function getAddonByID($_addonID) {
     // Initalize the class
     $this->funcInit();
 
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
-        $this->addonSQL['addonBasic'], $_addonID)
-      );
+      $this->classSQL->getRow(self::SQL_ADDON_BY_ID, $_addonID)
+    );
 
     if ($addonManifest != null) {
       $addonManifest = $this->funcProcessManifest($addonManifest);
@@ -167,9 +195,8 @@ class classReadManifest {
     $this->funcInit();
     
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
-        $this->addonSQL['addonComplete'], $_addonSlug)
-      );
+      $this->classSQL->getRow(self::SQL_ADDON_BY_SLUG, $_addonSlug)
+    );
     
     if ($addonManifest != null) {
       $addonManifest = $this->funcProcessManifest($addonManifest);
