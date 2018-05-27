@@ -41,22 +41,36 @@ class classGeneratePage {
 
     // Initalize Smarty
     $this->libSmarty = new Smarty();
-    
+
     // Set Smarty Caching
     $this->libSmarty->caching = 0;
-    
+
     // Set Smarty Debug
     $this->libSmarty->debug = false;
-    
+
     if ($this->arraySoftwareState['requestSmartyDebug']) {
       $this->libSmarty->debug = $this->arraySoftwareState['debugMode'];
     }
-    
+
     // Set Smarty Paths
+    $smartyObjPath = ROOT_PATH . OBJ_RELPATH . '/amarty/' .
+                     $this->arraySoftwareState['requestComponent'] .
+                     '-' . $skin . '/';
+
+    $this->libSmarty->setCacheDir($smartyObjPath . 'cache');
+    $this->libSmarty->setCompileDir($smartyObjPath . 'compile');
+    $this->libSmarty->setConfigDir($smartyObjPath . 'config');
+    $this->libSmarty->addPluginsDir($smartyObjPath . 'plugins');
+    $this->libSmarty->setTemplateDir($smartyObjPath . 'template');
   }
 
   public function test() {
-    funcError(array($this->arraySoftwareState, $this->strSkinPath, $this->libSmarty), 1);
+    funcError(array(
+        $this->strSkinPath,
+        $this->arraySoftwareState,
+        $this->libSmarty
+      ), 1
+    );
   }
 }
 
