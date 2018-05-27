@@ -9,7 +9,6 @@ class classGeneratePage {
   const TEMPLATE_FILE = 'template.xhtml';
   const STYLESHEET_FILE = 'stylesheet.css';
   private $arraySoftwareState;
-  private $strSkinPath;
   private $libSmarty;
 
   /****************************************************************************
@@ -36,8 +35,9 @@ class classGeneratePage {
       $skin = $this->arraySoftwareState['currentApplication'];
     }
 
-    // Set the skinPath class property
-    $this->strSkinPath = $componentPath . '/skin/' . $skin . '/';
+    $this->arraySoftwareState['smartySkinPath'] = $componentPath . '/skin/' . $skin . '/';
+    $this->arraySoftwareState['smartySkinRelPath'] = 
+      str_replace(ROOT_PATH, '', $this->arraySoftwareState['smartySkinPath']);
 
     // ------------------------------------------------------------------------
 
@@ -67,11 +67,7 @@ class classGeneratePage {
   }
 
   public function test() {
-    funcError(array(
-        $this->strSkinPath,
-        $this->arraySoftwareState,
-        $GLOBALS['arraySoftwareState']
-      ), 1
+    funcError($this->arraySoftwareState, 1
     );
   }
 }
