@@ -50,7 +50,7 @@ class classReadManifest {
   // Gets a single Add-on by Slug
   // Result is the full manifest
   const SQL_ADDON_BY_SLUG = "
-    SELECT *
+    SELECT addon.*
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
