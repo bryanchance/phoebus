@@ -75,13 +75,12 @@ else {
 
 // ----------------------------------------------------------------------------
 
-$generatePage = new classGeneratePage();
-$generatePage->test();
-
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') {
-  funcError(array('Front Page', $arraySoftwareState), 1);
+  //funcError(array('Front Page', $arraySoftwareState), 1);
+  $moduleGeneratePage = new classGeneratePage();
+  $moduleGeneratePage->test();
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
