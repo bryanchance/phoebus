@@ -62,7 +62,6 @@ $arrayAddonsDB = array(
     'keyconfig@mozilla.dorando.at' => 'keyconfig',
     'location4evar@Off.JustOff' => 'location-4-evar',
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
-    'lwthemes-manager@193d9009' => 'lighttheme-mgr',
     'macmoon@lootyhoof-pm' => 'macmoon',
     'materialmoon@franklindm' => 'material-moon',
     'modhresponse@Off.JustOff' => 'modify-http-response',
@@ -159,7 +158,6 @@ $arrayAddonsDB = array(
     '{8e05f2af-03be-443e-a2b5-b4375a3a1930}' => 'cookie-permissions',
     '{8eb2e77d-73aa-4620-a9dd-9ddae0602172}' => 'change-referer-button',
     '{98a2ae55-3a75-4354-a460-9176594d05c3}' => 'open-about-config',
-    '{9bae89f4-fe30-4710-bbed-256c9d6af2c3}' => 'browserviewplus',
     '{9c03eb94-a057-42f0-84a6-679103d738bb}' => 'restartbrowsernow',
     '{9e96e0c4-9bde-49b7-989f-a4ca4bdc90bb}' => 'active-stop-button',
     '{AF445D67-154C-4c69-A17B-7F392BCC36A3}' => 'complete-yt-saver',
@@ -193,9 +191,7 @@ $arrayAddonsDB = array(
     '{efb0aee9-a019-4341-bbeb-11e1630492f3}' => 'popup-english-dictionary',
     '{f0220cf6-8b2c-4103-9e8c-5b7215db3158}' => 'personamaker',
     '{f227c673-0e00-447a-a486-40eb47bfa9bc}' => 'quickdialtool',
-    '{f44a1992-64ff-4b96-acd6-35d65ab61cb3}' => 'viewsidebarmgr',
     '{f60dcfb5-358d-498e-9f2e-1b53eba4dde7}' => 'searchload-options-revived',
-    '{fd127522-63a6-40ef-a259-7f7a0ba811bc}' => 'lighttheme-maker',
     '{ff497972-c067-44d8-b98e-98e62085837f}' => 'compact-moon-options',
 );
 ?>
