@@ -66,9 +66,11 @@ class classGeneratePage {
     $this->libSmarty->setTemplateDir($smartyObjPath . 'template');
   }
 
+  /****************************************************************************
+  * Temporary test function .. outputs arraySoftwareState
+  ****************************************************************************/
   public function test() {
-    funcError($this->arraySoftwareState, 1
-    );
+    funcError($this->arraySoftwareState, 1);
   }
 }
 

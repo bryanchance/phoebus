@@ -44,7 +44,7 @@ $arrayCategorySlug = array(
   'other' => 'Other'
 );
 
- $readManifest = new classReadManifest();
+ $moduleReadManifest = new classReadManifest();
 
 // ----------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/addon/');
-  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on Releases
@@ -100,7 +100,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/releases/');
-  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Releases: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on License
@@ -110,14 +110,14 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
-  $addonManifest = $readManifest->getAddonBySlug($strSlug);
+  $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on License: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == '/extensions/') {
-    $categoryManifest = $readManifest->getAllExtensions();
+    $categoryManifest = $moduleReadManifest->getAllExtensions();
     funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
@@ -127,7 +127,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
 
   // See if the slug exists in the category array
   if (array_key_exists($strSlug, $arrayCategorySlug)) {
-    $categoryManifest = $readManifest->getCategory($strSlug);
+    $categoryManifest = $moduleReadManifest->getCategory($strSlug);
     funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
   }
   else {
@@ -139,7 +139,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
 }
 // Themes Category
 elseif ($arraySoftwareState['requestPath'] == '/themes/') {
-  $categoryManifest = $readManifest->getCategory('themes');
+  $categoryManifest = $moduleReadManifest->getCategory('themes');
   funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
 }
 // Search Plugins
