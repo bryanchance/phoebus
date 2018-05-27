@@ -35,7 +35,7 @@ class classGeneratePage {
     }
 
     // Set the skinPath class property
-    $this->strSkinPath = $componentPath . $skin . '/';
+    $this->strSkinPath = $componentPath '/' . $skin . '/';
 
     // ------------------------------------------------------------------------
 
