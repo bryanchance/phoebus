@@ -23,7 +23,7 @@ class classGeneratePage {
     // ------------------------------------------------------------------------
 
     // Componet Path
-    $componentPath = basepath(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
+    $componentPath = dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
 
     // Current Skin
     $skin = 'default';
