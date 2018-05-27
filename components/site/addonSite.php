@@ -6,9 +6,9 @@
 // == | Setup | ===============================================================
 
 // Include modules
-$includes = array('sql', $strSQLCredsPath, 'readManifest',
-                  'smarty', 'generatePage');
-foreach($includes as $_value) { require_once($_value); }
+$arrayIncludes = array('sql', 'sql-creds', 'readManifest',
+                       'smarty', 'generatePage');
+foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // ============================================================================
 
@@ -75,12 +75,10 @@ else {
 
 // ----------------------------------------------------------------------------
 
-$generatePage = new classGeneratePage();
-
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') {
-  funcError(array('Front Page', $arraySoftwareState), 1);
+  //funcError(array('Front Page', $arraySoftwareState), 1);
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {

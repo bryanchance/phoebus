@@ -45,7 +45,8 @@ const MODULES = array(
   'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
   'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
   'rdf' => ROOT_PATH . LIB_RELPATH . 'rdf/RdfComponent.php',
-  'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php'
+  'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
+  'sql-creds' => ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/rdb.php'
 );
 
 // Define the target applications that the site will accomidate with
