@@ -54,11 +54,11 @@ class classGeneratePage {
     
     // Set Smarty Paths
   }
-}
 
   public function test() {
     funcError(array($this->arraySoftwareState, $this->strSkinPath, $this->libSmarty), 1);
   }
+}
 
 // ============================================================================
 
