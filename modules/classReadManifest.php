@@ -71,11 +71,7 @@ class classReadManifest {
   // ------------------------------------------------------------------------
 
   // Initalize class
-  // You should put this in every public method entry point
-  private function funcInit() {
-    // Be sure to clear out errors in case we reuse the class
-    $this->addonErrors = null;
-   
+  function __construct() {  
     // Create a new instance of the SafeMysql class
     $this->classSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
@@ -84,8 +80,8 @@ class classReadManifest {
 
   // gets an indexed array of manifests for a single category
   public function getSearchResults($_searchTerms) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $searchManifest = array();
 
@@ -119,8 +115,8 @@ class classReadManifest {
 
   // gets an indexed array of manifests for a single category
   public function getCategory($_categorySlug) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $categoryManifest = array();
 
@@ -154,8 +150,8 @@ class classReadManifest {
 
   // gets an indexed array of manifests for a all extensions
   public function getAllExtensions() {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $categoryManifest = array();
 
@@ -187,8 +183,8 @@ class classReadManifest {
 
   // Gets a reduced add-on manifest by ID
   public function getAddonByID($_addonID) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $addonManifest = funcCheckVar(
       $this->classSQL->getRow(
@@ -215,8 +211,8 @@ class classReadManifest {
 
   // Gets a single complete add-on manifest by Slug
   public function getAddonBySlug($_addonSlug) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
     
     $addonManifest = funcCheckVar(
       $this->classSQL->getRow(

@@ -6,6 +6,8 @@
 // == | classGeneratePage | ===================================================
 
 class classGeneratePage {
+  const TEMPLATE_FILE = 'template.xhtml';
+  const STYLESHEET_FILE = 'stylesheet.css';
   private $arraySoftwareState;
   private $strSkinPath;
   private $libSmarty;
@@ -67,8 +69,7 @@ class classGeneratePage {
   public function test() {
     funcError(array(
         $this->strSkinPath,
-        $this->arraySoftwareState,
-        $this->libSmarty
+        $this->arraySoftwareState
       ), 1
     );
   }
