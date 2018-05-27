@@ -13,7 +13,7 @@ class classGeneratePage {
   /****************************************************************************
   * Class constructor that sets inital state of things
   ****************************************************************************/
-  private function __construct() {
+  function __construct() {
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
     
