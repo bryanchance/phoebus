@@ -45,6 +45,7 @@ $arrayCategorySlug = array(
 );
 
  $moduleReadManifest = new classReadManifest();
+ $moduleGeneratePage = new classGeneratePage();
 
 // ----------------------------------------------------------------------------
 
@@ -79,7 +80,6 @@ else {
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') {
   //funcError(array('Front Page', $arraySoftwareState), 1);
-  $moduleGeneratePage = new classGeneratePage();
   $moduleGeneratePage->test();
 }
 // Add-on Page
