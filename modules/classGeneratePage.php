@@ -69,7 +69,8 @@ class classGeneratePage {
   public function test() {
     funcError(array(
         $this->strSkinPath,
-        $this->arraySoftwareState
+        $this->arraySoftwareState,
+        $GLOBALS['arraySoftwareState']
       ), 1
     );
   }
