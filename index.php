@@ -318,7 +318,8 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
 // Override currentApplication by query
 // If requestApplication is set and it exists in the array constant check if it is
 // enabled and if so set the currentApplication to that
-if ($arraySoftwareState['requestApplication'] &&
+if ($arraySoftwareState['debugMode'] &&
+    $arraySoftwareState['requestApplication'] &&
     array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
     TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
