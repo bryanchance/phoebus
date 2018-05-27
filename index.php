@@ -40,6 +40,7 @@ const COMPONENTS = array(
 // directly output content. Libs are also considered modules for simplicity.
 // The exception to this would be smarty.
 const MODULES = array(
+  'generatePage' => ROOT_PATH . MODULES_RELPATH . 'classGeneratePage.php',
   'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
   'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
