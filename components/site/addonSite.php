@@ -6,7 +6,7 @@
 // == | Setup | ===============================================================
 
 // URI Constants
-const URI_ADDON_PAGE = '/addons/';
+const URI_ADDON_PAGE = '/addon/';
 const URI_ADDON_RELEASES = '/releases/';
 const URI_ADDON_LICENSE = '/license/';
 const URI_EXTENSIONS = '/extensions/';
@@ -113,7 +113,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
-  funcError($strSlug, 1);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
