@@ -138,13 +138,18 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
+  $boolExtensionsEnabled =
+    in_array('extensions', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+  $boolExtensionsCatEnabled =
+    in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+  
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
-  if (in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features'])) {
+  if (boolExtensionsCatEnabled) {
     // Extensions Subcategory
     // Strip the path to get the slug
     $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
@@ -164,15 +169,35 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
 }
 // Themes Category
 elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
-  $categoryManifest = $moduleReadManifest->getCategory('themes');
-  funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
+  $boolThemesEnabled =
+    in_array('themes', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+  
+  if ($boolThemesEnabled) {
+    $categoryManifest = $moduleReadManifest->getCategory('themes');
+    funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
+  }
+  else {
+    funcSend404();
+  }
 }
 // Search Plugins
 elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
-  funcError(array('Search Plugins Category', $arraySoftwareState), 1);
+  $boolSearchPluginsEnabled =
+    in_array('search-plugins', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+  
+  if ($boolSearchPluginsEnabled) {
+    funcError(array('Search Plugins Category', $arraySoftwareState), 1);
+  }
+  else {
+    funcSend404();
+  }
 }
 // Language Packs
 elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
+  $boolLangPacksEnabled =
+    in_array('language-packs', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+  
+  if ($boolLangPacksEnabled) {
   funcError(array('Language Packs Category', $arraySoftwareState), 1);
 }
 // There are no matches so error out
