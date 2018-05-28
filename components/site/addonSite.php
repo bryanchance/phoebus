@@ -149,7 +149,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
-  if (boolExtensionsCatEnabled) {
+  if ($boolExtensionsCatEnabled) {
     // Extensions Subcategory
     // Strip the path to get the slug
     $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
