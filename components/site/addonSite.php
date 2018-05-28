@@ -4,6 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // == | Setup | ===============================================================
+
 // URI Constants
 const URI_ADDONS_PAGE = '/addons/';
 const URI_ADDONS_RELEASES = '/releases/';
@@ -143,14 +144,19 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
-  // Extensions Subcategory
-  // Strip the path to get the slug
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
+  if (in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features'])) {
+    // Extensions Subcategory
+    // Strip the path to get the slug
+    $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
 
-  // See if the slug exists in the category array
-  if (array_key_exists($strSlug, $arrayCategorySlug)) {
-    $categoryManifest = $moduleReadManifest->getCategory($strSlug);
-    funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
+    // See if the slug exists in the category array
+    if (array_key_exists($strSlug, $arrayCategorySlug)) {
+      $categoryManifest = $moduleReadManifest->getCategory($strSlug);
+      funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
+    }
+    else {
+      funcSend404();
+    }
   }
   else {
     funcSend404();
