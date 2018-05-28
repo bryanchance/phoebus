@@ -113,6 +113,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   }
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
+  funcError($strSlug, 1);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
