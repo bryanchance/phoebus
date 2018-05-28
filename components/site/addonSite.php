@@ -4,6 +4,15 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // == | Setup | ===============================================================
+// URI Constants
+const URI_ADDONS_PAGE = '/addons/';
+const URI_ADDONS_RELEASES = '/releases/';
+const URI_ADDONS_LICENSE = '/license/';
+const URI_EXTENSIONS = '/extensions/';
+const URI_THEMES = '/themes/';
+const URI_SEARCHPLUGINS = '/search-plugins/';
+const URI_LANGPACKS = '/language-packs/';
+const URI_SEARCH = '/search/';
 
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest',
@@ -23,6 +32,20 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 ******************************************************************************/
 function funcStripPath($_path, $_prefix) {
   return str_replace('/', '', str_replace($_prefix, '', $_path));
+}
+
+/******************************************************************************
+* Sends a 404 error but does it depending on debug mode
+*
+* @param $_path     $arraySoftwareState['requestPath']
+* @param $_prefix   Prefix to strip 
+* @returns          slug
+******************************************************************************/
+function funcSend404() {
+  if (!$GLOBALS['arraySoftwareState']['debugMode']) {
+    funcSendHeader('404');
+  }
+  funcError('404 - Not Found');
 }
 
 // ============================================================================
@@ -83,46 +106,46 @@ if ($arraySoftwareState['requestPath'] == '/') {
   $moduleGeneratePage->test();
 }
 // Add-on Page
-elseif (startsWith($arraySoftwareState['requestPath'], '/addon/')) {
-  if ($arraySoftwareState['requestPath'] == '/addon/') {
+elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
+  if ($arraySoftwareState['requestPath'] == URI_ADDON_PAGE) {
     funcRedirect('/');
   }
 
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/addon/');
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on Releases
-elseif (startsWith($arraySoftwareState['requestPath'], '/releases/')) {
-  if ($arraySoftwareState['requestPath'] == '/releases/') {
+elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
+  if ($arraySoftwareState['requestPath'] == URI_ADDON_RELEASES) {
     funcRedirect('/');
   }
 
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/releases/');
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_RELEASES);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on Releases: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Add-on License
-elseif (startsWith($arraySoftwareState['requestPath'], '/license/')) {
-  if ($arraySoftwareState['requestPath'] == '/license/') {
+elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
+  if ($arraySoftwareState['requestPath'] == URI_ADDON_LICENSE) {
     funcRedirect('/');
   }
 
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/license/');
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_LICENSE);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
   funcError(array('Add-on License: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
 }
 // Extensions Category or Subcategory
-elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
+elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   // Extensions Category
-  if ($arraySoftwareState['requestPath'] == '/extensions/') {
+  if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
   }
 
   // Extensions Subcategory
   // Strip the path to get the slug
-  $strSlug = funcStripPath($arraySoftwareState['requestPath'], '/extensions/');
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
 
   // See if the slug exists in the category array
   if (array_key_exists($strSlug, $arrayCategorySlug)) {
@@ -130,31 +153,25 @@ elseif (startsWith($arraySoftwareState['requestPath'], '/extensions/')) {
     funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
   }
   else {
-    if (!$arraySoftwareState['debugMode']) {
-      funcSendHeader('404');
-    }
-    funcError('404 - Not Found');
+    funcSend404();
   }
 }
 // Themes Category
-elseif ($arraySoftwareState['requestPath'] == '/themes/') {
+elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
   $categoryManifest = $moduleReadManifest->getCategory('themes');
   funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
 }
 // Search Plugins
-elseif ($arraySoftwareState['requestPath'] == '/search-plugins/') {
+elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
   funcError(array('Search Plugins Category', $arraySoftwareState), 1);
 }
 // Language Packs
-elseif ($arraySoftwareState['requestPath'] == '/search-plugins/') {
-  funcError(array('Search Plugins Category', $arraySoftwareState), 1);
+elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
+  funcError(array('Language Packs Category', $arraySoftwareState), 1);
 }
 // There are no matches so error out
 else {
-  if (!$arraySoftwareState['debugMode']) {
-    funcSendHeader('404');
-  }
-  funcError('404 - Not Found');
+  funcSend404();
 }
 
 // ============================================================================
