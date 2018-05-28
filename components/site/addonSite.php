@@ -198,7 +198,8 @@ elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
     in_array('language-packs', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
   
   if ($boolLangPacksEnabled) {
-  funcError(array('Language Packs Category', $arraySoftwareState), 1);
+    funcError(array('Language Packs Category', $arraySoftwareState), 1);
+  }
 }
 // There are no matches so error out
 else {
