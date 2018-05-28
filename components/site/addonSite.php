@@ -201,7 +201,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
     funcError(array('Language Packs Category', $arraySoftwareState), 1);
   }
   else {
-    //funcSend404();
+    funcSend404();
   }
 }
 // There are no matches so error out
