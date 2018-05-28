@@ -6,9 +6,9 @@
 // == | Setup | ===============================================================
 
 // URI Constants
-const URI_ADDONS_PAGE = '/addons/';
-const URI_ADDONS_RELEASES = '/releases/';
-const URI_ADDONS_LICENSE = '/license/';
+const URI_ADDON_PAGE = '/addons/';
+const URI_ADDON_RELEASES = '/releases/';
+const URI_ADDON_LICENSE = '/license/';
 const URI_EXTENSIONS = '/extensions/';
 const URI_THEMES = '/themes/';
 const URI_SEARCHPLUGINS = '/search-plugins/';
