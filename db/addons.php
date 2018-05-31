@@ -73,6 +73,7 @@ $arrayAddonsDB = array(
     'noia-options@addons.palemoon.org' => 'noia-moon-options',
     'NoiaScrollbars@ArisT2_Noia4dev' => 'newscrollbars',
     'noia-theme@addons.palemoon.org' => 'noia-moon-theme',
+    'nosquint@me.ebonjaeger.com' => 'nosquint',
     'notestruck@franklindm' => 'notestruck',
     'ntlmauth@lakora.us' => 'integrated-authentication',
     'password-backup-tool@Off.JustOff' => 'password-backup-tool',
