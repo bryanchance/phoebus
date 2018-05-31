@@ -18,7 +18,7 @@
 
 <h3>List of add-ons with known compatibility issues</h3>
 
-<p><strong>Last updated: 2018-05-25</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
+<p><strong>Last updated: 2018-05-31</strong> (compatible with Pale Moon 27.1+, released 2017-02-09)</p>
 
 <p><strong>FIXED</strong></p>
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
@@ -43,12 +43,13 @@
                     <li>Enjoy Reading</li>
                     <li><a href="/addon/febe/">FEBE</a></li>
                     <li>Fierr</li>
+                    <li><a href="/addon/fireftp">FireFTP</a></li>
                 </ul>
             </td>
 
             <td style="vertical-align:top; width:33%">
                 <ul>
-                    <li><a href="/addon/fireftp">FireFTP</a></li>
+                    <li><a href="/addon/nosquint">NoSquint</a></li>
                     <li>Fire IE</li>
                     <li><a href="/addon/firessh">FireSSH</a></li>
                     <li>FlashDisable</li>

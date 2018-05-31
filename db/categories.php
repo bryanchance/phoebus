@@ -53,6 +53,7 @@ $arrayCategoryList02 = array(
     'classic-rsgb',
     'noiabuttons',
     'active-stop-button',
+    'nosquint',
     'externals' => array(
         'all-menus-button' => array(
             'id' => 'fx-621692',
