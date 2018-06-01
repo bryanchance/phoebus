@@ -271,7 +271,17 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
     in_array('search-plugins', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
   
   if ($boolSearchPluginsEnabled) {
-    funcError(array('Search Plugins Category', $arraySoftwareState), 1);
+    $categoryManifest = $moduleReadManifest->getSearchPlugins();
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    $moduleGeneratePage->output(
+      'template',
+      'Search Plugins',
+      'search-plugin',
+      $categoryManifest
+    );
   }
   else {
     funcSend404();
