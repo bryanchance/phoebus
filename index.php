@@ -30,6 +30,7 @@ const COMPONENTS = array(
 //  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/placeholder.txt',
 //  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/placeholder.txt',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
+//  'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
 //  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
 //  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
