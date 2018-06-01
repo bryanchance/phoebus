@@ -179,22 +179,22 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
     funcRedirect($addonManifest['licenseURL']);
   }
   
-  if ($addonManifest['license'] != 'pd' || 
-      $addonManifest['license'] != 'copyright' ||
-      $addonManifest['license'] != 'custom') {
-    funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
+  if ($addonManifest['license'] == 'pd' ||
+      $addonManifest['license'] == 'copyright' ||
+      $addonManifest['license'] == 'custom') {
+    if ($addonManifest['licenseText']) {
+      $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
+    }
+
+    $moduleGeneratePage->output(
+      'template',
+      $addonManifest['name'] . ' - License',
+      'addon-license',
+      $addonManifest
+    );
   }
 
-  if ($addonManifest['licenseText']) {
-    $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
-  }
-
-  $moduleGeneratePage->output(
-    'template',
-    $addonManifest['name'] . ' - License',
-    'addon-license',
-    $addonManifest
-  );
+  funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
