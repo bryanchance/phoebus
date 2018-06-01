@@ -149,7 +149,7 @@ class classGeneratePage {
       switch ($_flag) {
         case 'addon-page':
         case 'addon-releases':
-        case 'addon-licenses':
+        case 'addon-license':
           $content = file_get_contents(
             $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE);
           break;
