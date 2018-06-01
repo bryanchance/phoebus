@@ -99,9 +99,9 @@ class classGeneratePage {
   ****************************************************************************/
   private function funcGetTemplate($_type, $_flag) {
     $template = file_get_contents(
-      $this->arraySoftwareState['smartySkinPath'] . SITE_TEMPLATE);
+      $this->arraySoftwareState['smartySkinPath'] . self::SITE_TEMPLATE);
     $stylesheet = file_get_contents(
-      $this->arraySoftwareState['smartySkinPath'] . SITE_STYLESHEET);
+      $this->arraySoftwareState['smartySkinPath'] . self::SITE_STYLESHEET);
 
     if ($_type = 'content') {
       $content = file_get_contents(
@@ -113,18 +113,18 @@ class classGeneratePage {
         case 'addon-releases':
         case 'addon-licenses':
           $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . ADDON_PAGE_TEMPLATE);
+            $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE);
           break;
         case 'cat-extensions':
         case 'cat-themes':
         case 'cat-search':
           $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . ADDON_CATEGORY_TEMPLATE);
+            $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
           break;
         case 'language-pack':
         case 'search-plugin':
           $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . OTHER_CATEGORY_TEMPLATE);
+            $this->arraySoftwareState['smartySkinPath'] . self::OTHER_CATEGORY_TEMPLATE);
           break;
         default:
           funcError('Unkown template type');
