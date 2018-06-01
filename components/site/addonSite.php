@@ -217,7 +217,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
 
       $moduleGeneratePage->output(
         'template',
-        $arrayCategorySlug[$slug] . ' Extensions',
+        $arrayCategorySlug[$strSlug] . ' Extensions',
         'cat-extensions',
         $categoryManifest
       );
