@@ -83,11 +83,27 @@
 {/if}
     </p>
 {/if}
+
+{if $PAGE_DATA.license != null && $PAGE_DATA.license != 'copyright'}
+    <h3>
+      License
+    </h3>
+    <p>
+      <a href="/license/{$PAGE_DATA.slug}/" target="_blank">{$PAGE_DATA.licenseName}</a>
+    </p>
+{/if}
+
 {if $PAGE_DATA.homepageURL != null || $PAGE_DATA.supportURL != null || $PAGE_DATA.supportEmail != null || $PAGE_DATA.repository != null}
     <h3>
       Resources
     </h3>
     <p>
+{if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
+      <a href="/releases/{$PAGE_DATA.slug}/">Previous Releases</a><br />
+{/if}
+{if $PAGE_TYPE == 'addon-releases'}
+      <a href="/addon/{$PAGE_DATA.slug}/" target="_blank">Add-on Details</a><br />
+{/if}
 {if $PAGE_DATA.homepageURL != null}
       <a href="{$PAGE_DATA.homepageURL}" target="_blank">Add-on Homepage</a><br />
 {/if}
@@ -100,21 +116,6 @@
 {if $PAGE_DATA.repository != null}
       <a href="{$PAGE_DATA.repository}" target="_blank">Source Repository</a><br />
 {/if}
-{if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
-      <a href="/releases/{$PAGE_DATA.slug}/">Previous Releases</a><br />
-{/if}
-{if $PAGE_TYPE == 'addon-releases'}
-      <a href="/addon/{$PAGE_DATA.slug}/" target="_blank">Add-on Details</a><br />
-{/if}
-    </p>
-{/if}
-
-{if $PAGE_DATA.license != null && $PAGE_DATA.license != 'copyright'}
-    <h3>
-      License
-    </h3>
-    <p>
-      <a href="/license/{$PAGE_DATA.slug}/" target="_blank">{$PAGE_DATA.licenseName}</a>
     </p>
 {/if}
   </div>
