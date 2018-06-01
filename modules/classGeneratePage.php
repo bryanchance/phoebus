@@ -187,7 +187,7 @@ class classGeneratePage {
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
-    //funcError($this->arraySoftwareState, 1);
+    funcError($this->arraySoftwareState, 1);
     
     $this->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
   }
