@@ -96,7 +96,7 @@ else {
 }
 
 $moduleReadManifest = new classReadManifest();
-$moduleGeneratePage = new classGeneratePage(null);
+$moduleGeneratePage = new classGeneratePage();
 
 // ----------------------------------------------------------------------------
 $moduleGeneratePage->test();
