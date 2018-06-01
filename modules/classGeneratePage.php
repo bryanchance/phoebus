@@ -102,15 +102,11 @@ class classGeneratePage {
     $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
+    $this->libSmarty->assign('PAGE_DATA', $_data);
 
     // Templates need to be aware of the arbitrary flag
     if ($_type == 'template') {
       $this->libSmarty->assign('PAGE_TYPE', $_flag);
-    }
-    
-    // If we have data we should assign it
-    if ($_data) {
-      $this->libSmarty->assign('PAGE_DATA', $_data);
     }
 
     // Send html header
