@@ -176,7 +176,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
   }
 
   if ($addonManifest['licenseText']) {
-    $addonManifest['licenseText'] = htmlentities($addonManifest['licenseText'], ENT_XHTML);
     $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
   }
   else {
