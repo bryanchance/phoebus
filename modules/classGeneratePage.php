@@ -56,10 +56,10 @@ class classGeneratePage {
     $this->libSmarty->caching = 0;
 
     // Set Smarty Debug
-    $this->libSmarty->debug = false;
+    $this->libSmarty->debugging = false;
 
     if ($this->arraySoftwareState['requestSmartyDebug']) {
-      $this->libSmarty->debug = $this->arraySoftwareState['debugMode'];
+      $this->libSmarty->debugging = $this->arraySoftwareState['debugMode'];
     }
 
     // Set Smarty Paths
