@@ -72,8 +72,16 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 8px;">
-                <span class="ad-1" style="color: rgb(102, 102, 102);"><small>- Advertisement -</small></span><br />
-                <script src="//ap.lijit.com/www/delivery/fpi.js?z=404948&width=728&height=90"></script>
+              <span class="ad-1" style="color: rgb(102, 102, 102);"><small>- Advertisement -</small></span><br />
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <!-- Addons site leaderboard -->
+              <ins class="adsbygoogle"
+                   style="display:inline-block;width:728px;height:90px"
+                   data-ad-client="ca-pub-4490583218014683"
+                   data-ad-slot="4318962855"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
             </div>
             <div style="margin-top: 10px; text-align: center; line-height: 13px; font-size: 10px;">
                 <p><span style="color: rgb(102, 102, 102);">
