@@ -167,7 +167,7 @@ class classGeneratePage {
     funcSendHeader('html');
     
     // Send the final template to smarty and output
-    $this->libSmarty->display('string:' . $template);
+    $this->libSmarty->display('string:' . $finalTemplate);
     
     // We're done here
     exit();
