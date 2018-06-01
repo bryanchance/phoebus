@@ -65,6 +65,7 @@
 </div> <!-- END DIV ID PM-Content-Body -->
 <div id="PM-Content-Sidebar"> <!-- START PM-Content-Sidebar -->
   <div style="margin-top: 22px;">
+{if $PAGE_TYPE == 'addon-page'}
     <h3>Release Information</h3>
     Version {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}<br />
     Updated on {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['prettyDate']}
@@ -81,7 +82,7 @@
       {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
 {/if}
     </p>
-
+{/if}
 {if $PAGE_DATA.homepageURL != null || $PAGE_DATA.supportURL != null || $PAGE_DATA.supportEmail != null || $PAGE_DATA.repository != null}
     <h3>
       Resources
