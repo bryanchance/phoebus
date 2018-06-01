@@ -132,6 +132,7 @@ class classGeneratePage {
     }
 
     $finalTemplate = str_replace('{%PAGE_CONTENT}', $content, $template);
+    funcError($content, 2);
     $finalTemplate = str_replace('{%SITE_STYLESHEET}', $stylesheet, $template);
     
     return $finalTemplate;
