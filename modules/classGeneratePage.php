@@ -179,7 +179,7 @@ class classGeneratePage {
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
-    funcError($this->arraySoftwareState, 1);
+    funcError(array($this->arraySoftwareState, $this->libSmarty), 1);
   }
 }
 
