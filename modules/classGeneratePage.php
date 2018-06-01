@@ -19,7 +19,7 @@ class classGeneratePage {
   /****************************************************************************
   * Class constructor that sets inital state of things
   ****************************************************************************/
-  function __construct() {
+  function __construct($_useSmarty = true) {
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
     
@@ -49,29 +49,31 @@ class classGeneratePage {
 
     // ------------------------------------------------------------------------
 
-    // Initalize Smarty
-    $this->libSmarty = new Smarty();
+    if ($_useSmarty) {
+      // Initalize Smarty
+      $this->libSmarty = new Smarty();
 
-    // Set Smarty Caching
-    $this->libSmarty->caching = 0;
+      // Set Smarty Caching
+      $this->libSmarty->caching = 0;
 
-    // Set Smarty Debug
-    $this->libSmarty->debugging = false;
+      // Set Smarty Debug
+      $this->libSmarty->debugging = false;
 
-    if ($this->arraySoftwareState['requestSmartyDebug']) {
-      $this->libSmarty->debugging = $this->arraySoftwareState['debugMode'];
+      if ($this->arraySoftwareState['requestSmartyDebug']) {
+        $this->libSmarty->debugging = $this->arraySoftwareState['debugMode'];
+      }
+
+      // Set Smarty Paths
+      $smartyObjPath = ROOT_PATH . OBJ_RELPATH . '/smarty/' .
+                       $this->arraySoftwareState['requestComponent'] .
+                       '-' . $skin . '/';
+
+      $this->libSmarty->setCacheDir($smartyObjPath . 'cache');
+      $this->libSmarty->setCompileDir($smartyObjPath . 'compile');
+      $this->libSmarty->setConfigDir($smartyObjPath . 'config');
+      $this->libSmarty->addPluginsDir($smartyObjPath . 'plugins');
+      $this->libSmarty->setTemplateDir($smartyObjPath . 'template');
     }
-
-    // Set Smarty Paths
-    $smartyObjPath = ROOT_PATH . OBJ_RELPATH . '/smarty/' .
-                     $this->arraySoftwareState['requestComponent'] .
-                     '-' . $skin . '/';
-
-    $this->libSmarty->setCacheDir($smartyObjPath . 'cache');
-    $this->libSmarty->setCompileDir($smartyObjPath . 'compile');
-    $this->libSmarty->setConfigDir($smartyObjPath . 'config');
-    $this->libSmarty->addPluginsDir($smartyObjPath . 'plugins');
-    $this->libSmarty->setTemplateDir($smartyObjPath . 'template');
   }
 
   /****************************************************************************
