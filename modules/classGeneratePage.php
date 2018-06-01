@@ -106,6 +106,7 @@ class classGeneratePage {
     if ($_type = 'content') {
       $content = file_get_contents(
         $this->arraySoftwareState['smartyContentPath'] . $_flag);
+    }
     else {
       switch ($_flag) {
         case 'addon-page':
