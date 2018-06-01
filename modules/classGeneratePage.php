@@ -86,7 +86,7 @@ class classGeneratePage {
   ****************************************************************************/
   public function output($_type, $_title, $_flag, $_data = null) {
     // Get template
-    if (arraySoftwareState['requestComponent'] == 'site') {
+    if ($this->arraySoftwareState['requestComponent'] == 'site') {
       $template = $this->funcGetSiteTemplate($_type, $_flag);
     }
     else {
@@ -132,7 +132,7 @@ class classGeneratePage {
   * @returns       Final template as string
   ****************************************************************************/
   private function funcGetSiteTemplate($_type, $_flag) {
-    if (arraySoftwareState['requestComponent'] != 'site') {
+    if ($this->arraySoftwareState['requestComponent'] != 'site') {
       funcError(__FUNCTION__ . ': This function only works with the SITE component');
     }
 
@@ -187,7 +187,7 @@ class classGeneratePage {
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
-    funcError($this->arraySoftwareState, 1);
+    //funcError($this->arraySoftwareState, 1);
     
     $this->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
   }
