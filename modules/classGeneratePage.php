@@ -93,7 +93,7 @@ class classGeneratePage {
       funcError(__FUNCTION__ . ': Non-SITE component page generation is not yet implimented');
     }
 
-    // Assign Data to Smarty (In the old way)
+    // Assign (old style) Data to Smarty
     $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
     $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
     $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
@@ -126,9 +126,9 @@ class classGeneratePage {
   * Private method that will read the various template/content files
   *
   * @param $_type  Content type 'content' or 'template'
-  * @param $_flag   Depends on $_type
-                    $_type = 'template' then this controls WHICH template
-                    $_type = 'content' then this is the content file to open
+  * @param $_flag  Depends on $_type
+                   $_type = 'template' then this controls WHICH template
+                   $_type = 'content' then this is the content file to open
   * @returns       Final template as string
   ****************************************************************************/
   private function funcGetSiteTemplate($_type, $_flag) {

@@ -68,8 +68,6 @@ $arrayCategorySlug = array(
   'other' => 'Other'
 );
 
-$moduleReadManifest = new classReadManifest();
-
 // ----------------------------------------------------------------------------
 
 // Site Name
@@ -97,14 +95,25 @@ else {
     TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
 }
 
+$moduleReadManifest = new classReadManifest();
+$moduleGeneratePage = new classGeneratePage();
+
 // ----------------------------------------------------------------------------
 
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') {
   //funcError(array('Front Page', $arraySoftwareState), 1);
-  $moduleGeneratePage = new classGeneratePage();
-  $moduleGeneratePage->test();
+  $moduleGeneratePage->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
+}
+// Incompatible Add-ons Page (Pale Moon legacy page)
+elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
+  if ($arraySoftwareState['currentApplication'] = 'palemoon') {
+    $moduleGeneratePage->output('content', 'Incompatible Add-ons', 'palemoon-incompatible.xhtml');
+  }
+  else {
+    funcSend404();
+  }
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
@@ -114,7 +123,13 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
-  funcError(array('Add-on Page: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
+
+  if ($addonManifest) {
+    $moduleGeneratePage->output('template', $addonManifest['name'], 'addon-page');
+  }
+  else {
+    funcSend404();
+  }
 }
 // Add-on Releases
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
