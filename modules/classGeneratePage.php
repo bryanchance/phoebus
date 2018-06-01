@@ -6,8 +6,13 @@
 // == | classGeneratePage | ===================================================
 
 class classGeneratePage {
-  const TEMPLATE_FILE = 'template.xhtml';
-  const STYLESHEET_FILE = 'stylesheet.css';
+  // Skin Templates
+  const SITE_TEMPLATE = 'site-template.xhtml';
+  const SITE_STYLESHEET = 'site-stylesheet.css';
+  const ADDON_CATEGORY_TEMPLATE = 'addon-category.xhtml';
+  const OTHER_CATEGORY_TEMPLATE = 'other-category.xhtml';
+  const ADDON_PAGE_TEMPLATE = 'addon-page.xhtml';
+  
   private $arraySoftwareState;
   private $libSmarty;
 
@@ -26,6 +31,9 @@ class classGeneratePage {
     // Component Path
     $componentPath = dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
 
+    // Component Content Path (for static content)
+    $this->arraySoftwareState['smartyContentPath'] = $componentPath . '/content/';
+    
     // Current Skin
     $skin = 'default';
 

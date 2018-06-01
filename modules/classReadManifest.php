@@ -39,8 +39,8 @@ class classReadManifest {
   // Gets a single Add-on by ID
   // Result is a reduced manifest for use with AUS and DOWNLOAD
   const SQL_ADDON_BY_ID = "
-    SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`,
-           `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `reviewed`,
+           `active`, `xpinstall`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
@@ -73,7 +73,7 @@ class classReadManifest {
   // Initalize class
   function __construct() {  
     // Assign currentApplication by reference
-    $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
+    $this->currentApplication = &$GLOBALS['arraySoftwareState']['currentApplication'];
 
     // Create a new instance of the SafeMysql class
     $this->moduleSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
