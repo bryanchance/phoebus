@@ -180,7 +180,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
   }
   
   if ($addonManifest['license'] != 'pd' || 
-      $addonManifest['license'] != 'copyright') {
+      $addonManifest['license'] != 'copyright' ||
+      $addonManifest['license'] != 'custom') {
     funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
   }
 
