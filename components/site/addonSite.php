@@ -175,17 +175,17 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
     funcSend404();
   }
 
+  if ($addonManifest['licenseURL']) {
+    funcRedirect($addonManifest['licenseURL']);
+  }
+  
+  if ($addonManifest['license'] != 'pd' || 
+      $addonManifest['license'] != 'copyright') {
+    funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
+  }
+
   if ($addonManifest['licenseText']) {
     $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
-  }
-  else {
-    if ($addonManifest['licenseURL']) {
-      funcRedirect($addonManifest['licenseURL']);
-    }
-    elseif ($addonManifest['license'] != 'pd' || 
-            $addonManifest['license'] != 'copyright') {
-      funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
-    }
   }
 
   $moduleGeneratePage->output(
