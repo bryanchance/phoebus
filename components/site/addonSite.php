@@ -99,7 +99,7 @@ $moduleReadManifest = new classReadManifest();
 $moduleGeneratePage = new classGeneratePage();
 
 // ----------------------------------------------------------------------------
-$moduleGeneratePage->test();
+
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') { 
