@@ -85,7 +85,41 @@ class classGeneratePage {
   * @param $_data   Used if $_type is 'template' to send data to smarty
   ****************************************************************************/
   public function output($_type, $_title, $_flag, $_data = null) {
+    // Get template
+    if (arraySoftwareState['requestComponent'] == 'site') {
+      $template = $this->funcGetSiteTemplate($_type, $_flag);
+    }
+    else {
+      funcError(__FUNCTION__ . ': Non-SITE component page generation is not yet implimented');
+    }
 
+    // Assign Data to Smarty (In the old way)
+    $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
+    $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
+    $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
+    $this->libSmarty->assign('PAGE_TITLE', $_title);
+    $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
+    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
+    $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
+
+    // Templates need to be aware of the arbitrary flag
+    if ($_type == 'template') {
+      $this->libSmarty->assign('PAGE_TYPE', $_flag);
+    }
+    
+    // If we have data we should assign it
+    if ($_data) {
+      $this->libSmarty->assign('PAGE_TYPE', $_data);
+    }
+
+    // Send html header
+    funcSendHeader('html');
+    
+    // Send the final template to smarty and output
+    $this->libSmarty->display('string:' . $template);
+    
+    // We're done here
+    exit();
   }
 
   /****************************************************************************
@@ -97,7 +131,11 @@ class classGeneratePage {
                     $_type = 'content' then this is the content file to open
   * @returns       Final template as string
   ****************************************************************************/
-  private function funcGetTemplate($_type, $_flag) {
+  private function funcGetSiteTemplate($_type, $_flag) {
+    if (arraySoftwareState['requestComponent'] != 'site') {
+      funcError(__FUNCTION__ . ': This function only works with the SITE component');
+    }
+
     $template = file_get_contents(
       $this->arraySoftwareState['smartySkinPath'] . self::SITE_TEMPLATE);
     $stylesheet = file_get_contents(
@@ -150,10 +188,8 @@ class classGeneratePage {
   ****************************************************************************/
   public function test() {
     //funcError($this->arraySoftwareState, 1);
-    $template = $this->funcGetTemplate('content', 'palemoon-frontpage.xhtml');
-    funcSendHeader('text');
-    var_export($template);
-    die();
+    
+    $this->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
   }
 }
 
