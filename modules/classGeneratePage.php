@@ -153,6 +153,7 @@ class classGeneratePage {
           $content = file_get_contents(
             $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE);
           break;
+        case 'cat-all-extensions':
         case 'cat-extensions':
         case 'cat-themes':
         case 'cat-search':

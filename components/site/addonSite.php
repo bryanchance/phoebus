@@ -103,13 +103,20 @@ $moduleGeneratePage = new classGeneratePage();
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') {
-  //funcError(array('Front Page', $arraySoftwareState), 1);
-  $moduleGeneratePage->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
+  $moduleGeneratePage->output(
+    'content',
+    'Your browser, Your way!',
+    'palemoon-frontpage.xhtml'
+  );
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
 elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
   if ($arraySoftwareState['currentApplication'] = 'palemoon') {
-    $moduleGeneratePage->output('content', 'Incompatible Add-ons', 'palemoon-incompatible.xhtml');
+    $moduleGeneratePage->output(
+      'content',
+      'Incompatible Add-ons',
+      'palemoon-incompatible.xhtml'
+    );
   }
   else {
     funcSend404();
@@ -124,12 +131,16 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
 
-  if ($addonManifest) {
-    $moduleGeneratePage->output('template', $addonManifest['name'], 'addon-page', $addonManifest);
-  }
-  else {
+  if (!$addonManifest) {
     funcSend404();
   }
+
+  $moduleGeneratePage->output(
+    'template',
+    $addonManifest['name'],
+    'addon-page',
+    $addonManifest
+  );
 }
 // Add-on Releases
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
@@ -139,7 +150,17 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_RELEASES);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
-  funcError(array('Add-on Releases: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
+
+  if (!$addonManifest) {
+    funcSend404();
+  }
+
+  $moduleGeneratePage->output(
+    'template',
+    $addonManifest['name'] . ' - Releases',
+    'addon-releases',
+    $addonManifest
+  );
 }
 // Add-on License
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
@@ -149,7 +170,17 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
 
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_LICENSE);
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
-  funcError(array('Add-on License: ' . $strSlug, $addonManifest, $arraySoftwareState), 1);
+
+  if (!$addonManifest) {
+    funcSend404();
+  }
+
+  $moduleGeneratePage->output(
+    'template',
+    $addonManifest['name'] . ' - License',
+    'addon-license',
+    $addonManifest
+  );
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
@@ -157,11 +188,18 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     in_array('extensions', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
   $boolExtensionsCatEnabled =
     in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-  
+
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
-    funcError(array('Extensions Category', $categoryManifest, $arraySoftwareState), 1);
+    if ($categoryManifest) {
+      $moduleGeneratePage->output(
+        'template',
+        'Extensions',
+        'cat-all-extensions',
+        $categoryManifest
+      );
+    }
   }
 
   if ($boolExtensionsCatEnabled) {
@@ -172,7 +210,17 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     // See if the slug exists in the category array
     if (array_key_exists($strSlug, $arrayCategorySlug)) {
       $categoryManifest = $moduleReadManifest->getCategory($strSlug);
-      funcError(array('Extensions Category: ' . $strSlug, $categoryManifest, $arraySoftwareState), 1);
+      
+      if (!$categoryManifest) {
+        funcSend404();
+      }
+
+      $moduleGeneratePage->output(
+        'template',
+        $arrayCategorySlug[$slug] . ' Extensions',
+        'cat-extensions',
+        $categoryManifest
+      );
     }
     else {
       funcSend404();
@@ -189,7 +237,16 @@ elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
   
   if ($boolThemesEnabled) {
     $categoryManifest = $moduleReadManifest->getCategory('themes');
-    funcError(array('Themes Category', $categoryManifest, $arraySoftwareState), 1);
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    $moduleGeneratePage->output(
+      'template',
+      'Themes',
+      'cat-themes',
+      $categoryManifest
+    );
   }
   else {
     funcSend404();
