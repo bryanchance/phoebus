@@ -88,6 +88,9 @@
       Resources
     </h3>
     <p>
+{if $PAGE_TYPE == 'addon-releases'}
+      <a href="/addon/{$PAGE_DATA.slug}/" target="_blank">Add-on Details</a><br /><br />
+{/if}
 {if $PAGE_DATA.homepageURL != null}
       <a href="{$PAGE_DATA.homepageURL}" target="_blank">Add-on Homepage</a><br />
 {/if}
