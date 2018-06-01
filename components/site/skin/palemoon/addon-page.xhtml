@@ -100,11 +100,11 @@
 {if $PAGE_DATA.repository != null}
       <a href="{$PAGE_DATA.repository}" target="_blank">Source Repository</a><br />
 {/if}
-{if $PAGE_TYPE == 'addon-releases'}
-      <a href="/addon/{$PAGE_DATA.slug}/" target="_blank">Add-on Details</a><br />
-{/if}
 {if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
       <a href="/releases/{$PAGE_DATA.slug}/">Previous Releases</a><br />
+{/if}
+{if $PAGE_TYPE == 'addon-releases'}
+      <a href="/addon/{$PAGE_DATA.slug}/" target="_blank">Add-on Details</a><br />
 {/if}
     </p>
 {/if}
