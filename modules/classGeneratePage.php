@@ -141,7 +141,7 @@ class classGeneratePage {
     $stylesheet = file_get_contents(
       $this->arraySoftwareState['smartySkinPath'] . self::SITE_STYLESHEET);
 
-    if ($_type = 'content') {
+    if ($_type == 'content') {
       $content = file_get_contents(
         $this->arraySoftwareState['smartyContentPath'] . $_flag);
     }
