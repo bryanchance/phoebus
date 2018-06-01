@@ -102,25 +102,24 @@ $moduleGeneratePage = new classGeneratePage();
 
 // Decide what kind of page is being requested
 // The front page
-if ($arraySoftwareState['requestPath'] == '/') {
+if ($arraySoftwareState['requestPath'] == '/') { 
   $moduleGeneratePage->output(
     'content',
-    'Your browser, Your way!',
-    'palemoon-frontpage.xhtml'
+    'Explore Add-ons',
+    $arraySoftwareState['currentApplication'] . '-frontpage.xhtml'
   );
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
 elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
-  if ($arraySoftwareState['currentApplication'] = 'palemoon') {
-    $moduleGeneratePage->output(
-      'content',
-      'Incompatible Add-ons',
-      'palemoon-incompatible.xhtml'
-    );
-  }
-  else {
+  if (!$arraySoftwareState['currentApplication'] = 'palemoon') {
     funcSend404();
   }
+
+  $moduleGeneratePage->output(
+    'content',
+    'Incompatible Add-ons',
+    'palemoon-incompatible.xhtml'
+  );
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
@@ -216,8 +215,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     }
   }
 
+  // Extensions Subcategory
   if ($boolExtensionsCatEnabled) {
-    // Extensions Subcategory
     // Strip the path to get the slug
     $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
 
