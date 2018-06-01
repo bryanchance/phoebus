@@ -109,7 +109,7 @@ class classGeneratePage {
     
     // If we have data we should assign it
     if ($_data) {
-      $this->libSmarty->assign('PAGE_TYPE', $_data);
+      $this->libSmarty->assign('PAGE_DATA', $_data);
     }
 
     // Send html header
