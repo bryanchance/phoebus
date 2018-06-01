@@ -131,9 +131,16 @@ class classGeneratePage {
       }
     }
 
-    $finalTemplate = str_replace('{%PAGE_CONTENT}', $content, $template);
-    funcError($finalTemplate, 2);
-    $finalTemplate = str_replace('{%SITE_STYLESHEET}', $stylesheet, $template);
+    // Build the final template
+    $finalTemplate = str_replace(
+      '{%SITE_STYLESHEET}',
+      $stylesheet,
+      str_replace(
+        '{%PAGE_CONTENT}',
+        $content,
+        $template
+      )
+    );
     
     return $finalTemplate;
   }
