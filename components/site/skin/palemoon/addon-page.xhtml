@@ -128,7 +128,7 @@
 {if $PAGE_TYPE == 'addon-license'}
   <h3>License</h3>
   {if $PAGE_DATA.licenseText}
-  <pre>$PAGE_DATA.licenseText</pre>
+  {$PAGE_DATA.licenseText}
   {else}
     {if $PAGE_DATA.license == 'pd'}
       <p><strong>Public Domain</strong></p>
