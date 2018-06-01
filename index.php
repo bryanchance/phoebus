@@ -27,12 +27,12 @@ const LIB_RELPATH = '/lib/';
 // Components are considered to be the main code that drives the site and
 // do the direct work of calling modules and outputting content
 const COMPONENTS = array(
-  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/placeholder.txt',
-  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/placeholder.txt',
+//  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/placeholder.txt',
+//  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/placeholder.txt',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
-  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
+//  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
-  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
+//  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
 );
 
 // Define modules
