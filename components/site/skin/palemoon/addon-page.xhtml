@@ -129,6 +129,7 @@
 {/if}
 
 {if $PAGE_TYPE == 'addon-releases'}
+<h3>Previous Releases</h3>
 {foreach $PAGE_DATA.xpinstall as $key}
       <a href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}&hash={$key.hash}">Version {$key.version}</a> <small>[{$key.prettyDate}]</small><br />
       <small>
