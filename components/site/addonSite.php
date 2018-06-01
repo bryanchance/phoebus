@@ -121,6 +121,25 @@ elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
     'palemoon-incompatible.xhtml'
   );
 }
+elseif ($arraySoftwareState['requestPath'] == '/search/') {
+  $searchManifest =
+    $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
+  
+  if (!$searchManifest) {
+    $moduleGeneratePage->output(
+      'template',
+      'No results',
+      'search'
+    );
+  }
+
+  $moduleGeneratePage->output(
+    'template',
+    'Search Results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
+    'search',
+    $searchManifest
+  );
+}
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   if ($arraySoftwareState['requestPath'] == URI_ADDON_PAGE) {

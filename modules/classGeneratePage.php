@@ -101,6 +101,7 @@ class classGeneratePage {
     $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
     $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
+    $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
 
     // Templates need to be aware of the arbitrary flag
     if ($_type == 'template') {
@@ -156,7 +157,7 @@ class classGeneratePage {
         case 'cat-all-extensions':
         case 'cat-extensions':
         case 'cat-themes':
-        case 'cat-search':
+        case 'search':
           $content = file_get_contents(
             $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
           break;

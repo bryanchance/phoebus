@@ -285,7 +285,8 @@ $arraySoftwareState = array(
   'requestComponent' => funcHTTPGetValue('component'),
   'requestPath' => funcHTTPGetValue('path'),
   'requestApplication' => funcHTTPGetValue('application'),
-  'requestDebugOff' => funcHTTPGetValue('debugOff')
+  'requestDebugOff' => funcHTTPGetValue('debugOff'),
+  'requestSearchTerms' => funcHTTPGetValue('terms')
 );
 
 // ----------------------------------------------------------------------------
