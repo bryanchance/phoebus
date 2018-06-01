@@ -75,10 +75,76 @@ class classGeneratePage {
   }
 
   /****************************************************************************
+  * Public method that will control the page generation and send it to smarty
+  *
+  * @param $_type   Content type 'content' or 'template'    
+  * @param $_title  Page title
+  * @param $_flag   Depends on $_type
+                    $_type = 'template' then this controls WHICH template
+                    $_type = 'content' then this is the content file to open
+  * @param $_data   Used if $_type is 'template' to send data to smarty
+  ****************************************************************************/
+  public function output($_type, $_title, $_flag, $_data = null) {
+
+  }
+
+  /****************************************************************************
+  * Private method that will read the various template/content files
+  *
+  * @param $_type  Content type 'content' or 'template'
+  * @param $_flag   Depends on $_type
+                    $_type = 'template' then this controls WHICH template
+                    $_type = 'content' then this is the content file to open
+  * @returns       Final template as string
+  ****************************************************************************/
+  private function funcGetTemplate($_type, $_flag) {
+    $template = file_get_contents(
+      $this->arraySoftwareState['smartySkinPath'] . SITE_TEMPLATE);
+    $stylesheet = file_get_contents(
+      $this->arraySoftwareState['smartySkinPath'] . SITE_STYLESHEET);
+
+    if ($_type = 'content') {
+      $content = file_get_contents(
+        $this->arraySoftwareState['smartyContentPath'] . $_flag);
+    else {
+      switch ($_flag) {
+        case 'addon-page':
+        case 'addon-releases':
+        case 'addon-licenses':
+          $content = file_get_contents(
+            $this->arraySoftwareState['smartySkinPath'] . ADDON_PAGE_TEMPLATE);
+          break;
+        case 'cat-extensions':
+        case 'cat-themes':
+        case 'cat-search':
+          $content = file_get_contents(
+            $this->arraySoftwareState['smartySkinPath'] . ADDON_CATEGORY_TEMPLATE);
+          break;
+        case 'language-pack':
+        case 'search-plugin':
+          $content = file_get_contents(
+            $this->arraySoftwareState['smartySkinPath'] . OTHER_CATEGORY_TEMPLATE);
+          break;
+        default:
+          funcError('Unkown template type');
+      }
+    }
+
+    $finalTemplate = str_replace('{%PAGE_CONTENT}', $content, $template);
+    $finalTemplate = str_replace('{%SITE_STYLESHEET}', $stylesheet, $template);
+    
+    return $finalTemplate;
+  }
+
+  /****************************************************************************
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
-    funcError($this->arraySoftwareState, 1);
+    //funcError($this->arraySoftwareState, 1);
+    $template = $this->funcGetTemplate('content', 'palemoon-frontpage.xhtml');
+    funcSendHeader('text');
+    var_export($template);
+    die();
   }
 }
 

@@ -8,7 +8,7 @@
 class classReadManifest {
   // We want a prop that warning and error messages can be sent to
   public $addonErrors;
-  private $moduleSQL;
+  private $libSQL;
   private $currentApplication;
 
   // Gets Add-ons by Category
@@ -76,7 +76,7 @@ class classReadManifest {
     $this->currentApplication = &$GLOBALS['arraySoftwareState']['currentApplication'];
 
     // Create a new instance of the SafeMysql class
-    $this->moduleSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
+    $this->libSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
 
   // ------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class classReadManifest {
     $searchManifest = array();
 
     $searchSQL = funcCheckVar(
-      $this->moduleSQL->getAll(
+      $this->libSQL->getAll(
         self::SQL_SEARCH_RESULTS,
         $this->currentApplication,
         $_searchTerms
@@ -124,7 +124,7 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->moduleSQL->getAll(
+      $this->libSQL->getAll(
         self::SQL_CATEGORY,
         $this->currentApplication,
         $_categorySlug
@@ -159,7 +159,7 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->moduleSQL->getAll(
+      $this->libSQL->getAll(
         self::SQL_ALL_EXTENSIONS,
         $this->currentApplication)
     );
@@ -190,7 +190,7 @@ class classReadManifest {
     $this->addonErrors = null;
 
     $addonManifest = funcCheckVar(
-      $this->moduleSQL->getRow(
+      $this->libSQL->getRow(
         self::SQL_ADDON_BY_ID,
         $this->currentApplication,
         $_addonID
@@ -218,7 +218,7 @@ class classReadManifest {
     $this->addonErrors = null;
     
     $addonManifest = funcCheckVar(
-      $this->moduleSQL->getRow(
+      $this->libSQL->getRow(
         self::SQL_ADDON_BY_SLUG,
         $this->currentApplication,
         $_addonSlug
