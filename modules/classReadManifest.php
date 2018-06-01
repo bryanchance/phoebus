@@ -8,8 +8,8 @@
 class classReadManifest {
   // We want a prop that warning and error messages can be sent to
   public $addonErrors;
-  private $addonInit;
-  private $classSQL;
+  private $moduleSQL;
+  private $currentApplication;
 
   // Gets Add-ons by Category
   const SQL_CATEGORY = "
@@ -72,8 +72,11 @@ class classReadManifest {
 
   // Initalize class
   function __construct() {  
+    // Assign currentApplication by reference
+    $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
+
     // Create a new instance of the SafeMysql class
-    $this->classSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
+    $this->moduleSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
 
   // ------------------------------------------------------------------------
@@ -86,9 +89,9 @@ class classReadManifest {
     $searchManifest = array();
 
     $searchSQL = funcCheckVar(
-      $this->classSQL->getAll(
+      $this->moduleSQL->getAll(
         self::SQL_SEARCH_RESULTS,
-        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $this->currentApplication,
         $_searchTerms
       )
     );
@@ -121,9 +124,9 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
+      $this->moduleSQL->getAll(
         self::SQL_CATEGORY,
-        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $this->currentApplication,
         $_categorySlug
       )
     );
@@ -156,9 +159,9 @@ class classReadManifest {
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
+      $this->moduleSQL->getAll(
         self::SQL_ALL_EXTENSIONS,
-        $GLOBALS['arraySoftwareState']['currentApplication'])
+        $this->currentApplication)
     );
 
     if ($categorySQL != null) {
@@ -187,9 +190,9 @@ class classReadManifest {
     $this->addonErrors = null;
 
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
+      $this->moduleSQL->getRow(
         self::SQL_ADDON_BY_ID,
-        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $this->currentApplication,
         $_addonID
       )
     );
@@ -215,9 +218,9 @@ class classReadManifest {
     $this->addonErrors = null;
     
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
+      $this->moduleSQL->getRow(
         self::SQL_ADDON_BY_SLUG,
-        $GLOBALS['arraySoftwareState']['currentApplication'],
+        $this->currentApplication,
         $_addonSlug
       )
     );
