@@ -63,7 +63,7 @@ class classGeneratePage {
     }
 
     // Set Smarty Paths
-    $smartyObjPath = ROOT_PATH . OBJ_RELPATH . '/amarty/' .
+    $smartyObjPath = ROOT_PATH . OBJ_RELPATH . '/smarty/' .
                      $this->arraySoftwareState['requestComponent'] .
                      '-' . $skin . '/';
 
