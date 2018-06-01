@@ -279,7 +279,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
     $moduleGeneratePage->output(
       'template',
       'Search Plugins',
-      'search-plugin',
+      'cat-search-plugins',
       $categoryManifest
     );
   }

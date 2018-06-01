@@ -161,7 +161,7 @@ class classGeneratePage {
             $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
           break;
         case 'language-pack':
-        case 'search-plugin':
+        case 'cat-search-plugins':
           $content = file_get_contents(
             $this->arraySoftwareState['smartySkinPath'] . self::OTHER_CATEGORY_TEMPLATE);
           break;
