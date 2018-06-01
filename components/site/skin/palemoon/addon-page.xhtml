@@ -130,7 +130,6 @@
 
 {if $PAGE_TYPE == 'addon-releases'}
 {foreach $PAGE_DATA.xpinstall as $key}
-{if $key != $PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]}
       <a href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}&hash={$key.hash}">Version {$key.version}</a> <small>[{$key.prettyDate}]</small><br />
       <small>
         Works with Pale Moon {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['minVersion']} to
@@ -138,8 +137,8 @@
         Unknown
 {else}
         {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
-{/if}
       </small><br /><br />
+{/if}
 {/foreach}
 {/if}
 
