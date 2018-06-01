@@ -38,7 +38,30 @@
     <span>Install {$PAGE_DATA.name}</span>
   </a>
 </p>
+{/if}
 
+{if $PAGE_TYPE == 'addon-releases'}
+<h3>Previous Releases</h3>
+{foreach $PAGE_DATA.xpinstall as $key}
+    <div class="fake-table-row category-addon">
+      <div class="alignright" style="margin-top: 8px;"><a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}&hash={$key.hash}">
+        <img border="0" src="{$BASE_PATH}download.png" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
+        <span>Install Now</span>
+      </a></div>
+      <p style="margin-top: 8px;"><strong>Version {$key.version}</strong><br />
+      <small>Released: {$key.prettyDate}<br />
+        Works with Pale Moon {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['minVersion']} to
+{if $key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion'] == '*'}
+        Unknown
+{else}
+        {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
+      </small></p>
+{/if}
+  </div>
+{/foreach}
+{/if}
+
+{if $PAGE_TYPE == 'addon-page' || $PAGE_TYPE == 'addon-releases'}
 </div> <!-- END DIV ID PM-Content-Body -->
 <div id="PM-Content-Sidebar"> <!-- START PM-Content-Sidebar -->
   <div style="margin-top: 22px;">
@@ -102,27 +125,6 @@
 {/if}
   </div>
   <div class="clearfix"></div>
-{/if}
-
-{if $PAGE_TYPE == 'addon-releases'}
-<h3>Previous Releases</h3>
-{foreach $PAGE_DATA.xpinstall as $key}
-    <div class="fake-table-row category-addon">
-      <div class="alignright" style="margin-top: 8px;"><a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}&hash={$key.hash}">
-        <img border="0" src="{$BASE_PATH}download.png" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
-        <span>Install Now</span>
-      </a></div>
-      <p style="margin-top: 8px;"><strong>Version {$key.version}</strong><br />
-      <small>Released: {$key.prettyDate}<br />
-        Works with Pale Moon {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['minVersion']} to
-{if $key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion'] == '*'}
-        Unknown
-{else}
-        {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
-      </small></p>
-{/if}
-  </div>
-{/foreach}
 {/if}
 
 {if $PAGE_TYPE == 'addon-license'}
