@@ -84,60 +84,25 @@ class classGeneratePage {
                     $_type = 'content' then this is the content file to open
   * @param $_data   Used if $_type is 'template' to send data to smarty
   ****************************************************************************/
-  public function output($_type, $_title, $_flag, $_data = null) {
-    // Get template
-    if ($this->arraySoftwareState['requestComponent'] == 'site') {
-      $template = $this->funcGetSiteTemplate($_type, $_flag);
-    }
-    else {
-      funcError(__FUNCTION__ . ': Non-SITE component page generation is not yet implimented');
-    }
-
-    // Assign (old style) Data to Smarty
-    $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
-    $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
-    $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
-    $this->libSmarty->assign('PAGE_TITLE', $_title);
-    $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
-    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
-    $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
-    $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
-    $this->libSmarty->assign('PAGE_DATA', $_data);
-
-    // Templates need to be aware of the arbitrary flag
-    if ($_type == 'template') {
-      $this->libSmarty->assign('PAGE_TYPE', $_flag);
-    }
-
-    // Send html header
-    funcSendHeader('html');
-    
-    // Send the final template to smarty and output
-    $this->libSmarty->display('string:' . $template);
-    
-    // We're done here
-    exit();
-  }
-
-  /****************************************************************************
-  * Private method that will read the various template/content files
-  *
-  * @param $_type  Content type 'content' or 'template'
-  * @param $_flag  Depends on $_type
-                   $_type = 'template' then this controls WHICH template
-                   $_type = 'content' then this is the content file to open
-  * @returns       Final template as string
-  ****************************************************************************/
-  private function funcGetSiteTemplate($_type, $_flag) {
+  public function addonSite($_type, $_title, $_flag, $_data = null) {
+    // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site') {
       funcError(__FUNCTION__ . ': This function only works with the SITE component');
     }
 
+    // ------------------------------------------------------------------------
+
+    // Read the Site Template
     $template = file_get_contents(
       $this->arraySoftwareState['smartySkinPath'] . self::SITE_TEMPLATE);
+
+    // Read the Site Stylesheet
     $stylesheet = file_get_contents(
       $this->arraySoftwareState['smartySkinPath'] . self::SITE_STYLESHEET);
 
+    // ------------------------------------------------------------------------
+
+    // Depending on type load the correct content file/template
     if ($_type == 'content') {
       $content = file_get_contents(
         $this->arraySoftwareState['smartyContentPath'] . $_flag);
@@ -167,6 +132,8 @@ class classGeneratePage {
       }
     }
 
+    // ------------------------------------------------------------------------
+
     // Build the final template
     $finalTemplate = str_replace(
       '{%SITE_STYLESHEET}',
@@ -177,17 +144,40 @@ class classGeneratePage {
         $template
       )
     );
+
+    // ------------------------------------------------------------------------
+
+    // Assign Data to Smarty
+    $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
+    $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
+    $this->libSmarty->assign('PAGE_TITLE', $_title);
+    $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
+    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
+    $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
+    $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
+    $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
+    $this->libSmarty->assign('PAGE_DATA', $_data);
+
+    // Templates need to be aware of the arbitrary flag
+    if ($_type == 'template') {
+      $this->libSmarty->assign('PAGE_TYPE', $_flag);
+    }
+
+    // Send html header
+    funcSendHeader('html');
     
-    return $finalTemplate;
+    // Send the final template to smarty and output
+    $this->libSmarty->display('string:' . $template);
+    
+    // We're done here
+    exit();
   }
 
   /****************************************************************************
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
-    //funcError($this->arraySoftwareState, 1);
-    
-    $this->output('content', 'Your browser, Your way!', 'palemoon-frontpage.xhtml');
+    funcError($this->arraySoftwareState, 1);
   }
 }
 

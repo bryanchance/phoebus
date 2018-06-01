@@ -103,7 +103,7 @@ $moduleGeneratePage = new classGeneratePage();
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') { 
-  $moduleGeneratePage->output(
+  $moduleGeneratePage->addonSite(
     'content',
     'Explore Add-ons',
     $arraySoftwareState['currentApplication'] . '-frontpage.xhtml'
@@ -115,7 +115,7 @@ elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
     funcSend404();
   }
 
-  $moduleGeneratePage->output(
+  $moduleGeneratePage->addonSite(
     'content',
     'Incompatible Add-ons',
     'palemoon-incompatible.xhtml'
@@ -126,14 +126,14 @@ elseif ($arraySoftwareState['requestPath'] == '/search/') {
     $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
   
   if (!$searchManifest) {
-    $moduleGeneratePage->output(
+    $moduleGeneratePage->addonSite(
       'template',
       'No results',
       'search'
     );
   }
 
-  $moduleGeneratePage->output(
+  $moduleGeneratePage->addonSite(
     'template',
     'Search Results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
     'search',
@@ -153,7 +153,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
     funcSend404();
   }
 
-  $moduleGeneratePage->output(
+  $moduleGeneratePage->addonSite(
     'template',
     $addonManifest['name'],
     'addon-page',
@@ -173,7 +173,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
     funcSend404();
   }
 
-  $moduleGeneratePage->output(
+  $moduleGeneratePage->addonSite(
     'template',
     $addonManifest['name'] . ' - Releases',
     'addon-releases',
@@ -204,7 +204,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
       $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
     }
 
-    $moduleGeneratePage->output(
+    $moduleGeneratePage->addonSite(
       'template',
       $addonManifest['name'] . ' - License',
       'addon-license',
@@ -225,7 +225,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     if ($categoryManifest) {
-      $moduleGeneratePage->output(
+      $moduleGeneratePage->addonSite(
         'template',
         'Extensions',
         'cat-all-extensions',
@@ -247,7 +247,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
         funcSend404();
       }
 
-      $moduleGeneratePage->output(
+      $moduleGeneratePage->addonSite(
         'template',
         $arrayCategorySlug[$strSlug],
         'cat-extensions',
@@ -273,7 +273,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
       funcSend404();
     }
 
-    $moduleGeneratePage->output(
+    $moduleGeneratePage->addonSite(
       'template',
       'Themes',
       'cat-themes',
@@ -295,7 +295,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
       funcSend404();
     }
 
-    $moduleGeneratePage->output(
+    $moduleGeneratePage->addonSite(
       'template',
       'Search Plugins',
       'cat-search-plugins',
