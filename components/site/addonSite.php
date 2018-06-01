@@ -125,7 +125,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
 
   if ($addonManifest) {
-    $moduleGeneratePage->output('template', $addonManifest['name'], 'addon-page');
+    $moduleGeneratePage->output('template', $addonManifest['name'], 'addon-page', $addonManifest);
   }
   else {
     funcSend404();
