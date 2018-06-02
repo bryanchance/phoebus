@@ -249,7 +249,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
 
       $moduleGeneratePage->addonSite(
         'template',
-        $arrayCategorySlug[$strSlug],
+        'Extensions: ' . $arrayCategorySlug[$strSlug],
         'cat-extensions',
         $categoryManifest
       );
