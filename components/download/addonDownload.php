@@ -5,9 +5,7 @@
 
 // == | Vars | ================================================================
 
-$arrayIncludes = array(
-  $arrayModules['readManifest'],
-);
+require_once(MODULES['readManifest']);
 
 $strRequestAddonID = funcHTTPGetValue('id');
 $strRequestAddonVersion = funcHTTPGetValue('version');
@@ -82,8 +80,6 @@ function funcDownloadSearchPlugin($_searchPluginName) {
 
 // == | Main | ================================================================
 
-funcCheckUserAgent();
-
 // Sanity
 if ($strRequestAddonID == null) {
   funcError('Missing minimum required arguments.');
@@ -92,12 +88,6 @@ if ($strRequestAddonID == null) {
 if ($strRequestAddonVersion == null) {
   $strRequestAddonVersion = 'latest';
 } 
-
-// Includes
-foreach($arrayIncludes as $_value) {
-  require_once($_value);
-}
-unset($arrayIncludes);
 
 // Search for add-ons in our databases
 // Search Plugins
