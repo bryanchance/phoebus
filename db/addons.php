@@ -131,6 +131,7 @@ $arrayAddonsDB = array(
     '{2db74bf0-e2ce-4412-a47c-ec6de1449db1}' => 'space-advance',
     '{302dd086-df72-4fbf-835f-dc1f296049eb}' => 'extension-preferences-menu',
     '{36365A44-0C40-4d16-B174-0B803FA14366}' => 'pasteemail',
+    '{3c8cb644-b444-49f5-a1c4-2811d53d352c}' => 'browsepaper',
     '{3C9A65A6-9563-4485-BA4A-4BCD698BCFB4}' => 'backtotop',
     '{4523665a-317f-4a66-9376-3763d1ad1978}' => 'chatzilla',
     '{4BBDD651-70CF-4821-84F8-2B918CF89CA3}' => 'febe',
