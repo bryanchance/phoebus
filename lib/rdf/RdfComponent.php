@@ -67,6 +67,9 @@ class RdfComponent {
                 $id = $data[$targetApp][EM_NS."id"];
                 $targetArray[$id]['minVersion'] = $data[$targetApp][EM_NS.'minVersion'];
                 $targetArray[$id]['maxVersion'] = $data[$targetApp][EM_NS.'maxVersion'];
+                if (array_key_exists(EM_NS.'basilisk', $data[$targetApp])) {
+                  $targetArray[$id]['basilisk'] = (bool)$data[$targetApp][EM_NS.'basilisk'];
+                }
             }
         }
 
