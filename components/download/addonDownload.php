@@ -5,7 +5,9 @@
 
 // == | Vars | ================================================================
 
-require_once(MODULES['readManifest']);
+// Include modules
+$arrayIncludes = array('sql', 'sql-creds', 'readManifest');
+foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 $strRequestAddonID = funcHTTPGetValue('id');
 $strRequestAddonVersion = funcHTTPGetValue('version');
