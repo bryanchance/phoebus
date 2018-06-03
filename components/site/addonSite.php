@@ -88,7 +88,7 @@ $moduleGenerateContent = new classGenerateContent(true);
 if ($arraySoftwareState['requestPath'] == '/') { 
   $moduleGenerateContent->addonSite(
     $arraySoftwareState['currentApplication'] . '-frontpage.xhtml',
-    'Explore Add-ons',
+    'Explore Add-ons'
   );
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
