@@ -87,9 +87,8 @@ $moduleGenerateContent = new classGenerateContent(true);
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') { 
   $moduleGenerateContent->addonSite(
-    'content',
+    $arraySoftwareState['currentApplication'] . '-frontpage.xhtml',
     'Explore Add-ons',
-    $arraySoftwareState['currentApplication'] . '-frontpage.xhtml'
   );
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
@@ -99,9 +98,8 @@ elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
   }
 
   $moduleGenerateContent->addonSite(
-    'content',
-    'Incompatible Add-ons',
-    'palemoon-incompatible.xhtml'
+    'palemoon-incompatible.xhtml',
+    'Incompatible Add-ons'
   );
 }
 elseif ($arraySoftwareState['requestPath'] == '/search/') {
@@ -110,16 +108,14 @@ elseif ($arraySoftwareState['requestPath'] == '/search/') {
   
   if (!$searchManifest) {
     $moduleGenerateContent->addonSite(
-      'template',
-      'No search results',
-      'search'
+      'search',
+      'No search results'
     );
   }
 
   $moduleGenerateContent->addonSite(
-    'template',
+    'search',,
     'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
-    'search',
     $searchManifest
   );
 }
@@ -137,9 +133,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
   }
 
   $moduleGenerateContent->addonSite(
-    'template',
-    $addonManifest['name'],
     'addon-page',
+    $addonManifest['name'],
     $addonManifest
   );
 }
@@ -157,9 +152,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
   }
 
   $moduleGenerateContent->addonSite(
-    'template',
-    $addonManifest['name'] . ' - Releases',
     'addon-releases',
+    $addonManifest['name'] . ' - Releases',
     $addonManifest
   );
 }
@@ -188,9 +182,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
     }
 
     $moduleGenerateContent->addonSite(
-      'template',
-      $addonManifest['name'] . ' - License',
       'addon-license',
+      $addonManifest['name'] . ' - License',
       $addonManifest
     );
   }
@@ -209,9 +202,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     if ($categoryManifest) {
       $moduleGenerateContent->addonSite(
-        'template',
-        'Extensions',
         'cat-all-extensions',
+        'Extensions',
         $categoryManifest
       );
     }
@@ -231,9 +223,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
       }
 
       $moduleGenerateContent->addonSite(
-        'template',
-        'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
         'cat-extensions',
+        'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
         $categoryManifest
       );
     }
@@ -257,9 +248,8 @@ elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
     }
 
     $moduleGenerateContent->addonSite(
-      'template',
-      'Themes',
       'cat-themes',
+      'Themes',
       $categoryManifest
     );
   }
@@ -279,9 +269,8 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
     }
 
     $moduleGenerateContent->addonSite(
-      'template',
-      'Search Plugins',
       'cat-search-plugins',
+      'Search Plugins',
       $categoryManifest
     );
   }

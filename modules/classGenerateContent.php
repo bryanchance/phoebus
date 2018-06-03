@@ -86,15 +86,12 @@ class classGenerateContent {
 
   /****************************************************************************
   * Public method that will control the page generation and send it to smarty
-  *
-  * @param $_type   Content type 'content' or 'template'    
+  * 
+  * @param $_type   template or content file
   * @param $_title  Page title
-  * @param $_flag   Depends on $_type
-                    $_type = 'template' then this controls WHICH template
-                    $_type = 'content' then this is the content file to open
   * @param $_data   Used if $_type is 'template' to send data to smarty
   ****************************************************************************/
-  public function addonSite($_type, $_title, $_flag, $_data = null) {
+  public function addonSite($_type, $_title, $_data = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
         !funcCheckModule('smarty') || !$this->libSmarty) {
@@ -116,34 +113,37 @@ class classGenerateContent {
 
     // ------------------------------------------------------------------------
 
-    // Depending on type load the correct content file/template
-    if ($_type == 'content') {
-      $content = file_get_contents(
-        $this->arraySoftwareState['smartyContentPath'] . $_flag);
-    }
-    else {
-      switch ($_flag) {
-        case 'addon-page':
-        case 'addon-releases':
-        case 'addon-license':
+    switch ($_type) {
+      case 'addon-page':
+      case 'addon-releases':
+      case 'addon-license':
+        $content = file_get_contents(
+          $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE
+        );
+        break;
+      case 'cat-all-extensions':
+      case 'cat-extensions':
+      case 'cat-themes':
+      case 'search':
+        $content = file_get_contents(
+          $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE
+        );
+        break;
+      case 'language-pack':
+      case 'cat-search-plugins':
+        $content = file_get_contents(
+          $this->arraySoftwareState['smartySkinPath'] . self::OTHER_CATEGORY_TEMPLATE
+        );
+        break;
+      default:
+        if (file_exists($this->arraySoftwareState['smartyContentPath'] . $_flag)) {
           $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE);
-          break;
-        case 'cat-all-extensions':
-        case 'cat-extensions':
-        case 'cat-themes':
-        case 'search':
-          $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
-          break;
-        case 'language-pack':
-        case 'cat-search-plugins':
-          $content = file_get_contents(
-            $this->arraySoftwareState['smartySkinPath'] . self::OTHER_CATEGORY_TEMPLATE);
-          break;
-        default:
+            $this->arraySoftwareState['smartyContentPath'] . $_flag
+          );
+        }
+        else {
           funcError('Unkown template type');
-      }
+        }
     }
 
     // ------------------------------------------------------------------------
@@ -170,12 +170,8 @@ class classGenerateContent {
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
     $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
+    $this->libSmarty->assign('PAGE_TYPE', $_type);
     $this->libSmarty->assign('PAGE_DATA', $_data);
-
-    // Templates need to be aware of the arbitrary flag
-    if ($_type == 'template') {
-      $this->libSmarty->assign('PAGE_TYPE', $_flag);
-    }
 
     // Send html header
     funcSendHeader('html');
