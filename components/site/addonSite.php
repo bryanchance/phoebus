@@ -17,7 +17,7 @@ const URI_SEARCH = '/search/';
 
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest',
-                       'smarty', 'generatePage');
+                       'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // ============================================================================
@@ -53,23 +53,6 @@ function funcSend404() {
 
 // == | Main | ================================================================
 
-// These are Category Slugs with their titles
-$arrayCategorySlug = array(
-  'alerts-and-updates' => 'Alerts & Updates',
-  'appearance' => 'Appearance',
-  'bookmarks-and-tabs' => 'Bookmarks & Tabs',
-  'download-management' => 'Download Management',
-  'feeds-news-and-blogging' => 'Feeds, News, & Blogging',
-  'privacy-and-security' => 'Privacy & Security',
-  'search-tools' => 'Search Tools',
-  'social-and-communication' => 'Social & Communication',
-  'tools-and-utilities' => 'Tools & Utilities',
-  'web-development' => 'Web Development',
-  'other' => 'Other'
-);
-
-// ----------------------------------------------------------------------------
-
 // Site Name
 // When in debug mode it displays the software name and version and if git
 // is detected it will append the branch and short sha1 hash
@@ -96,7 +79,7 @@ else {
 }
 
 $moduleReadManifest = new classReadManifest();
-$moduleGeneratePage = new classGeneratePage();
+$moduleGenerateContent = new classGenerateContent(true);
 
 // ----------------------------------------------------------------------------
 
@@ -240,7 +223,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
     $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
 
     // See if the slug exists in the category array
-    if (array_key_exists($strSlug, $arrayCategorySlug)) {
+    if (array_key_exists($strSlug, classReadManifest::EXTENSION_CATEGORY_SLUGS)) {
       $categoryManifest = $moduleReadManifest->getCategory($strSlug);
       
       if (!$categoryManifest) {
@@ -249,7 +232,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
 
       $moduleGeneratePage->addonSite(
         'template',
-        'Extensions: ' . $arrayCategorySlug[$strSlug],
+        'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
         'cat-extensions',
         $categoryManifest
       );

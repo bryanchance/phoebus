@@ -5,7 +5,7 @@
 
 // == | classGeneratePage | ===================================================
 
-class classGeneratePage {
+class classGenerateContent {
   // Skin Templates
   const SITE_TEMPLATE = 'site-template.xhtml';
   const SITE_STYLESHEET = 'site-stylesheet.css';
@@ -19,7 +19,7 @@ class classGeneratePage {
   /****************************************************************************
   * Class constructor that sets inital state of things
   ****************************************************************************/
-  function __construct($_useSmarty = true) {
+  function __construct($_useSmarty = null) {
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
     
@@ -50,6 +50,10 @@ class classGeneratePage {
     // ------------------------------------------------------------------------
 
     if ($_useSmarty) {
+      if (!class_exists('Smarty', false)) {
+        funcError(__FUNCTION__ . ': Smarty is not included');
+      }
+      
       // Initalize Smarty
       $this->libSmarty = new Smarty();
 

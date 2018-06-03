@@ -68,6 +68,22 @@ class classReadManifest {
     AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
 
+  // The current category slugs
+  const EXTENSION_CATEGORY_SLUGS = array(
+    'alerts-and-updates' => 'Alerts & Updates',
+    'appearance' => 'Appearance',
+    'bookmarks-and-tabs' => 'Bookmarks & Tabs',
+    'download-management' => 'Download Management',
+    'feeds-news-and-blogging' => 'Feeds, News, & Blogging',
+    'privacy-and-security' => 'Privacy & Security',
+    'search-tools' => 'Search Tools',
+    'social-and-communication' => 'Social & Communication',
+    'tools-and-utilities' => 'Tools & Utilities',
+    'web-development' => 'Web Development',
+    'other' => 'Other'
+  );
+  
+  // The Search Plugins should really be moved to SQL
   const SEARCH_PLUGINS_DB = array(
       'search-100' => 'google.xml',
       'search-101' => 'youtube.xml',
