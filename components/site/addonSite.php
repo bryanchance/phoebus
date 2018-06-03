@@ -114,7 +114,7 @@ elseif ($arraySoftwareState['requestPath'] == '/search/') {
   }
 
   $moduleGenerateContent->addonSite(
-    'search',,
+    'search',
     'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
     $searchManifest
   );
