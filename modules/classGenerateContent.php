@@ -29,10 +29,12 @@ class classGenerateContent {
     // ------------------------------------------------------------------------
 
     // Component Path
-    $componentPath = dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
+    $componentPath =
+      dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
 
     // Component Content Path (for static content)
-    $this->arraySoftwareState['smartyContentPath'] = $componentPath . '/content/';
+    $this->arraySoftwareState['componentContentPath'] =
+      $componentPath . '/content/';
     
     // Current Skin
     $skin = 'default';
@@ -43,9 +45,10 @@ class classGenerateContent {
       $skin = $this->arraySoftwareState['currentApplication'];
     }
 
-    $this->arraySoftwareState['smartySkinPath'] = $componentPath . '/skin/' . $skin . '/';
-    $this->arraySoftwareState['smartySkinRelPath'] = 
-      str_replace(ROOT_PATH, '', $this->arraySoftwareState['smartySkinPath']);
+    $this->arraySoftwareState['componentSkinPath'] =
+      $componentPath . '/skin/' . $skin . '/';
+    $this->arraySoftwareState['componentSkinRelPath'] = 
+      str_replace(ROOT_PATH, '', $this->arraySoftwareState['componentSkinPath']);
 
     // ------------------------------------------------------------------------
 
@@ -105,11 +108,11 @@ class classGenerateContent {
 
     // Read the Site Template
     $template = file_get_contents(
-      $this->arraySoftwareState['smartySkinPath'] . self::SITE_TEMPLATE);
+      $this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
 
     // Read the Site Stylesheet
     $stylesheet = file_get_contents(
-      $this->arraySoftwareState['smartySkinPath'] . self::SITE_STYLESHEET);
+      $this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
 
     // ------------------------------------------------------------------------
 
@@ -118,7 +121,7 @@ class classGenerateContent {
       case 'addon-releases':
       case 'addon-license':
         $content = file_get_contents(
-          $this->arraySoftwareState['smartySkinPath'] . self::ADDON_PAGE_TEMPLATE
+          $this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE
         );
         break;
       case 'cat-all-extensions':
@@ -126,19 +129,19 @@ class classGenerateContent {
       case 'cat-themes':
       case 'search':
         $content = file_get_contents(
-          $this->arraySoftwareState['smartySkinPath'] . self::ADDON_CATEGORY_TEMPLATE
+          $this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE
         );
         break;
       case 'language-pack':
       case 'cat-search-plugins':
         $content = file_get_contents(
-          $this->arraySoftwareState['smartySkinPath'] . self::OTHER_CATEGORY_TEMPLATE
+          $this->arraySoftwareState['componentSkinPath'] . self::OTHER_CATEGORY_TEMPLATE
         );
         break;
       default:
-        if (file_exists($this->arraySoftwareState['smartyContentPath'] . $_type)) {
+        if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
           $content = file_get_contents(
-            $this->arraySoftwareState['smartyContentPath'] . $_type
+            $this->arraySoftwareState['componentContentPath'] . $_type
           );
         }
         else {
