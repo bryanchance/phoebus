@@ -52,7 +52,7 @@ class classGenerateContent {
     if ($_useSmarty) {
       if (!class_exists('Smarty', false)) {
         funcError(
-        __CLASS__ . '::' __FUNCTION__ .
+        __CLASS__ . '::' . __FUNCTION__ .
         ' - Smarty has been indicated and is required to be included
         in the global scope'
         );
@@ -99,7 +99,7 @@ class classGenerateContent {
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
         !$this->libSmarty) {
       funcError(
-        __CLASS__ . '::' __FUNCTION__ .
+        __CLASS__ . '::' . __FUNCTION__ .
         ' - This method only works with the SITE component
         and requires Smarty to be included in the global scope'
       );
