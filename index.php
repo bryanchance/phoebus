@@ -188,6 +188,24 @@ function funcCheckVar($_value) {
 }
 
 /******************************************************************************
+* Check if a module is in $arrayIncludes
+*
+* @param $_value    A module
+* @returns          true or null depending on if $_value is in $arrayIncludes
+******************************************************************************/
+function funcCheckModule($_value) {
+  if (!array_key_exists('arrayIncludes', $GLOBALS) {
+    funcError('$arrayIncludes is not defined');
+  }
+  
+  if (!in_array($_value, $GLOBALS['arrayIncludes']) {
+    return null;
+  }
+  
+  return true;
+}
+
+/******************************************************************************
 * Sends HTTP Headers to client using a short name
 *
 * @param $_value    Short name of header

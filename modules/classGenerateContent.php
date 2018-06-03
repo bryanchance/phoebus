@@ -50,7 +50,7 @@ class classGenerateContent {
     // ------------------------------------------------------------------------
 
     if ($_useSmarty) {
-      if (!class_exists('Smarty', false)) {
+      if (!funcCheckModule('smarty')) {
         funcError(
         __CLASS__ . '::' . __FUNCTION__ .
         ' - Smarty has been indicated and is required to be included
@@ -97,7 +97,7 @@ class classGenerateContent {
   public function addonSite($_type, $_title, $_flag, $_data = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
-        !$this->libSmarty) {
+        !funcCheckModule('smarty')) {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ .
         ' - This method only works with the SITE component
