@@ -100,8 +100,7 @@ class classGenerateContent {
         !funcCheckModule('smarty') || !$this->libSmarty) {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ .
-        ' - This method only works with the SITE component
-        and requires Smarty to be included in the global scope'
+        ' - This method only works with the SITE component and requires Smarty'
       );
     }
 
