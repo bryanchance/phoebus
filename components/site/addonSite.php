@@ -17,7 +17,7 @@ const URI_SEARCH = '/search/';
 
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest',
-                       'smarty', 'generateContent');
+                       'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // ============================================================================
