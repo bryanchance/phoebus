@@ -16,7 +16,7 @@ const URI_LANGPACKS = '/language-packs/';
 const URI_SEARCH = '/search/';
 
 // Include modules
-$arrayIncludes = array('sql', 'sql-creds', 'readManifest',
+$arrayIncludes = array('sql-creds', 'readManifest',
                        'smarty', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
