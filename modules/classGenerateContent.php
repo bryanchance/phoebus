@@ -136,9 +136,9 @@ class classGenerateContent {
         );
         break;
       default:
-        if (file_exists($this->arraySoftwareState['smartyContentPath'] . $_flag)) {
+        if (file_exists($this->arraySoftwareState['smartyContentPath'] . $_type)) {
           $content = file_get_contents(
-            $this->arraySoftwareState['smartyContentPath'] . $_flag
+            $this->arraySoftwareState['smartyContentPath'] . $_type
           );
         }
         else {
