@@ -194,11 +194,11 @@ function funcCheckVar($_value) {
 * @returns          true or null depending on if $_value is in $arrayIncludes
 ******************************************************************************/
 function funcCheckModule($_value) {
-  if (!array_key_exists('arrayIncludes', $GLOBALS) {
+  if (!array_key_exists('arrayIncludes', $GLOBALS)) {
     funcError('$arrayIncludes is not defined');
   }
   
-  if (!in_array($_value, $GLOBALS['arrayIncludes']) {
+  if (!in_array($_value, $GLOBALS['arrayIncludes'])) {
     return null;
   }
   
