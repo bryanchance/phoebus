@@ -111,14 +111,14 @@ elseif ($arraySoftwareState['requestPath'] == '/search/') {
   if (!$searchManifest) {
     $moduleGenerateContent->addonSite(
       'template',
-      'No results',
+      'No search results',
       'search'
     );
   }
 
   $moduleGenerateContent->addonSite(
     'template',
-    'Search Results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
+    'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
     'search',
     $searchManifest
   );
