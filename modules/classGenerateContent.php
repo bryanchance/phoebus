@@ -51,7 +51,10 @@ class classGenerateContent {
 
     if ($_useSmarty) {
       if (!class_exists('Smarty', false)) {
-        funcError(__FUNCTION__ . ': Smarty is not included');
+        funcError(
+        __CLASS__ . '::' __FUNCTION__ .
+        ' - Smarty has not been included in the global scope component'
+        );
       }
       
       // Initalize Smarty
@@ -92,8 +95,12 @@ class classGenerateContent {
   ****************************************************************************/
   public function addonSite($_type, $_title, $_flag, $_data = null) {
     // This function will only serve the SITE component
-    if ($this->arraySoftwareState['requestComponent'] != 'site') {
-      funcError(__FUNCTION__ . ': This function only works with the SITE component');
+    if ($this->arraySoftwareState['requestComponent'] != 'site' ||
+        !$this->libSmarty) {
+      funcError(
+        __CLASS__ . '::' __FUNCTION__ .
+        ' - This function only works with the SITE component and requires Smarty'
+      );
     }
 
     // ------------------------------------------------------------------------
