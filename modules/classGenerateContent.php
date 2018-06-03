@@ -169,7 +169,7 @@ class classGenerateContent {
     $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
     $this->libSmarty->assign('PAGE_TITLE', $_title);
     $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
-    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['smartySkinRelPath']);
+    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['componentSkinRelPath']);
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
     $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
