@@ -97,7 +97,8 @@ class classGenerateContent {
   public function addonSite($_type, $_title, $_flag, $_data = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
-        !funcCheckModule('smarty')) {
+        !funcCheckModule('smarty') ||
+        !class_exists('Smarty', false)) {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ .
         ' - This method only works with the SITE component
