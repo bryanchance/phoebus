@@ -128,7 +128,7 @@ class classReadManifest {
         !array_key_exists('arraySQLCreds', $GLOBALS)) {
       funcError(
       __CLASS__ . '::' . __FUNCTION__ .
-      ' - sql and sql-creds required to be included in the global scope'
+      ' - sql and sql-creds are required to be included in the global scope'
       );
     }
     
