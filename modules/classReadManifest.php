@@ -125,7 +125,7 @@ class classReadManifest {
   // Initalize class
   function __construct() {  
     if (!funcCheckModule('sql') || !funcCheckModule('sql-creds') ||
-        array_key_exists('arraySQLCreds', $GLOBALS) {
+        !array_key_exists('arraySQLCreds', $GLOBALS)) {
       funcError(
       __CLASS__ . '::' . __FUNCTION__ .
       ' - sql and sql-creds required to be included in the global scope'
