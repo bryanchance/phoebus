@@ -79,7 +79,7 @@ else {
 }
 
 $moduleReadManifest = new classReadManifest();
-$moduleGenerateContent = new classGenerateContent();
+$moduleGenerateContent = new classGenerateContent(true);
 
 // ----------------------------------------------------------------------------
 
