@@ -216,13 +216,13 @@ class classGenerateContent {
       // We're done here
       exit();
     }
-    funcError($addonManifest, 1);
+    //funcError($addonManifest, 1);
     $updateRDF = file_get_contents(
       $this->arraySoftwareState['componentContentPath'] . 'update.rdf'
     );
 
     $addonXPInstall =
-      $addonManifest['xpinstall'][$addonManifest['release']]['version'];
+      $addonManifest['xpinstall'][$addonManifest['releaseXPI']]['version'];
     $addonTargetApplication =
       $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
     
