@@ -47,7 +47,9 @@ $arraySoftwareState['requestAddonVersion'] = funcHTTPGetValue('version');
 $arraySoftwareState['requestAppID'] = funcHTTPGetValue('appID');
 $arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
 $arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
-$arraySoftwareState['requestMozXPIUpdate'] = (bool)funcHTTPGetValue('updateOverride');
+$arraySoftwareState['requestMozXPIUpdate'] =
+  array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) or
+  (bool)funcHTTPGetValue('updateOverride');
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
@@ -67,9 +69,7 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
 }
 
 // Check for Moz-XPI-Update header
-if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
-    ($arraySoftwareState['debugMode'] &&
-    $arraySoftwareState['requestMozXPIUpdate'])) {
+if (!$arraySoftwareState['requestMozXPIUpdate']) {
   funcError('Compatibility check failed.');
 }
 
