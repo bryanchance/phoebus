@@ -118,7 +118,8 @@ if ($arraySoftwareState['requestAppID'] == TARGET_APPLICATION_ID['fossamail']) {
 // ----------------------------------------------------------------------------
 
 // Check for Add-on Updates
-if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicationID']) {
+if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicationID'] ||
+    ($arraySoftwareState['debugMode'] && $arraySoftwareState['orginalApplication'])) {
   $addonManifest =
     $moduleReadManifest->getAddonByID($arraySoftwareState['requestAddonID']);
 
