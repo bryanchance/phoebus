@@ -36,8 +36,6 @@
 // == | Setup | ===============================================================
 
 // Constants
-const AMO_AUS_URL = 'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2';
-
 // This constant is a list of Add-on IDs that should never be checked for
 const BAD_ADDON_IDS = array(
   '{972ce4c6-7e08-4474-a285-3208198ce6fd}', // Default Theme
@@ -49,6 +47,26 @@ const BAD_ADDON_IDS = array(
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
+
+// ============================================================================
+
+// == | Functions | ===========================================================
+
+/******************************************************************************
+* Sends update request to AMO
+*
+* @param $_appID        Application ID that we are claiming to be
+* @param $_appVersion   Application Version that we are claiming to be
+******************************************************************************/
+function funcSendToAMO($_appID, $_appVersion) {
+  funcRedirect( 
+    'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2' .
+    '&id=' . $GLOBALS['arraySoftwareState']['requestAddonID'] .
+    '&version=' . $GLOBALS['arraySoftwareState']['requestAddonVersion'] .
+    '&appID=' . $_appID . '&appVersion=' . $_appVersion .
+    '&compatMode=' . $GLOBALS['arraySoftwareState']['requestAddonCompatMode']
+  );
+}
 
 // ============================================================================
 
@@ -104,15 +122,7 @@ if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
 
 // Handle FossaMail Special Case (Send to AMO unconditionally)
 if ($arraySoftwareState['requestAppID'] == TARGET_APPLICATION_ID['fossamail']) {
-  $strAMOLink = 
-    AMO_AUS_URL .
-    '&id=' . $arraySoftwareState['requestAddonID'] .
-    '&version=' . $arraySoftwareState['requestAddonVersion'] .
-    '&appID=' . TARGET_APPLICATION_ID['thunderbird'] .
-    '&appVersion=' . '38.9' .
-    '&compatMode=' . $arraySoftwareState['requestAddonCompatMode'];
-  
-  funcRedirect($strAMOLink);
+  funcSendToAMO(TARGET_APPLICATION_ID['thunderbird'], '38.9');
 }
 
 // ----------------------------------------------------------------------------
@@ -126,15 +136,7 @@ if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicatio
   if (!$addonManifest) {
     // Send non-existant add-ons to AMO for Basilisk
     if ($arraySoftwareState['currentApplication'] == 'basilisk') {
-      $strAMOLink =
-        AMO_AUS_URL .
-        '&id=' . $arraySoftwareState['requestAddonID'] .
-        '&version=' . $arraySoftwareState['requestAddonVersion'] .
-        '&appID=' . TARGET_APPLICATION_ID['firefox'] .
-        '&appVersion=' . '52.9' .
-        '&compatMode=' . $arraySoftwareState['requestAddonCompatMode'];
-      
-      funcRedirect($strAMOLink);
+      funcSendToAMO(TARGET_APPLICATION_ID['firefox'], '52.9');
     }
 
     // Add-on is non-existant send blank rdf response
