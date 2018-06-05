@@ -41,6 +41,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // == | Main | ================================================================
 
+// Assign HTTP GET arguments to the software state
 $arraySoftwareState['requestAddonID'] = funcHTTPGetValue('id');
 $arraySoftwareState['requestAddonVersion'] = funcHTTPGetValue('version');
 $arraySoftwareState['requestAppID'] = funcHTTPGetValue('appID');
@@ -48,13 +49,36 @@ $arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
 $arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
 $arraySoftwareState['requestMozXPIUpdate'] = funcHTTPGetValue('Moz-XPI-Update');
 
-
+// Instantiate modules
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent();
 
+// Vars
+$boolMozXPIUpdate = false;
+
 // ----------------------------------------------------------------------------
 
+// Sanity
+if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddonVersion'] ||
+    !$arraySoftwareState['requestAppID'] || !$arraySoftwareState['requestAppVersion'] ||
+    !$arraySoftwareState['requestAddonCompatMode']) {
+  if (!arraySoftwareState['debugMode']) {
+    funcSendHeader('404');
+  }
+
+  funcError('Missing minimum required arguments.');
+}
+
+// Check for Moz-XPI-Update header
+if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
+    (arraySoftwareState['debugMode'] && $arraySoftwareState['requestMozXPIUpdate'])) {
+  $boolMozXPIUpdate = true;
+}
+
+
+
 $moduleGenerateContent->test();
+
 // ============================================================================
 
 ?>

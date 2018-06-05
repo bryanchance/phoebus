@@ -78,6 +78,7 @@ else {
     TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
 }
 
+// Instantiate modules
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent(true);
 
