@@ -125,7 +125,7 @@ if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicatio
 
   if (!$addonManifest) {
     // Send non-existant add-ons to AMO for Basilisk
-    if ($arraySoftwareState['currentApplication'] = 'basilisk') {
+    if ($arraySoftwareState['currentApplication'] == 'basilisk') {
       $strAMOLink = 
         AMO_AUS_URL .
         '&id=' . $arraySoftwareState['requestAddonID'] .
