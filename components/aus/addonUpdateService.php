@@ -92,7 +92,7 @@ if (!$arraySoftwareState['requestMozXPIUpdate']) {
 // ----------------------------------------------------------------------------
 
 // Check for "Bad" Add-on IDs
-if (in_array($arraySoftwareState['requestAddonID']), BAD_ADDON_IDS) {
+if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
   if (!$arraySoftwareState['debugMode']) {
     // Send blank rdf response
     $moduleGenerateContent->addonUpdateService(null);
