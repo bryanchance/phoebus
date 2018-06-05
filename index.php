@@ -303,7 +303,7 @@ $arraySoftwareState = array(
   'phpRequestURI' => $_SERVER['REQUEST_URI'],
   'requestComponent' => funcHTTPGetValue('component'),
   'requestPath' => funcHTTPGetValue('path'),
-  'requestApplication' => funcHTTPGetValue('application'),
+  'requestApplication' => funcHTTPGetValue('appOverride'),
   'requestDebugOff' => funcHTTPGetValue('debugOff'),
   'requestSearchTerms' => funcHTTPGetValue('terms')
 );
