@@ -222,7 +222,7 @@ class classGenerateContent {
     );
 
     $addonXPInstall =
-      $addonManifest['xpinstall'][$_addonManifest['release']]['version'];
+      $addonManifest['xpinstall'][$addonManifest['release']]['version'];
     $addonTargetApplication =
       $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
     
