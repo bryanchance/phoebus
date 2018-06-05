@@ -218,6 +218,7 @@ function funcSendHeader($_value) {
     'html' => 'Content-Type: text/html',
     'text' => 'Content-Type: text/plain',
     'xml' => 'Content-Type: text/xml',
+    'json' => 'Content-Type: application/json',
     'css' => 'Content-Type: text/css',
     'phoebus' => 'X-Phoebus: https://github.com/Pale-Moon-Addons-Team/phoebus/',
   );
@@ -377,6 +378,9 @@ if (!$arraySoftwareState['requestComponent']) {
   elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
     $arraySoftwareState['requestComponent'] = 'special';
   }
+  elseif ($arraySoftwareState['requestComponent'] = 'integration') {
+    $arraySoftwareState['requestComponent'] = 'api';
+  }
   // requestPath should NEVER be set if the component isn't SITE
   elseif ($arraySoftwareState['requestComponent'] != 'site' &&
           $arraySoftwareState['requestPath']) {
@@ -389,7 +393,6 @@ if (!$arraySoftwareState['requestComponent']) {
 // Load component based on requestComponent
 if ($arraySoftwareState['requestComponent'] &&
     array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
-  //funcError($arraySoftwareState['requestComponent'], 1);
   require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
 }
 else {
