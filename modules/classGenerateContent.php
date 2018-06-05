@@ -31,10 +31,6 @@ class classGenerateContent {
     $this->arraySoftwareState =
       &$GLOBALS['arraySoftwareState'];
 
-    // Get smartyDebug HTTP GET Argument
-    $this->arraySoftwareState['requestSmartyDebug'] =
-      funcHTTPGetValue('smartyDebug');
-
     // Set the Application ID
     $this->arraySoftwareState['targetApplicationID'] =
       TARGET_APPLICATION_ID[$this->arraySoftwareState['currentApplication']];
@@ -73,7 +69,11 @@ class classGenerateContent {
         in the global scope'
         );
       }
-      
+
+      // Get smartyDebug HTTP GET Argument
+      $this->arraySoftwareState['requestSmartyDebug'] =
+        funcHTTPGetValue('smartyDebug');
+
       // Initalize Smarty
       $this->libSmarty = new Smarty();
 
