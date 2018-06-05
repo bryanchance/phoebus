@@ -40,8 +40,19 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 // ============================================================================
 
 // == | Main | ================================================================
+
+$arraySoftwareState['requestAddonID'] = funcHTTPGetValue('id');
+$arraySoftwareState['requestAddonVersion'] = funcHTTPGetValue('version');
+$arraySoftwareState['requestAppID'] = funcHTTPGetValue('appID');
+$arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
+$arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
+$arraySoftwareState['requestMozXPIUpdate'] = funcHTTPGetValue('Moz-XPI-Update');
+
+
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent();
+
+// ----------------------------------------------------------------------------
 
 $moduleGenerateContent->test();
 // ============================================================================
