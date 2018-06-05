@@ -60,7 +60,7 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
     !$arraySoftwareState['requestAppID'] || !$arraySoftwareState['requestAppVersion'] ||
     !$arraySoftwareState['requestAddonCompatMode']) {
   if (!arraySoftwareState['debugMode']) {
-    moduleGenerateContent->addonUpdateService(null);
+    $moduleGenerateContent->addonUpdateService(null);
   }
 
   funcError('Missing minimum required arguments.');
