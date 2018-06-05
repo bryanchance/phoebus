@@ -201,7 +201,7 @@ class classGenerateContent {
   }
 
   /****************************************************************************
-  * This will generate XML content for the Add-on Update Service
+  * This will generate RDF content for the Add-on Update Service
   * 
   * @param $addonManifest   Add-on Manifest data structure
   ****************************************************************************/
