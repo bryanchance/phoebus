@@ -18,7 +18,7 @@ class classGenerateContent {
   const RDF_AUS_BLANK = '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#" />';
   const XML_API_SEARCH_BLANK = '<searchresults total_results="0" />';
   const XML_API_LIST_BLANK = '<addons />';
-  const XML_API_ADDON_ERROR '<error>Add-on not found!</error>';
+  const XML_API_ADDON_ERROR = '<error>Add-on not found!</error>';
   
   private $arraySoftwareState;
   private $libSmarty;
