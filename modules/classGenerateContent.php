@@ -15,7 +15,7 @@ class classGenerateContent {
 
   // XML/RDF Default Responses
   const XML_TAG = '<?xml version="1.0" encoding="UTF-8"?>';
-  const RDF_AUS_BLANK = '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#" />';
+  const RDF_AUS_BLANK = '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#"></RDF:RDF>';
   const XML_API_SEARCH_BLANK = '<searchresults total_results="0" />';
   const XML_API_LIST_BLANK = '<addons />';
   const XML_API_ADDON_ERROR = '<error>Add-on not found!</error>';
