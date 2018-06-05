@@ -69,7 +69,7 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
 // Check for Moz-XPI-Update header
 if (!array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
     !$arraySoftwareState['requestMozXPIUpdate']) {
-  funcError('Compatibility check failed.');
+  //funcError('Compatibility check failed.');
 }
 
 
