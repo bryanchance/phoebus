@@ -70,7 +70,7 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
 if (!array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
     (!arraySoftwareState['debugMode'] && !$arraySoftwareState['requestMozXPIUpdate'])) {
   if (!arraySoftwareState['debugMode']) {
-    moduleGenerateContent->addonUpdateService(null);
+    $moduleGenerateContent->addonUpdateService(null);
   }
 
   funcError('Compatibility check failed.');
