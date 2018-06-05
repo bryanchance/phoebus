@@ -203,7 +203,7 @@ class classGenerateContent {
   /****************************************************************************
   * This will generate XML content for the Add-on Update Service
   * 
-  * @param $_addonManifest   Add-on Manifest data structure
+  * @param $addonManifest   Add-on Manifest data structure
   ****************************************************************************/
   public function addonUpdateService($addonManifest = null) {
     if (!$addonManifest) {
@@ -233,8 +233,8 @@ class classGenerateContent {
       '{%APPLICATION_ID}'   => $this->arraySoftwareState['targetApplicationID'],
       '{%ADDON_MINVERSION}' => $addonTargetApplication['minVersion'],
       '{%ADDON_MAXVERSION}' => $addonTargetApplication['maxVersion'],
-      '{%ADDON_XPI}'        => $addonManifest['baseURL'] . $_addonManifest['id'],
-      '{%ADDON_HASH}'       => $$addonXPInstall['hash']
+      '{%ADDON_XPI}'        => $addonManifest['baseURL'] . $addonManifest['id'],
+      '{%ADDON_HASH}'       => $addonXPInstall['hash']
     );
 
     foreach ($arrayFilterSubstitute as $_key => $_value) {
