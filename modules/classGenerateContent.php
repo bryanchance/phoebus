@@ -12,6 +12,13 @@ class classGenerateContent {
   const ADDON_CATEGORY_TEMPLATE = 'addon-category.xhtml';
   const OTHER_CATEGORY_TEMPLATE = 'other-category.xhtml';
   const ADDON_PAGE_TEMPLATE = 'addon-page.xhtml';
+
+  // XML/RDF Default Responses
+  const XML_TAG = '<?xml version="1.0" encoding="UTF-8"?>';
+  const RDF_AUS_BLANK = '<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#" />';
+  const XML_API_SEARCH_BLANK = '<searchresults total_results="0" />';
+  const XML_API_LIST_BLANK = '<addons />';
+  const XML_API_ADDON_ERROR '<error>Add-on not found!</error>';
   
   private $arraySoftwareState;
   private $libSmarty;
@@ -21,10 +28,16 @@ class classGenerateContent {
   ****************************************************************************/
   function __construct($_useSmarty = null) {
     // Assign current software state to a class property by reference
-    $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
-    
+    $this->arraySoftwareState =
+      &$GLOBALS['arraySoftwareState'];
+
     // Get smartyDebug HTTP GET Argument
-    $this->arraySoftwareState['requestSmartyDebug'] = funcHTTPGetValue('smartyDebug');
+    $this->arraySoftwareState['requestSmartyDebug'] =
+      funcHTTPGetValue('smartyDebug');
+
+    // Set the Application ID
+    $this->arraySoftwareState['targetApplicationID'] =
+      TARGET_APPLICATION_ID[$this->arraySoftwareState['currentApplication']];
 
     // ------------------------------------------------------------------------
 
@@ -88,7 +101,7 @@ class classGenerateContent {
   }
 
   /****************************************************************************
-  * Public method that will control the page generation and send it to smarty
+  * This will generate HTML content for the SITE component using Smarty
   * 
   * @param $_type   template or content file
   * @param $_title  Page title
@@ -173,6 +186,7 @@ class classGenerateContent {
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
     $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
+    $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
     $this->libSmarty->assign('PAGE_TYPE', $_type);
     $this->libSmarty->assign('PAGE_DATA', $_data);
 
@@ -181,6 +195,57 @@ class classGenerateContent {
     
     // Send the final template to smarty and output
     $this->libSmarty->display('string:' . $finalTemplate);
+    
+    // We're done here
+    exit();
+  }
+
+  /****************************************************************************
+  * This will generate XML content for the Add-on Update Service
+  * 
+  * @param $_addonManifest   Add-on Manifest data structure
+  ****************************************************************************/
+  public function addonUpdateService($addonManifest = null) {
+    if (!$addonManifest) {
+      // Send XML header
+      funcSendHeader('xml');
+      
+      // Print XML Tag and Empty RDF Response
+      print(self::XML_TAG . NEW_LINE . self::RDF_AUS_BLANK);
+      
+      // We're done here
+      exit();
+    }
+    
+    $updateRDF = file_get_contents(
+      $this->arraySoftwareState['componentContentPath'] . 'update.rdf'
+    );
+
+    $addonXPInstall =
+      $addonManifest['xpinstall'][$_addonManifest['release']]['version'];
+    $addonTargetApplication =
+      $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
+    
+    $arrayFilterSubstitute = array(
+      '{%ADDON_TYPE}'       => $addonManifest['type'],
+      '{%ADDON_ID}'         => $addonManifest['id'],
+      '{%ADDON_VERSION}'    => $addonXPInstall['version'],
+      '{%APPLICATION_ID}'   => $this->arraySoftwareState['targetApplicationID'],
+      '{%ADDON_MINVERSION}' => $addonTargetApplication['minVersion'],
+      '{%ADDON_MAXVERSION}' => $addonTargetApplication['maxVersion'],
+      '{%ADDON_XPI}'        => $addonManifest['baseURL'] . $_addonManifest['id'],
+      '{%ADDON_HASH}'       => $$addonXPInstall['hash']
+    );
+
+    foreach ($arrayFilterSubstitute as $_key => $_value) {
+      $updateRDF = str_replace($_key, $_value, $updateRDF);
+    }
+
+    // Send XML header
+    funcSendHeader('xml');
+    
+    // Print Update RDF
+    print($updateRDF);
     
     // We're done here
     exit();

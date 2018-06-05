@@ -14,7 +14,7 @@ error_reporting(0);
 // NOTE: DOCUMENT_ROOT does NOT have a trailing slash.
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 
-// Define basic constants for the application
+// Define basic constants for the software
 const SOFTWARE_NAME = 'Phoebus';
 const SOFTWARE_VERSION = '2.0.0a1';
 const DATASTORE_RELPATH = '/datastore/';
@@ -22,13 +22,14 @@ const OBJ_RELPATH = '/.obj/';
 const COMPONENTS_RELPATH = '/components/';
 const MODULES_RELPATH = '/modules/';
 const LIB_RELPATH = '/lib/';
+const NEW_LINE = "\n";
 
 // Define components
 // Components are considered to be the main code that drives the site and
 // do the direct work of calling modules and outputting content
 const COMPONENTS = array(
 //  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/placeholder.txt',
-//  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/placeholder.txt',
+  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
 //  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
