@@ -255,6 +255,7 @@ class classGenerateContent {
   * Temporary test function .. outputs arraySoftwareState
   ****************************************************************************/
   public function test() {
+    ksort($this->arraySoftwareState);
     funcError(array($this->arraySoftwareState, $this->libSmarty), 1);
   }
 }
