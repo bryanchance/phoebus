@@ -48,7 +48,7 @@ $arraySoftwareState['requestAppID'] = funcHTTPGetValue('appID');
 $arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
 $arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
 (bool)$arraySoftwareState['requestMozXPIUpdate'] =
-  array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) + funcHTTPGetValue('updateOverride');
+  array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || funcHTTPGetValue('updateOverride');
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
