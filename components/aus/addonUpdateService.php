@@ -53,9 +53,6 @@ $arraySoftwareState['requestMozXPIUpdate'] = funcHTTPGetValue('Moz-XPI-Update');
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent();
 
-// Vars
-$boolMozXPIUpdate = false;
-
 // ----------------------------------------------------------------------------
 
 // Sanity
@@ -63,16 +60,20 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
     !$arraySoftwareState['requestAppID'] || !$arraySoftwareState['requestAppVersion'] ||
     !$arraySoftwareState['requestAddonCompatMode']) {
   if (!arraySoftwareState['debugMode']) {
-    funcSendHeader('404');
+    moduleGenerateContent->addonUpdateService(null);
   }
 
   funcError('Missing minimum required arguments.');
 }
 
 // Check for Moz-XPI-Update header
-if (array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
-    (arraySoftwareState['debugMode'] && $arraySoftwareState['requestMozXPIUpdate'])) {
-  $boolMozXPIUpdate = true;
+if (!array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
+    (!arraySoftwareState['debugMode'] && !$arraySoftwareState['requestMozXPIUpdate'])) {
+  if (!arraySoftwareState['debugMode']) {
+    moduleGenerateContent->addonUpdateService(null);
+  }
+
+  funcError('Compatibility check failed.');
 }
 
 
