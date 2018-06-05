@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | classGeneratePage | ===================================================
+// == | classGenerateContent | ================================================
 
 class classGenerateContent {
   // Skin Templates
@@ -216,7 +216,7 @@ class classGenerateContent {
       // We're done here
       exit();
     }
-    //funcError($addonManifest, 1);
+
     $updateRDF = file_get_contents(
       $this->arraySoftwareState['componentContentPath'] . 'update.rdf'
     );
