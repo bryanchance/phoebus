@@ -158,7 +158,7 @@ class classGenerateContent {
           );
         }
         else {
-          funcError('Unkown template type');
+          funcError('Unkown template or content');
         }
     }
 
