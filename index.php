@@ -367,7 +367,7 @@ if ($arraySoftwareState['debugMode']) {
 // Set entry points for URI based components
 // Root (/) won't set a component or path
 if ($arraySoftwareState['phpRequestURI'] == '/' ||
-    startsWith($arraySoftwareState['phpRequestURI'], '/?application=') ||
+    startsWith($arraySoftwareState['phpRequestURI'], '/?appOverride=') ||
     startsWith($arraySoftwareState['phpRequestURI'], '/?smartyDebug=')) {
   $arraySoftwareState['requestComponent'] = 'site';
   $arraySoftwareState['requestPath'] = '/';
