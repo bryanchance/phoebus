@@ -63,13 +63,15 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
   if (!arraySoftwareState['debugMode']) {
     $moduleGenerateContent->addonUpdateService(null);
   }
-
   funcError('Missing minimum required arguments.');
 }
 
 // Check for Moz-XPI-Update header
 if (!$arraySoftwareState['requestMozXPIUpdate']) {
-  //funcError('Compatibility check failed.');
+  if (!arraySoftwareState['debugMode']) {
+    $moduleGenerateContent->addonUpdateService(null);
+  }
+  funcError('Compatibility check failed.');
 }
 
 
