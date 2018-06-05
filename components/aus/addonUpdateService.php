@@ -68,7 +68,7 @@ if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddon
 
 // Check for Moz-XPI-Update header
 if (!array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) ||
-    (!arraySoftwareState['debugMode'] && !$arraySoftwareState['requestMozXPIUpdate'])) {
+    (arraySoftwareState['debugMode'] && !$arraySoftwareState['requestMozXPIUpdate'])) {
   if (!arraySoftwareState['debugMode']) {
     $moduleGenerateContent->addonUpdateService(null);
   }
