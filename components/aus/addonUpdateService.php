@@ -104,7 +104,7 @@ if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
 
 // Handle FossaMail Special Case (Send to AMO unconditionally)
 if ($arraySoftwareState['requestAppID'] == TARGET_APPLICATION_ID['fossamail']) {
-  $strAMO = 
+  $strAMOLink = 
     AMO_AUS_URL .
     '&id=' . $arraySoftwareState['requestAddonID'] .
     '&version=' . $arraySoftwareState['requestAddonVersion'] .
@@ -126,7 +126,7 @@ if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicatio
   if (!$addonManifest) {
     // Send non-existant add-ons to AMO for Basilisk
     if ($arraySoftwareState['currentApplication'] = 'basilisk') {
-      $strAMO = 
+      $strAMOLink = 
         AMO_AUS_URL .
         '&id=' . $arraySoftwareState['requestAddonID'] .
         '&version=' . $arraySoftwareState['requestAddonVersion'] .
