@@ -216,7 +216,7 @@ class classGenerateContent {
       // We're done here
       exit();
     }
-    
+    funcError($addonManifest, 1);
     $updateRDF = file_get_contents(
       $this->arraySoftwareState['componentContentPath'] . 'update.rdf'
     );
