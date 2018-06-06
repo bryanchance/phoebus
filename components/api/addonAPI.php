@@ -6,7 +6,7 @@
 // == | Setup | ===============================================================
 
 // Constants
-XML_HEAD = '<?xml version="1.0" encoding="utf-8" ?>';
+const XML_HEAD = '<?xml version="1.0" encoding="utf-8" ?>';
 
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
