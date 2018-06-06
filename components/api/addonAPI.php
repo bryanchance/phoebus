@@ -37,15 +37,15 @@ if (!$arraySoftwareState['requestAPIScope'] ||
 
 if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
-    'search':
+    case 'search':
       $searchManifest =
         $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery']);
       $moduleGenerateContent->amSearch($searchManifest);
-    'get':
+    case 'get':
       funcSendHeader('xml');
       print(XML_HEAD . NEW_LINE . '<searchresults total_results="0" />');
       exit();
-    'recommended':
+    case 'recommended':
       funcSendHeader('xml');
       print(XML_HEAD . NEW_LINE . '<addons />');
       exit();
@@ -55,17 +55,17 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
 }
 elseif ($arraySoftwareState['requestAPIScope'] == 'external') {
   switch ($arraySoftwareState['requestAPIFunction']) {
-    'search':
+    case 'search':
       funcRedirect(
         '/search/?terms=' . $arraySoftwareState['requestAPISearchQuery']
       );
-    'themes':
+    case 'themes':
       funcRedirect('/themes/');
-    'searchplugins':
+    case 'searchplugins':
       funcRedirect('/search-plugins/');
-    'devtools':
+    case 'devtools':
       funcRedirect('/extensions/web-development/');
-    'recommended':
+    case 'recommended':
     default:
       funcRedirect('/');
   }
