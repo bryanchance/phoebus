@@ -42,9 +42,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
         $moduleReadManifest->getAPISearchResults($arraySoftwareState['requestAPISearchQuery']);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
-      funcSendHeader('xml');
-      print(XML_HEAD . NEW_LINE . '<searchresults total_results="0" />');
-      exit();
+      $moduleGenerateContent->amSearch(null);
     case 'recommended':
       funcSendHeader('xml');
       print(XML_HEAD . NEW_LINE . '<addons />');
