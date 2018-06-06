@@ -22,5 +22,5 @@
       </application>
     </compatible_applications>
     <last_updated epoch="{%ADDON_MTIME}" />
-    <install>{%ADDON_XPI}</install>
+    <install><![CDATA[{%ADDON_XPI}]]></install>
   </addon>
