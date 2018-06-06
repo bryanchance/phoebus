@@ -290,7 +290,7 @@ class classGenerateContent {
 
     $searchXML =
       self::XML_TAG . NEW_LINE .
-      '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE
+      '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE;
     
     foreach ($searchManifest as $_value) {     
       $_addonXML = $addonXML;
