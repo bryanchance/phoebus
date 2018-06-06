@@ -216,10 +216,10 @@ class classGenerateContent {
     if (!$addonManifest) {
       // Send XML header
       funcSendHeader('xml');
-      
+
       // Print XML Tag and Empty RDF Response
       print(self::XML_TAG . NEW_LINE . self::RDF_AUS_BLANK);
-      
+
       // We're done here
       exit();
     }
@@ -250,10 +250,98 @@ class classGenerateContent {
 
     // Send XML header
     funcSendHeader('xml');
-    
+
     // Print Update RDF
     print($updateRDF);
+
+    // We're done here
+    exit();
+  }
+
+  /****************************************************************************
+  * This will generate XML content for Add-ons Manager Search Results
+  * 
+  * @param $searchManifest    Search Result Manifest
+  ****************************************************************************/
+  public function amSearch($searchManifest = null) {
+    if ($this->arraySoftwareState['requestComponent'] != 'api') {
+      funcError(
+        __CLASS__ . '::' . __FUNCTION__ .
+        ' - This method is designed to work with the api component only'
+      );
+    }
+
+    if (!$searchManifest) {
+      // Send XML header
+      funcSendHeader('xml');
+
+      // Print XML Tag and Empty RDF Response
+      print(self::XML_TAG . NEW_LINE . self::XML_API_SEARCH_BLANK);
+
+      // We're done here
+      exit();
+    }
+
+    $addonXML = file_get_contents(
+      $this->arraySoftwareState['componentContentPath'] . 'addon.xml'
+    );
+
+    $intResultCount = count($searchManifest);
+
+    $searchXML =
+      self::XML_TAG . NEW_LINE .
+      '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE
     
+    foreach ($searchManifest as $_value) {     
+      $_addonXML = $addonXML;
+      $_addonType = null;
+
+      $_addonXPInstall =
+        $_value['xpinstall'][$_value['releaseXPI']];
+      $_addonTargetApplication =
+        $_value['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
+
+      switch ($_value['type']) {
+        case 'extension':
+          $_addonType = 1;
+          break;
+        case 'theme':
+          $_addonType = 2;
+          break;
+      }        
+
+      $_arrayFilterSubstitute = array(
+        '{%ADDON_TYPE}'             => $_addonType,
+        '{%ADDON_ID}'               => $_value['id'],
+        '{%ADDON_VERSION}'          => $_addonXPInstall['version'],
+        '{%ADDON_MTIME}'            => $_addonXPInstall['mtime'],
+        '{%ADDON_NAME}'             => $_value['name'],
+        '{%ADDON_CREATOR}'          => $_value['creator'],
+        '{%ADDON_CREATORURL}'       => 'about:blank',
+        '{%ADDON_SHORTDESCRIPTION}' => $_value['shortDescription'];
+        '{%ADDON_ICON}'             => $_value['icon'];
+        '{%ADDON_HOMEPAGEURL}'      => $_value['homepageURL'] || '',
+        '{%APPLICATION_ID}'         => $this->arraySoftwareState['targetApplicationID'],
+        '{%ADDON_MINVERSION}'       => $_addonTargetApplication['minVersion'],
+        '{%ADDON_MAXVERSION}'       => $_addonTargetApplication['maxVersion'],
+        '{%ADDON_XPI}'              => $_value['baseURL'] . $_value['id']
+      );
+
+      foreach ($_arrayFilterSubstitute as $_key => $_value) {
+        $_addonXML = str_replace($_key, $_value, $_addonXML);
+      }
+      
+      $searchXML .= $_addonXML . NEW_LINE;
+    }
+
+    $searchXML .= '</searchresults>';
+    
+    // Send XML header
+    funcSendHeader('xml');
+
+    // Print Update RDF
+    print($searchXML);
+
     // We're done here
     exit();
   }

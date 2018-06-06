@@ -28,7 +28,7 @@ const NEW_LINE = "\n";
 // Components are considered to be the main code that drives the site and
 // do the direct work of calling modules and outputting content
 const COMPONENTS = array(
-//  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/placeholder.txt',
+  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
