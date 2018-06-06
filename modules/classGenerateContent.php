@@ -289,6 +289,10 @@ class classGenerateContent {
     foreach ($searchManifest as $_value) {     
       $_addonXML = $addonXML;
       $_addonType = null;
+      
+      if (!$_value['homepageURL') {
+        $_addonHomepageURL = '';
+      }
 
       $_addonXPInstall =
         $_value['xpinstall'][$_value['releaseXPI']];
@@ -317,7 +321,7 @@ class classGenerateContent {
           'http://' . $this->arraySoftwareState['currentDomain'] . $_value['url'],
         '{%ADDON_ICON}'         =>
           'http://' . $this->arraySoftwareState['currentDomain'] . $_value['icon'],
-        '{%ADDON_HOMEPAGEURL}'  => $_value['homepageURL'] || '',
+        '{%ADDON_HOMEPAGEURL}'  => $_addonHomepageURL,
         '{%APPLICATION_ID}'     => $this->arraySoftwareState['targetApplicationID'],
         '{%ADDON_MINVERSION}'   => $_addonTargetApplication['minVersion'],
         '{%ADDON_MAXVERSION}'   => $_addonTargetApplication['maxVersion'],
