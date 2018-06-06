@@ -290,8 +290,11 @@ class classGenerateContent {
       $_addonXML = $addonXML;
       $_addonType = null;
       
-      if (!$_value['homepageURL') {
+      if (!$_value['homepageURL']) {
         $_addonHomepageURL = '';
+      }
+      else {
+        $_addonHomepageURL = $_value['homepageURL'];
       }
 
       $_addonXPInstall =
