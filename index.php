@@ -378,7 +378,7 @@ if (!$arraySoftwareState['requestComponent']) {
   elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
     $arraySoftwareState['requestComponent'] = 'special';
   }
-  elseif ($arraySoftwareState['requestComponent'] = 'integration') {
+  elseif ($arraySoftwareState['requestComponent'] == 'integration') {
     $arraySoftwareState['requestComponent'] = 'api';
   }
   // requestPath should NEVER be set if the component isn't SITE
