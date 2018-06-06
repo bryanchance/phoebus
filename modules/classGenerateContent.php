@@ -264,7 +264,8 @@ class classGenerateContent {
   * @param $searchManifest    Search Result Manifest
   ****************************************************************************/
   public function amSearch($searchManifest = null) {
-    if ($this->arraySoftwareState['requestComponent'] != 'api') {
+    if ($this->arraySoftwareState['requestComponent'] != 'api' ||
+        $this->arraySoftwareState['requestComponent'] != 'integration') {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ .
         ' - This method is designed to work with the api component only'
