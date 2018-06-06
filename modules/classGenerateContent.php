@@ -286,6 +286,7 @@ class classGenerateContent {
       $this->arraySoftwareState['componentContentPath'] . 'addon.xml'
     );
 
+    funcError($searchManifest, 1);
     $intResultCount = count($searchManifest);
 
     $searchXML =
