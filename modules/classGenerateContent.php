@@ -320,7 +320,10 @@ class classGenerateContent {
         '{%ADDON_CREATOR}'      => $_value['creator'],
         '{%ADDON_CREATORURL}'   => 'about:blank',
         '{%ADDON_DESCRIPTION}'  => $_value['description'],
-        '{%ADDON_ICON}'         => $_value['icon'],
+        '{%ADDON_URL}'          =>
+          'http://' . $this->arraySoftwareState['currentDomain'] . $_value['url'],
+        '{%ADDON_ICON}'         =>
+          'http://' . $this->arraySoftwareState['currentDomain'] . $_value['icon'],
         '{%ADDON_HOMEPAGEURL}'  => $_value['homepageURL'] || '',
         '{%APPLICATION_ID}'     => $this->arraySoftwareState['targetApplicationID'],
         '{%ADDON_MINVERSION}'   => $_addonTargetApplication['minVersion'],
