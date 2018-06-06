@@ -312,20 +312,20 @@ class classGenerateContent {
       }        
 
       $_arrayFilterSubstitute = array(
-        '{%ADDON_TYPE}'             => $_addonType,
-        '{%ADDON_ID}'               => $_value['id'],
-        '{%ADDON_VERSION}'          => $_addonXPInstall['version'],
-        '{%ADDON_MTIME}'            => $_addonXPInstall['mtime'],
-        '{%ADDON_NAME}'             => $_value['name'],
-        '{%ADDON_CREATOR}'          => $_value['creator'],
-        '{%ADDON_CREATORURL}'       => 'about:blank',
-        '{%ADDON_SHORTDESCRIPTION}' => $_value['shortDescription'],
-        '{%ADDON_ICON}'             => $_value['icon'],
-        '{%ADDON_HOMEPAGEURL}'      => $_value['homepageURL'] || '',
-        '{%APPLICATION_ID}'         => $this->arraySoftwareState['targetApplicationID'],
-        '{%ADDON_MINVERSION}'       => $_addonTargetApplication['minVersion'],
-        '{%ADDON_MAXVERSION}'       => $_addonTargetApplication['maxVersion'],
-        '{%ADDON_XPI}'              => $_value['baseURL'] . $_value['id']
+        '{%ADDON_TYPE}'         => $_addonType,
+        '{%ADDON_ID}'           => $_value['id'],
+        '{%ADDON_VERSION}'      => $_addonXPInstall['version'],
+        '{%ADDON_MTIME}'        => $_addonXPInstall['mtime'],
+        '{%ADDON_NAME}'         => $_value['name'],
+        '{%ADDON_CREATOR}'      => $_value['creator'],
+        '{%ADDON_CREATORURL}'   => 'about:blank',
+        '{%ADDON_DESCRIPTION}'  => $_value['description'],
+        '{%ADDON_ICON}'         => $_value['icon'],
+        '{%ADDON_HOMEPAGEURL}'  => $_value['homepageURL'] || '',
+        '{%APPLICATION_ID}'     => $this->arraySoftwareState['targetApplicationID'],
+        '{%ADDON_MINVERSION}'   => $_addonTargetApplication['minVersion'],
+        '{%ADDON_MAXVERSION}'   => $_addonTargetApplication['maxVersion'],
+        '{%ADDON_XPI}'          => $_value['baseURL'] . $_value['id']
       );
 
       foreach ($_arrayFilterSubstitute as $_key => $_value) {

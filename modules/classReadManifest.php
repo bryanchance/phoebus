@@ -67,6 +67,16 @@ class classReadManifest {
     AND MATCH(`tags`)
     AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
+  // Gets API search results
+  const SQL_API_SEARCH_RESULTS = "
+    SELECT `id`, `slug`, `type`, `name`, `creator`, `homepageURL`,
+           `description`, `url`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND MATCH(`tags`)
+    AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
 
   // The current category slugs
   const EXTENSION_CATEGORY_SLUGS = array(
@@ -151,6 +161,41 @@ class classReadManifest {
     $searchSQL = funcCheckVar(
       $this->libSQL->getAll(
         self::SQL_SEARCH_RESULTS,
+        $this->currentApplication,
+        $_searchTerms
+      )
+    );
+
+    if ($searchSQL != null) {
+      foreach ($searchSQL as $_value) {
+        $addonManifest = $this->funcProcessManifest($_value);
+        if ($addonManifest != null) {
+          $searchManifest[] = $addonManifest;
+        }
+        else {
+          continue;
+        }
+      }
+    }
+    else {
+      return null;
+    }
+    
+    return $searchManifest;
+  }
+
+  // ------------------------------------------------------------------------
+
+  // gets an indexed array of manifests for a single category
+  public function getAPISearchResults($_searchTerms) {
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
+
+    $searchManifest = array();
+
+    $searchSQL = funcCheckVar(
+      $this->libSQL->getAll(
+        self::SQL_API_SEARCH_RESULTS,
         $this->currentApplication,
         $_searchTerms
       )

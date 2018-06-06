@@ -11,7 +11,7 @@
         <link>{%ADDON_CREATORURL}</link> <!-- We do not have specific developer pages yet -->
       </author>
     </authors>
-    <summary>{%ADDON_SHORTDESCRIPTION}</summary>
+    <summary>{%ADDON_DESCRIPTION}</summary>
     <icon size="64">{%ADDON_ICON}</icon>
     <icon size="32">{%ADDON_ICON}</icon>
     <compatible_applications>
