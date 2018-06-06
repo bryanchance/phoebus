@@ -32,6 +32,7 @@ const COMPONENTS = array(
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
+  'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
 //  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
 //  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
@@ -377,9 +378,6 @@ if (!$arraySoftwareState['requestComponent']) {
   // The SPECIAL component overrides the SITE component
   elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
     $arraySoftwareState['requestComponent'] = 'special';
-  }
-  elseif ($arraySoftwareState['requestComponent'] == 'integration') {
-    $arraySoftwareState['requestComponent'] = 'api';
   }
   // requestPath should NEVER be set if the component isn't SITE
   elseif ($arraySoftwareState['requestComponent'] != 'site' &&
