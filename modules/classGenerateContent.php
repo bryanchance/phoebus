@@ -300,7 +300,7 @@ class classGenerateContent {
       $_addonXPInstall =
         $_value['xpinstall'][$_value['releaseXPI']];
       $_addonTargetApplication =
-        $_value['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
+        $_addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
 
       switch ($_value['type']) {
         case 'extension':
