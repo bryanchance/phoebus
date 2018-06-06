@@ -206,7 +206,7 @@ class classGenerateContent {
   * @param $addonManifest   Add-on Manifest data structure
   ****************************************************************************/
   public function addonUpdateService($addonManifest = null) {
-    if ($this->arraySoftwareState['requestComponent'] != 'aus' {
+    if ($this->arraySoftwareState['requestComponent'] != 'aus') {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ .
         ' - This method is designed to work with the AUS component only'
