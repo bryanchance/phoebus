@@ -69,8 +69,7 @@ class classReadManifest {
   ";
   // Gets API search results
   const SQL_API_SEARCH_RESULTS = "
-    SELECT `id`, `slug`, `type`, `name`, `creator`, `homepageURL`,
-           `description`, `url`, `reviewed`, `active`, `releaseXPI` `xpinstall`
+    SELECT addon.*
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
