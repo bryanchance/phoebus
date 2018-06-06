@@ -39,7 +39,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
     case 'search':
       $searchManifest =
-        $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery']);
+        $moduleReadManifest->getAPISearchResults($arraySoftwareState['requestAPISearchQuery']);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
       funcSendHeader('xml');
