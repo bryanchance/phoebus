@@ -21,7 +21,7 @@ $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
 $arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
 $arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
 $arraySoftwareState['requestAPISearchGUID'] =
-  explode(',', funcHTTPGetValue('addonguid')) || null;
+  explode(',', funcHTTPGetValue('addonguid')) | null;
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
