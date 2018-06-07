@@ -255,6 +255,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
   else {
     funcSend404();
   }
+}
 // There are no matches so error out
 else {
   funcSend404();
