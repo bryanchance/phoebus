@@ -20,7 +20,8 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
 $arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
 $arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
-$arraySoftwareState['requestAPISearchGUID'] = explode(',', funcHTTPGetValue('addonguid'));
+$arraySoftwareState['requestAPISearchGUID'] =
+  explode(',', funcHTTPGetValue('addonguid')) || null;
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
