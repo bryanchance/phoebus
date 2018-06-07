@@ -37,9 +37,9 @@ if (!$arraySoftwareState['requestAPIScope'] ||
 if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
     case 'search':
-      $searchManifest =
-        $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery']);
-      $moduleGenerateContent->amSearch($searchManifest, 1);
+      $searchManifest = $moduleReadManifest->
+        getSearchResults($arraySoftwareState['requestAPISearchQuery'], 1);
+      $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
       if (!$arraySoftwareState['requestAPISearchGUID']) {
         $moduleGenerateContent->amSearch(null);
@@ -48,9 +48,9 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
       $arraySoftwareState['requestAPISearchGUID'] = 
         explode(',', $arraySoftwareState['requestAPISearchGUID']);
 
-      $searchManifest =
-        $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID']);
-      $moduleGenerateContent->amSearch($searchManifest, 2);
+      $searchManifest = $moduleReadManifest->
+        getSearchResults($arraySoftwareState['requestAPISearchGUID'], 2);
+      $moduleGenerateContent->amSearch($searchManifest);
     case 'recommended':
       // This is apperently not used anymore but provide an empty response
       funcSendHeader('xml');
