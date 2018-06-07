@@ -20,6 +20,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
 $arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
 $arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
+$arraySoftwareState['requestAPISearchGUID'] = explode(',', funcHTTPGetValue('addonguid'));
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
@@ -37,13 +38,16 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
     case 'search':
       $searchManifest =
-        $moduleReadManifest->getAPISearchResults($arraySoftwareState['requestAPISearchQuery']);
+        $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery']);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
       // XXX: Get this working again
       // addonguid is comma seperated list of GUIDs
       // returns search results
-      $moduleGenerateContent->amSearch(null);
+      funcError($arraySoftwareState['requestAPISearchGUID']);
+      $searchManifest =
+        $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID']);
+      $moduleGenerateContent->amSearch($searchManifest);
     case 'recommended':
       // This is apperently not used anymore but provide an empty response
       funcSendHeader('xml');

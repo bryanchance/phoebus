@@ -64,8 +64,7 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND MATCH(`tags`)
-    AGAINST(?s IN NATURAL LANGUAGE MODE)
+    AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API search results
   const SQL_API_SEARCH_RESULTS = "
@@ -75,8 +74,18 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND MATCH(`tags`)
-    AGAINST(?s IN NATURAL LANGUAGE MODE)
+    AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
+  // Gets API get results
+  const SQL_API_GET_RESULTS = "
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`,
+           `homepageURL`, `description`, `url`, `reviewed`, `active`,
+           `xpinstall`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `id` in (?a)
+    AND NOT `type` = 'external'
   ";
 
   // The current category slugs
@@ -153,54 +162,30 @@ class classReadManifest {
   // ------------------------------------------------------------------------
 
   // gets an indexed array of manifests for a single category
-  public function getSearchResults($_searchTerms) {
+  public function getSearchResults($_search, $_mode = 0) {
     // Clear the Add-on Errors
     $this->addonErrors = null;
 
-    $searchManifest = array();
+    $query = null;
 
-    $searchSQL = funcCheckVar(
-      $this->libSQL->getAll(
-        self::SQL_SEARCH_RESULTS,
-        $this->currentApplication,
-        $_searchTerms
-      )
-    );
-
-    if ($searchSQL != null) {
-      foreach ($searchSQL as $_value) {
-        $addonManifest = $this->funcProcessManifest($_value);
-        if ($addonManifest != null) {
-          $searchManifest[] = $addonManifest;
-        }
-        else {
-          continue;
-        }
-      }
+    switch ($_mode) {
+      case 0:
+        $query = SQL_SEARCH_RESULTS;
+        break;
+      case 1:
+        $query = SQL_API_SEARCH_RESULTS;
+        break;
+      case 2:
+        $query = SQL_API_GET_RESULTS;
+        break;
+      default:
+        funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown mode');
     }
-    else {
-      return null;
-    }
-    
-    return $searchManifest;
-  }
-
-  // ------------------------------------------------------------------------
-
-  // gets an indexed array of manifests for a single category
-  public function getAPISearchResults($_searchTerms) {
-    // Clear the Add-on Errors
-    $this->addonErrors = null;
 
     $searchManifest = array();
 
-    $searchSQL = funcCheckVar(
-      $this->libSQL->getAll(
-        self::SQL_API_SEARCH_RESULTS,
-        $this->currentApplication,
-        $_searchTerms
-      )
-    );
+    $searchSQL =
+      funcCheckVar($this->libSQL->getAll($query, $this->currentApplication, $_search));
 
     if ($searchSQL != null) {
       foreach ($searchSQL as $_value) {
