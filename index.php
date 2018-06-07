@@ -169,7 +169,7 @@ function funcHTTPGetValue($_value) {
   }
   else {
     $_finalValue =
-      preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s]/', '', $_GET[$_value]);
+      preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
     return $_finalValue;
   }
 }
