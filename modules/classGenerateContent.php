@@ -205,6 +205,11 @@ class classGenerateContent {
     $addonXPInstall = $addonManifest['xpinstall'][$addonManifest['releaseXPI']];
     $addonTargetApplication = $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
     
+    // Language Packs are an 'item' as far as update.rdf is conserned
+    if ($addonManifest['type'] == 'langpack') {
+      $addonManifest['type'] = 'item';
+    }
+    
     $arrayFilterSubstitute = array(
       '{%ADDON_TYPE}'       => $addonManifest['type'],
       '{%ADDON_ID}'         => $addonManifest['id'],
@@ -277,6 +282,8 @@ class classGenerateContent {
         case 'langpack':
           $_addonType = 6;
           break;
+        default:
+          $_addonType = 0;
       }        
 
       $_arrayFilterSubstitute = array(
