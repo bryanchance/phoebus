@@ -20,8 +20,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
 $arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
 $arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
-$arraySoftwareState['requestAPISearchGUID'] =
-  explode(',', funcHTTPGetValue('addonguid')) | null;
+$arraySoftwareState['requestAPISearchGUID'] = funcHTTPGetValue('addonguid');
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
@@ -45,7 +44,13 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
       // XXX: Get this working again
       // addonguid is comma seperated list of GUIDs
       // returns search results
-      funcError($arraySoftwareState['requestAPISearchGUID'], 1);
+      if (!$arraySoftwareState['requestAPISearchGUID']) {
+        $moduleGenerateContent->amSearch(null)
+      }
+
+      $arraySoftwareState['requestAPISearchGUID'] = 
+        explode(',', $arraySoftwareState['requestAPISearchGUID']);
+
       $searchManifest =
         $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID']);
       $moduleGenerateContent->amSearch($searchManifest);
