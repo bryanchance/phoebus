@@ -28,12 +28,8 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND `type` = 'extension'
-    AND NOT `category` = 'unlisted'
-    OR (
-      `type` = 'external'
-      AND NOT `category` = 'theme'
-    )
+    AND `type` IN ('extension', 'external')
+    AND NOT `category` IN ('unlisted', 'theme', 'langpack')
     ORDER BY `name`
   ";
   // Gets a single Add-on by ID
@@ -45,7 +41,7 @@ class classReadManifest {
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `id` = ?s
-    AND NOT `type` = 'external'
+    AND `type` in ('extension', 'theme', langpacks)
   ";
   // Gets a single Add-on by Slug
   // Result is the full manifest
@@ -55,7 +51,7 @@ class classReadManifest {
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `slug` = ?s
-    AND NOT `type` = 'external'
+    AND `type` in ('extension', 'theme', langpacks)
   ";
   // Gets search results
   const SQL_SEARCH_RESULTS = "
@@ -64,6 +60,7 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
+    AND `type` in ('extension', 'theme', langpacks)
     AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API search results
@@ -74,6 +71,7 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
+    AND `type` in ('extension', 'theme', 'langpack')
     AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API get results
@@ -84,8 +82,8 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND `id` in (?a)
-    AND NOT `type` = 'external'
+    AND `id` IN (?a)
+    AND `type` IN ('extension', 'theme', 'langpack')
   ";
 
   // The current category slugs
