@@ -39,7 +39,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
     case 'search':
       $searchManifest =
         $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery']);
-      $moduleGenerateContent->amSearch($searchManifest);
+      $moduleGenerateContent->amSearch($searchManifest, 1);
     case 'get':
       if (!$arraySoftwareState['requestAPISearchGUID']) {
         $moduleGenerateContent->amSearch(null);
@@ -50,7 +50,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
 
       $searchManifest =
         $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID']);
-      $moduleGenerateContent->amSearch($searchManifest);
+      $moduleGenerateContent->amSearch($searchManifest, 2);
     case 'recommended':
       // This is apperently not used anymore but provide an empty response
       funcSendHeader('xml');
