@@ -8,49 +8,176 @@
 class classReadManifest {
   // We want a prop that warning and error messages can be sent to
   public $addonErrors;
-  private $addonSQL;
-  private $addonInit;
-  private $classSQL;
+  private $libSQL;
+  private $currentApplication;
+
+  // Gets Add-ons by Category
+  const SQL_CATEGORY = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `category` = ?s
+    ORDER BY `name`
+  ";
+  // Gets All Extensions
+  const SQL_ALL_EXTENSIONS = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `type` IN ('extension', 'external')
+    AND NOT `category` IN ('unlisted', 'theme', 'langpack')
+    ORDER BY `name`
+  ";
+  // Gets a single Add-on by ID
+  // Result is a reduced manifest for use with AUS and DOWNLOAD
+  const SQL_ADDON_BY_ID = "
+    SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `id` = ?s
+    AND `type` IN ('extension', 'theme', 'langpack')
+  ";
+  // Gets a single Add-on by Slug
+  // Result is the full manifest
+  const SQL_ADDON_BY_SLUG = "
+    SELECT addon.*
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `slug` = ?s
+    AND `type` IN ('extension', 'theme', 'langpack')
+  ";
+  // Gets search results
+  const SQL_SEARCH_RESULTS = "
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `type` IN ('extension', 'theme', 'langpack')
+    AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
+  // Gets API search results
+  const SQL_API_SEARCH_RESULTS = "
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
+           `url`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `type` IN ('extension', 'theme', 'langpack')
+    AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
+  ";
+  // Gets API get results
+  const SQL_API_GET_RESULTS = "
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
+           `url`, `reviewed`, `active`, `xpinstall`
+    FROM `addon`
+    JOIN `client` ON addon.id = client.addonID
+    WHERE ?n = 1
+    AND `id` IN (?a)
+    AND `type` IN ('extension', 'theme', 'langpack')
+  ";
+
+  // The current category slugs
+  const EXTENSION_CATEGORY_SLUGS = array(
+    'alerts-and-updates' => 'Alerts & Updates',
+    'appearance' => 'Appearance',
+    'bookmarks-and-tabs' => 'Bookmarks & Tabs',
+    'download-management' => 'Download Management',
+    'feeds-news-and-blogging' => 'Feeds, News, & Blogging',
+    'privacy-and-security' => 'Privacy & Security',
+    'search-tools' => 'Search Tools',
+    'social-and-communication' => 'Social & Communication',
+    'tools-and-utilities' => 'Tools & Utilities',
+    'web-development' => 'Web Development',
+    'other' => 'Other'
+  );
+  
+  // The Search Plugins should really be moved to SQL
+  const SEARCH_PLUGINS_DB = array(
+      'search-100' => 'google.xml',
+      'search-101' => 'youtube.xml',
+      'search-102' => 'google-play.xml',
+      'search-103' => 'ask.xml',
+      'search-104' => 'merriam-webster.xml',
+      'search-105' => 'facebook.xml',
+      'search-106' => 'abbreviations-com.xml',
+      'search-107' => 'accuweather.xml',
+      'search-108' => 'amazon-com.xml',
+      'search-109' => 'amazon-co-uk.xml',
+      'search-110' => 'baidu.xml',
+      'search-111' => 'dictionary-com.xml',
+      'search-112' => 'dogpile.xml',
+      'search-113' => 'ebay.xml',
+      'search-114' => 'european-search-engine.xml',
+      'search-115' => 'imdb.xml',
+      'search-116' => 'imgur.xml',
+      'search-117' => 'ixquick.xml',
+      'search-118' => 'openstreetmap.xml',
+      'search-120' => 'pale-moon-forum.xml',
+      'search-121' => 'pcnet.xml',
+      'search-122' => 'qwant.xml',
+      'search-123' => 'reference-com.xml',
+      'search-124' => 'searx.xml',
+      'search-125' => 'startpage.xml',
+      'search-126' => 'the-online-slang-dictionary.xml',
+      'search-127' => 'the-weather-channel.xml',
+      'search-128' => 'tumblr.xml',
+      'search-129' => 'urban-dictionary.xml',
+      'search-130' => 'webopedia.xml',
+      'search-131' => 'wiktionary.xml',
+      'search-132' => 'yandex.xml',
+      'search-133' => 'pale-moon-add-ons-google.xml'
+    );
 
   // ------------------------------------------------------------------------
 
   // Initalize class
-  // You should put this in every public method entry point
-  private function funcInit() {
-    // Be sure to clear out errors in case we reuse the class
-    $this->addonErrors = null;
-
-    // These are the SQL Query strings we will use to accomplish basic functions
-    $this->addonSQL = array(
-      'categorySingle' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE `category` = ?s ORDER BY `name`",
-      'searchResults' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)",
-      'categoryAllExtensions' =>
-        "SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active` FROM `addon` WHERE `type` = 'extension' AND NOT `category` = 'unlisted' OR (`type` = 'external' AND NOT `category` = 'theme') ORDER BY `name`",
-      'addonBasic' =>
-        "SELECT `id`, `slug`, `type`, `creator`, `license`, `licenseText`, `licenseURL`, `releaseXPI`, `reviewed`, `active`, `xpinstall` FROM `addon` WHERE `id` = ?s AND NOT `type` = 'external'",
-      'addonComplete' =>
-        "SELECT * FROM `addon` WHERE `slug` = ?s AND NOT `type` = 'external'"
-    );
+  function __construct() {  
+    if (!funcCheckModule('sql') || !funcCheckModule('sql-creds') ||
+        !array_key_exists('arraySQLCreds', $GLOBALS)) {
+      funcError(
+      __CLASS__ . '::' . __FUNCTION__ .
+      ' - sql and sql-creds are required to be included in the global scope'
+      );
+    }
     
+    // Assign currentApplication by reference
+    $this->currentApplication = &$GLOBALS['arraySoftwareState']['currentApplication'];
+
     // Create a new instance of the SafeMysql class
-    $this->classSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
+    $this->libSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
 
   // ------------------------------------------------------------------------
 
   // gets an indexed array of manifests for a single category
-  public function getSearchResults($_searchTerms) {
-    // Initalize the class
-    $this->funcInit();
+  public function getSearchResults($_search, $_mode = 0) {
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
+
+    $query = null;
+
+    switch ($_mode) {
+      case 0:
+        $query = self::SQL_SEARCH_RESULTS;
+        break;
+      case 1:
+        $query = self::SQL_API_SEARCH_RESULTS;
+        break;
+      case 2:
+        $query = self::SQL_API_GET_RESULTS;
+        break;
+      default:
+        funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown mode');
+    }
 
     $searchManifest = array();
 
-    $searchSQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['searchResults'], $_searchTerms)
-      );
+    $searchSQL =
+      funcCheckVar($this->libSQL->getAll($query, $this->currentApplication, $_search));
 
     if ($searchSQL != null) {
       foreach ($searchSQL as $_value) {
@@ -74,15 +201,18 @@ class classReadManifest {
 
   // gets an indexed array of manifests for a single category
   public function getCategory($_categorySlug) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['categorySingle'], $_categorySlug)
-      );
+      $this->libSQL->getAll(
+        self::SQL_CATEGORY,
+        $this->currentApplication,
+        $_categorySlug
+      )
+    );
 
     if ($categorySQL != null) {
       foreach ($categorySQL as $_value) {
@@ -106,15 +236,16 @@ class classReadManifest {
 
   // gets an indexed array of manifests for a all extensions
   public function getAllExtensions() {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $categoryManifest = array();
 
     $categorySQL = funcCheckVar(
-      $this->classSQL->getAll(
-        $this->addonSQL['categoryAllExtensions'])
-      );
+      $this->libSQL->getAll(
+        self::SQL_ALL_EXTENSIONS,
+        $this->currentApplication)
+    );
 
     if ($categorySQL != null) {
       foreach ($categorySQL as $_value) {
@@ -136,15 +267,18 @@ class classReadManifest {
 
   // ------------------------------------------------------------------------
 
-  // Gets a single basic add-on manifest by ID
+  // Gets a reduced add-on manifest by ID
   public function getAddonByID($_addonID) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
 
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
-        $this->addonSQL['addonBasic'], $_addonID)
-      );
+      $this->libSQL->getRow(
+        self::SQL_ADDON_BY_ID,
+        $this->currentApplication,
+        $_addonID
+      )
+    );
 
     if ($addonManifest != null) {
       $addonManifest = $this->funcProcessManifest($addonManifest);
@@ -163,13 +297,16 @@ class classReadManifest {
 
   // Gets a single complete add-on manifest by Slug
   public function getAddonBySlug($_addonSlug) {
-    // Initalize the class
-    $this->funcInit();
+    // Clear the Add-on Errors
+    $this->addonErrors = null;
     
     $addonManifest = funcCheckVar(
-      $this->classSQL->getRow(
-        $this->addonSQL['addonComplete'], $_addonSlug)
-      );
+      $this->libSQL->getRow(
+        self::SQL_ADDON_BY_SLUG,
+        $this->currentApplication,
+        $_addonSlug
+      )
+    );
     
     if ($addonManifest != null) {
       $addonManifest = $this->funcProcessManifest($addonManifest);
@@ -192,11 +329,11 @@ class classReadManifest {
 
   // ------------------------------------------------------------------------
 
-  public function getSearchPlugins($arraySearchPluginsDB) {
-    $datastorePath = $GLOBALS['strApplicationDatastore'] . '/searchplugins/';
+  public function getSearchPlugins() {
+    $datastorePath = ROOT_PATH . DATASTORE_RELPATH . '/searchplugins/';
     $arraySearchPlugins = array();
     
-    foreach ($arraySearchPluginsDB as $_key => $_value) {
+    foreach (self::SEARCH_PLUGINS_DB as $_key => $_value) {
       $arraySearchPluginXML = simplexml_load_file($datastorePath . $_value);
       $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['type'] = 'search-plugin';
       $arraySearchPlugins[(string)$arraySearchPluginXML->ShortName]['id'] = $_key;
@@ -266,7 +403,7 @@ class classReadManifest {
     if ($addonManifest['type'] != 'external') {
       $addonManifest['baseURL'] =
         'http://' .
-        $GLOBALS['strApplicationURL'] .
+        $GLOBALS['arraySoftwareState']['currentDomain'] .
         '/?component=download&version=latest&id=';
     }
 
@@ -277,7 +414,7 @@ class classReadManifest {
 
       // Set basePath
       $addonManifest['basePath'] =
-        $GLOBALS['strApplicationDatastore'] . 'addons/' . $_oldID . '/';
+        '.' . DATASTORE_RELPATH . 'addons/' . $_oldID . '/';
 
       // Set reletive url paths
       $_addonPath = substr($addonManifest['basePath'], 1);
@@ -286,7 +423,7 @@ class classReadManifest {
     else {
       // Set basePath
       $addonManifest['basePath'] =
-        $GLOBALS['strApplicationDatastore'] . 'addons/' . $addonManifest['slug'] . '/';
+        '.' . DATASTORE_RELPATH . 'addons/' . $addonManifest['slug'] . '/';
 
       // Set reletive url paths
       $_addonPath = substr($addonManifest['basePath'], 1);
@@ -467,7 +604,7 @@ class classReadManifest {
     // Disable Fatal status completely but leave the mechinism in place
     $_fatal = null;
 
-    if ($_fatal == true && $GLOBALS['boolDebugMode'] == true) {
+    if ($_fatal == true && $GLOBALS['arraySoftwareState']['debugMode'] == true) {
       $_fatalErrors = implode("\n", $this->addonErrors);
       funcError($_fatalErrors);
     }

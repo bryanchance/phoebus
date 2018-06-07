@@ -5,10 +5,9 @@
 
 // == | Vars | ================================================================
 
-$arrayIncludes = array(
-  $arrayModules['dbSearchPlugins'],
-  $arrayModules['readManifest'],
-);
+// Include modules
+$arrayIncludes = array('sql', 'sql-creds', 'readManifest');
+foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 $strRequestAddonID = funcHTTPGetValue('id');
 $strRequestAddonVersion = funcHTTPGetValue('version');
@@ -83,8 +82,6 @@ function funcDownloadSearchPlugin($_searchPluginName) {
 
 // == | Main | ================================================================
 
-funcCheckUserAgent();
-
 // Sanity
 if ($strRequestAddonID == null) {
   funcError('Missing minimum required arguments.');
@@ -94,20 +91,14 @@ if ($strRequestAddonVersion == null) {
   $strRequestAddonVersion = 'latest';
 } 
 
-// Includes
-foreach($arrayIncludes as $_value) {
-  require_once($_value);
-}
-unset($arrayIncludes);
-
 // Search for add-ons in our databases
 // Search Plugins
-if (array_key_exists($strRequestAddonID, $arraySearchPluginsDB)) {
-  funcDownloadSearchPlugin($arraySearchPluginsDB[$strRequestAddonID]);
+if (array_key_exists($strRequestAddonID, classReadManifest::SEARCH_PLUGINS_DB)) {
+  funcDownloadSearchPlugin(classReadManifest::SEARCH_PLUGINS_DB[$strRequestAddonID]);
 }
 else {
-  $readManifest = new classReadManifest();
-  $addonManifest = $readManifest->getAddonByID($strRequestAddonID);
+  $moduleReadManifest = new classReadManifest();
+  $addonManifest = $moduleReadManifest->getAddonByID($strRequestAddonID);
   
   if ($addonManifest != null) {
     $addonManifest['release'] = $addonManifest['releaseXPI'];

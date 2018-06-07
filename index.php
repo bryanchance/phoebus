@@ -3,136 +3,401 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | Setup | ===============================================================
+// == | Setup | =======================================================================================================
 
-// Debug inital state
-$boolDebugMode = false;
+// Disable all error reporting
+error_reporting(0);
 
-// Version
-$strProductName = 'Phoebus';
-$strApplicationVersion = '2.0.0a1';
+// This has to be defined using the function at runtime because it is based
+// on a variable. However, constants defined with the language construct
+// can use this constant by some strange voodoo. Keep an eye on this.
+// NOTE: DOCUMENT_ROOT does NOT have a trailing slash.
+define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 
-// Include basicFunctions
-require_once('./modules/basicFunctions.php');
+// Define basic constants for the software
+const SOFTWARE_NAME = 'Phoebus';
+const SOFTWARE_VERSION = '2.0.0a1';
+const DATASTORE_RELPATH = '/datastore/';
+const OBJ_RELPATH = '/.obj/';
+const COMPONENTS_RELPATH = '/components/';
+const MODULES_RELPATH = '/modules/';
+const LIB_RELPATH = '/lib/';
+const NEW_LINE = "\n";
 
-// URLs
-$strApplicationLiveURL = 'addons.palemoon.org';
-$strApplicationDevURL = 'addons-dev.palemoon.org';
-$strApplicationURL = $strApplicationLiveURL;
-
-// Define application paths
-$strRootPath = $_SERVER['DOCUMENT_ROOT'];
-$strObjDirPath = $strRootPath . '/.obj/';
-$strApplicationDatastore = './datastore/';
-$strDatabasesPath = $strRootPath . '/db/';
-$strLibPath = $strRootPath . '/lib/';
-$strComponentsPath = $strRootPath . '/components/';
-$strModulesPath = $strRootPath . '/modules/';
-$strSkinPath = $strRootPath . '/skin/';
-
-// Define Components
-$arrayComponents = array(
-  'aus' => $strComponentsPath . 'aus/addonUpdateService.php',
-  'discover' => $strComponentsPath . 'discover/discoverPane.php',
-  'download' => $strComponentsPath . 'download/addonDownload.php',
-  'integration' => $strComponentsPath . 'integration/amIntegration.php',
-  'license' => $strComponentsPath . 'license/addonLicense.php',
-  'site' => $strComponentsPath . 'site/addonSite.php',
-  'special' => $strComponentsPath . 'special/special.php'
+// Define components
+// Components are considered to be the main code that drives the site and
+// do the direct work of calling modules and outputting content
+const COMPONENTS = array(
+  // 'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
+  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
+  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
+  'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
+  'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
+  // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
+  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
+  // 'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
 );
 
-// Define Modules
-$arrayModules = array(
-  'readManifest' => $strModulesPath . 'classReadManifest.php',
-  'generatePage' => $strModulesPath . 'classGeneratePage.php',
-  'vc' => $strModulesPath . 'nsIVersionComparator.php',
-  'dbSearchPlugins' => $strDatabasesPath . 'searchPlugins.php',
-  'smarty' => $strLibPath . 'smarty/Smarty.class.php',
-  'rdf' => $strLibPath . 'rdf/RdfComponent.php',
-  'sql' => $strLibPath . 'safemysql/safemysql.class.php'
+// Define modules
+// Modules are largely independent and reusable chunks of code that do not
+// directly output content. Libs are also considered modules for simplicity.
+// The exception to this would be smarty.
+const MODULES = array(
+  'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
+  'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
+  'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
+  'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
+  'rdf' => ROOT_PATH . LIB_RELPATH . 'rdf/RdfComponent.php',
+  'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
+  'sql-creds' => ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/rdb.php'
 );
 
-// Define Skins
-$arraySkins = array(
-  'default' => $strSkinPath . 'default/',
-  'palemoon' => $strSkinPath . 'palemoon/',
-  'basilisk' => $strSkinPath . 'basilisk/'
+// Define the target applications that the site will accomidate with
+// the enabled site features
+const TARGET_APPLICATION_SITE = array(
+  'palemoon' => array(
+    'enabled' => true,
+    'name' => 'Pale Moon - Add-ons',
+    'domain' => array(
+      'live' => 'addons.palemoon.org',
+      'dev' => 'addons-dev.palemoon.org'
+    ),
+    'features' => array(
+      'https', 'extensions', 'extensions-cat', 'themes',
+      'language-packs', 'search-plugins'
+    )
+  ),
+  'basilisk' => array(
+    'enabled' => true,
+    'name' => 'Basilisk: add-ons',
+    'domain' => array(
+      'live' => 'addons.basilisk-browser.org',
+      'dev' => 'addons-dev.basilisk-browser.org'
+    ),
+    'features' => array(
+      'https', 'extensions', 'themes', 'search-plugins'
+    )
+  ),
+  'borealis' => array(
+    'enabled' => false,
+    'name' => 'Add-ons - Borealis - Binary Outcast',
+    'domain' => array(
+      'live' => 'borealis-addons.binaryoutcast.com',
+      'dev' => null
+    ),
+    'features' => array(
+      'extensions', 'themes', 'search-plugins'
+    )
+  ),
 );
 
-// Known Client GUIDs
-$strPaleMoonID = '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}';
-$strFossaMailID = '{3550f703-e582-4d05-9a08-453d09bdfdc6}';
-$strBasiliskID = '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}';
-$strFirefoxID = $strBasiliskID; // {ec8030f7-c20a-464f-9b0e-13a3a9e97384}
-$strThunderbirdID = $strFossaMailID; // {3550f703-e582-4d05-9a08-453d09bdfdc6}
-$strSeaMonkeyID = '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}';
-$strClientID = $strPaleMoonID;
+// Define Application IDs
+// Application IDs are normally in the form of a GUID, however, they
+// can be in the form of a user@host ID as well.
+// Basilisk/Firefox have the same ID
+// FossaMail/Thunderbird have the same ID
+const TARGET_APPLICATION_ID = array(
+  // MCP
+  'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
+  'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  // BinOC
+  'borealis' => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
+  // Mozilla
+  'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}',
+  'fennec-xul' => '{a23983c0-fd0e-11dc-95ff-0800200c9a66}',
+  'fennec-native' => '{aa3c5121-dab2-40e2-81ca-7ea25febc110}',
+  'sunbird' => '{718e30fb-e89b-41dd-9da7-e25a45638b28}',
+  // Adblock Plus
+  'adblock-browser' => '{55aba3ac-94d3-41a8-9e25-5c21fe874539}',
+  // Common
+  'toolkit' => 'toolkit@mozilla.org'
+);
 
-// $_GET and Path Magic
-$strRequestComponent = funcHTTPGetValue('component');
-$strRequestPath = funcHTTPGetValue('path');
+// ====================================================================================================================
 
-// ============================================================================
+// == | Functions | ===================================================================================================
 
-// == | Main | ================================================================
+/******************************************************************************
+* Error function that will display data (Error Message) as an html page
+*
+* @param $_value    Data to be printed
+* @param #_mode     Optional integer to change how data is printed
+                    0: Default, just print $_value as-is
+                    1: Print #_value as a JSON encoded string
+                    2: Print $_value as valid php code
+******************************************************************************/
+function funcError($_value, $_mode = 0) {
+  ob_get_clean();
+  header('Content-Type: text/html', false);   
+  print(file_get_contents('./components/special/skin/default/template-header.xhtml'));
+  print('<h2>' . SOFTWARE_NAME . ' ' . SOFTWARE_VERSION . '</h2>');
 
-// Define a Debug/Developer Mode
-if ($_SERVER['SERVER_NAME'] == $strApplicationDevURL) {
-  // Flip the var
-  $boolDebugMode = true;
+  switch($_mode) {
+    case 0:
+      print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
+      print('<ul><li>' . $_value . '</li></ul>');
+      break;
+    case 1:
+      print('<p>Output:</p>');
+      print('<pre><code>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</code></pre>');
+      break;
+    case 2:
+      print('<p>Output:</p>');
+      print('<pre>' . var_export($_value, true) . '</pre>');
+      break;
+  }
+
+  print(file_get_contents('./components/special/skin/default/template-footer.xhtml'));
   
-  // Use dev URL
-  $strApplicationURL = $strApplicationDevURL;
-
-  // Enable all errors
-  error_reporting(E_ALL);
-  ini_set("display_errors", "on");
-}
-else {
-  error_reporting(0);
+  // We are done here
+  exit();
 }
 
-// Always Require SQL
-require_once($arrayModules['sql']);
-require_once('./datastore/pm-admin/rdb.php');
-
-// Set inital URL-based entry points
-if ($_SERVER['REQUEST_URI'] == '/') {
-  // Root (/) won't send a component or path
-  $strRequestComponent = 'site';
-  $strRequestPath = '/';
-}
-elseif (startsWith($_SERVER['REQUEST_URI'], '/special/')) {
-  // The special component is well.. Special load it up
-  $strRequestComponent = 'special';
-}
-elseif ($strRequestComponent != 'site' && $strRequestPath != null) {
-  // If for some reason the SITE component was sent but no path.. 404
-  funcSendHeader('404');
-}
-
-// Load component based on strRequestComponent
-if ($strRequestComponent != null) {
-  if (array_key_exists($strRequestComponent, $arrayComponents)) {
-    require_once($arrayComponents[$strRequestComponent]);
+/**********************************************************************************************************************
+* Gets an HTTP GET request value and performs basic checks and filtering
+*
+* @param $_value    HTTP GET argument
+* @returns          Value of HTTP GET argument or null
+**********************************************************************************************************************/
+function funcHTTPGetValue($_value) {
+  if (!isset($_GET[$_value]) || $_GET[$_value] === '' ||
+    $_GET[$_value] === null || empty($_GET[$_value])) {
+    return null;
   }
   else {
-    if ($boolDebugMode == true) {
-      funcError($strRequestComponent . ' is an unknown component');
-    }
-    else {
-      funcSendHeader('404');
-    }
+    $_finalValue =
+      preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
+    return $_finalValue;
   }
 }
-else {
-  if ($boolDebugMode == true) {
-    funcError('You did not specify a component');
+
+/**********************************************************************************************************************
+* Check if an /existing/ variable has a value
+*
+* @param $_value    Any existing variable
+* @returns          Passed data or null
+**********************************************************************************************************************/
+function funcCheckVar($_value) {
+  if ($_value === '' || $_value === 'none' || $_value === null || empty($_value)) {
+    return null;
   }
   else {
+    return $_value;
+  }
+}
+
+/**********************************************************************************************************************
+* Check if a module is in $arrayIncludes
+*
+* @param $_value    A module
+* @returns          true or null depending on if $_value is in $arrayIncludes
+**********************************************************************************************************************/
+function funcCheckModule($_value) {
+  if (!array_key_exists('arrayIncludes', $GLOBALS)) {
+    funcError('$arrayIncludes is not defined');
+  }
+  
+  if (!in_array($_value, $GLOBALS['arrayIncludes'])) {
+    return null;
+  }
+  
+  return true;
+}
+
+/**********************************************************************************************************************
+* Sends HTTP Headers to client using a short name
+*
+* @param $_value    Short name of header
+**********************************************************************************************************************/
+function funcSendHeader($_value) {
+  $_arrayHeaders = array(
+    '404' => 'HTTP/1.0 404 Not Found',
+    '501' => 'HTTP/1.0 501 Not Implemented',
+    'html' => 'Content-Type: text/html',
+    'text' => 'Content-Type: text/plain',
+    'xml' => 'Content-Type: text/xml',
+    'json' => 'Content-Type: application/json',
+    'css' => 'Content-Type: text/css',
+    'phoebus' => 'X-Phoebus: https://github.com/Pale-Moon-Addons-Team/phoebus/',
+  );
+  
+  if (array_key_exists($_value, $_arrayHeaders)) {
+    header($_arrayHeaders['phoebus']);
+    header($_arrayHeaders[$_value]);
+    
+    if ($_value == '404' || $_value == '501') {
+      // We are done here
+      exit();
+    }
+  }
+  else {
+    // Fallback to text
+    header($_arrayHeaders['text']);
+  }
+}
+
+/**********************************************************************************************************************
+* Sends HTTP Header to redirect the client to another URL
+*
+* @param $_strURL   URL to redirect to
+**********************************************************************************************************************/
+// This function sends a redirect header
+function funcRedirect($_strURL) {
+	header('Location: ' . $_strURL , true, 302);
+  
+  // We are done here
+  exit();
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+
+/**********************************************************************************************************************
+* Polyfills for missing functions
+* startsWith, endsWith, contains
+*
+* @param $haystack  string
+* @param $needle    substring
+* @returns          true if substring exists in string else false
+**********************************************************************************************************************/
+
+function startsWith($haystack, $needle) {
+   $length = strlen($needle);
+   return (substr($haystack, 0, $length) === $needle);
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+
+function endsWith($haystack, $needle) {
+  $length = strlen($needle);
+  if ($length == 0) {
+    return true;
+  }
+
+  return (substr($haystack, -$length) === $needle);
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+
+function contains($haystack, $needle) {
+  if (strpos($haystack, $needle) > -1) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+// ====================================================================================================================
+
+// == | Main | ========================================================================================================
+
+// Define an array that will hold the current application state
+$arraySoftwareState = array(
+  'currentApplication' => null,
+  'orginalApplication' => null,
+  'currentName' => null,
+  'currentDomain' => null,
+  'debugMode' => null,
+  'phpServerName' => $_SERVER['SERVER_NAME'],
+  'phpRequestURI' => $_SERVER['REQUEST_URI'],
+  'requestComponent' => funcHTTPGetValue('component'),
+  'requestPath' => funcHTTPGetValue('path'),
+  'requestApplication' => funcHTTPGetValue('appOverride'),
+  'requestDebugOff' => funcHTTPGetValue('debugOff'),
+  'requestSearchTerms' => funcHTTPGetValue('terms')
+);
+
+// --------------------------------------------------------------------------------------------------------------------
+
+// Decide which application by domain that the software will be serving
+// and if debug is enabled
+foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
+  if ($arraySoftwareState['phpServerName'] == $_value['domain']['live']) {
+    $arraySoftwareState['currentApplication'] = $_key;
+    $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
+  }
+  elseif ($arraySoftwareState['phpServerName'] == $_value['domain']['dev']) {
+    $arraySoftwareState['currentApplication'] = $_key;
+    $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
+    $arraySoftwareState['debugMode'] = true;
+  }
+
+  if ($arraySoftwareState['currentApplication']) {
+    break;
+  }
+}
+
+// Override currentApplication by query
+// If requestApplication is set and it exists in the array constant check if it is
+// enabled and if so set the currentApplication to that
+if ($arraySoftwareState['debugMode'] && $arraySoftwareState['requestApplication'] &&
+    array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
+    TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
+    $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
+    $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
+    $arraySoftwareState['requestApplication'] = null;
+}
+
+// If there is no valid currentApplication or currentDomain
+// or if requestApplication is still set then error out
+if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentDomain'] ||
+    $arraySoftwareState['requestApplication'] ||
+    ($arraySoftwareState['currentApplication'] == $arraySoftwareState['orginalApplication'])) {
+  funcError('Invalid domain or application');
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+
+if ($arraySoftwareState['debugMode']) {
+  if ($arraySoftwareState['requestDebugOff']) {
+    $arraySoftwareState['debugMode'] = null;
+  }
+  else {
+    // Enable all errors
+    error_reporting(E_ALL);
+    ini_set("display_errors", "on");
+  }
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+
+// Set entry points for URI based components
+// Root (/) won't set a component or path
+if (!$arraySoftwareState['requestComponent']) {
+  if ($arraySoftwareState['phpRequestURI'] == '/' ||
+      startsWith($arraySoftwareState['phpRequestURI'], '/?appOverride=') ||
+      startsWith($arraySoftwareState['phpRequestURI'], '/?smartyDebug=')) {
+    $arraySoftwareState['requestComponent'] = 'site';
+    $arraySoftwareState['requestPath'] = '/';
+  }
+  // The SPECIAL component overrides the SITE component
+  elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
+    $arraySoftwareState['requestComponent'] = 'special';
+  }
+  // requestPath should NEVER be set if the component isn't SITE
+  elseif ($arraySoftwareState['requestComponent'] != 'site' &&
+          $arraySoftwareState['requestPath']) {
     funcSendHeader('404');
   }
 }
 
-// ============================================================================
+// --------------------------------------------------------------------------------------------------------------------
+
+// Load component based on requestComponent
+if ($arraySoftwareState['requestComponent'] &&
+    array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
+  require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
+}
+else {
+  if (!$arraySoftwareState['debugMode']) {
+    funcSendHeader('404');
+  }
+  funcError('Invalid component');
+}
+
+// ====================================================================================================================
+
 ?>
