@@ -51,7 +51,7 @@ class classReadManifest {
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `slug` = ?s
-    AND `type` in ('extension', 'theme', langpacks)
+    AND `type` in ('extension', 'theme', 'langpacks')
   ";
   // Gets search results
   const SQL_SEARCH_RESULTS = "
@@ -60,7 +60,7 @@ class classReadManifest {
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND `type` in ('extension', 'theme', langpacks)
+    AND `type` in ('extension', 'theme', 'langpacks')
     AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API search results
