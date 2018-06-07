@@ -170,13 +170,13 @@ class classReadManifest {
 
     switch ($_mode) {
       case 0:
-        $query = SQL_SEARCH_RESULTS;
+        $query = self::SQL_SEARCH_RESULTS;
         break;
       case 1:
-        $query = SQL_API_SEARCH_RESULTS;
+        $query = self::SQL_API_SEARCH_RESULTS;
         break;
       case 2:
-        $query = SQL_API_GET_RESULTS;
+        $query = self::SQL_API_GET_RESULTS;
         break;
       default:
         funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown mode');
