@@ -5,9 +5,6 @@
 
 // == | Setup | ===============================================================
 
-// Constants
-const XML_HEAD = '<?xml version="1.0" encoding="utf-8" ?>';
-
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
@@ -54,7 +51,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
     case 'recommended':
       // This is apperently not used anymore but provide an empty response
       funcSendHeader('xml');
-      print(XML_HEAD . NEW_LINE . '<addons />');
+      print('<?xml version="1.0" encoding="utf-8" ?>' . NEW_LINE . '<addons />');
       exit();
     default:
       funcError('Unknown Internal Request');
