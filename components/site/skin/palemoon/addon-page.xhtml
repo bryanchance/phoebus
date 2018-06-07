@@ -33,6 +33,7 @@
   <img src="{$PAGE_DATA.preview}" class="aligncenter" style="max-width: 750px"/>
 {/if}
 {elseif $PAGE_DATA.type == 'langpack'}
+  <h3>About this Language Pack</h3>
   <p>Please note the installation instructions, just installing the language pack and letting Pale Moon restart is not enough! Also keep in mind that these language packs are a convenience and that the browser is and remains an English language product at its heart, so something like the Safe Mode dialog, about box and default bookmarks folder names will be in English.</p>
   <div class="instruction-infobox">
     <h3>Installation instructions</h3>
@@ -65,13 +66,10 @@
       <li>Close Pale Moon completely and restart it.</li>
     </ol>
   </div>
-  <p>
-    And that's it! You can now use Pale Moon in your native language.<br />
-    <br />
-    Note that these language packs only change the interface language. They don't change the language used for the spellchecker.<br />
-    To download a spell checker dictionary of your choice, go to: <a href="https://addons.mozilla.org/en-US/firefox/language-tools/" target="_blank">https://addons.mozilla.org/en-US/firefox/language-tools/</a><br />
-    Or right-click any normal text input field, and in the pop-up menu select Languages -&gt; Add Dictionaries...
-  </p>
+  <p>And that's it! You can now use Pale Moon in your native language.</p>
+  <p>Note that these language packs only change the interface language. They don't change the language used for the spellchecker.</p>
+  <p>To download a spell checker dictionary of your choice, go to: <a href="https://addons.mozilla.org/en-US/firefox/language-tools/" target="_blank">https://addons.mozilla.org/en-US/firefox/language-tools/</a> Or right-click any normal text input field, and in the pop-up menu select Languages -&gt; Add Dictionaries...</p>
+  
 {/if}
 <p style="text-align: center; padding: 10px;">
   <a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}&hash={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['hash']}">
