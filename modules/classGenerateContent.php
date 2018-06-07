@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | classGenerateContent | ================================================
+// == | classGenerateContent | ========================================================================================
 
 class classGenerateContent {
   // Skin Templates
@@ -23,27 +23,24 @@ class classGenerateContent {
   private $arraySoftwareState;
   private $libSmarty;
 
-  /****************************************************************************
+  /********************************************************************************************************************
   * Class constructor that sets inital state of things
-  ****************************************************************************/
+  ********************************************************************************************************************/
   function __construct($_useSmarty = null) {
     // Assign current software state to a class property by reference
-    $this->arraySoftwareState =
-      &$GLOBALS['arraySoftwareState'];
+    $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
 
     // Set the Application ID
     $this->arraySoftwareState['targetApplicationID'] =
       TARGET_APPLICATION_ID[$this->arraySoftwareState['currentApplication']];
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     // Component Path
-    $componentPath =
-      dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
+    $componentPath = dirname(COMPONENTS[$this->arraySoftwareState['requestComponent']]);
 
     // Component Content Path (for static content)
-    $this->arraySoftwareState['componentContentPath'] =
-      $componentPath . '/content/';
+    $this->arraySoftwareState['componentContentPath'] = $componentPath . '/content/';
     
     // Current Skin
     $skin = 'default';
@@ -54,25 +51,22 @@ class classGenerateContent {
       $skin = $this->arraySoftwareState['currentApplication'];
     }
 
-    $this->arraySoftwareState['componentSkinPath'] =
-      $componentPath . '/skin/' . $skin . '/';
+    $this->arraySoftwareState['componentSkinPath'] = $componentPath . '/skin/' . $skin . '/';
     $this->arraySoftwareState['componentSkinRelPath'] = 
       str_replace(ROOT_PATH, '', $this->arraySoftwareState['componentSkinPath']);
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     if ($_useSmarty) {
       if (!funcCheckModule('smarty')) {
         funcError(
         __CLASS__ . '::' . __FUNCTION__ .
-        ' - Smarty has been indicated and is required to be included
-        in the global scope'
+        ' - Smarty has been indicated and is required to be included in the global scope'
         );
       }
 
       // Get smartyDebug HTTP GET Argument
-      $this->arraySoftwareState['requestSmartyDebug'] =
-        funcHTTPGetValue('smartyDebug');
+      $this->arraySoftwareState['requestSmartyDebug'] = funcHTTPGetValue('smartyDebug');
 
       // Initalize Smarty
       $this->libSmarty = new Smarty();
@@ -100,82 +94,65 @@ class classGenerateContent {
     }
   }
 
-  /****************************************************************************
+  /********************************************************************************************************************
   * This will generate HTML content for the SITE component using Smarty
   * 
   * @param $_type   template or content file
   * @param $_title  Page title
   * @param $_data   Used if $_type is 'template' to send data to smarty
-  ****************************************************************************/
+  ********************************************************************************************************************/
   public function addonSite($_type, $_title, $_data = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
         !funcCheckModule('smarty') || !$this->libSmarty) {
       funcError(
-        __CLASS__ . '::' . __FUNCTION__ .
-        ' - This method only works with the SITE component and requires Smarty'
+        __CLASS__ . '::' . __FUNCTION__ . ' - This method only works with the SITE component and requires Smarty'
       );
     }
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     // Read the Site Template
-    $template = file_get_contents(
-      $this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
+    $template = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
 
     // Read the Site Stylesheet
-    $stylesheet = file_get_contents(
-      $this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
+    $stylesheet = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     switch ($_type) {
       case 'addon-page':
       case 'addon-releases':
       case 'addon-license':
-        $content = file_get_contents(
-          $this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE
-        );
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE);
         break;
       case 'cat-all-extensions':
       case 'cat-extensions':
       case 'cat-themes':
       case 'search':
-        $content = file_get_contents(
-          $this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE
-        );
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
         break;
       case 'language-pack':
       case 'cat-search-plugins':
-        $content = file_get_contents(
-          $this->arraySoftwareState['componentSkinPath'] . self::OTHER_CATEGORY_TEMPLATE
-        );
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::OTHER_CATEGORY_TEMPLATE);
         break;
       default:
         if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
-          $content = file_get_contents(
-            $this->arraySoftwareState['componentContentPath'] . $_type
-          );
+          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $_type);
         }
         else {
           funcError('Unkown template or content');
         }
     }
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     // Build the final template
-    $finalTemplate = str_replace(
-      '{%SITE_STYLESHEET}',
-      $stylesheet,
-      str_replace(
-        '{%PAGE_CONTENT}',
-        $content,
-        $template
-      )
+    $finalTemplate = str_replace('{%SITE_STYLESHEET}', $stylesheet,
+      str_replace('{%PAGE_CONTENT}', $content, $template)
     );
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------
 
     // Assign Data to Smarty
     $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
@@ -200,16 +177,15 @@ class classGenerateContent {
     exit();
   }
 
-  /****************************************************************************
+  /********************************************************************************************************************
   * This will generate RDF content for the Add-on Update Service
   * 
   * @param $addonManifest   Add-on Manifest data structure
-  ****************************************************************************/
+  ********************************************************************************************************************/
   public function addonUpdateService($addonManifest = null) {
     if ($this->arraySoftwareState['requestComponent'] != 'aus') {
       funcError(
-        __CLASS__ . '::' . __FUNCTION__ .
-        ' - This method is designed to work with the AUS component only'
+        __CLASS__ . '::' . __FUNCTION__ . ' - This method is designed to work with the AUS component only'
       );
     }
 
@@ -224,14 +200,10 @@ class classGenerateContent {
       exit();
     }
 
-    $updateRDF = file_get_contents(
-      $this->arraySoftwareState['componentContentPath'] . 'update.rdf'
-    );
+    $updateRDF = file_get_contents($this->arraySoftwareState['componentContentPath'] . 'update.rdf');
 
-    $addonXPInstall =
-      $addonManifest['xpinstall'][$addonManifest['releaseXPI']];
-    $addonTargetApplication =
-      $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
+    $addonXPInstall = $addonManifest['xpinstall'][$addonManifest['releaseXPI']];
+    $addonTargetApplication = $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
     
     $arrayFilterSubstitute = array(
       '{%ADDON_TYPE}'       => $addonManifest['type'],
@@ -258,11 +230,11 @@ class classGenerateContent {
     exit();
   }
 
-  /****************************************************************************
+  /********************************************************************************************************************
   * This will generate XML content for Add-ons Manager Search Results
   * 
   * @param $searchManifest    Search Result Manifest
-  ****************************************************************************/
+  ********************************************************************************************************************/
   public function amSearch($searchManifest = null) {
     if (!$searchManifest) {
       // Send XML header
@@ -275,16 +247,11 @@ class classGenerateContent {
       exit();
     }
 
-    $addonXML = file_get_contents(
-      $this->arraySoftwareState['componentContentPath'] . 'addon.xml'
-    );
+    $addonXML = file_get_contents($this->arraySoftwareState['componentContentPath'] . 'addon.xml');
 
-    //funcError($searchManifest, 1);
     $intResultCount = count($searchManifest);
 
-    $searchXML =
-      self::XML_TAG . NEW_LINE .
-      '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE;
+    $searchXML = self::XML_TAG . NEW_LINE . '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE;
     
     foreach ($searchManifest as $_value) {     
       $_addonXML = $addonXML;
@@ -297,10 +264,8 @@ class classGenerateContent {
         $_addonHomepageURL = $_value['homepageURL'];
       }
 
-      $_addonXPInstall =
-        $_value['xpinstall'][$_value['releaseXPI']];
-      $_addonTargetApplication =
-        $_addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
+      $_addonXPInstall = $_value['xpinstall'][$_value['releaseXPI']];
+      $_addonTargetApplication = $_addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
 
       switch ($_value['type']) {
         case 'extension':
@@ -320,10 +285,8 @@ class classGenerateContent {
         '{%ADDON_CREATOR}'      => $_value['creator'],
         '{%ADDON_CREATORURL}'   => 'about:blank',
         '{%ADDON_DESCRIPTION}'  => $_value['description'],
-        '{%ADDON_URL}'          =>
-          'http://' . $this->arraySoftwareState['currentDomain'] . $_value['url'],
-        '{%ADDON_ICON}'         =>
-          'http://' . $this->arraySoftwareState['currentDomain'] . $_value['icon'],
+        '{%ADDON_URL}'          => 'http://' . $this->arraySoftwareState['currentDomain'] . $_value['url'],
+        '{%ADDON_ICON}'         => 'http://' . $this->arraySoftwareState['currentDomain'] . $_value['icon'],
         '{%ADDON_HOMEPAGEURL}'  => $_addonHomepageURL,
         '{%APPLICATION_ID}'     => $this->arraySoftwareState['targetApplicationID'],
         '{%ADDON_MINVERSION}'   => $_addonTargetApplication['minVersion'],
@@ -350,15 +313,15 @@ class classGenerateContent {
     exit();
   }
 
-  /****************************************************************************
+  /********************************************************************************************************************
   * Temporary test function .. outputs arraySoftwareState
-  ****************************************************************************/
+  ********************************************************************************************************************/
   public function test() {
     ksort($this->arraySoftwareState);
     funcError(array($this->arraySoftwareState, $this->libSmarty), 1);
   }
 }
 
-// ============================================================================
+// ====================================================================================================================
 
 ?>

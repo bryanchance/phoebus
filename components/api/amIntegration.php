@@ -3,15 +3,15 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL
 
-// == | Setup | ===============================================================
+// == | Setup | =======================================================================================================
 
 // Include modules
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Main | ================================================================
+// == | Main | ========================================================================================================
 
 // Assign HTTP GET arguments to the software state
 $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
@@ -23,7 +23,7 @@ $arraySoftwareState['requestAPISearchGUID'] = funcHTTPGetValue('addonguid');
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent();
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Sanity
 if (!$arraySoftwareState['requestAPIScope'] ||
@@ -31,22 +31,21 @@ if (!$arraySoftwareState['requestAPIScope'] ||
   funcError('Missing minimum arguments (type or request)');
 }
 
+// --------------------------------------------------------------------------------------------------------------------
+
 if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
     case 'search':
-      $searchManifest = $moduleReadManifest->
-        getSearchResults($arraySoftwareState['requestAPISearchQuery'], 1);
+      $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery'], 1);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
       if (!$arraySoftwareState['requestAPISearchGUID']) {
         $moduleGenerateContent->amSearch(null);
       }
 
-      $arraySoftwareState['requestAPISearchGUID'] = 
-        explode(',', $arraySoftwareState['requestAPISearchGUID']);
+      $arraySoftwareState['requestAPISearchGUID'] = explode(',', $arraySoftwareState['requestAPISearchGUID']);
 
-      $searchManifest = $moduleReadManifest->
-        getSearchResults($arraySoftwareState['requestAPISearchGUID'], 2);
+      $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID'], 2);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'recommended':
       // This is apperently not used anymore but provide an empty response
@@ -75,6 +74,6 @@ elseif ($arraySoftwareState['requestAPIScope'] == 'external') {
   }
 }
 
-// ============================================================================
+// ====================================================================================================================
 
 ?>

@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | Setup | ===============================================================
+// == | Setup | =======================================================================================================
 
 // Disable all error reporting
 error_reporting(0);
@@ -116,9 +116,9 @@ const TARGET_APPLICATION_ID = array(
   'toolkit' => 'toolkit@mozilla.org'
 );
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Functions | ===========================================================
+// == | Functions | ===================================================================================================
 
 /******************************************************************************
 * Error function that will display data (Error Message) as an html page
@@ -156,12 +156,12 @@ function funcError($_value, $_mode = 0) {
   exit();
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Gets an HTTP GET request value and performs basic checks and filtering
 *
 * @param $_value    HTTP GET argument
 * @returns          Value of HTTP GET argument or null
-******************************************************************************/
+**********************************************************************************************************************/
 function funcHTTPGetValue($_value) {
   if (!isset($_GET[$_value]) || $_GET[$_value] === '' ||
     $_GET[$_value] === null || empty($_GET[$_value])) {
@@ -174,12 +174,12 @@ function funcHTTPGetValue($_value) {
   }
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Check if an /existing/ variable has a value
 *
 * @param $_value    Any existing variable
 * @returns          Passed data or null
-******************************************************************************/
+**********************************************************************************************************************/
 function funcCheckVar($_value) {
   if ($_value === '' || $_value === 'none' || $_value === null || empty($_value)) {
     return null;
@@ -189,12 +189,12 @@ function funcCheckVar($_value) {
   }
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Check if a module is in $arrayIncludes
 *
 * @param $_value    A module
 * @returns          true or null depending on if $_value is in $arrayIncludes
-******************************************************************************/
+**********************************************************************************************************************/
 function funcCheckModule($_value) {
   if (!array_key_exists('arrayIncludes', $GLOBALS)) {
     funcError('$arrayIncludes is not defined');
@@ -207,11 +207,11 @@ function funcCheckModule($_value) {
   return true;
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Sends HTTP Headers to client using a short name
 *
 * @param $_value    Short name of header
-******************************************************************************/
+**********************************************************************************************************************/
 function funcSendHeader($_value) {
   $_arrayHeaders = array(
     '404' => 'HTTP/1.0 404 Not Found',
@@ -239,11 +239,11 @@ function funcSendHeader($_value) {
   }
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Sends HTTP Header to redirect the client to another URL
 *
 * @param $_strURL   URL to redirect to
-******************************************************************************/
+**********************************************************************************************************************/
 // This function sends a redirect header
 function funcRedirect($_strURL) {
 	header('Location: ' . $_strURL , true, 302);
@@ -252,23 +252,23 @@ function funcRedirect($_strURL) {
   exit();
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Polyfills for missing functions
 * startsWith, endsWith, contains
 *
 * @param $haystack  string
 * @param $needle    substring
 * @returns          true if substring exists in string else false
-******************************************************************************/
+**********************************************************************************************************************/
 
 function startsWith($haystack, $needle) {
    $length = strlen($needle);
    return (substr($haystack, 0, $length) === $needle);
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 function endsWith($haystack, $needle) {
   $length = strlen($needle);
@@ -279,7 +279,7 @@ function endsWith($haystack, $needle) {
   return (substr($haystack, -$length) === $needle);
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 function contains($haystack, $needle) {
   if (strpos($haystack, $needle) > -1) {
@@ -290,9 +290,9 @@ function contains($haystack, $needle) {
   }
 }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Main | ================================================================
+// == | Main | ========================================================================================================
 
 // Define an array that will hold the current application state
 $arraySoftwareState = array(
@@ -310,7 +310,7 @@ $arraySoftwareState = array(
   'requestSearchTerms' => funcHTTPGetValue('terms')
 );
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
@@ -333,8 +333,7 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
 // Override currentApplication by query
 // If requestApplication is set and it exists in the array constant check if it is
 // enabled and if so set the currentApplication to that
-if ($arraySoftwareState['debugMode'] &&
-    $arraySoftwareState['requestApplication'] &&
+if ($arraySoftwareState['debugMode'] && $arraySoftwareState['requestApplication'] &&
     array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
     TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
@@ -344,14 +343,13 @@ if ($arraySoftwareState['debugMode'] &&
 
 // If there is no valid currentApplication or currentDomain
 // or if requestApplication is still set then error out
-if (!$arraySoftwareState['currentApplication'] ||
-    !$arraySoftwareState['currentDomain'] ||
+if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentDomain'] ||
     $arraySoftwareState['requestApplication'] ||
     ($arraySoftwareState['currentApplication'] == $arraySoftwareState['orginalApplication'])) {
   funcError('Invalid domain or application');
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 if ($arraySoftwareState['debugMode']) {
   if ($arraySoftwareState['requestDebugOff']) {
@@ -364,7 +362,7 @@ if ($arraySoftwareState['debugMode']) {
   }
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Set entry points for URI based components
 // Root (/) won't set a component or path
@@ -386,11 +384,10 @@ if (!$arraySoftwareState['requestComponent']) {
   }
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Load component based on requestComponent
-if ($arraySoftwareState['requestComponent'] &&
-    array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
+if ($arraySoftwareState['requestComponent'] && array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
   require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
 }
 else {

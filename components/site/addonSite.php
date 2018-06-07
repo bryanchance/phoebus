@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | Setup | ===============================================================
+// == | Setup | =======================================================================================================
 
 // URI Constants
 const URI_ADDON_PAGE = '/addon/';
@@ -20,28 +20,28 @@ $arrayIncludes = array('sql', 'sql-creds', 'readManifest',
                        'smarty', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Functions | ===========================================================
+// == | Functions | ===================================================================================================
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Strips path to obtain the slug
 *
 * @param $_path     $arraySoftwareState['requestPath']
 * @param $_prefix   Prefix to strip 
 * @returns          slug
-******************************************************************************/
+***********************************************************************************************************************/
 function funcStripPath($_path, $_prefix) {
   return str_replace('/', '', str_replace($_prefix, '', $_path));
 }
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Sends a 404 error but does it depending on debug mode
 *
 * @param $_path     $arraySoftwareState['requestPath']
 * @param $_prefix   Prefix to strip 
 * @returns          slug
-******************************************************************************/
+***********************************************************************************************************************/
 function funcSend404() {
   if (!$GLOBALS['arraySoftwareState']['debugMode']) {
     funcSendHeader('404');
@@ -49,19 +49,16 @@ function funcSend404() {
   funcError('404 - Not Found');
 }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Main | ================================================================
+// == | Main | ========================================================================================================
 
 // Site Name
 // When in debug mode it displays the software name and version and if git
 // is detected it will append the branch and short sha1 hash
 // else it will use the name defined in TARGET_APPLICATION_SITE
 if ($arraySoftwareState['debugMode']) {
-  $arraySoftwareState['currentName'] =
-    SOFTWARE_NAME .
-    ' Development - Version: '
-    . SOFTWARE_VERSION;
+  $arraySoftwareState['currentName'] = SOFTWARE_NAME . ' Development - Version: ' . SOFTWARE_VERSION;
   // Git stuff
   if (file_exists('./.git/HEAD')) {
     $_strGitHead = file_get_contents('./.git/HEAD');
@@ -74,23 +71,19 @@ if ($arraySoftwareState['debugMode']) {
   }
 }
 else {
-  $arraySoftwareState['currentName'] =
-    TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
+  $arraySoftwareState['currentName'] = TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
 }
 
 // Instantiate modules
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent(true);
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Decide what kind of page is being requested
 // The front page
 if ($arraySoftwareState['requestPath'] == '/') { 
-  $moduleGenerateContent->addonSite(
-    $arraySoftwareState['currentApplication'] . '-frontpage.xhtml',
-    'Explore Add-ons'
-  );
+  $moduleGenerateContent->addonSite($arraySoftwareState['currentApplication'] . '-frontpage.xhtml', 'Explore Add-ons');
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
 elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
@@ -98,24 +91,17 @@ elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
     funcSend404();
   }
 
-  $moduleGenerateContent->addonSite(
-    'palemoon-incompatible.xhtml',
-    'Incompatible Add-ons'
-  );
+  $moduleGenerateContent->addonSite('palemoon-incompatible.xhtml', 'Incompatible Add-ons');
 }
 elseif ($arraySoftwareState['requestPath'] == '/search/') {
   $searchManifest =
     $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
   
   if (!$searchManifest) {
-    $moduleGenerateContent->addonSite(
-      'search',
-      'No search results'
-    );
+    $moduleGenerateContent->addonSite('search', 'No search results');
   }
 
-  $moduleGenerateContent->addonSite(
-    'search',
+  $moduleGenerateContent->addonSite('search',
     'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
     $searchManifest
   );
@@ -133,11 +119,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
     funcSend404();
   }
 
-  $moduleGenerateContent->addonSite(
-    'addon-page',
-    $addonManifest['name'],
-    $addonManifest
-  );
+  $moduleGenerateContent->addonSite('addon-page', $addonManifest['name'], $addonManifest);
 }
 // Add-on Releases
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
@@ -152,11 +134,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
     funcSend404();
   }
 
-  $moduleGenerateContent->addonSite(
-    'addon-releases',
-    $addonManifest['name'] . ' - Releases',
-    $addonManifest
-  );
+  $moduleGenerateContent->addonSite('addon-releases', $addonManifest['name'] . ' - Releases', $addonManifest);
 }
 // Add-on License
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
@@ -175,18 +153,13 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
     funcRedirect($addonManifest['licenseURL']);
   }
   
-  if ($addonManifest['license'] == 'pd' ||
-      $addonManifest['license'] == 'copyright' ||
+  if ($addonManifest['license'] == 'pd' || $addonManifest['license'] == 'copyright' ||
       $addonManifest['license'] == 'custom') {
     if ($addonManifest['licenseText']) {
       $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
     }
 
-    $moduleGenerateContent->addonSite(
-      'addon-license',
-      $addonManifest['name'] . ' - License',
-      $addonManifest
-    );
+    $moduleGenerateContent->addonSite('addon-license', $addonManifest['name'] . ' - License', $addonManifest);
   }
 
   funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
@@ -202,11 +175,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     if ($categoryManifest) {
-      $moduleGenerateContent->addonSite(
-        'cat-all-extensions',
-        'Extensions',
-        $categoryManifest
-      );
+      $moduleGenerateContent->addonSite('cat-all-extensions', 'Extensions', $categoryManifest);
     }
   }
 
@@ -224,9 +193,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
       }
 
       $moduleGenerateContent->addonSite(
-        'cat-extensions',
-        'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
-        $categoryManifest
+        'cat-extensions', 'Extensions: ' .
+        classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug], $categoryManifest
       );
     }
     else {
@@ -248,11 +216,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
       funcSend404();
     }
 
-    $moduleGenerateContent->addonSite(
-      'cat-themes',
-      'Themes',
-      $categoryManifest
-    );
+    $moduleGenerateContent->addonSite('cat-themes', 'Themes', $categoryManifest);
   }
   else {
     funcSend404();
@@ -269,11 +233,7 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
       funcSend404();
     }
 
-    $moduleGenerateContent->addonSite(
-      'cat-search-plugins',
-      'Search Plugins',
-      $categoryManifest
-    );
+    $moduleGenerateContent->addonSite('cat-search-plugins', 'Search Plugins', $categoryManifest);
   }
   else {
     funcSend404();
@@ -296,6 +256,6 @@ else {
   funcSend404();
 }
 
-// ============================================================================
+// ====================================================================================================================
 
 ?>

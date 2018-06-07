@@ -3,37 +3,37 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL
 
-// == | INFO | ================================================================
+// == | INFO | ========================================================================================================
 
-// This needs to be moved the hell out of this file
+  // This needs to be moved the hell out of this file
 
-// Automatic Update Service for Add-ons responds with a valid RDF file
-// containing update information for known add-ons or sends the request
-// off to AMO (for now) if it is unknown to us.
+  // Automatic Update Service for Add-ons responds with a valid RDF file
+  // containing update information for known add-ons or sends the request
+  // off to AMO (for now) if it is unknown to us.
 
-// FULL GET Arguments for AUS are as follows:
+  // FULL GET Arguments for AUS are as follows:
 
-// [query]          [Description]       [Example]                       [Used]
-// ----------------------------------------------------------------------------
-// reqVersion       Request Version     '2'                             false
-// id               Add-on ID           '{GUID}' or 'user@host.tld'     true
-// version          Add-on Version      '1.2.3a1'                       amo
-// maxAppVersion                        '26.5.0'                        false
-// status           Add-on Status       'userEnabled'                   false
-// appID            Client ID           'toolkit@mozilla.org'           true
-// appVersion       Client Version      '27.2.1'                        true
-// appOS            Client OS           'WINNT'                         false
-// appABI           Client ABI          'x86-gcc3'                      false
-// locale           Client Locale       'en-US'                         false    
-// currentAppVersion                    '27.4.2'                        false
-// updateType       Update Type         '32' or '64'                    false
-// compatMode       Compatibility Mode  'normal', 'ignore', or 'strict' amo
+  // [query]          [Description]       [Example]                       [Used]
+  // ----------------------------------------------------------------------------
+  // reqVersion       Request Version     '2'                             false
+  // id               Add-on ID           '{GUID}' or 'user@host.tld'     true
+  // version          Add-on Version      '1.2.3a1'                       amo
+  // maxAppVersion                        '26.5.0'                        false
+  // status           Add-on Status       'userEnabled'                   false
+  // appID            Client ID           'toolkit@mozilla.org'           true
+  // appVersion       Client Version      '27.2.1'                        true
+  // appOS            Client OS           'WINNT'                         false
+  // appABI           Client ABI          'x86-gcc3'                      false
+  // locale           Client Locale       'en-US'                         false    
+  // currentAppVersion                    '27.4.2'                        false
+  // updateType       Update Type         '32' or '64'                    false
+  // compatMode       Compatibility Mode  'normal', 'ignore', or 'strict' amo
 
-// See: https://developer.mozilla.org/Add-ons/Install_Manifests#updateURL
+  // See: https://developer.mozilla.org/Add-ons/Install_Manifests#updateURL
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Setup | ===============================================================
+// == | Setup | =======================================================================================================
 
 // Constants
 // This constant is a list of Add-on IDs that should never be checked for
@@ -48,16 +48,16 @@ const BAD_ADDON_IDS = array(
 $arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Functions | ===========================================================
+// == | Functions | ===================================================================================================
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Sends update request to AMO
 *
 * @param $_appID        Application ID that we are claiming to be
 * @param $_appVersion   Application Version that we are claiming to be
-******************************************************************************/
+**********************************************************************************************************************/
 function funcSendToAMO($_appID, $_appVersion) {
   funcRedirect( 
     'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2' .
@@ -68,9 +68,9 @@ function funcSendToAMO($_appID, $_appVersion) {
   );
 }
 
-// ============================================================================
+// ====================================================================================================================
 
-// == | Main | ================================================================
+// == | Main | ========================================================================================================
 
 // Assign HTTP GET arguments to the software state
 $arraySoftwareState['requestAddonID'] = funcHTTPGetValue('id');
@@ -85,7 +85,7 @@ $arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent();
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Sanity
 if (!$arraySoftwareState['requestAddonID'] || !$arraySoftwareState['requestAddonVersion'] ||
@@ -107,7 +107,7 @@ if (!$arraySoftwareState['requestMozXPIUpdate']) {
   funcError('Compatibility check failed.');
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Check for "Bad" Add-on IDs
 if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
@@ -118,20 +118,19 @@ if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
   funcError('"Bad" Add-on ID Detected');
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Handle FossaMail Special Case (Send to AMO unconditionally)
 if ($arraySoftwareState['requestAppID'] == TARGET_APPLICATION_ID['fossamail']) {
   funcSendToAMO(TARGET_APPLICATION_ID['thunderbird'], '38.9');
 }
 
-// ----------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 // Check for Add-on Updates
 if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicationID'] ||
     ($arraySoftwareState['debugMode'] && $arraySoftwareState['orginalApplication'])) {
-  $addonManifest =
-    $moduleReadManifest->getAddonByID($arraySoftwareState['requestAddonID']);
+  $addonManifest = $moduleReadManifest->getAddonByID($arraySoftwareState['requestAddonID']);
 
   if (!$addonManifest) {
     // Send non-existant add-ons to AMO for Basilisk
@@ -154,6 +153,6 @@ else {
   funcError('Mismatched or Invalid Application ID');
 }
 
-// ============================================================================
+// ====================================================================================================================
 
 ?>
