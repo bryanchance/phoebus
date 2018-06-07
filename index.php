@@ -28,14 +28,14 @@ const NEW_LINE = "\n";
 // Components are considered to be the main code that drives the site and
 // do the direct work of calling modules and outputting content
 const COMPONENTS = array(
-  'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
+  // 'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
-  'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
-//  'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
+  'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
+  // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
-//  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
+  // 'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
 );
 
 // Define modules
