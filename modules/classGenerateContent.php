@@ -274,6 +274,9 @@ class classGenerateContent {
         case 'theme':
           $_addonType = 2;
           break;
+        case 'langpack':
+          $_addonType = 6;
+          break;
       }        
 
       $_arrayFilterSubstitute = array(
