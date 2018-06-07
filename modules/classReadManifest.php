@@ -13,8 +13,7 @@ class classReadManifest {
 
   // Gets Add-ons by Category
   const SQL_CATEGORY = "
-    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
-           `reviewed`, `active`
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
@@ -23,8 +22,7 @@ class classReadManifest {
   ";
   // Gets All Extensions
   const SQL_ALL_EXTENSIONS = "
-    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
-           `reviewed`, `active`
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
@@ -35,13 +33,12 @@ class classReadManifest {
   // Gets a single Add-on by ID
   // Result is a reduced manifest for use with AUS and DOWNLOAD
   const SQL_ADDON_BY_ID = "
-    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `reviewed`,
-           `active`, `xpinstall`
+    SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `id` = ?s
-    AND `type` in ('extension', 'theme', langpacks)
+    AND `type` IN ('extension', 'theme', 'langpack')
   ";
   // Gets a single Add-on by Slug
   // Result is the full manifest
@@ -51,34 +48,31 @@ class classReadManifest {
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
     AND `slug` = ?s
-    AND `type` in ('extension', 'theme', 'langpacks')
+    AND `type` IN ('extension', 'theme', 'langpack')
   ";
   // Gets search results
   const SQL_SEARCH_RESULTS = "
-    SELECT `id`, `slug`, `type`, `name`, `description`, `url`,
-           `reviewed`, `active`
+    SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND `type` in ('extension', 'theme', 'langpacks')
+    AND `type` IN ('extension', 'theme', 'langpack')
     AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API search results
   const SQL_API_SEARCH_RESULTS = "
-    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`,
-           `homepageURL`, `description`, `url`, `reviewed`, `active`,
-           `xpinstall`
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
+           `url`, `reviewed`, `active`, `xpinstall`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
-    AND `type` in ('extension', 'theme', 'langpack')
+    AND `type` IN ('extension', 'theme', 'langpack')
     AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
   ";
   // Gets API get results
   const SQL_API_GET_RESULTS = "
-    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`,
-           `homepageURL`, `description`, `url`, `reviewed`, `active`,
-           `xpinstall`
+    SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
+           `url`, `reviewed`, `active`, `xpinstall`
     FROM `addon`
     JOIN `client` ON addon.id = client.addonID
     WHERE ?n = 1
