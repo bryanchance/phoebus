@@ -44,7 +44,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
       // XXX: Get this working again
       // addonguid is comma seperated list of GUIDs
       // returns search results
-      funcError($arraySoftwareState['requestAPISearchGUID']);
+      funcError($arraySoftwareState['requestAPISearchGUID'], 1);
       $searchManifest =
         $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID']);
       $moduleGenerateContent->amSearch($searchManifest);
