@@ -243,14 +243,18 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
 elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
   $boolLangPacksEnabled =
     in_array('language-packs', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-  
+   
   if ($boolLangPacksEnabled) {
-    funcError(array('Language Packs Category', $arraySoftwareState), 1);
+    $categoryManifest = $moduleReadManifest->getCategory('language-packs');
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    $moduleGenerateContent->addonSite('cat-language-packs', 'Language Packs', $categoryManifest);
   }
   else {
     funcSend404();
   }
-}
 // There are no matches so error out
 else {
   funcSend404();

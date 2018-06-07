@@ -132,7 +132,7 @@ class classGenerateContent {
       case 'search':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
         break;
-      case 'language-pack':
+      case 'cat-language-packs':
       case 'cat-search-plugins':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::OTHER_CATEGORY_TEMPLATE);
         break;
