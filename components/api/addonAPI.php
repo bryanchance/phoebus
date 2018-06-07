@@ -40,8 +40,12 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
         $moduleReadManifest->getAPISearchResults($arraySoftwareState['requestAPISearchQuery']);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
+      // XXX: Get this working again
+      // addonguid is comma seperated list of GUIDs
+      // returns search results
       $moduleGenerateContent->amSearch(null);
     case 'recommended':
+      // This is apperently not used anymore but provide an empty response
       funcSendHeader('xml');
       print(XML_HEAD . NEW_LINE . '<addons />');
       exit();
