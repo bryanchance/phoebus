@@ -20,6 +20,7 @@ $arrayKnownIDs = array(
         'palemoon.org',
         'basilisk-browser.org',
         'binaryoutcast.com',
+        'lootyhoof-pm',
         'mattatobin.com',
         'mozilla.org'
     )
