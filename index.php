@@ -35,7 +35,7 @@ const COMPONENTS = array(
   'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
   // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
-  // 'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/placeholder.txt'
+  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/specialComponent.php'
 );
 
 // Define modules
@@ -43,6 +43,7 @@ const COMPONENTS = array(
 // directly output content. Libs are also considered modules for simplicity.
 // The exception to this would be smarty.
 const MODULES = array(
+  'auth' => ROOT_PATH . MODULES_RELPATH . 'classAuthentication.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
   'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
@@ -296,6 +297,7 @@ function contains($haystack, $needle) {
 
 // Define an array that will hold the current application state
 $arraySoftwareState = array(
+  'authentication' => null,
   'currentApplication' => null,
   'orginalApplication' => null,
   'currentName' => null,
@@ -366,22 +368,20 @@ if ($arraySoftwareState['debugMode']) {
 
 // Set entry points for URI based components
 // Root (/) won't set a component or path
-if (!$arraySoftwareState['requestComponent']) {
-  if ($arraySoftwareState['phpRequestURI'] == '/' ||
-      startsWith($arraySoftwareState['phpRequestURI'], '/?appOverride=') ||
-      startsWith($arraySoftwareState['phpRequestURI'], '/?smartyDebug=')) {
-    $arraySoftwareState['requestComponent'] = 'site';
-    $arraySoftwareState['requestPath'] = '/';
-  }
-  // The SPECIAL component overrides the SITE component
-  elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
-    $arraySoftwareState['requestComponent'] = 'special';
-  }
-  // requestPath should NEVER be set if the component isn't SITE
-  elseif ($arraySoftwareState['requestComponent'] != 'site' &&
-          $arraySoftwareState['requestPath']) {
-    funcSendHeader('404');
-  }
+if (!$arraySoftwareState['requestComponent'] &&
+   ($arraySoftwareState['phpRequestURI'] == '/' || startsWith($arraySoftwareState['phpRequestURI'], '/?appOverride=') ||
+    startsWith($arraySoftwareState['phpRequestURI'], '/?smartyDebug='))) {
+  $arraySoftwareState['requestComponent'] = 'site';
+  $arraySoftwareState['requestPath'] = '/';
+}
+// The SPECIAL component overrides the SITE component
+elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
+  $arraySoftwareState['requestComponent'] = 'special';
+}
+// requestPath should NEVER be set if the component isn't SITE
+elseif ($arraySoftwareState['requestComponent'] != 'site' &&
+        $arraySoftwareState['requestPath']) {
+  funcSendHeader('404');
 }
 
 // --------------------------------------------------------------------------------------------------------------------
