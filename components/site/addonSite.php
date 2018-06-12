@@ -86,7 +86,7 @@ if ($arraySoftwareState['requestPath'] == '/') {
 }
 // Incompatible Add-ons Page (Pale Moon legacy page)
 elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
-  if (!$arraySoftwareState['currentApplication'] = 'palemoon') {
+  if ($arraySoftwareState['currentApplication'] != 'palemoon') {
     funcSend404();
   }
 
