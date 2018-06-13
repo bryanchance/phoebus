@@ -94,6 +94,9 @@ $moduleGenerateContent = new classGenerateContent(true);
 if ($arraySoftwareState['requestPath'] == '/') { 
   $moduleGenerateContent->addonSite($arraySoftwareState['currentApplication'] . '-frontpage.xhtml', 'Explore Add-ons');
 }
+elseif ($arraySoftwareState['requestPath'] == '/favicon.ico') { 
+  funcRedirect('/components/site/skin/' . $arraySoftwareState['currentApplication'] . '/favicon.ico');
+}
 // Incompatible Add-ons Page (Pale Moon legacy page)
 elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
   if ($arraySoftwareState['currentApplication'] != 'palemoon') {
