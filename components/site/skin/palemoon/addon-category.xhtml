@@ -61,7 +61,7 @@
 <div id="PM-Content-Sidebar"> <!-- START PM-Content-Sidebar -->
   <div class="category-extensions-list">
     <h1>Categories</h1>
-    {foreach $EXTRA_DATA as $key => $value}
+    {foreach from=$EXTRA_DATA key=key value=value}
       <a href="/extensions/$key/">$value</a><br />
     {/foreach}
   </div>
