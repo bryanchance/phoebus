@@ -30,7 +30,8 @@
     {/if}
 
     {if $PAGE_DATA.hasPreview == true}
-    <img src="{$PAGE_DATA.preview}" class="aligncenter" style="max-width: 750px"/>
+      <h3>Preview</h3>
+      <img src="{$PAGE_DATA.preview}" class="aligncenter" style="max-width: 750px"/>
     {/if}
   {elseif $PAGE_DATA.type == 'langpack'}
     <p>Please note the installation instructions, just installing the language pack and letting Pale Moon restart is not enough! Also keep in mind that these language packs are a convenience and that the browser is and remains an English language product at its heart, so something like the Safe Mode dialog, about box and default bookmarks folder names will be in English.</p>
