@@ -365,7 +365,7 @@ class classReadManifest {
       $addonManifest['xpinstall'] = json_decode($addonManifest['xpinstall'], true);
 
       foreach ($addonManifest['xpinstall'] as $_key => $_value) {
-        if (array_key_exists('prettyDate', $addonManifest['xpinstall'][$_key]) {
+        if (array_key_exists('prettyDate', $addonManifest['xpinstall'][$_key])) {
           unset($addonManifest['xpinstall'][$_key]['date']);
           unset($addonManifest['xpinstall'][$_key]['prettyDate']);
         }
