@@ -82,15 +82,15 @@ class classReadManifest {
 
   // The current category slugs
   const EXTENSION_CATEGORY_SLUGS = array(
-    'alerts-and-updates' => 'Alerts & Updates',
+    'alerts-and-updates' => 'Alerts &amp; Updates',
     'appearance' => 'Appearance',
-    'bookmarks-and-tabs' => 'Bookmarks & Tabs',
+    'bookmarks-and-tabs' => 'Bookmarks &amp; Tabs',
     'download-management' => 'Download Management',
-    'feeds-news-and-blogging' => 'Feeds, News, & Blogging',
-    'privacy-and-security' => 'Privacy & Security',
+    'feeds-news-and-blogging' => 'Feeds, News, &amp; Blogging',
+    'privacy-and-security' => 'Privacy &amp; Security',
     'search-tools' => 'Search Tools',
-    'social-and-communication' => 'Social & Communication',
-    'tools-and-utilities' => 'Tools & Utilities',
+    'social-and-communication' => 'Social &amp; Communication',
+    'tools-and-utilities' => 'Tools &amp; Utilities',
     'web-development' => 'Web Development',
     'other' => 'Other'
   );
