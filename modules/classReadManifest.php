@@ -10,6 +10,7 @@ class classReadManifest {
   public $addonErrors;
   private $libSQL;
   private $currentApplication;
+  private $currentAppID;
 
   // Gets Add-ons by Category
   const SQL_CATEGORY = "
@@ -146,6 +147,7 @@ class classReadManifest {
     
     // Assign currentApplication by reference
     $this->currentApplication = &$GLOBALS['arraySoftwareState']['currentApplication'];
+    $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
 
     // Create a new instance of the SafeMysql class
     $this->libSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
@@ -364,7 +366,13 @@ class classReadManifest {
       // JSON Decode xpinstall
       $addonManifest['xpinstall'] = json_decode($addonManifest['xpinstall'], true);
 
+      
       foreach ($addonManifest['xpinstall'] as $_key => $_value) {
+        if (!array_key_exists($this->currentAppID, $addonManifest['xpinstall'][$_key]['targetApplication'])) {
+          unset($addonManifest['xpinstall'][$_key]);
+          continue;
+        }
+
         if (array_key_exists('prettyDate', $addonManifest['xpinstall'][$_key])) {
           unset($addonManifest['xpinstall'][$_key]['date']);
           unset($addonManifest['xpinstall'][$_key]['prettyDate']);
