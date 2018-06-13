@@ -134,7 +134,7 @@
     <h3>Resources</h3>
     <p>
       {if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
-        <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases <small>(Version History)</small></a><br />
+        <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases</a> <small>(Version History)</small><br />
       {/if}
       {if $PAGE_TYPE == 'addon-releases'}
         <a href="/addon/{$PAGE_DATA.slug}/">Add-on Details</a><br />
