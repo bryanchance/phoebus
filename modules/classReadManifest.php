@@ -364,6 +364,12 @@ class classReadManifest {
       // JSON Decode xpinstall
       $addonManifest['xpinstall'] = json_decode($addonManifest['xpinstall'], true);
 
+      foreach ($addonManifest['xpinstall'] as $_key => $_value) {
+        $addonManifest['xpinstall'][$_key]['prettyDate'] = null;
+        $addonManifest['xpinstall'][$_key]['prettyDate'] =
+          date('F j, Y' ,$addonManifest['xpinstall'][$_key]['mtime']);
+      }
+
       // Ensure that the xpinstall keys are reverse sorted
       uasort($addonManifest['xpinstall'], function ($_xpi1, $_xpi2) {
         return $_xpi2['mtime'] <=> $_xpi1['mtime'];
