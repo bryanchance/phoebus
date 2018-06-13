@@ -62,7 +62,6 @@ a:hover {
 }
 }
 */
-
 #PM-Wrapper {
   width: 1200px;
   min-width: 1200px;
@@ -186,11 +185,6 @@ background: linear-gradient(to right, rgba(240,240,240,1) 50%,rgba(255,255,255,0
   height: 64px;
   text-decoration: none;
   color: #000;
-}
-
-.category-extension {
-  -moz-column-count: 2;
-  width: 100%;
 }
 
 .category-other {
