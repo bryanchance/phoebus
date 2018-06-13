@@ -188,12 +188,14 @@ background: linear-gradient(to right, rgba(240,240,240,1) 50%,rgba(255,255,255,0
 }
 
 .category-extension {
-  -moz-column-count: 2;
+  -moz-column-count: 3;
+  column-count: 3;
   width: 100%;
 }
 
 .category-other {
   -moz-column-count: 3;
+  column-count: 3;
   width: 100%;
 }
 
