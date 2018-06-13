@@ -187,7 +187,7 @@ background: linear-gradient(to right, rgba(240,240,240,1) 50%,rgba(255,255,255,0
   color: #000;
 }
 
-.category-other {
+.category-extension {
   -moz-column-count: 2;
   width: 100%;
 }
