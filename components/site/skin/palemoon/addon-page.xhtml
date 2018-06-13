@@ -90,11 +90,11 @@
       <p style="margin-top: 8px;">
         <strong>Version {$key.version}</strong><br />
         <small>Released: {$key.date}<br />
-          Works with Pale Moon {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['minVersion']} to
-          {if $key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion'] == '*'}
+          Works with Pale Moon {$key['targetApplication'][$APPLICATION_ID]['minVersion']} to
+          {if $key['targetApplication'][$APPLICATION_ID]['maxVersion'] == '*'}
             Unknown
           {else}
-            {$key['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
+            {$key['targetApplication'][$APPLICATION_ID]['maxVersion']}
           {/if}
         </small>
       </p>
@@ -115,11 +115,11 @@
     </h3>
 
     <p>
-      Pale Moon {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['minVersion']} to 
-      {if $PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion'] == '*'}
+      Pale Moon {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication'][$APPLICATION_ID]['minVersion']} to 
+      {if $PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication'][$APPLICATION_ID]['maxVersion'] == '*'}
         Unknown
       {else}
-        {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication']['{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}']['maxVersion']}
+        {$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['targetApplication'][$APPLICATION_ID]['maxVersion']}
       {/if}
     </p>
 {/if}
