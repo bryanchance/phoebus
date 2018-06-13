@@ -134,10 +134,10 @@
     <h3>Resources</h3>
     <p>
       {if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
-        <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases</a><br /><br />
+        <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases (Previous Versions)</a><br />
       {/if}
       {if $PAGE_TYPE == 'addon-releases'}
-        <a href="/addon/{$PAGE_DATA.slug}/">Add-on Details</a><br /><br />
+        <a href="/addon/{$PAGE_DATA.slug}/">Add-on Details</a><br />
       {/if}
       {if $PAGE_DATA.homepageURL != null}
         <a href="{$PAGE_DATA.homepageURL}" target="_blank">Add-on Homepage</a><br />
