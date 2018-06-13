@@ -180,7 +180,10 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
     if ($categoryManifest) {
-      $moduleGenerateContent->addonSite('cat-all-extensions', 'Extensions', $categoryManifest);
+      $moduleGenerateContent->addonSite(
+        'cat-all-extensions', 'Extensions', $categoryManifest,
+        classReadManifest::EXTENSION_CATEGORY_SLUGS
+      );
     }
   }
 
@@ -198,8 +201,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
       }
 
       $moduleGenerateContent->addonSite(
-        'cat-extensions', 'Extensions: ' .
-        classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug], $categoryManifest
+        'cat-extensions', 'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
+        $categoryManifest, classReadManifest::EXTENSION_CATEGORY_SLUGS
       );
     }
     else {

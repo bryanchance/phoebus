@@ -99,11 +99,12 @@ class classGenerateContent {
   /********************************************************************************************************************
   * This will generate HTML content for the SITE component using Smarty
   * 
-  * @param $_type   template or content file
-  * @param $_title  Page title
-  * @param $_data   Used if $_type is 'template' to send data to smarty
+  * @param $_type         template or content file
+  * @param $_title        Page title
+  * @param $_data         Used if not null
+  * @param $_extraData    Used if not null
   ********************************************************************************************************************/
-  public function addonSite($_type, $_title, $_data = null) {
+  public function addonSite($_type, $_title, $_data = null, $_extraData = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' ||
         !funcCheckModule('smarty') || !$this->libSmarty) {
@@ -172,6 +173,7 @@ class classGenerateContent {
     $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
     $this->libSmarty->assign('PAGE_TYPE', $_type);
     $this->libSmarty->assign('PAGE_DATA', $_data);
+    $this->libSmarty->assign('EXTRA_DATA', $_extraData);
 
     // Send html header
     funcSendHeader('html');
