@@ -12,6 +12,7 @@ class classGenerateContent {
   const ADDON_CATEGORY_TEMPLATE = 'addon-category.xhtml';
   const OTHER_CATEGORY_TEMPLATE = 'other-category.xhtml';
   const ADDON_PAGE_TEMPLATE = 'addon-page.xhtml';
+  const ADDON_LICENSE_TEMPLATE = 'addon-license.xhtml';
 
   // XML/RDF Default Responses
   const XML_TAG = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -123,8 +124,10 @@ class classGenerateContent {
     switch ($_type) {
       case 'addon-page':
       case 'addon-releases':
-      case 'addon-license':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE);
+        break;
+      case 'addon-license':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_LICENSE_TEMPLATE);
         break;
       case 'cat-all-extensions':
       case 'cat-extensions':
