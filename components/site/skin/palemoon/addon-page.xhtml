@@ -72,7 +72,7 @@
 <p style="text-align: center; padding: 10px;">
   <a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}&hash={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['hash']}">
     <img border="0" src="{$BASE_PATH}download.png" alt="" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
-    <span>Install {$PAGE_DATA.name}</span>
+    <span>Install Now</span>
   </a>
 </p>
 {/if}
@@ -166,10 +166,10 @@
     </h3>
     <p>
 {if $PAGE_TYPE == 'addon-page' && $PAGE_DATA.xpinstall|@count > 1}
-      <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases</a><br />
+      <a href="/releases/{$PAGE_DATA.slug}/">Add-on Releases</a><br /><br />
 {/if}
 {if $PAGE_TYPE == 'addon-releases'}
-      <a href="/addon/{$PAGE_DATA.slug}/">Add-on Details</a><br />
+      <a href="/addon/{$PAGE_DATA.slug}/">Add-on Details</a><br /><br />
 {/if}
 {if $PAGE_DATA.homepageURL != null}
       <a href="{$PAGE_DATA.homepageURL}" target="_blank">Add-on Homepage</a><br />
