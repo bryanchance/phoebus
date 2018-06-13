@@ -36,16 +36,26 @@ function funcStripPath($_path, $_prefix) {
 
 /**********************************************************************************************************************
 * Sends a 404 error but does it depending on debug mode
-*
-* @param $_path     $arraySoftwareState['requestPath']
-* @param $_prefix   Prefix to strip 
-* @returns          slug
 ***********************************************************************************************************************/
 function funcSend404() {
   if (!$GLOBALS['arraySoftwareState']['debugMode']) {
     funcSendHeader('404');
   }
   funcError('404 - Not Found');
+}
+
+/**********************************************************************************************************************
+* Checks for enabled features
+*
+* @param $_value    feature
+* @returns          true if existant else null
+***********************************************************************************************************************/
+function funcIsEnabledFeature($_value) {
+  $_currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
+  if (!in_array($_value, TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
+    return null;
+  }
+  return true;
 }
 
 // ====================================================================================================================
@@ -92,6 +102,7 @@ elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
 
   $moduleGenerateContent->addonSite('palemoon-incompatible.xhtml', 'Incompatible Add-ons');
 }
+// Add-on Search
 elseif ($arraySoftwareState['requestPath'] == '/search/') {
   $searchManifest =
     $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
@@ -165,11 +176,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
 }
 // Extensions Category or Subcategory
 elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
-  $boolExtensionsEnabled =
-    in_array('extensions', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-  $boolExtensionsCatEnabled =
-    in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
     $categoryManifest = $moduleReadManifest->getAllExtensions();
@@ -179,7 +185,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   }
 
   // Extensions Subcategory
-  if ($boolExtensionsCatEnabled) {
+  if (funcIsEnabledFeature('extensions-cat')) {
     // Strip the path to get the slug
     $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
 
@@ -205,11 +211,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   }
 }
 // Themes Category
-elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
-  $boolThemesEnabled =
-    in_array('themes', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-  
-  if ($boolThemesEnabled) {
+elseif ($arraySoftwareState['requestPath'] == URI_THEMES) { 
+  if (funcIsEnabledFeature('themes')) {
     $categoryManifest = $moduleReadManifest->getCategory('themes');
     if (!$categoryManifest) {
       funcSend404();
@@ -222,11 +225,8 @@ elseif ($arraySoftwareState['requestPath'] == URI_THEMES) {
   }
 }
 // Search Plugins
-elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
-  $boolSearchPluginsEnabled =
-    in_array('search-plugins', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-  
-  if ($boolSearchPluginsEnabled) {
+elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) { 
+  if (funcIsEnabledFeature('search-plugins')) {
     $categoryManifest = $moduleReadManifest->getSearchPlugins();
     if (!$categoryManifest) {
       funcSend404();
@@ -239,11 +239,8 @@ elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) {
   }
 }
 // Language Packs
-elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {
-  $boolLangPacksEnabled =
-    in_array('language-packs', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
-   
-  if ($boolLangPacksEnabled) {
+elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {  
+  if (funcIsEnabledFeature('language-packs')) {
     $categoryManifest = $moduleReadManifest->getCategory('language-packs');
     if (!$categoryManifest) {
       funcSend404();
