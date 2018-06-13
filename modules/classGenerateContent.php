@@ -10,6 +10,7 @@ class classGenerateContent {
   const SITE_TEMPLATE = 'site-template.xhtml';
   const SITE_STYLESHEET = 'site-stylesheet.css';
   const ADDON_CATEGORY_TEMPLATE = 'addon-category.xhtml';
+  const EXTENSION_CATEGORY_TEMPLATE = 'extension-category.xhtml';
   const LANGPACK_CATEGORY_TEMPLATE = 'langpack-category.xhtml';
   const SEARCHPLUGIN_CATEGORY_TEMPLATE = 'searchplugin-category.xhtml';
   const ADDON_PAGE_TEMPLATE = 'addon-page.xhtml';
@@ -130,6 +131,9 @@ class classGenerateContent {
         break;
       case 'addon-license':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_LICENSE_TEMPLATE);
+        break;
+      case 'cat-extension-category':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::EXTENSION_CATEGORY_TEMPLATE);
         break;
       case 'cat-all-extensions':
       case 'cat-extensions':

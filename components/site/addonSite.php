@@ -178,13 +178,17 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
 elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   // Extensions Category
   if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
-    $categoryManifest = $moduleReadManifest->getAllExtensions();
-    if ($categoryManifest) {
-      $moduleGenerateContent->addonSite(
-        'cat-all-extensions', 'Extensions', $categoryManifest,
-        classReadManifest::EXTENSION_CATEGORY_SLUGS
-      );
+    if (!funcIsEnabledFeature('extensions-cat')) {
+      $categoryManifest = $moduleReadManifest->getAllExtensions();
+      if ($categoryManifest) {
+        $moduleGenerateContent->addonSite(
+          'cat-all-extensions', 'Extensions', $categoryManifest,
+          classReadManifest::EXTENSION_CATEGORY_SLUGS
+        );
+      }
     }
+    
+    $moduleGenerateContent->addonSite('cat-extension-category', 'Extensions', classReadManifest::EXTENSION_CATEGORY_SLUGS);
   }
 
   // Extensions Subcategory
