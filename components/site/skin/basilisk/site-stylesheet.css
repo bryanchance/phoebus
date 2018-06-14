@@ -375,7 +375,7 @@ hr {
   box-sizing: border-box;
   text-transform: uppercase;
   background-color: transparent;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .addonSearchButton:hover {
