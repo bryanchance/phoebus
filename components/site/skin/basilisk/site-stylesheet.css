@@ -357,9 +357,7 @@ hr {
 }
 
 .addonSearchInput, .addonSearchButton {
-  margin: unset;
-  padding: unset;
-  border: unset;
+  all: unset;
 }
 
 .dllink_green {
