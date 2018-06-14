@@ -386,6 +386,10 @@ hr {
   background-color: #D9F9F0;
 }
 
+.addonSearchButtonMenuBar:hover {
+  background-color: #b2ded8;
+}
+
 .dllink_green {
   border: 1px solid rgb(0, 153, 0); 
   padding: 14px; 
