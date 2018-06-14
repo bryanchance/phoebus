@@ -386,7 +386,8 @@ hr {
   padding: 0 0.5em;
   box-sizing: border-box;
   height: 2em;
-  background-color: #D9F9F0;
+  background-color: #FFF;
+  color: black;
 }
 
 .addonSearchButton {
