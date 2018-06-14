@@ -381,7 +381,7 @@ hr {
 */
 
 .addonSearchInput {
-  border: 2px solid #555;
+  border: 2px solid #464646;
   line-height: 1.1em;
   padding: 0 0.5em;
   box-sizing: border-box;
@@ -392,8 +392,8 @@ hr {
 
 .addonSearchButton {
   line-height: 1.1em;
-  border: 2px solid #555;
-  border-radius: 4px;
+  border: 2px solid #464646;
+  border-radius: 3px;
   background-color: #D9F9F0;
   height: 2em;
   padding: 0 0.3em;
