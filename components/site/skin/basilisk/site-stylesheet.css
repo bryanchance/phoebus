@@ -356,6 +356,10 @@ hr {
   display: none;
 }
 
+.addonSearchInput, .addonSearchButton {
+  all: initial;
+}
+
 .dllink_green {
   border: 1px solid rgb(0, 153, 0); 
   padding: 14px; 
