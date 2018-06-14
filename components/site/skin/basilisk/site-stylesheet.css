@@ -400,7 +400,7 @@ hr {
   text-transform: capitalize;
 }
 
-.menu > .addonSearchButton {
+.menu .addonSearchButton {
   background-color: #D9F9F0;
 }
 
