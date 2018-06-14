@@ -360,7 +360,6 @@ hr {
   border: 2px solid #464646;
   max-width: 200px;
   border-radius: 3px;
-  font-weight: bold;
 }
 
 .addonSearchInput {
@@ -374,6 +373,7 @@ hr {
   line-height: 1.8em;
   padding-bottom: 1px;
   text-transform: capitalize;
+  font-weight: bold;
   background-image: radial-gradient(ellipse at 50% 90%, #D9F9F0 0%,#D6F6F0 41%,#c9e9e0 100%);
 }
 
