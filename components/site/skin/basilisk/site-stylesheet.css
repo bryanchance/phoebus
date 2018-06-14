@@ -373,7 +373,7 @@ hr {
   height: 2em;
   padding: 0 0.3em;
   box-sizing: border-box;
-  text-transform: capitalize;
+  text-transform: uppercase;
   background-color: transparent;
   font-weight: bold;
 }
