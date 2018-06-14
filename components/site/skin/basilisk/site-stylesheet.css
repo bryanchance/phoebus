@@ -356,30 +356,6 @@ hr {
   display: none;
 }
 
-/*
-
-.addonSearchInput, .addonSearchButton {
-  border: 2px solid #464646;
-  max-width: 200px;
-  border-radius: 3px;
-}
-
-.addonSearchInput {
-  line-height: 2em;
-  padding: 0 0.5em;
-  margin: auto 0;
-  vertical-align: middle;
-}
-
-.addonSearchButton {
-  line-height: 1.8em;
-  padding-bottom: 1px;
-  text-transform: capitalize;
-  background-image: radial-gradient(ellipse at 50% 90%, #D9F9F0 0%,#D6F6F0 41%,#c9e9e0 100%);
-}
-
-*/
-
 .addonSearchInput {
   border: 2px solid #464646;
   line-height: 1.1em;
@@ -398,9 +374,15 @@ hr {
   padding: 0 0.3em;
   box-sizing: border-box;
   text-transform: capitalize;
+  background-color: transparent;
 }
 
-.menu .addonSearchButton {
+.addonSearchButton:hover {
+  transition: all 0.3s ease;
+  background-color: rgba(21, 115, 119, 0.2);
+}
+
+.addonSearchButtonMenuBar {
   background-color: #D9F9F0;
 }
 
