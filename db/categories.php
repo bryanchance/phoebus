@@ -55,6 +55,7 @@ $arrayCategoryList02 = array(
     'active-stop-button',
     'nosquint',
     'browsepaper',
+    'stylem',
     'externals' => array(
         'all-menus-button' => array(
             'id' => 'fx-621692',

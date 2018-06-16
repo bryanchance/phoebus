@@ -138,6 +138,7 @@ $arrayAddonsDB = array(
     '{4b13c0da-55d5-44ce-b98e-98e62085837f}' => 'darkpitch',
     '{4d457603-1613-4177-b98e-98e62085837f}' => 'reinheit',
     '{4d60e663-9c10-48d9-895a-801285687ced}' => 'fcstweatherbutton',
+    '{503a85e3-84c9-40e5-b98e-98e62085837f}' => 'stylem',
     '{55e5dab6-f1cc-11e6-8a72-4981b17b32b7}' => 'jsview-revive',
     '{5a92897a-cdf8-4ead-8f56-cf620fd6062f}' => 'sidebartogglemenu',
     '{5b965352-430a-11e2-956a-13226188709b}' => 'calendate',
