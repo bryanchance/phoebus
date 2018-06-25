@@ -299,12 +299,6 @@ $arrayCategoryList08 = array(
             'shortDescription' => 'Permanently hide content from web pages via the context menu.',
             'url' => 'https://addons.mozilla.org/firefox/addon/remove-it-permanently/'
         ),
-        'restart-manager' => array(
-            'id' => 'fx-545420',
-            'name' => 'Restart manager',
-            'shortDescription' => 'Restarts Pale Moon on demand and lets you fine-tune the way normal restart/exit requests are handled.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/restart-manager/'
-        ),
         'wheelclear' => array(
             'id' => 'default',
             'name' => 'WheelClear',
