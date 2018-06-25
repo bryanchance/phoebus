@@ -88,6 +88,7 @@ $arrayAddonsDB = array(
     'profileswitcher@projects.binaryoutcast.com' => 'profile-switcher',
     'pxruler@Off.JustOff' => 'proxy-privacy-ruler',
     'resp-bmbar@Off.JustOff' => 'responsive-bookmarks-toolbar',
+	'restartmanager@chania.gr' => 'restart-manager',
     'save-images-me@Off.JustOff' => 'save-images-me',
     'scrapbookx@addons.mozilla.org' => 'scrapbook-x',
     'sortbookmarks@bouanto' => 'auto-sort-bookmarks',
