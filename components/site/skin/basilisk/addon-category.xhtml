@@ -2,7 +2,7 @@
 
 {if $PAGE_TYPE == 'cat-all-extensions'}
 <p>
-  Extensions are small add-ons that add new functionality to Pale Moon, from a simple toolbar button to a completely new feature. They allow you to customize the browser to fit your own needs and preferences, while letting us keep the core itself light and lean.
+  Extensions are small add-ons that add new functionality to Basilisk, from a simple toolbar button to a completely new feature. They allow you to customize the browser to fit your own needs and preferences, while letting us keep the core itself light and lean.
 </p>
 {elseif $PAGE_TYPE == 'cat-themes'}
 <p>
@@ -54,18 +54,3 @@
     </a>
   {/foreach}
 </div>
-
-{if $PAGE_TYPE == 'cat-extensions'}
-  {if $EXTRA_DATA}
-</div> <!-- END DIV ID PM-Content-Body -->
-<div id="PM-Content-Sidebar"> <!-- START PM-Content-Sidebar -->
-  <div class="category-extensions-list">
-    <h1>Categories</h1>
-    {foreach $EXTRA_DATA as $key => $value}
-      <a href="/extensions/{$key}/">{$value}</a><br />
-    {/foreach}
-  </div>
-  <div class="clearfix"></div>
-  {/if}
-{/if}
-{$key = null}

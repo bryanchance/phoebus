@@ -69,7 +69,7 @@
 
 <div class="category-addon" style="margin-bottom: 16px">
   <div class="alignright" style="margin-top: 8px;">
-    <a class="button" style="margin-top: 8px; margin-right: 0px;" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}&hash={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['hash']}">
+    <a class="button" style="margin-top: 8px; margin-right: 0px;" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}">
     <span>Install Now</span>
   </a>
   </div>
@@ -91,7 +91,7 @@
   {foreach $PAGE_DATA.xpinstall as $key}
     <div class="category-addon" style="margin-bottom: 16px">
       <div class="alignright" style="margin-top: 8px;">
-        <a class="button" style="margin-top: 8px; margin-right: 0px;" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}&hash={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['hash']}">
+        <a class="button" style="margin-top: 8px; margin-right: 0px;" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}">
         <span>Install Now</span>
       </a>
       </div>

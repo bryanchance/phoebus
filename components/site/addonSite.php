@@ -6,6 +6,8 @@
 // == | Setup | =======================================================================================================
 
 // URI Constants
+const URI_ROOT = '/';
+const URI_INCOMPATIBLE_PAGE = '/incompatible/';
 const URI_ADDON_PAGE = '/addon/';
 const URI_ADDON_RELEASES = '/releases/';
 const URI_ADDON_LICENSE = '/license/';
@@ -16,8 +18,13 @@ const URI_LANGPACKS = '/language-packs/';
 const URI_SEARCH = '/search/';
 
 // Include modules
-$arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'smarty', 'generateContent');
+$arrayIncludes = ['database', 'readManifest', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
+
+// Instantiate modules
+$moduleDatabase = new classDatabase();
+$moduleReadManifest = new classReadManifest();
+$moduleGenerateContent = new classGenerateContent(true);
 
 // ====================================================================================================================
 
@@ -35,27 +42,15 @@ function funcStripPath($_path, $_prefix) {
 }
 
 /**********************************************************************************************************************
-* Sends a 404 error but does it depending on debug mode
-***********************************************************************************************************************/
-function funcSend404() {
-  if (!$GLOBALS['arraySoftwareState']['debugMode']) {
-    funcSendHeader('404');
-  }
-  funcError('404 - Not Found');
-}
-
-/**********************************************************************************************************************
 * Checks for enabled features
 *
 * @param $_value    feature
-* @returns          true if existant else null
 ***********************************************************************************************************************/
-function funcIsEnabledFeature($_value) {
+function funcCheckEnabledFeature($_value) {
   $_currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
   if (!in_array($_value, TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
-    return null;
+    funcSend404();
   }
-  return true;
 }
 
 // ====================================================================================================================
@@ -83,186 +78,224 @@ else {
   $arraySoftwareState['currentName'] = TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
 }
 
-// Instantiate modules
-$moduleReadManifest = new classReadManifest();
-$moduleGenerateContent = new classGenerateContent(true);
+// --------------------------------------------------------------------------------------------------------------------
+
+// Use a simple switch case to deal with simple URIs
+switch ($arraySoftwareState['requestPath']) {
+  case URI_ROOT:
+    // Front Page
+    // Generate the frontpage from SITE content
+    $moduleGenerateContent->addonSite(
+      $arraySoftwareState['currentApplication'] . '-frontpage.xhtml', 'Explore Add-ons'
+    );
+    break;
+  case URI_INCOMPATIBLE_PAGE:
+    // Pale Moon Incompatible Add-ons Page
+    // If not Pale Moon than 404
+    if ($arraySoftwareState['currentApplication'] != 'palemoon') {
+      funcSend404();
+    }
+
+    // Generate the Incompatible Add-ons Page
+    $moduleGenerateContent->addonSite('palemoon-incompatible.xhtml', 'Incompatible Add-ons');
+    break;
+  case URI_SEARCH:
+    // Search Page
+    // Send the search terms to SQL
+    $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
+
+    // If no results generate a page indicating that
+    if (!$searchManifest) {
+      $moduleGenerateContent->addonSite('search', 'No search results');
+    }
+
+    // We have results so generate the page with them
+    $moduleGenerateContent->addonSite('search',
+      'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
+      $searchManifest
+    );
+    break;
+  case URI_EXTENSIONS:
+    // Extensions Category (Top Level)
+    // Find out if we should use Extension Subcategories or All Extensions
+    $useExtensionSubcategories =
+      in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+
+    if ($useExtensionSubcategories) {
+      // We are using Extension Subcategories so generate a page that lists all the subcategories
+      $moduleGenerateContent->addonSite(
+        'cat-extension-category', 'Extensions', classReadManifest::EXTENSION_CATEGORY_SLUGS
+      );
+    }
+
+    // We are doing an "All Extensions" Page
+    // Get all extensions from SQL
+    $categoryManifest = $moduleReadManifest->getAllExtensions();
+
+    // If there are no extensions then 404
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    // Generate the "All Extensions" Page
+    $moduleGenerateContent->addonSite(
+      'cat-all-extensions', 'Extensions', $categoryManifest,
+      classReadManifest::EXTENSION_CATEGORY_SLUGS
+    );
+    break;
+  case URI_THEMES:
+    // Themes Category
+    // Check if Themes are enabled
+    funcCheckEnabledFeature('themes');
+
+    // Query SQL and get all themes
+    $categoryManifest = $moduleReadManifest->getCategory('themes');
+
+    // If there are no themes then 404
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    // We have themes so generate the page
+    $moduleGenerateContent->addonSite('cat-themes', 'Themes', $categoryManifest);
+    break;
+  case URI_LANGPACKS:
+    // Language Packs Category
+    // See if LangPacks are enabled
+    funcCheckEnabledFeature('language-packs');
+
+    // Query SQL for langpacks
+    $categoryManifest = $moduleReadManifest->getCategory('language-packs');
+
+    // If there are no langpacks then 404
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    // We have langpacks so generate the page
+    $moduleGenerateContent->addonSite('cat-language-packs', 'Language Packs', $categoryManifest);
+    break;
+  case URI_SEARCHPLUGINS:
+    // Search Engine Plugins Category
+    // See if Search Engine Plugins are enabled
+    funcCheckEnabledFeature('search-plugins');
+
+    // Get an array of hardcoded langpacks from readManifest
+    $categoryManifest = $moduleReadManifest->getSearchPlugins();
+
+    // If for some reason there aren't any even though there is no error checking in the method, 404
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    // Generate the Search Engine Plugins category page
+    $moduleGenerateContent->addonSite('cat-search-plugins', 'Search Plugins', $categoryManifest);
+    break;
+  case URI_ADDON_PAGE:
+  case URI_ADDON_RELEASES:
+  case URI_ADDON_LICENSE:
+    // These have no content so send the client back to root
+    funcRedirect(URI_ROOT);
+}
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// Decide what kind of page is being requested
-// The front page
-if ($arraySoftwareState['requestPath'] == '/') { 
-  $moduleGenerateContent->addonSite($arraySoftwareState['currentApplication'] . '-frontpage.xhtml', 'Explore Add-ons');
-}
-// Incompatible Add-ons Page (Pale Moon legacy page)
-elseif ($arraySoftwareState['requestPath'] == '/incompatible/') {
-  if ($arraySoftwareState['currentApplication'] != 'palemoon') {
+// Complex URIs need more complex conditional checking
+// Extension Subcategories
+if (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
+  // Check if Extension Subcategories are enabled
+  funcCheckEnabledFeature('extensions-cat');
+
+  // Strip the path to get the slug
+  $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
+
+  // See if the slug exists in the category array
+  if (!array_key_exists($strSlug, classReadManifest::EXTENSION_CATEGORY_SLUGS)) {
     funcSend404();
   }
 
-  $moduleGenerateContent->addonSite('palemoon-incompatible.xhtml', 'Incompatible Add-ons');
-}
-// Add-on Search
-elseif ($arraySoftwareState['requestPath'] == '/search/') {
-  $searchManifest =
-    $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
+  // Query SQL for extensions in this specific category
+  $categoryManifest = $moduleReadManifest->getCategory($strSlug);
   
-  if (!$searchManifest) {
-    $moduleGenerateContent->addonSite('search', 'No search results');
+  // If there are no extensions then 404
+  if (!$categoryManifest) {
+    funcSend404();
   }
 
-  $moduleGenerateContent->addonSite('search',
-    'Search results for "' . $arraySoftwareState['requestSearchTerms'] . '"',
-    $searchManifest
+  // We have extensions so generate the subcategory page
+  $moduleGenerateContent->addonSite(
+    'cat-extensions', 'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
+    $categoryManifest, classReadManifest::EXTENSION_CATEGORY_SLUGS
   );
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {
-  if ($arraySoftwareState['requestPath'] == URI_ADDON_PAGE) {
-    funcRedirect('/');
-  }
-
+  // Strip the path to get the slug
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_PAGE);
+
+  // Query SQL for the add-on
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
 
+  // If there is no add-on, 404
   if (!$addonManifest) {
     funcSend404();
   }
 
+  // Generate the Add-on Releases Page
   $moduleGenerateContent->addonSite('addon-page', $addonManifest['name'], $addonManifest);
 }
 // Add-on Releases
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_RELEASES)) {
-  if ($arraySoftwareState['requestPath'] == URI_ADDON_RELEASES) {
-    funcRedirect('/');
-  }
-
+  // Strip the path to get the slug
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_RELEASES);
+
+  // Query SQL for the add-on
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
 
+  // If there is no add-on, 404
   if (!$addonManifest) {
     funcSend404();
   }
 
+  // Generate the Add-on Releases Page
   $moduleGenerateContent->addonSite('addon-releases', $addonManifest['name'] . ' - Releases', $addonManifest);
 }
 // Add-on License
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_LICENSE)) {
-  if ($arraySoftwareState['requestPath'] == URI_ADDON_LICENSE) {
-    funcRedirect('/');
-  }
-
+  // Strip the path to get the slug
   $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_ADDON_LICENSE);
+
+  // Query SQL for the add-on
   $addonManifest = $moduleReadManifest->getAddonBySlug($strSlug);
 
+  // If there is no add-on, 404
   if (!$addonManifest) {
     funcSend404();
   }
 
+  // If there is a licenseURL then redirect to it
   if ($addonManifest['licenseURL']) {
     funcRedirect($addonManifest['licenseURL']);
   }
   
+  // If the license is public domain, copyright, or custom then we want to generate a page for it
   if ($addonManifest['license'] == 'pd' || $addonManifest['license'] == 'copyright' ||
       $addonManifest['license'] == 'custom') {
+    // If we have licenseText we want to convert newlines to xhtml line breaks
     if ($addonManifest['licenseText']) {
       $addonManifest['licenseText'] = nl2br($addonManifest['licenseText'], true);
     }
 
+    // Smarty will handle displaying content for these license types
     $moduleGenerateContent->addonSite('addon-license', $addonManifest['name'] . ' - License', $addonManifest);
   }
 
+  // The license is assumed to be an OSI license so redirect there
   funcRedirect('https://opensource.org/licenses/' . $addonManifest['license']);
 }
-// Extensions Category or Subcategory
-elseif (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
-  // Extensions Category
-  if ($arraySoftwareState['requestPath'] == URI_EXTENSIONS) {
-    if (!funcIsEnabledFeature('extensions-cat')) {
-      $categoryManifest = $moduleReadManifest->getAllExtensions();
-      if ($categoryManifest) {
-        $moduleGenerateContent->addonSite(
-          'cat-all-extensions', 'Extensions', $categoryManifest,
-          classReadManifest::EXTENSION_CATEGORY_SLUGS
-        );
-      }
-    }
-    
-    $moduleGenerateContent->addonSite('cat-extension-category', 'Extensions', classReadManifest::EXTENSION_CATEGORY_SLUGS);
-  }
 
-  // Extensions Subcategory
-  if (funcIsEnabledFeature('extensions-cat')) {
-    // Strip the path to get the slug
-    $strSlug = funcStripPath($arraySoftwareState['requestPath'], URI_EXTENSIONS);
-
-    // See if the slug exists in the category array
-    if (array_key_exists($strSlug, classReadManifest::EXTENSION_CATEGORY_SLUGS)) {
-      $categoryManifest = $moduleReadManifest->getCategory($strSlug);
-      
-      if (!$categoryManifest) {
-        funcSend404();
-      }
-
-      $moduleGenerateContent->addonSite(
-        'cat-extensions', 'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
-        $categoryManifest, classReadManifest::EXTENSION_CATEGORY_SLUGS
-      );
-    }
-    else {
-      funcSend404();
-    }
-  }
-  else {
-    funcSend404();
-  }
-}
-// Themes Category
-elseif ($arraySoftwareState['requestPath'] == URI_THEMES) { 
-  if (funcIsEnabledFeature('themes')) {
-    $categoryManifest = $moduleReadManifest->getCategory('themes');
-    if (!$categoryManifest) {
-      funcSend404();
-    }
-
-    $moduleGenerateContent->addonSite('cat-themes', 'Themes', $categoryManifest);
-  }
-  else {
-    funcSend404();
-  }
-}
-// Search Plugins
-elseif ($arraySoftwareState['requestPath'] == URI_SEARCHPLUGINS) { 
-  if (funcIsEnabledFeature('search-plugins')) {
-    $categoryManifest = $moduleReadManifest->getSearchPlugins();
-    if (!$categoryManifest) {
-      funcSend404();
-    }
-
-    $moduleGenerateContent->addonSite('cat-search-plugins', 'Search Plugins', $categoryManifest);
-  }
-  else {
-    funcSend404();
-  }
-}
-// Language Packs
-elseif ($arraySoftwareState['requestPath'] == URI_LANGPACKS) {  
-  if (funcIsEnabledFeature('language-packs')) {
-    $categoryManifest = $moduleReadManifest->getCategory('language-packs');
-    if (!$categoryManifest) {
-      funcSend404();
-    }
-
-    $moduleGenerateContent->addonSite('cat-language-packs', 'Language Packs', $categoryManifest);
-  }
-  else {
-    funcSend404();
-  }
-}
-// There are no matches so error out
-else {
-  funcSend404();
-}
+// There are no matches so 404
+funcSend404();
 
 // ====================================================================================================================
 
