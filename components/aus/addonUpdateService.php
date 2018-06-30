@@ -5,8 +5,6 @@
 
 // == | INFO | ========================================================================================================
 
-  // This needs to be moved the hell out of this file
-
   // Automatic Update Service for Add-ons responds with a valid RDF file
   // containing update information for known add-ons or sends the request
   // off to AMO (for now) if it is unknown to us.
@@ -45,8 +43,13 @@ const BAD_ADDON_IDS = array(
 );
 
 // Include modules
-$arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
+$arrayIncludes = ['database', 'readManifest', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
+
+// Instantiate modules
+$moduleDatabase = new classDatabase();
+$moduleReadManifest = new classReadManifest();
+$moduleGenerateContent = new classGenerateContent();
 
 // ====================================================================================================================
 
@@ -80,10 +83,6 @@ $arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
 $arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
 (bool)$arraySoftwareState['requestMozXPIUpdate'] =
   array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || funcHTTPGetValue('updateOverride');
-
-// Instantiate modules
-$moduleReadManifest = new classReadManifest();
-$moduleGenerateContent = new classGenerateContent();
 
 // --------------------------------------------------------------------------------------------------------------------
 

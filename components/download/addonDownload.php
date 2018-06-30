@@ -3,16 +3,17 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL
 
-// == | Vars | ================================================================
+// == | Setup | =======================================================================================================
 
 // Include modules
-$arrayIncludes = array('sql', 'sql-creds', 'readManifest');
+$arrayIncludes = ['database', 'readManifest'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
-$strRequestAddonID = funcHTTPGetValue('id');
-$strRequestAddonVersion = funcHTTPGetValue('version');
+// Instantiate modules
+$moduleDatabase = new classDatabase();
+$moduleReadManifest = new classReadManifest();
 
-// ============================================================================
+// ====================================================================================================================
 
 // == | funcDownloadXPI | ===============================================
 
@@ -82,6 +83,9 @@ function funcDownloadSearchPlugin($_searchPluginName) {
 
 // == | Main | ================================================================
 
+$strRequestAddonID = funcHTTPGetValue('id');
+$strRequestAddonVersion = funcHTTPGetValue('version');
+
 // Sanity
 if ($strRequestAddonID == null) {
   funcError('Missing minimum required arguments.');
@@ -97,9 +101,8 @@ if (array_key_exists($strRequestAddonID, classReadManifest::SEARCH_PLUGINS_DB)) 
   funcDownloadSearchPlugin(classReadManifest::SEARCH_PLUGINS_DB[$strRequestAddonID]);
 }
 else {
-  $moduleReadManifest = new classReadManifest();
   $addonManifest = $moduleReadManifest->getAddonByID($strRequestAddonID);
-  
+
   if ($addonManifest != null) {
     $addonManifest['release'] = $addonManifest['releaseXPI'];
     funcDownloadXPI($addonManifest, $strRequestAddonVersion);

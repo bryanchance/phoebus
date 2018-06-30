@@ -6,8 +6,13 @@
 // == | Setup | =======================================================================================================
 
 // Include modules
-$arrayIncludes = array('sql', 'sql-creds', 'readManifest', 'generateContent');
+$arrayIncludes = ['database', 'readManifest', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
+
+// Instantiate modules
+$moduleDatabase = new classDatabase();
+$moduleReadManifest = new classReadManifest();
+$moduleGenerateContent = new classGenerateContent();
 
 // ====================================================================================================================
 
@@ -18,10 +23,6 @@ $arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
 $arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
 $arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
 $arraySoftwareState['requestAPISearchGUID'] = funcHTTPGetValue('addonguid');
-
-// Instantiate modules
-$moduleReadManifest = new classReadManifest();
-$moduleGenerateContent = new classGenerateContent();
 
 // --------------------------------------------------------------------------------------------------------------------
 
