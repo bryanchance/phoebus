@@ -21,36 +21,36 @@ const DATASTORE_RELPATH = '/datastore/';
 const OBJ_RELPATH = '/.obj/';
 const COMPONENTS_RELPATH = '/components/';
 const MODULES_RELPATH = '/modules/';
-const LIB_RELPATH = '/lib/';
+const LIB_RELPATH = '/libraries/';
 const NEW_LINE = "\n";
 
 // Define components
-// Components are considered to be the main code that drives the site and
-// do the direct work of calling modules and outputting content
 const COMPONENTS = array(
   // 'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
   'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
   'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
-  // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/placeholder.txt',
+  // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/addonPanel.php',
   'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
   'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/specialComponent.php'
 );
 
 // Define modules
-// Modules are largely independent and reusable chunks of code that do not
-// directly output content. Libs are also considered modules for simplicity.
-// The exception to this would be smarty.
 const MODULES = array(
   'auth' => ROOT_PATH . MODULES_RELPATH . 'classAuthentication.php',
+  'database' => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
+  'mozillaRDF' => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
   'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
+);
+
+// Define libraries
+const LIBRARIES = array(
   'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
-  'rdf' => ROOT_PATH . LIB_RELPATH . 'rdf/RdfComponent.php',
-  'sql' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
-  'sql-creds' => ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/rdb.php'
+  'safeMySQL' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
+  'rdfParser' => ROOT_PATH . LIB_RELPATH . 'rdf/rdf_parser.php',
 );
 
 // Define the target applications that the site will accomidate with
@@ -73,10 +73,10 @@ const TARGET_APPLICATION_SITE = array(
     'name' => 'Basilisk: add-ons',
     'domain' => array(
       'live' => 'addons.basilisk-browser.org',
-      'dev' => 'addons-dev.basilisk-browser.org'
+      'dev' => null
     ),
     'features' => array(
-      'https', 'extensions', 'themes', 'search-plugins'
+      'https', 'extensions', 'search-plugins'
     )
   ),
   'borealis' => array(
@@ -87,7 +87,7 @@ const TARGET_APPLICATION_SITE = array(
       'dev' => null
     ),
     'features' => array(
-      'extensions', 'themes', 'search-plugins'
+      'extensions', 'search-plugins'
     )
   ),
 );
@@ -131,6 +131,12 @@ const TARGET_APPLICATION_ID = array(
                     2: Print $_value as valid php code
 ******************************************************************************/
 function funcError($_value, $_mode = 0) {
+  if ($_mode == -1) {
+    header('Content-Type: text/plain', false);
+    var_export($_value);
+    exit();
+  }
+
   ob_get_clean();
   header('Content-Type: text/html', false);   
   print(file_get_contents('./components/special/skin/default/template-header.xhtml'));
@@ -164,25 +170,45 @@ function funcError($_value, $_mode = 0) {
 * @returns          Value of HTTP GET argument or null
 **********************************************************************************************************************/
 function funcHTTPGetValue($_value) {
+  return funcGETValue($_value);
+}
+
+function funcGETValue($_value) {
   if (!isset($_GET[$_value]) || $_GET[$_value] === '' ||
     $_GET[$_value] === null || empty($_GET[$_value])) {
     return null;
   }
-  else {
-    $_finalValue =
-      preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
-    return $_finalValue;
-  }
+
+  $_finalValue =
+    preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
+  return $_finalValue;
 }
 
 /**********************************************************************************************************************
-* Check if an /existing/ variable has a value
+* Gets an HTTP POST request value
+*
+* @param $_value    HTTP POST argument
+* @returns          Value of HTTP POST argument or null
+**********************************************************************************************************************/
+function funcPOSTValue($_value) {
+  if (!isset($_POST[$_value]) || $_POST[$_value] === '' ||
+    $_POST[$_value] === null || empty($_POST[$_value])) {
+    return null;
+  }
+
+  //$_finalValue = preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_POST[$_value]);
+  $_finalValue = $_POST[$_value];
+  return $_finalValue;
+}
+
+/**********************************************************************************************************************
+* Check if an /existing/ variable has a truthy value
 *
 * @param $_value    Any existing variable
 * @returns          Passed data or null
 **********************************************************************************************************************/
 function funcCheckVar($_value) {
-  if ($_value === '' || $_value === 'none' || $_value === null || empty($_value)) {
+  if ($_value === '' || $_value === 'none' || $_value === null || empty($_value) || $_value === false) {
     return null;
   }
   else {
@@ -256,6 +282,16 @@ function funcRedirect($_strURL) {
 // --------------------------------------------------------------------------------------------------------------------
 
 /**********************************************************************************************************************
+* Sends a 404 error but does it depending on debug mode
+***********************************************************************************************************************/
+function funcSend404() {
+  if (!$GLOBALS['arraySoftwareState']['debugMode']) {
+    funcSendHeader('404');
+  }
+  funcError('404 - Not Found');
+}
+
+/**********************************************************************************************************************
 * Polyfills for missing functions
 * startsWith, endsWith, contains
 *
@@ -301,15 +337,16 @@ $arraySoftwareState = array(
   'currentApplication' => null,
   'orginalApplication' => null,
   'currentName' => null,
+  'currentScheme' => $_SERVER['SCHEME'] ?? '',
   'currentDomain' => null,
   'debugMode' => null,
   'phpServerName' => $_SERVER['SERVER_NAME'],
   'phpRequestURI' => $_SERVER['REQUEST_URI'],
-  'requestComponent' => funcHTTPGetValue('component'),
-  'requestPath' => funcHTTPGetValue('path'),
-  'requestApplication' => funcHTTPGetValue('appOverride'),
-  'requestDebugOff' => funcHTTPGetValue('debugOff'),
-  'requestSearchTerms' => funcHTTPGetValue('terms')
+  'requestComponent' => funcGETValue('component'),
+  'requestPath' => funcGETValue('path'),
+  'requestApplication' => funcGETValue('appOverride'),
+  'requestDebugOff' => funcGETValue('debugOff'),
+  'requestSearchTerms' => funcGETValue('terms')
 );
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -366,22 +403,14 @@ if ($arraySoftwareState['debugMode']) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// Set entry points for URI based components
 // Root (/) won't set a component or path
-if (!$arraySoftwareState['requestComponent'] &&
-   ($arraySoftwareState['phpRequestURI'] == '/' || startsWith($arraySoftwareState['phpRequestURI'], '/?appOverride=') ||
-    startsWith($arraySoftwareState['phpRequestURI'], '/?smartyDebug='))) {
+if (!$arraySoftwareState['requestComponent'] && !$arraySoftwareState['requestPath']) {
   $arraySoftwareState['requestComponent'] = 'site';
   $arraySoftwareState['requestPath'] = '/';
 }
 // The SPECIAL component overrides the SITE component
 elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
   $arraySoftwareState['requestComponent'] = 'special';
-}
-// requestPath should NEVER be set if the component isn't SITE
-elseif ($arraySoftwareState['requestComponent'] != 'site' &&
-        $arraySoftwareState['requestPath']) {
-  funcSendHeader('404');
 }
 
 // --------------------------------------------------------------------------------------------------------------------

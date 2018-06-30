@@ -3,37 +3,47 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// == | INFO | ========================================================================================================
+
+/* Phoebus User Levels
+  Level 1 - Registered Developer
+  Level 2 - Advanced/Legacy Developer
+  Level 3 - Add-ons Team Member
+  Level 4 - Add-ons Team Leader
+  Level 5 - Administrator
+*/
+
+// ====================================================================================================================
+
 // == | classAuthentication | =========================================================================================
 
 class classAuthentication { 
   private $arraySoftwareState;
-  private $libSQL;
-
+  private $moduleDatabase;
   const SQL_USER_AUTH = "SELECT * FROM `user` WHERE `username` = ?s";
 
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
   ********************************************************************************************************************/
   function __construct() {
-    if (!funcCheckModule('sql') || !funcCheckModule('sql-creds') ||
-        !array_key_exists('arraySQLCreds', $GLOBALS)) {
-      funcError(__CLASS__ . '::' . __FUNCTION__ . ' - sql and sql-creds are required to be included in the global scope');
+    if (!funcCheckModule('database')) {
+      funcError(
+        __CLASS__ . '::' . __FUNCTION__ .
+        ' - safeMySQL and database are required to be included in the global scope'
+      );
     }
 
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
 
-    // Set a logout flag on softwareState
-    $this->arraySoftwareState['requestLogout'] = (bool)funcHTTPGetValue('logout');
-
-    // Create a new instance of the SafeMysql class
-    $this->libSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
+    // Assign the global instance of the database class to a class property by reference
+    $this->moduleDatabase = &$GLOBALS['moduleDatabase'];
   }
 
   /********************************************************************************************************************
   * Performs authentication
   ********************************************************************************************************************/
-  public function authenticate() {
+  public function authenticate($_logout = null) {
     // Get Username and Password from HTTP Basic Authentication 
     $strUsername = $this->checkServerValue('PHP_AUTH_USER');
     $strPassword = $this->checkServerValue('PHP_AUTH_PW');
@@ -45,16 +55,15 @@ class classAuthentication {
 
     // This will handle a logout situation using a dirty javascript trick
     // It will not work without javascript or on IE but then again neither will the PANEL
-    if ($this->arraySoftwareState['requestLogout']) {
-      $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . 
-             $this->arraySoftwareState['requestPath'];
+    if ($_logout) {
+      $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
       funcSendHeader('html');
       die(
         '<html><head><script>' .
         'var xmlHttp = new XMLHttpRequest();' .
         'xmlHttp.open( "GET", "' . $url . '", false );' .
         'xmlHttp.send( null );' .
-        'window.location = "/";' .
+        'window.location = "/panel/";' .
         '</script></head><body>' .
         '<p>Logging out...</p>' .
         '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
@@ -66,7 +75,7 @@ class classAuthentication {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Query SQL for a user row
-    $userManifest = funcCheckVar($this->libSQL->getRow(self::SQL_USER_AUTH, $strUsername));
+    $userManifest = $this->moduleDatabase->query('row', self::SQL_USER_AUTH, $strUsername);
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels
@@ -87,8 +96,6 @@ class classAuthentication {
 
     // Boolean cast int booleans
     $userManifest['active'] = (bool)$userManifest['active'];
-    $userManifest['isAdmin'] = (bool)$userManifest['isAdmin'];
-    $userManifest['useReserved'] = (bool)$userManifest['useReserved'];
 
     // Assign the userManifest to the softwareState
     $this->arraySoftwareState['authentication'] = $userManifest;

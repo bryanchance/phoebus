@@ -3,6 +3,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// == | Setup | =======================================================================================================
+
+// Include required libraries
+require_once(LIBRARIES['smarty']);
+
+// ====================================================================================================================
+
 // == | classGenerateContent | ========================================================================================
 
 class classGenerateContent {
@@ -61,13 +68,6 @@ class classGenerateContent {
     // ----------------------------------------------------------------------------------------------------------------
 
     if ($_useSmarty) {
-      if (!funcCheckModule('smarty')) {
-        funcError(
-        __CLASS__ . '::' . __FUNCTION__ .
-        ' - Smarty has been indicated and is required to be included in the global scope'
-        );
-      }
-
       // Get smartyDebug HTTP GET Argument
       $this->arraySoftwareState['requestSmartyDebug'] = funcHTTPGetValue('smartyDebug');
 
@@ -107,8 +107,7 @@ class classGenerateContent {
   ********************************************************************************************************************/
   public function addonSite($_type, $_title, $_data = null, $_extraData = null) {
     // This function will only serve the SITE component
-    if ($this->arraySoftwareState['requestComponent'] != 'site' ||
-        !funcCheckModule('smarty') || !$this->libSmarty) {
+    if ($this->arraySoftwareState['requestComponent'] != 'site' || !$this->libSmarty) {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ . ' - This method only works with the SITE component and requires Smarty'
       );
@@ -167,7 +166,11 @@ class classGenerateContent {
 
     // Assign Data to Smarty
     $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
-    $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
+    $this->libSmarty->assign(
+      'SITE_DOMAIN',
+      $this->arraySoftwareState['currentScheme'] .
+      '://' . $this->arraySoftwareState['currentDomain']
+    );
     $this->libSmarty->assign('PAGE_TITLE', $_title);
     $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
     $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['componentSkinRelPath']);
@@ -178,6 +181,87 @@ class classGenerateContent {
     $this->libSmarty->assign('PAGE_TYPE', $_type);
     $this->libSmarty->assign('PAGE_DATA', $_data);
     $this->libSmarty->assign('EXTRA_DATA', $_extraData);
+
+    // Send html header
+    funcSendHeader('html');
+    
+    // Send the final template to smarty and output
+    $this->libSmarty->display('string:' . $finalTemplate);
+    
+    // We're done here
+    exit();
+  }
+
+ /********************************************************************************************************************
+  * This will generate HTML content for the PANEL component using Smarty
+  * 
+  * @param $_type         template or content file
+  * @param $_title        Page title
+  * @param $_data         Used if not null
+  ********************************************************************************************************************/
+  public function addonPanel($_type, $_title, $_data = null) {
+    // This function will only serve the PANEL component
+    if ($this->arraySoftwareState['requestComponent'] != 'panel' || !$this->libSmarty) {
+      funcError(
+        __CLASS__ . '::' . __FUNCTION__ . ' - This method only works with the PANEL component and requires Smarty'
+      );
+    }
+
+    // ----------------------------------------------------------------------------------------------------------------
+
+    // Read the Panel Template
+    $template = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
+    // Read the Site Stylesheet
+    $stylesheet = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
+
+    // ----------------------------------------------------------------------------------------------------------------
+
+    switch ($_type) {
+      case 'developer-addons-list':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'developer-addons-list.xhtml');
+        break;
+      case 'administration-list':
+      case 'admin-list-extensions':
+      case 'admin-list-externals':
+      case 'admin-list-themes':
+      case 'admin-list-langpacks':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'administration-list.xhtml');
+        break;
+      default:
+        if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
+          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $_type);
+        }
+        else {
+          funcError('Unkown template or content');
+        }
+    }
+
+    // ----------------------------------------------------------------------------------------------------------------
+
+    // Build the final template
+    $finalTemplate = str_replace('{%SITE_STYLESHEET}', $stylesheet,
+      str_replace('{%PAGE_CONTENT}', $content, $template)
+    );
+
+    // ----------------------------------------------------------------------------------------------------------------
+
+    // Assign Data to Smarty
+    $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
+    $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
+    $this->libSmarty->assign('PAGE_TITLE', $_title);
+    $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
+    $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['componentSkinRelPath']);
+    $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
+    $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
+    $this->libSmarty->assign('PAGE_TYPE', $_type);
+    $this->libSmarty->assign('PAGE_DATA', $_data);
+
+    if ($this->arraySoftwareState['authentication']) {
+      $this->libSmarty->assign('USER_LEVEL', $this->arraySoftwareState['authentication']['level']);
+    }
+    else {
+      $this->libSmarty->assign('USER_LEVEL', 0);
+    }
 
     // Send html header
     funcSendHeader('html');
