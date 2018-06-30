@@ -6,23 +6,38 @@
 // == | Setup | =======================================================================================================
 
 // Include modules
-$arrayIncludes = ['database', 'auth'];
+$arrayIncludes = ['mozillaRDF'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // ====================================================================================================================
 
 // == | Main | ========================================================================================================
 
-$moduleDatabase = new classDatabase();
-$moduleAuth = new classAuthentication();
-$moduleAuth->authenticate();
+function funcReadFileFromZip($_value, $_checkExistance = null) {
+  $file = funcCheckVar(@file_get_contents('zip://' . ROOT_PATH . $_value));;
 
-if ($arraySoftwareState['authentication']) {
-  ksort($arraySoftwareState);
-  funcError($arraySoftwareState, 1);
+  if (!$file) {
+    return null;
+  }
+
+  if ($_checkExistance) {
+    unset($file);
+    return true;
+  }
+
+  return $file;
 }
 
-funcError('Something went terribly wrong');
+$moduleMozillaRDF = new classMozillaRDF();
+
+$pathInstallManifest = DATASTORE_RELPATH . 'addons/abprime/abprime-1.0.6.xpi#install.rdf';
+$installManifest = funcReadFileFromZip($pathInstallManifest);
+
+if (!$installManifest) {
+  funcError('Could not open requested file from zip.');
+}
+
+funcError($moduleMozillaRDF->parseInstallManifest($installManifest), 1);
 
 // ====================================================================================================================
 

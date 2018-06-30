@@ -16,20 +16,6 @@ function funcStripPath($_path, $_prefix) {
   return str_replace('/', '', str_replace($_prefix, '', $_path));
 }
 
-/**********************************************************************************************************************
-* Sends a 404 error but does it depending on debug mode
-*
-* @param $_path     $arraySoftwareState['requestPath']
-* @param $_prefix   Prefix to strip 
-* @returns          slug
-***********************************************************************************************************************/
-function funcSend404() {
-  if (!$GLOBALS['arraySoftwareState']['debugMode']) {
-    funcSendHeader('404');
-  }
-  funcError('404 - Not Found');
-}
-
 // ====================================================================================================================
 
 // == | Main | ========================================================================================================
@@ -37,15 +23,23 @@ function funcSend404() {
 $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']]) . '/';
 $strSkinPath = $strComponentPath . '/skin/';
 
-$arraySpecialFunctions = array('validate' => 'addonValidator.php');
+$arraySpecialFunctions = array(
+  'validate' => 'addonValidator.php'
+);
 
-// Test authentication
+// Temporary Test Cases
 $arraySpecialFunctions['testAuth'] = 'testAuth.php';
+$arraySpecialFunctions['testInstallManifest'] = 'testInstallManifest.php';
+$arraySpecialFunctions['testSQL'] = 'testSQL.php';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-if ($arraySoftwareState['phpRequestURI'] == '/special/phpinfo/') {
+if ($arraySoftwareState['requestPath'] == '/special/phpinfo/') {
   phpinfo();
+  exit();
+}
+elseif ($arraySoftwareState['requestPath'] == '/special/phpvars/') {
+  phpinfo(32);
   exit();
 }
 
@@ -58,7 +52,8 @@ else {
   if (!$arraySoftwareState['debugMode']) {
     funcSendHeader('404');
   }
-  funcError('Invalid special function');
+  //funcError('Invalid special function');
+  funcError($arraySoftwareState, 1);
 }
 
 // ====================================================================================================================

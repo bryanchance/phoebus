@@ -4,7 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL
 
 // Include modules
-$arrayIncludes = array('rdf');
+$arrayIncludes = ['mozillaRDF'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // == | Vars | ================================================================

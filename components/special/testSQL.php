@@ -6,23 +6,24 @@
 // == | Setup | =======================================================================================================
 
 // Include modules
-$arrayIncludes = ['database', 'auth'];
+$arrayIncludes = ['database'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
+
+$moduleDatabase = new classDatabase();
 
 // ====================================================================================================================
 
 // == | Main | ========================================================================================================
 
-$moduleDatabase = new classDatabase();
-$moduleAuth = new classAuthentication();
-$moduleAuth->authenticate();
+$result = array();
 
-if ($arraySoftwareState['authentication']) {
-  ksort($arraySoftwareState);
-  funcError($arraySoftwareState, 1);
-}
+$result['single'] =
+  $moduleDatabase->query('row', "SELECT * from `addon` WHERE `slug` = ?s", 'abprime');
+$result['multiple'] = $moduleDatabase->query('rows',
+  "SELECT `username`, `addons` from `user` WHERE `level` >= ?i AND NOT `username` = ?s",
+  3, 'mattatobin');
 
-funcError('Something went terribly wrong');
+funcError($result, -1);
 
 // ====================================================================================================================
 
