@@ -26,7 +26,6 @@ $arrayCategoryList02 = array(
     'noia-moon-options',
     'pentadactyl',
     'stylish-editor-modified',
-    'tiny-menu',
     'themetool',
     'advanced-night-mode',
     'theme-shim',
@@ -221,7 +220,6 @@ $arrayCategoryList05 = array(
 $arrayCategoryList06 = array(
     'title' => 'Search Tools',
     'add-to-search-bar',
-    'finderbar-tweak',
     'searchload-options-revived',
     'externals' => array(
         'context-search-x' => array(
@@ -247,7 +245,6 @@ $arrayCategoryList06 = array(
 
 $arrayCategoryList07 = array(
     'title' => 'Social & Communication',
-    'chatzilla',
     'foxclocks',
     'pmforum-smart-preview',
     'externals' => array(
@@ -328,7 +325,6 @@ $arrayCategoryList08 = array(
 
 $arrayCategoryList09 = array(
     'title' => 'Web Development',
-    'devtools',
     'error-console2',
     'jsview-revive',
     'fireftp',
