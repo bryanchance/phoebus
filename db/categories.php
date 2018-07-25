@@ -124,6 +124,7 @@ $arrayCategoryList03 = array(
     'downloadstatusbar-pm',
     'scrapbook-x',
     'opendownload2',
+    'turbo-downloader',
     'externals' => array(
         'imagehost-grabber' => array(
             'id' => 'ex-005',
