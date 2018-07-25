@@ -106,6 +106,7 @@ $arrayAddonsDB = array(
     'throbberinurlbar@srazzano.com' => 'throbber-in-urlbar',
     'toggleDocumentColors@darkoshi' => 'toggle-document-colors',
     'toolbarize-menu-button@wsdfhjxc' => 'toolbarize-menu-button',
+    'turbodownloader0724@jetpack' => 'turbo-downloader',
     'treestyletabforpm@oinkoink' => 'treestyletabforpm',
     'ublock0-updater@Off.JustOff' => 'ublock0-updater',
     'walnutty@lootyhoof-pm' => 'walnutty',
