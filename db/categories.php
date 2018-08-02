@@ -289,7 +289,8 @@ $arrayCategoryList08 = array(
     'keyconfig',
     'stylish-custom',
     'newmime',
-	'restart-manager',
+    'restart-manager',
+    'fect',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',

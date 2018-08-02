@@ -39,6 +39,7 @@ $arrayAddonsDB = array(
     'esrc-explorer@Off.JustOff' => 'esrc-explorer',
     'exif-viewer@asraskin.org' => 'exif-viewer',
     'expose-noisy-tabs@wsdfhjxc' => 'expose-noisy-tabs',
+    'fect@softwarebychuck' => 'fect',
     'firefox-tabgroups@mozilla.com' => 'tabgroups',
     'firessh@nightlight.ws' => 'firessh',
     'foxyproxy-basic@eric.h.jung' => 'foxyproxy-basic',
