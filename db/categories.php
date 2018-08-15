@@ -55,6 +55,7 @@ $arrayCategoryList02 = array(
     'nosquint',
     'browsepaper',
     'stylem',
+    'extended-statusbar',
     'externals' => array(
         'all-menus-button' => array(
             'id' => 'fx-621692',

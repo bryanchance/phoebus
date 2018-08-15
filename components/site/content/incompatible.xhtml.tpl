@@ -41,6 +41,7 @@
                     <li><a href="/addon/downloads-window/">Downloads Window</a></li>
                     <li>DOM Inspector</li>
                     <li>Enjoy Reading</li>
+                    <li><a href="/addon/extended-statusbar/">Extended Statusbar</a></li>
                     <li><a href="/addon/febe/">FEBE</a></li>
                     <li>Fierr</li>
                     <li><a href="/addon/fireftp">FireFTP</a></li>
