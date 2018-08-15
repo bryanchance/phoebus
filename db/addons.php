@@ -183,6 +183,7 @@ $arrayAddonsDB = array(
     '{d37dc5d0-431d-44e5-8c91-49419370caa1}' => 'foxclocks',
     '{d49bc111-8359-4a82-8738-db3f9a411f58}' => 'history-menu-button',
     '{d9990772-0e04-4731-b98e-98e62085837f}' => 'theme-tweaker',
+    '{daf44bf7-a45e-4450-979c-91cf07434c3d}' => 'extended-statusbar',
     '{dc572301-7619-498c-a57d-39143191b318}' => 'tab-mix-plus',
     '{e178eb56-1085-4a1f-9376-3763d1ad1978}' => 'add-to-search-bar',
     '{e3e77d59-b01e-4381-b98e-98e62085837f}' => 'nauticalia',
