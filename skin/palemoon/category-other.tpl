@@ -105,7 +105,7 @@
 </p>
 {elseif $PAGE_TYPE == 'cat-language-packs'}
 <p>
-    <strong>Important note:</strong> These language packs are provided AS-IS. We, the authors of the actual Pale Moon browser, are not the authors of these language packs, and cannot provide support for the actual contents of them. This is a community effort! If you have any feedback on them, please either get involved on our <a href="https://crowdin.com/project/pale-moon" target="_blank">CrowdIn project</a> directly or go to the <a href="https://forum.palemoon.org/viewtopic.php?f=30&t=13720" target="_blank">forum</a>.<br />
+    <strong>Important note:</strong> These language packs are provided AS-IS. We, the authors of the actual Pale Moon browser, are not the authors of these language packs, and cannot provide support for the actual contents of them. This is a community effort! If you have any feedback on them, please either get involved on our <a href="https://crowdin.com/project/pale-moon" target="_blank">CrowdIn project</a> directly or go to the <a href="https://forum.palemoon.org/viewtopic.php?f=30&t=19474" target="_blank">forum</a>.<br />
     <br />
     Can't find your language?<br />
     We're sorry but these are the only languages that actually have a complete translation and have support from (near-)native speakers. We cannot support any other languages without a dedicated community translator for a language. Other languages are in the works but not complete yet.
