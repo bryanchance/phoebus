@@ -6,7 +6,7 @@
 </p>
 {elseif $PAGE_TYPE == 'cat-language-packs'}
 <p>
-    We are currently working as a community to bring you more languages for Pale Moon 27.<br />
+    We are currently working as a community to bring you more languages for Pale Moon 28.<br />
     To be informed of progress (or to help out!), please go to the following <a href="https://forum.palemoon.org/viewtopic.php?f=30&t=13720">forum topic dedicated to localization</a>.<br />
     <br />
     If you prefer to have the Pale Moon user interface in your native language (not US-English), then these language packs can help you! They are originally based on the Mozilla Firefox language packs, with additional translations and improvements done by our community translators for Pale Moon. Pale Moon will not be released with installers in individual languages, but installing these language packs on top of the US-English browser will pretty much have the same effect.<br />
@@ -55,9 +55,7 @@
 
 <p>
     <strong>Important:</strong><br />
-    These language packs are for the latest version of the browser (v27). They will not work on older versions. If you are using an older version of the browser, <strong>please update to the current version</strong> first. If you for whatever reason decide you need to use an older version of the browser, please go to the <a href="//www.palemoon.org/archived.shtml" target="_blank">archived versions</a> page and download the appropriate language pack for your browser version.<br />
-    <br />
-    As of version 27, we've had to re-do the language packs and will be adding more languages over time as they become available and supported by our community. We can only offer those languages that currently have active translators for them.
+    These language packs are for the latest version of the browser (v28). They will not work on older versions. If you are using an older version of the browser, <strong>please update to the current version</strong> first. If you for whatever reason decide you need to use an older version of the browser, please go to the <a href="//www.palemoon.org/archived.shtml" target="_blank">archived versions</a> page and download the appropriate language pack for your browser version.<br />
 </p>
 {/if}
 
