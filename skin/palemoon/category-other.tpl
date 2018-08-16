@@ -7,7 +7,7 @@
 {elseif $PAGE_TYPE == 'cat-language-packs'}
 <p>
     We are currently working as a community to bring you more languages for Pale Moon 28.<br />
-    To be informed of progress (or to help out!), please go to the following <a href="https://forum.palemoon.org/viewtopic.php?f=30&t=13720">forum topic dedicated to localization</a>.<br />
+    To be informed of progress (or to help out!), please go to the following <a href="https://forum.palemoon.org/viewtopic.php?f=30&t=19474">forum topic dedicated to localization</a>.<br />
     <br />
     If you prefer to have the Pale Moon user interface in your native language (not US-English), then these language packs can help you! They are originally based on the Mozilla Firefox language packs, with additional translations and improvements done by our community translators for Pale Moon. Pale Moon will not be released with installers in individual languages, but installing these language packs on top of the US-English browser will pretty much have the same effect.<br />
     <br />
