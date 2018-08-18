@@ -204,12 +204,6 @@ $arrayCategoryList05 = array(
             'shortDescription' => 'YesScript lets you make a blacklist of sites that aren&amp;t allowed to run JavaScript.',
             'url' => 'https://addons.mozilla.org/firefox/addon/yesscript/'
         ),
-        'uir-header' => array(
-            'id' => 'ex-036',
-            'name' => 'UIR Header',
-            'shortDescription' => 'Add the Upgrade-Insecure-Requests header to all HTTP requests.',
-            'url' => 'https://realityripple.com/Software/Mozilla-Extensions/UIR-Header/'
-        ),
         'noscript' => array(
             'id' => 'ex-040',
             'name' => 'NoScript Classic',
