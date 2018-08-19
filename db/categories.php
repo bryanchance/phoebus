@@ -405,6 +405,7 @@ $arrayCategoryList11 = array(
     'tabkit-tab-highlighter',
     'tab-utilities-phoenix',
     'speed-start',
+    'sorttabsby',
     'externals' => array(
         'tab-groups-helper' => array(
             'id' => 'fx-473368',
