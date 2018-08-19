@@ -158,6 +158,7 @@ $arrayAddonsDB = array(
     '{8a13d488-8657-4dab-b98e-98e62085837f}' => 'qute-legacy',
     '{8e05f2af-03be-443e-a2b5-b4375a3a1930}' => 'cookie-permissions',
     '{8eb2e77d-73aa-4620-a9dd-9ddae0602172}' => 'change-referer-button',
+    '{97f566f5-45e1-490f-8554-85c115089e18}' => 'sorttabsby',
     '{98a2ae55-3a75-4354-a460-9176594d05c3}' => 'open-about-config',
     '{9c03eb94-a057-42f0-84a6-679103d738bb}' => 'restartbrowsernow',
     '{9e96e0c4-9bde-49b7-989f-a4ca4bdc90bb}' => 'active-stop-button',
