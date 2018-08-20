@@ -116,6 +116,7 @@ $arrayAddonsDB = array(
     '{03c2ba51-52c3-4cb1-9309-229eb4bc8948}' => 'kempelton-reloaded',
     '{03e0a23d-1be6-4040-b98e-98e62085837f}' => 'micromoon',
     '{0631f4e8-ca63-4be8-960e-d2b375ddb306}' => 'forecastfox-pm',
+    '{07e09522-b725-49e7-9e3f-aef6a2994826}' => 'sage-reader',
     '{0b7fb85d-4837-4c73-88bb-0d6b538a2011}' => 'rosetta-qls',
     '{0c44653b-8ca4-4125-b98e-98e62085837f}' => 'qute-4-pm',
     '{0c901354-1fc1-4941-9376-3763d1ad1978}' => 'date-picker',

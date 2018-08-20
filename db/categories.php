@@ -146,6 +146,7 @@ $arrayCategoryList04 = array(
     'title' => 'Feeds, News, & Blogging',
     'inforss-reloaded',
     'bamboo-feed-reader',
+    'sage-reader',
     'externals' => array(
         'newsfox' => array(
             'id' => 'fx-629',
