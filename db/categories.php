@@ -18,14 +18,12 @@ $arrayCategoryList01 = array(
 
 $arrayCategoryList02 = array(
     'title' => 'Appearance',
-    'addons-manager-fix',
     'aviary-addons-manager',
     'blue-moon-linux',
     'compact-moon-options',
     'history-menu-button',
     'noia-moon-options',
     'pentadactyl',
-    'stylish-editor-modified',
     'themetool',
     'advanced-night-mode',
     'theme-shim',
