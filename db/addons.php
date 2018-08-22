@@ -74,6 +74,7 @@ $arrayAddonsDB = array(
     'nosquint@me.ebonjaeger.com' => 'nosquint',
     'notestruck@franklindm' => 'notestruck',
     'ntlmauth@lakora.us' => 'integrated-authentication',
+    'ocdownloader@nextcloud' => 'ocdownloader-palemoon',
     'password-backup-tool@Off.JustOff' => 'password-backup-tool',
     'past-modern-revisited@lootyhoof-pm' => 'past-modern-revisited',
     'pasteemailplus@guid.customsoftwareconsult.com' => 'pasteemailplus',

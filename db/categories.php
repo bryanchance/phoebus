@@ -124,6 +124,7 @@ $arrayCategoryList03 = array(
     'scrapbook-x',
     'opendownload2',
     'turbo-downloader',
+    'ocdownloader-palemoon',
     'externals' => array(
         'imagehost-grabber' => array(
             'id' => 'ex-005',
