@@ -191,6 +191,7 @@ $arrayCategoryList05 = array(
     'cookies-exterminator',
     'modify-http-response',
     'proxy-privacy-ruler',
+    'javascriptblock',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',

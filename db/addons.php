@@ -57,6 +57,7 @@ $arrayAddonsDB = array(
     'jid1-BoFifL9Vbdl2zQ@jetpack' => 'decentraleyes',
     'jid1-KKzOGWgsW3Ao4Q@jetpack' => 'i-dont-care-about-cookies',
     'jid1-OoNOA6XBjznvLQ@jetpack' => 'gnotifier',
+    'jsblock@4bebca82' => 'javascriptblock',
     'keyconfig@mozilla.dorando.at' => 'keyconfig',
     'location4evar@Off.JustOff' => 'location-4-evar',
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
