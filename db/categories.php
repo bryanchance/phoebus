@@ -124,6 +124,7 @@ $arrayCategoryList03 = array(
     'scrapbook-x',
     'opendownload2',
     'turbo-downloader',
+    'ocdownloader-palemoon',
     'externals' => array(
         'imagehost-grabber' => array(
             'id' => 'ex-005',
@@ -190,6 +191,7 @@ $arrayCategoryList05 = array(
     'cookies-exterminator',
     'modify-http-response',
     'proxy-privacy-ruler',
+    'javascriptblock',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
