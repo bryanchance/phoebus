@@ -128,6 +128,7 @@ $arrayAddonsDB = array(
     '{1f14e1f1-c178-46cd-8131-292e820a52c2}' => 'activetabcolor',
     '{20c00d0d-79a4-4af5-b98e-98e62085837f}' => 'maxi4',
     '{210249CE-F888-11DD-B868-4CB456D89593}' => 'opendownload2',
+    '{26e99c01-51be-476d-9bf7-0729ce4ae67f}' => 'bookmarks-sb-panels',
     '{2C646A52-4EDC-455F-8047-9405795D3E51}' => 'moonscape',
     '{2db74bf0-e2ce-4412-a47c-ec6de1449db1}' => 'space-advance',
     '{302dd086-df72-4fbf-835f-dc1f296049eb}' => 'extension-preferences-menu',
