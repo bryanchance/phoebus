@@ -407,6 +407,7 @@ $arrayCategoryList11 = array(
     'tab-utilities-phoenix',
     'speed-start',
     'sorttabsby',
+    'bookmarks-sb-panels',
     'externals' => array(
         'tab-groups-helper' => array(
             'id' => 'fx-473368',
