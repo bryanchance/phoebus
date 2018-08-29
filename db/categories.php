@@ -192,6 +192,7 @@ $arrayCategoryList05 = array(
     'modify-http-response',
     'proxy-privacy-ruler',
     'javascriptblock',
+	'cookies-control-panel',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
