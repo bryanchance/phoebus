@@ -54,6 +54,7 @@ $arrayCategoryList02 = array(
     'browsepaper',
     'stylem',
     'extended-statusbar',
+    'werewolf',
     'externals' => array(
         'all-menus-button' => array(
             'id' => 'fx-621692',
