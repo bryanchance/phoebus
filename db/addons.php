@@ -60,6 +60,7 @@ $arrayAddonsDB = array(
     'jid1-OoNOA6XBjznvLQ@jetpack' => 'gnotifier',
     'jsblock@4bebca82' => 'javascriptblock',
     'keyconfig@mozilla.dorando.at' => 'keyconfig',
+    'list-this@c0594b18' => 'list-this-sidebar',
     'location4evar@Off.JustOff' => 'location-4-evar',
     'lull-the-tabs@Off.JustOff' => 'lull-the-tabs',
     'macmoon@lootyhoof-pm' => 'macmoon',
