@@ -289,6 +289,7 @@ $arrayCategoryList08 = array(
     'newmime',
     'restart-manager',
     'fect',
+    'list-this-sidebar',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
