@@ -290,6 +290,7 @@ $arrayCategoryList08 = array(
     'restart-manager',
     'fect',
     'list-this-sidebar',
+    'take-page-screenshot',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
