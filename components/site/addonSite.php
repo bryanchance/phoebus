@@ -25,10 +25,6 @@ $arrayStaticPages = array(
     '/' => array(
         'title' => 'Your browser, your way!',
         'contentTemplate' => $strContentBasePath . 'frontpage.xhtml.tpl',
-    ),
-    '/incompatible/' => array(
-        'title' => 'Known Incompatible Add-ons',
-        'contentTemplate' => $strContentBasePath . 'incompatible.xhtml.tpl',
     )
 );
 
@@ -366,6 +362,9 @@ elseif ($strRequestPath == '/search/') {
   }
   
   funcGeneratePage($arrayPage);
+}
+elseif ($strRequestPath == '/incompatible/') {
+  funcRedirect('https://forum.palemoon.org/viewtopic.php?f=1&t=19727');
 }
 else {
     if (array_key_exists($strRequestPath, $arrayStaticPages)) {

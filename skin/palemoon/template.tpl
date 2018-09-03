@@ -53,7 +53,7 @@
                     <li class="li_nc"><a href="/search-plugins/">Search Plugins</a></li>
                     <li class="li_nc"><a href="#">More&hellip;</a>
                         <ul class="ul_ch">
-                            <li class="li_nc"><a href="/incompatible/">Incompatible Extensions</a></li>
+                            <li class="li_nc"><a href="/incompatible/" target="_blank">Incompatible Extensions</a></li>
                             <li class="li_nc"><a href="/special/validate/" target="_blank">Add-on Validator Tool</a></li>
                             <li class="li_nc"><a href="http://developer.palemoon.org/" target="_blank">Add-on Development</a></li>
                         </ul>
