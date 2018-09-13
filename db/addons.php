@@ -178,6 +178,7 @@ $arrayAddonsDB = array(
     '{ab91ffec-fe2a-440e-99ca-5260e0ea0c06}' => 'openwithieedge',
     '{ac2b4139-a75e-4e44-b710-fa4c6201788e}' => 'sidebartoright',
     '{ad063cc3-2519-42a5-9551-d1570959cb35}' => 'activetoolbarsvisibility',
+    '{b06f550f-4b27-428e-8493-5f52523eaae3}' => 'statusbar-date-time',
     '{b2e69492-2358-071a-7056-24ad0c3defb1}' => 'bamboo-feed-reader',
     '{b3e15674-2f14-4a47-973e-fb9718b5e892}' => 'dir-up-moon-edition',
     '{b5af16a6-105d-4a14-a5a6-c2b358b06a04}' => 'togglejscript',
