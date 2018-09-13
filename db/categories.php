@@ -291,6 +291,7 @@ $arrayCategoryList08 = array(
     'fect',
     'list-this-sidebar',
     'take-page-screenshot',
+    'statusbar-date-time',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
