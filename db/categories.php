@@ -413,6 +413,7 @@ $arrayCategoryList11 = array(
     'speed-start',
     'sorttabsby',
     'bookmarks-sb-panels',
+    'tab-counter',
     'externals' => array(
         'tab-groups-helper' => array(
             'id' => 'fx-473368',

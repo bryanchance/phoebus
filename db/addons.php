@@ -98,6 +98,7 @@ $arrayAddonsDB = array(
     'SStart@Off.JustOff' => 'speed-start',
     'superstart@2eba088bac04' => 'superstart-moon-edition',
     'tab2device@Off.JustOff' => 'send-tab-to-device',
+    'tabcounter-pm@chania.gr' => 'tab-counter',
     'tabkit.mouse-gestures@pikachuexe.amateur.hk' => 'tabkit-mouse-gestures',
     'tabkit.tab-highlighter@pikachuexe.amateur.hk' => 'tabkit-tab-highlighter',
     'tabkit2@pikachuexe.amateur.hk' => 'tabkit2',
