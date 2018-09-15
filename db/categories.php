@@ -218,7 +218,6 @@ $arrayCategoryList05 = array(
 
 $arrayCategoryList06 = array(
     'title' => 'Search Tools',
-    'add-to-search-bar',
     'searchload-options-revived',
     'externals' => array(
         'context-search-x' => array(
@@ -258,7 +257,6 @@ $arrayCategoryList07 = array(
 
 $arrayCategoryList08 = array(
     'title' => 'Tools & Utilities',
-    'date-picker',
     'extension-preferences-menu',
     'guerilla-scripting',
     'open-about-config',
