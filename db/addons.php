@@ -139,6 +139,7 @@ $arrayAddonsDB = array(
     '{36365A44-0C40-4d16-B174-0B803FA14366}' => 'pasteemail',
     '{3c8cb644-b444-49f5-a1c4-2811d53d352c}' => 'browsepaper',
     '{3C9A65A6-9563-4485-BA4A-4BCD698BCFB4}' => 'backtotop',
+    '{4523665a-317f-4a66-9376-3763d1ad1978}' => 'ambassador',
     '{4BBDD651-70CF-4821-84F8-2B918CF89CA3}' => 'febe',
     '{4b13c0da-55d5-44ce-b98e-98e62085837f}' => 'darkpitch',
     '{4d457603-1613-4177-b98e-98e62085837f}' => 'reinheit',

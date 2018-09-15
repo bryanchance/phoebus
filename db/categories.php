@@ -173,6 +173,7 @@ $arrayCategoryList07 = array(
     'title' => 'Social & Communication',
     'foxclocks',
     'pmforum-smart-preview',
+    'ambassador',
     'externals' => array(
         'gaiaformat' => array(
             'id' => 'ex-032',
