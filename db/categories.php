@@ -7,12 +7,6 @@ $arrayCategoryList01 = array(
     'title' => 'Alerts & Updates',
     'gnotifier',
     'externals' => array(
-        'flagfox' => array(
-            'id' => 'fx-5791',
-            'name' => 'FlagFox',
-            'shortDescription' => 'Displays a country flag depicting the location of the current website&amp;s server.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/flagfox/'
-        ),
     ),
 );
 
@@ -56,42 +50,6 @@ $arrayCategoryList02 = array(
     'extended-statusbar',
     'werewolf',
     'externals' => array(
-        'all-menus-button' => array(
-            'id' => 'fx-621692',
-            'name' => 'All Menus Button',
-            'shortDescription' => 'Combines all the menus in a single menu button that can be placed anywhere.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/all-menus-button/'
-        ),
-        'menu-icons-plus' => array(
-            'id' => 'fx-8266',
-            'name' => 'Menu Icons Plus',
-            'shortDescription' => 'Adds icons to your menus. Choose from the built-in icon sets or import your own.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/menu-icons-plus/'
-        ),
-        'noun-buttons' => array(
-            'id' => 'fx-7056',
-            'name' => 'NoUn Buttons',
-            'shortDescription' => 'Unmerge (separate) the Back & Forward buttons... and their menus!',
-            'url' => 'https://addons.mozilla.org/firefox/addon/noun-buttons/'
-        ),
-        'page-colors-fonts-buttons' => array(
-            'id' => 'fx-621166',
-            'name' => 'Page Colors & Fonts Buttons',
-            'shortDescription' => 'Adds toolbar buttons to switch between page-defined and user-defined colors/fonts for web pages.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/page-colors-fonts-buttons/'
-        ),
-        'xclear' => array(
-            'id' => 'default',
-            'name' => 'Xclear',
-            'shortDescription' => 'Adds in-field clear buttons to the URL bar, the Search bar and the Find bar.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/xclear/'
-        ),
-        'browser-backgrounds' => array(
-            'id' => 'ex-019',
-            'name' => 'Browser Backgrounds',
-            'shortDescription' => 'Browser Backgrounds is the new Pale Moon extension that lets you install backgrounds directly on your browser.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/browser-backgrounds/'
-        ),
         'fierr' => array(
             'id' => 'ex-030',
             'name' => 'Fierr',
@@ -133,12 +91,6 @@ $arrayCategoryList03 = array(
             'shortDescription' => 'Download entire galleries of hosted images with just a few clicks.',
             'url' => 'https://imagehostgrabber.com/'
         ),
-        'download-manager-s3' => array(
-            'id' => 'ex-015',
-            'name' => 'Download Manager (S3)',
-            'shortDescription' => 'View and manage downloads from a tidy statusbar.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/s3download-statusbar/'
-        ),
     ),
 );
 
@@ -148,12 +100,6 @@ $arrayCategoryList04 = array(
     'bamboo-feed-reader',
     'sage-reader',
     'externals' => array(
-        'newsfox' => array(
-            'id' => 'fx-629',
-            'name' => 'NewsFox',
-            'shortDescription' => 'NewsFox is an efficient 3-pane (email) style Atom/RSS feed reader.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/newsfox/'
-        ),
         'social-fixer-for-facebook' => array(
             'id' => 'ex-007',
             'name' => 'Social Fixer for Facebook',
@@ -201,12 +147,6 @@ $arrayCategoryList05 = array(
             'shortDescription' => 'Continuously randomizes your HTTP user agent to suppress device fingerprinting and resist web tracking.',
             'url' => 'https://www.dephormation.org.uk/?page=81'
         ),
-        'yesscript' => array(
-            'id' => 'fx-4922',
-            'name' => 'YesScript',
-            'shortDescription' => 'YesScript lets you make a blacklist of sites that aren&amp;t allowed to run JavaScript.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/yesscript/'
-        ),
         'noscript' => array(
             'id' => 'ex-040',
             'name' => 'NoScript Classic',
@@ -220,18 +160,6 @@ $arrayCategoryList06 = array(
     'title' => 'Search Tools',
     'searchload-options-revived',
     'externals' => array(
-        'context-search-x' => array(
-            'id' => 'fx-337150',
-            'name' => 'Context Search X',
-            'shortDescription' => 'Expands the context menu&amp;s "Search for" item into a list of search engines you can choose from.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/context-search-x/'
-        ),
-        'who-stole-my-pictures' => array(
-            'id' => 'fx-266838',
-            'name' => 'Who stole my pictures?',
-            'shortDescription' => 'Search for copies of images using Yandex.ru, Tineye.com, Google.com and VK.com via the right-click menu.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/who-stole-my-pictures/'
-        ),
         'track-package' => array(
             'id' => 'ex-037',
             'name' => 'Track Package',
@@ -292,18 +220,6 @@ $arrayCategoryList08 = array(
     'statusbar-date-time',
     'cpu-memory-statusbar',
     'externals' => array(
-        'remove-it-permanently' => array(
-            'id' => 'default',
-            'name' => 'Remove It Permanently',
-            'shortDescription' => 'Permanently hide content from web pages via the context menu.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/remove-it-permanently/'
-        ),
-        'wheelclear' => array(
-            'id' => 'default',
-            'name' => 'WheelClear',
-            'shortDescription' => 'Clear any text field by rolling the mousewheel over it.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/wheelclear/'
-        ),
         'greasemonkey' => array(
             'id' => 'ex-028',
             'name' => 'Greasemonkey for Pale Moon',
@@ -334,24 +250,6 @@ $arrayCategoryList09 = array(
     'fireftpbutton',
     'esrc-explorer',
     'externals' => array(
-        'alertip' => array(
-            'id' => 'default',
-            'name' => 'AlertIP',
-            'shortDescription' => 'Show the IP address of the currently loaded web page on demand in an alert prompt.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/alertip/'
-        ),
-        'dom-inspector' => array(
-            'id' => 'default',
-            'name' => 'DOM Inspector',
-            'shortDescription' => 'A tool that can be used to inspect and edit the live DOM of any web document or XUL application',
-            'url' => 'https://addons.mozilla.org/firefox/addon/dom-inspector-6622'
-        ),
-        'element-inspector' => array(
-            'id' => 'default',
-            'name' => 'Element Inspector',
-            'shortDescription' => 'Shift-right-click any element to open it in DOM Inspector.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/element-inspector/'
-        ),
     ),
 );
 
@@ -373,18 +271,6 @@ $arrayCategoryList10 = array(
     'dir-up-moon-edition',
     'gtranslator-moon-edition',
     'externals' => array(
-        'fire-ie' => array(
-            'id' => 'fx-372869',
-            'name' => 'Fire IE',
-            'shortDescription' => 'Embeds Internet Explorer (IE) in Pale Moon to use the powerful add-ons.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/fire-ie/'
-        ),
-        'thumbnail-zoom-plus' => array(
-            'id' => 'fx-337643',
-            'name' => 'Thumbnail Zoom Plus',
-            'shortDescription' => 'Shows the full image when you hover over a thumbnail.',
-            'url' => 'https://addons.mozilla.org/firefox/addon/thumbnail-zoom-plus/'
-        ),
     ),
 );
 
@@ -414,12 +300,6 @@ $arrayCategoryList11 = array(
     'bookmarks-sb-panels',
     'tab-counter',
     'externals' => array(
-        'tab-groups-helper' => array(
-            'id' => 'fx-473368',
-            'name' => 'Tab Groups Helper',
-            'shortDescription' => 'Provides an alternative interface for the Tab Groups feature. (Requires the Tab Groups add-on!)',
-            'url' => 'https://addons.mozilla.org/firefox/addon/tab-groups-helper/'
-        ),
     ),
 );
 
