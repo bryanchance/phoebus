@@ -292,6 +292,7 @@ $arrayCategoryList08 = array(
     'list-this-sidebar',
     'take-page-screenshot',
     'statusbar-date-time',
+    'cpu-memory-statusbar',
     'externals' => array(
         'remove-it-permanently' => array(
             'id' => 'default',
