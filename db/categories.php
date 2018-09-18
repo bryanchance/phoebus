@@ -220,6 +220,7 @@ $arrayCategoryList08 = array(
     'take-page-screenshot',
     'statusbar-date-time',
     'cpu-memory-statusbar',
+    'statusbar-organizer',
     'externals' => array(
         'greasemonkey' => array(
             'id' => 'ex-028',
