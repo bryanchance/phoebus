@@ -126,6 +126,7 @@ $arrayAddonsDB = array(
     '{0c44653b-8ca4-4125-b98e-98e62085837f}' => 'qute-4-pm',
     '{0daf556d-70de-4b15-a90f-b30395bd9c22}' => 'themetool',
     '{0ed852bb-a216-42e9-b98e-98e62085837f}' => 'moonfox3',
+    '{10205942-a0e8-4264-971a-5a0e21851af7}' => 'statusbar-organizer',
     '{1111dd1e-dd02-4c30-956f-f23c44dfea8e}' => 'readerview',
     '{1607f7ec-8262-4016-b51f-f9f5b43d43f1}' => 'sdc-moon-edition',
     '{1b6b1e6f-d8ac-4cdf-9ead-4719b7e25a0e}' => 'forecastweathersb',
