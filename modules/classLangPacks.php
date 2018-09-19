@@ -72,6 +72,7 @@ class classLangPacks {
                 'pt-BR' => 'Portuguese (Brazil)',
                 'pt-PT' => 'Portuguese (Portugal)',
                 'ru' => 'Russian',
+                'sk' => 'Slovak',
                 'sv-SE' => 'Swedish (Sweden)',
                 'tl' => 'Filipino (Tagalog)',
                 'tr' => 'Turkish',
