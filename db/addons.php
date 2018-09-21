@@ -123,6 +123,7 @@ $arrayAddonsDB = array(
     '{07e09522-b725-49e7-9e3f-aef6a2994826}' => 'sage-reader',
     '{0b457cAA-602d-484a-8fe7-c1d894a011ba}' => 'take-page-screenshot',
     '{0b7fb85d-4837-4c73-88bb-0d6b538a2011}' => 'rosetta-qls',
+    '{0ba76da0-ae26-42d4-a34e-5c75f8143605}' => 'search-drag-n-drop',
     '{0c44653b-8ca4-4125-b98e-98e62085837f}' => 'qute-4-pm',
     '{0daf556d-70de-4b15-a90f-b30395bd9c22}' => 'themetool',
     '{0ed852bb-a216-42e9-b98e-98e62085837f}' => 'moonfox3',

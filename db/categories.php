@@ -159,6 +159,7 @@ $arrayCategoryList05 = array(
 $arrayCategoryList06 = array(
     'title' => 'Search Tools',
     'searchload-options-revived',
+    'search-drag-n-drop',
     'externals' => array(
         'track-package' => array(
             'id' => 'ex-037',
