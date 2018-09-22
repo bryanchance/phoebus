@@ -160,6 +160,7 @@ $arrayCategoryList06 = array(
     'title' => 'Search Tools',
     'searchload-options-revived',
     'search-drag-n-drop',
+    'context-search-x',
     'externals' => array(
         'track-package' => array(
             'id' => 'ex-037',
