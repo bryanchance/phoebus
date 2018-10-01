@@ -21,7 +21,6 @@ $arrayCategoryList02 = array(
     'themetool',
     'advanced-night-mode',
     'theme-shim',
-    'throbber-in-urlbar',
     'splashed',
     'quickdialtool',
     'location-4-evar',
@@ -139,19 +138,13 @@ $arrayCategoryList05 = array(
     'modify-http-response',
     'proxy-privacy-ruler',
     'javascriptblock',
-	'cookies-control-panel',
+    'cookies-control-panel',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
             'name' => 'Secret Agent',
             'shortDescription' => 'Continuously randomizes your HTTP user agent to suppress device fingerprinting and resist web tracking.',
             'url' => 'https://www.dephormation.org.uk/?page=81'
-        ),
-        'noscript' => array(
-            'id' => 'ex-040',
-            'name' => 'NoScript Classic',
-            'shortDescription' => 'Allow active content to run only from sites you trust, and protect yourself against XSS and Clickjacking attacks, "Spectre", "Meltdown" and other JavaScript exploits.',
-            'url' => 'https://noscript.net/getit'
         ),
     ),
 );
