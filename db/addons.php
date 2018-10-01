@@ -108,7 +108,6 @@ $arrayAddonsDB = array(
     'themeshim@lootyhoof-pm' => 'theme-shim',
     'thinbookmarks@bonsaimind.org' => 'thinbookmarks',
     'thintabs@bonsaimind.org' => 'thintabs',
-    'throbberinurlbar@srazzano.com' => 'throbber-in-urlbar',
     'toggleDocumentColors@darkoshi' => 'toggle-document-colors',
     'toolbarize-menu-button@wsdfhjxc' => 'toolbarize-menu-button',
     'turbodownloader0724@jetpack' => 'turbo-downloader',
