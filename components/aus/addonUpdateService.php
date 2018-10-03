@@ -76,13 +76,13 @@ function funcSendToAMO($_appID, $_appVersion) {
 // == | Main | ========================================================================================================
 
 // Assign HTTP GET arguments to the software state
-$arraySoftwareState['requestAddonID'] = funcHTTPGetValue('id');
-$arraySoftwareState['requestAddonVersion'] = funcHTTPGetValue('version');
-$arraySoftwareState['requestAppID'] = funcHTTPGetValue('appID');
-$arraySoftwareState['requestAppVersion'] = funcHTTPGetValue('appVersion');
-$arraySoftwareState['requestAddonCompatMode'] = funcHTTPGetValue('compatMode');
+$arraySoftwareState['requestAddonID'] = funcUnifiedVariable('get', 'id');
+$arraySoftwareState['requestAddonVersion'] = funcUnifiedVariable('get', 'version');
+$arraySoftwareState['requestAppID'] = funcUnifiedVariable('get', 'appID');
+$arraySoftwareState['requestAppVersion'] = funcUnifiedVariable('get', 'appVersion');
+$arraySoftwareState['requestAddonCompatMode'] = funcUnifiedVariable('get', 'compatMode');
 (bool)$arraySoftwareState['requestMozXPIUpdate'] =
-  array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || funcHTTPGetValue('updateOverride');
+  array_key_exists('HTTP_MOZ_XPI_UPDATE', $_SERVER) || funcUnifiedVariable('get', 'updateOverride');
 
 // --------------------------------------------------------------------------------------------------------------------
 

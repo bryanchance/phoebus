@@ -1,0 +1,47 @@
+<img src="{$PAGE_DATA.icon}" style="height: 48px; width: 48px; margin-top: 22px;" class="alignright">
+<h1>
+  {$PAGE_DATA.name}
+</h1>
+
+<p style="margin-top: -18px">
+  By: {$PAGE_DATA.creator}
+</p>
+
+<h3>License</h3>
+{if $PAGE_DATA.licenseText}
+  {$PAGE_DATA.licenseText}
+{else}
+  {if $PAGE_DATA.license == 'pd'}
+    <p><strong>No License</strong></p>
+    <p>
+      This means there is no license attached.
+    </p>   
+    <p>
+      Some developers think that code with no license is automatically in the public domain. That is not true under today's copyright law; rather, all copyrightable works are copyrighted by default. This includes programs. Absent a license to grant users freedom, they don't have any. In some countries, users that download code with no license may infringe copyright merely by compiling it or running it.
+    </p>
+    <p>
+      Please contact the addon author and request that they provide a free license, and/or <a href="https://issues.hyperbola.info/index.php?string=iceweasel-uxp&project=4" target="_blank">report this issue to Hyperbola</a> as a freedom issue so that the addon can be blacklisted.
+    </p>
+  {elseif $PAGE_DATA.license == 'copyright'}
+    <p>
+      <strong>This add-on is Copyrighted by its author(s); all rights reserved.</strong>
+    </p>
+    <p>
+      This add-on has been posted on this website by the author(s) or one of their authorized agents with permission and consent for redistribution to the public in unmodified form.
+    </p>
+    <p>
+      Modification, inclusion in a larger work, verbatim copying of (parts of) this add-on's code and assets, and/or public redistribution of this add-on without the express prior written permission of the author(s) is prohibited.
+    </p>
+    <p>Please contact the addon author and request that they provide a free license, and/or <a href="https://issues.hyperbola.info/index.php?string=iceweasel-uxp&project=4" target="_blank">report this issue to Hyperbola</a> as a freedom issue so that the addon can be blacklisted.</p>
+  {else}
+    <p>
+      This Add-on has no assigned license.
+    </p>
+    <p>
+      Some developers think that code with no license is automatically in the public domain. That is not true under today's copyright law; rather, all copyrightable works are copyrighted by default. This includes programs. Absent a license to grant users freedom, they don't have any. In some countries, users that download code with no license may infringe copyright merely by compiling it or running it.
+    </p>
+    <p>
+      Please contact the addon author and request that they provide a standard license, and/or <a href="https://issues.hyperbola.info/index.php?string=iceweasel-uxp&project=4" target="_blank">report this issue to Hyperbola</a> as a freedom issue so that the addon can be blacklisted.
+    </p>
+  {/if}
+{/if}

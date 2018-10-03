@@ -45,8 +45,8 @@ class classAuthentication {
   ********************************************************************************************************************/
   public function authenticate($_logout = null) {
     // Get Username and Password from HTTP Basic Authentication 
-    $strUsername = $this->checkServerValue('PHP_AUTH_USER');
-    $strPassword = $this->checkServerValue('PHP_AUTH_PW');
+    $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
+    $strPassword = funcUnifiedVariable('server', 'PHP_AUTH_PW');
 
     // Check for the existance of username and password as well as the special 'logout' user
     if (!$strUsername || $strUsername == 'logout' || !$strPassword ) {
@@ -114,20 +114,6 @@ class classAuthentication {
     header('HTTP/1.0 401 Unauthorized');   
     funcError('You need to enter a valid username and password.');
     exit();
-  }
-
-  /********************************************************************************************************************
-  * Check if a $SERVER variable has a value
-  *
-  * @param $_value    Any existing variable
-  * @returns          Passed data or null
-  ********************************************************************************************************************/
-  private function checkServerValue($_value) {
-    if (!isset($_SERVER[$_value]) || $_SERVER[$_value] === '' ||
-        $_SERVER[$_value] === null || empty($_SERVER[$_value])) {
-      return null;
-    }
-    return $_SERVER[$_value];
   }
 }
 

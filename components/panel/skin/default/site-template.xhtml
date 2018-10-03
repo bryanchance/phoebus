@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>{$PAGE_TITLE} - Phoebus Panel</title>
+    <style type="text/css">
+      {%SITE_STYLESHEET}
+    </style>
+  </head>
+  <body>
+    <div id="container">
+    <h1>Phoebus Panel</h2>
+    <!-- <img src="{$BASE_PATH}logo.png" style="margin-bottom: 8px;"/> -->
+    <hr class="menu">
+    <nav class="navigation">
+      {if $USER_LEVEL >= 1}
+        {if $USER_LEVEL >= 3}
+          <a href="/panel/administration/">Administration</a> 
+        {/if}
+        <a href="/panel/addons/">Your Add-ons</a> 
+        <a href="/panel/account/">Phoebus Account</a> 
+        <a href="/panel/logout/">Logout</a>
+      {else}
+        <a href="/panel/registration/">Register</a>
+        <a href="/panel/login/">Login</a>
+      {/if}
+    </nav>
+    <hr class="menu">
+    {%PAGE_CONTENT}
+    </div>
+  </body>
+</html>

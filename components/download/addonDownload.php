@@ -83,8 +83,8 @@ function funcDownloadSearchPlugin($_searchPluginName) {
 
 // == | Main | ================================================================
 
-$strRequestAddonID = funcHTTPGetValue('id');
-$strRequestAddonVersion = funcHTTPGetValue('version');
+$strRequestAddonID = funcUnifiedVariable('get', 'id');
+$strRequestAddonVersion = funcUnifiedVariable('get', 'version');
 
 // Sanity
 if ($strRequestAddonID == null) {

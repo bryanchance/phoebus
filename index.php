@@ -15,42 +15,43 @@ error_reporting(0);
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT']);
 
 // Define basic constants for the software
-const SOFTWARE_NAME = 'Phoebus';
-const SOFTWARE_VERSION = '2.0.0a1';
-const DATASTORE_RELPATH = '/datastore/';
-const OBJ_RELPATH = '/.obj/';
-const COMPONENTS_RELPATH = '/components/';
-const MODULES_RELPATH = '/modules/';
-const LIB_RELPATH = '/libraries/';
-const NEW_LINE = "\n";
+const SOFTWARE_NAME       = 'Phoebus';
+const SOFTWARE_VERSION    = '2.0.0a1';
+const DATASTORE_RELPATH   = '/datastore/';
+const OBJ_RELPATH         = '/.obj/';
+const COMPONENTS_RELPATH  = '/components/';
+const MODULES_RELPATH     = '/modules/';
+const LIB_RELPATH         = '/libraries/';
+const NEW_LINE            = "\n";
 
 // Define components
 const COMPONENTS = array(
-  // 'api' => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
-  'aus' => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
-  'discover' => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
-  'download' => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
-  'integration' => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
-  // 'panel' => ROOT_PATH . COMPONENTS_RELPATH . 'panel/addonPanel.php',
-  'site' => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
-  'special' => ROOT_PATH . COMPONENTS_RELPATH . 'special/specialComponent.php'
+  // 'api'          => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
+  'aus'             => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
+  'discover'        => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
+  'download'        => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
+  'integration'     => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
+  'panel'           => ROOT_PATH . COMPONENTS_RELPATH . 'panel/addonPanel.php',
+  'site'            => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
+  'special'         => ROOT_PATH . COMPONENTS_RELPATH . 'special/specialComponent.php'
 );
 
 // Define modules
 const MODULES = array(
-  'auth' => ROOT_PATH . MODULES_RELPATH . 'classAuthentication.php',
-  'database' => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
+  'auth'            => ROOT_PATH . MODULES_RELPATH . 'classAuthentication.php',
+  'database'        => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
-  'mozillaRDF' => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
-  'readManifest' => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
-  'vc' => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
+  'mozillaRDF'      => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
+  'readManifest'    => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
+  'validator'       => ROOT_PATH . MODULES_RELPATH . 'classAddonValidator.php',
+  'vc'              => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
 );
 
 // Define libraries
 const LIBRARIES = array(
-  'smarty' => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
-  'safeMySQL' => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
-  'rdfParser' => ROOT_PATH . LIB_RELPATH . 'rdf/rdf_parser.php',
+  'smarty'          => ROOT_PATH . LIB_RELPATH . 'smarty/Smarty.class.php',
+  'safeMySQL'       => ROOT_PATH . LIB_RELPATH . 'safemysql/safemysql.class.php',
+  'rdfParser'       => ROOT_PATH . LIB_RELPATH . 'rdf/rdf_parser.php',
 );
 
 // Define the target applications that the site will accomidate with
@@ -90,31 +91,58 @@ const TARGET_APPLICATION_SITE = array(
       'extensions', 'search-plugins'
     )
   ),
+  'iceweasel' => array(
+    'enabled' => true,
+    'name' => 'Iceweasel Add-ons',
+    'domain' => array(
+      'live' => 'iw.addons.hyperbola.info',
+      'dev' => null
+    ),
+    'features' => array(
+      'https', 'extensions'
+    )
+  ),
+  'icedove' => array(
+    'enabled' => true,
+    'name' => 'Icedove Add-ons',
+    'domain' => array(
+      'live' => 'id.addons.hyperbola.info',
+      'dev' => null
+    ),
+    'features' => array(
+      'https', 'extensions'
+    )
+  ),
 );
 
 // Define Application IDs
 // Application IDs are normally in the form of a GUID, however, they
 // can be in the form of a user@host ID as well.
-// Basilisk/Firefox have the same ID
+// Basilisk/Iceweasel/Firefox have the same ID
 // FossaMail/Thunderbird have the same ID
 const TARGET_APPLICATION_ID = array(
   // MCP
-  'palemoon' => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
-  'basilisk' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-  'fossamail' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  'palemoon'        => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
+  'basilisk'        => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'fossamail'       => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
   // BinOC
-  'borealis' => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
+  'borealis'        => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
+  // Hyperbola
+  'iceweasel'       => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'icedove'         => '{3aa07e56-beb0-47a0-b0cb-c735edd25419}',
   // Mozilla
-  'firefox' => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-  'thunderbird' => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
-  'seamonkey' => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}',
-  'fennec-xul' => '{a23983c0-fd0e-11dc-95ff-0800200c9a66}',
-  'fennec-native' => '{aa3c5121-dab2-40e2-81ca-7ea25febc110}',
-  'sunbird' => '{718e30fb-e89b-41dd-9da7-e25a45638b28}',
+  'firefox'         => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
+  'thunderbird'     => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
+  'seamonkey'       => '{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}',
+  'fennec-xul'      => '{a23983c0-fd0e-11dc-95ff-0800200c9a66}',
+  'fennec-native'   => '{aa3c5121-dab2-40e2-81ca-7ea25febc110}',
+  'sunbird'         => '{718e30fb-e89b-41dd-9da7-e25a45638b28}',
+  // Instantbird
+  'instantbird'     => '{33cb9019-c295-46dd-be21-8c4936574bee}',
   // Adblock Plus
   'adblock-browser' => '{55aba3ac-94d3-41a8-9e25-5c21fe874539}',
   // Common
-  'toolkit' => 'toolkit@mozilla.org'
+  'toolkit'         => 'toolkit@mozilla.org'
 );
 
 // ====================================================================================================================
@@ -164,56 +192,46 @@ function funcError($_value, $_mode = 0) {
 }
 
 /**********************************************************************************************************************
-* Gets an HTTP GET request value and performs basic checks and filtering
+* Unified Var Checking
 *
-* @param $_value    HTTP GET argument
-* @returns          Value of HTTP GET argument or null
+* @param $_type           Type of var to check
+* @param $_value          GET/PUT/SERVER/FILES/EXISTING Normal Var
+* @param $_allowFalsy     Optional - Allow falsey returns (really only works with case var)
+* @returns                Value or null
 **********************************************************************************************************************/
-function funcHTTPGetValue($_value) {
-  return funcGETValue($_value);
-}
+function funcUnifiedVariable($_type, $_value, $_allowFalsy = null) {
+  $finalValue = null;
 
-function funcGETValue($_value) {
-  if (!isset($_GET[$_value]) || $_GET[$_value] === '' ||
-    $_GET[$_value] === null || empty($_GET[$_value])) {
+  switch ($_type) {
+    case 'get':
+      $finalValue = $_GET[$_value] ?? null;
+
+      if ($finalValue) {
+        $_finalValue = preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
+      }
+
+      break;
+    case 'post':
+      $finalValue = $_POST[$_value] ?? null;
+      break;
+    case 'server':
+      $finalValue = $_SERVER[$_value] ?? null;
+      break;
+    case 'files':
+      $finalValue = $_FILES[$_value] ?? null;
+      break;
+    case 'var':
+      $finalValue = $_value ?? null;
+      break;
+    default:
+      funcError('Incorrect var check');
+  }
+
+  if (!$_allowFalsy && (empty($finalValue) || $finalValue === 'none')) {
     return null;
   }
 
-  $_finalValue =
-    preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_GET[$_value]);
-  return $_finalValue;
-}
-
-/**********************************************************************************************************************
-* Gets an HTTP POST request value
-*
-* @param $_value    HTTP POST argument
-* @returns          Value of HTTP POST argument or null
-**********************************************************************************************************************/
-function funcPOSTValue($_value) {
-  if (!isset($_POST[$_value]) || $_POST[$_value] === '' ||
-    $_POST[$_value] === null || empty($_POST[$_value])) {
-    return null;
-  }
-
-  //$_finalValue = preg_replace('/[^-a-zA-Z0-9_\-\/\{\}\@\.\%\s\,]/', '', $_POST[$_value]);
-  $_finalValue = $_POST[$_value];
-  return $_finalValue;
-}
-
-/**********************************************************************************************************************
-* Check if an /existing/ variable has a truthy value
-*
-* @param $_value    Any existing variable
-* @returns          Passed data or null
-**********************************************************************************************************************/
-function funcCheckVar($_value) {
-  if ($_value === '' || $_value === 'none' || $_value === null || empty($_value) || $_value === false) {
-    return null;
-  }
-  else {
-    return $_value;
-  }
+  return $finalValue;
 }
 
 /**********************************************************************************************************************
@@ -251,7 +269,7 @@ function funcSendHeader($_value) {
     'phoebus' => 'X-Phoebus: https://github.com/Pale-Moon-Addons-Team/phoebus/',
   );
   
-  if (array_key_exists($_value, $_arrayHeaders)) {
+  if (!headers_sent() && array_key_exists($_value, $_arrayHeaders)) {
     header($_arrayHeaders['phoebus']);
     header($_arrayHeaders[$_value]);
     
@@ -259,10 +277,6 @@ function funcSendHeader($_value) {
       // We are done here
       exit();
     }
-  }
-  else {
-    // Fallback to text
-    header($_arrayHeaders['text']);
   }
 }
 
@@ -337,16 +351,16 @@ $arraySoftwareState = array(
   'currentApplication' => null,
   'orginalApplication' => null,
   'currentName' => null,
-  'currentScheme' => $_SERVER['SCHEME'] ?? '',
+  'currentScheme' => funcUnifiedVariable('server', 'SCHEME'),
   'currentDomain' => null,
   'debugMode' => null,
-  'phpServerName' => $_SERVER['SERVER_NAME'],
-  'phpRequestURI' => $_SERVER['REQUEST_URI'],
-  'requestComponent' => funcGETValue('component'),
-  'requestPath' => funcGETValue('path'),
-  'requestApplication' => funcGETValue('appOverride'),
-  'requestDebugOff' => funcGETValue('debugOff'),
-  'requestSearchTerms' => funcGETValue('terms')
+  'phpServerName' => funcUnifiedVariable('server', 'SERVER_NAME'),
+  'phpRequestURI' => funcUnifiedVariable('server', 'REQUEST_URI'),
+  'requestComponent' => funcUnifiedVariable('get', 'component'),
+  'requestPath' => funcUnifiedVariable('get', 'path'),
+  'requestApplication' => funcUnifiedVariable('get', 'appOverride'),
+  'requestDebugOff' => funcUnifiedVariable('get', 'debugOff'),
+  'requestSearchTerms' => funcUnifiedVariable('get', 'terms')
 );
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -369,15 +383,28 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
   }
 }
 
-// Override currentApplication by query
-// If requestApplication is set and it exists in the array constant check if it is
-// enabled and if so set the currentApplication to that
-if ($arraySoftwareState['debugMode'] && $arraySoftwareState['requestApplication'] &&
-    array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
-    TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
+// Items that get changed depending on debug mode
+if ($arraySoftwareState['debugMode']) {
+  // We can disable debug mode when on a dev url otherwise if debug mode we want all errors
+  if ($arraySoftwareState['requestDebugOff']) {
+    $arraySoftwareState['debugMode'] = null;
+  }
+  else {
+    // Enable all errors
+    error_reporting(E_ALL);
+    ini_set("display_errors", "on");
+  }
+
+  // Override currentApplication by query
+  // If requestApplication is set and it exists in the array constant check if it is
+  // enabled and if so set the currentApplication to that
+  if ($arraySoftwareState['requestApplication'] &&
+      array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
+      TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
     $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
     $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
     $arraySoftwareState['requestApplication'] = null;
+  }
 }
 
 // If there is no valid currentApplication or currentDomain
@@ -390,23 +417,14 @@ if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentD
 
 // --------------------------------------------------------------------------------------------------------------------
 
-if ($arraySoftwareState['debugMode']) {
-  if ($arraySoftwareState['requestDebugOff']) {
-    $arraySoftwareState['debugMode'] = null;
-  }
-  else {
-    // Enable all errors
-    error_reporting(E_ALL);
-    ini_set("display_errors", "on");
-  }
-}
-
-// --------------------------------------------------------------------------------------------------------------------
-
 // Root (/) won't set a component or path
 if (!$arraySoftwareState['requestComponent'] && !$arraySoftwareState['requestPath']) {
   $arraySoftwareState['requestComponent'] = 'site';
   $arraySoftwareState['requestPath'] = '/';
+}
+// The PANEL component overrides the SITE component
+elseif (startsWith($arraySoftwareState['phpRequestURI'], '/panel/')) {
+  $arraySoftwareState['requestComponent'] = 'panel';
 }
 // The SPECIAL component overrides the SITE component
 elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {

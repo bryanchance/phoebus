@@ -32,7 +32,7 @@ class ToolkitVersionComparator {
     $part = $tok[0];
     
     if ($part == "*") {
-      $result->numA = 9999999999;
+      $result->numA = PHP_INT_MAX;
       $result->strB = "";
     }
     else {

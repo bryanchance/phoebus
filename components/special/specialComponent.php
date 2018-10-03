@@ -21,39 +21,54 @@ function funcStripPath($_path, $_prefix) {
 // == | Main | ========================================================================================================
 
 $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']]) . '/';
+$strStripPath = funcStripPath($arraySoftwareState['requestPath'], '/special/');
 $strSkinPath = $strComponentPath . '/skin/';
-
-$arraySpecialFunctions = array(
-  'validate' => 'addonValidator.php'
-);
-
-// Temporary Test Cases
-$arraySpecialFunctions['testAuth'] = 'testAuth.php';
-$arraySpecialFunctions['testInstallManifest'] = 'testInstallManifest.php';
-$arraySpecialFunctions['testSQL'] = 'testSQL.php';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-if ($arraySoftwareState['requestPath'] == '/special/phpinfo/') {
-  phpinfo();
-  exit();
-}
-elseif ($arraySoftwareState['requestPath'] == '/special/phpvars/') {
-  phpinfo(32);
-  exit();
-}
+switch ($strStripPath) {
+  case 'phpinfo':
+    phpinfo();
+    break;
+  case 'phpvars':
+    phpinfo(32);
+    break;
+  case 'softwareState':
+    funcError($arraySoftwareState, 1);
+    break;
+  case 'validate':
+  case 'validator':
+    require_once($strComponentPath . 'addonValidator.php');
+    break;
+  case 'validator2':
+    require_once($strComponentPath . 'addonValidator2.php');
+    break;
+  case 'migrator':
+    if (file_exists(ROOT_PATH . '/.migration')) {
+      require_once($strComponentPath . 'addonMigrator.php');
+    }
+    else {
+      funcRedirect('/');
+    }
+    break;
+  case 'test':
+    if (!$arraySoftwareState['debugMode']) {
+      funcRedirect('/');
+    }
 
-$strStripPath = funcStripPath($arraySoftwareState['requestPath'], '/special/');
+    $arraySoftwareState['requestTestCase'] = funcUnifiedVariable('get', 'case');
 
-if (array_key_exists($strStripPath, $arraySpecialFunctions)) {
-  require_once($strComponentPath . $arraySpecialFunctions[$strStripPath]);
-}
-else {
-  if (!$arraySoftwareState['debugMode']) {
-    funcSendHeader('404');
-  }
-  //funcError('Invalid special function');
-  funcError($arraySoftwareState, 1);
+    if ($arraySoftwareState['requestTestCase'] &&
+        file_exists($strComponentPath . 'tests/' . $arraySoftwareState['requestTestCase'] . '.php')) {
+      require_once($strComponentPath . 'tests/' . $arraySoftwareState['requestTestCase'] . '.php');
+    }
+    else {
+      funcError('Invalid test case');
+    }
+
+    break;
+  default:
+    funcRedirect('/');
 }
 
 // ====================================================================================================================

@@ -86,7 +86,7 @@ class classDatabase {
         funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown query type');
     }
 
-    return funcCheckVar($result);
+    return funcUnifiedVariable('var', $result);
   }
 }
 

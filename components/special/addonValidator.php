@@ -93,13 +93,12 @@ function funcValidateRDF() {
     // Prep to read the xpi file and install.rdf
     $_arrayXPInstall = null;
     $_addonXPI = new ZipArchive;
-    $_addonRDF = new RdfComponent();
+    $_addonRDF = new classMozillaRDF();
     $_addonInstallRDFRaw = null;
     $_addonInstallRDF = null;
 
     // Open the XPI file
     if ($_addonXPI->open($_FILES['xpiFile']['tmp_name']) === true) {
-        funcError($_FILES['xpiFile'], 1);
         // See if we have install.rdf
         // OR manifest.json and error out if this is a pure webextension
         if ($_addonXPI->locateName('install.rdf') >-1) {
@@ -352,6 +351,9 @@ if (!empty($_FILES['xpiFile']['name'])) {
 print(file_get_contents($strSkinPath . 'default/template-footer.xhtml'));
 
 ob_end_flush();
+
+// We're done here
+exit();
 
 // ============================================================================
 ?>

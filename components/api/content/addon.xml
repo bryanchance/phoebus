@@ -21,6 +21,6 @@
         <max_version>{%ADDON_MAXVERSION}</max_version>
       </application>
     </compatible_applications>
-    <last_updated epoch="{%ADDON_MTIME}" />
+    <last_updated epoch="{%ADDON_EPOCH}" />
     <install><![CDATA[{%ADDON_XPI}]]></install>
   </addon>

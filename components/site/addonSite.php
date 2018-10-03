@@ -102,7 +102,7 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_SEARCH:
     // Search Page
     // Send the search terms to SQL
-    $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestSearchTerms']);
+    $searchManifest = $moduleReadManifest->getAddons('site-search', $arraySoftwareState['requestSearchTerms']);
 
     // If no results generate a page indicating that
     if (!$searchManifest) {
@@ -130,7 +130,7 @@ switch ($arraySoftwareState['requestPath']) {
 
     // We are doing an "All Extensions" Page
     // Get all extensions from SQL
-    $categoryManifest = $moduleReadManifest->getAllExtensions();
+    $categoryManifest = $moduleReadManifest->getAddons('site-all-extensions');
 
     // If there are no extensions then 404
     if (!$categoryManifest) {
@@ -149,7 +149,7 @@ switch ($arraySoftwareState['requestPath']) {
     funcCheckEnabledFeature('themes');
 
     // Query SQL and get all themes
-    $categoryManifest = $moduleReadManifest->getCategory('themes');
+    $categoryManifest = $moduleReadManifest->getAddons('site-addons-by-category', 'themes');
 
     // If there are no themes then 404
     if (!$categoryManifest) {
@@ -165,7 +165,7 @@ switch ($arraySoftwareState['requestPath']) {
     funcCheckEnabledFeature('language-packs');
 
     // Query SQL for langpacks
-    $categoryManifest = $moduleReadManifest->getCategory('language-packs');
+    $categoryManifest = $moduleReadManifest->getAddons('site-addons-by-category', 'language-packs');
 
     // If there are no langpacks then 404
     if (!$categoryManifest) {
@@ -215,7 +215,7 @@ if (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   }
 
   // Query SQL for extensions in this specific category
-  $categoryManifest = $moduleReadManifest->getCategory($strSlug);
+  $categoryManifest = $moduleReadManifest->getAddons('site-addons-by-category', $strSlug);
   
   // If there are no extensions then 404
   if (!$categoryManifest) {

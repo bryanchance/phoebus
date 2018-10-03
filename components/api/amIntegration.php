@@ -19,10 +19,10 @@ $moduleGenerateContent = new classGenerateContent();
 // == | Main | ========================================================================================================
 
 // Assign HTTP GET arguments to the software state
-$arraySoftwareState['requestAPIScope'] = funcHTTPGetValue('type');
-$arraySoftwareState['requestAPIFunction'] = funcHTTPGetValue('request');
-$arraySoftwareState['requestAPISearchQuery'] = funcHTTPGetValue('q');
-$arraySoftwareState['requestAPISearchGUID'] = funcHTTPGetValue('addonguid');
+$arraySoftwareState['requestAPIScope'] = funcUnifiedVariable('get', 'type');
+$arraySoftwareState['requestAPIFunction'] = funcUnifiedVariable('get', 'request');
+$arraySoftwareState['requestAPISearchQuery'] = funcUnifiedVariable('get', 'q');
+$arraySoftwareState['requestAPISearchGUID'] = funcUnifiedVariable('get', 'addonguid');
 
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ if (!$arraySoftwareState['requestAPIScope'] ||
 if ($arraySoftwareState['requestAPIScope'] == 'internal') {
   switch ($arraySoftwareState['requestAPIFunction']) {
     case 'search':
-      $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchQuery'], 1);
+      $searchManifest = $moduleReadManifest->getAddons('api-search', $arraySoftwareState['requestAPISearchQuery'], 1);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'get':
       if (!$arraySoftwareState['requestAPISearchGUID']) {
@@ -46,7 +46,7 @@ if ($arraySoftwareState['requestAPIScope'] == 'internal') {
 
       $arraySoftwareState['requestAPISearchGUID'] = explode(',', $arraySoftwareState['requestAPISearchGUID']);
 
-      $searchManifest = $moduleReadManifest->getSearchResults($arraySoftwareState['requestAPISearchGUID'], 2);
+      $searchManifest = $moduleReadManifest->getAddons('api-get', $arraySoftwareState['requestAPISearchGUID'], 2);
       $moduleGenerateContent->amSearch($searchManifest);
     case 'recommended':
       // This is apperently not used anymore but provide an empty response

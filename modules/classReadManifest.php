@@ -9,28 +9,7 @@ class classReadManifest {
   private $moduleDatabase;
   private $currentApplication;
   private $currentAppID;
-
-  // Gets a single Add-on by ID
-  // Result is a reduced manifest for use with AUS and DOWNLOAD
-  const SQL_ADDON_BY_ID = "
-    SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
-    FROM `addon`
-    JOIN `client` ON addon.id = client.addonID
-    WHERE ?n = 1
-    AND `id` = ?s
-    AND `type` IN ('extension', 'theme', 'langpack')
-  ";
-
-  // Gets a single Add-on by Slug
-  // Result is the full manifest
-  const SQL_ADDON_BY_SLUG = "
-    SELECT addon.*
-    FROM `addon`
-    JOIN `client` ON addon.id = client.addonID
-    WHERE ?n = 1
-    AND `slug` = ?s
-    AND `type` IN ('extension', 'theme', 'langpack')
-  ";
+  private $excludePotentiallyNonFree;
 
   // ------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +78,21 @@ class classReadManifest {
     // Assign currentApplication
     $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
     $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
+    $this->excludePotentiallyNonFree = null;
 
+    switch ($GLOBALS['arraySoftwareState']['currentApplication']) {
+      case 'iceweasel':
+        // Iceweasel is a huge hack on the Basilisk application on the Add-ons Site so pretend to be Basilisk
+        $this->currentApplication = 'basilisk';
+        // Exclude potentally non-free add-ons due to f5t GNU requirements
+        $this->excludePotentiallyNonFree = true;
+        break;
+      case 'icedove':
+        // Exclude potentally non-free add-ons due to f5t GNU requirements
+        $this->excludePotentiallyNonFree = true;
+        break;
+    }
+    
     // Assign the global instance of the database class to a class property by reference
     $this->moduleDatabase = &$GLOBALS['moduleDatabase'];
   }
@@ -111,7 +104,15 @@ class classReadManifest {
   * @returns                reduced add-on manifest or null
   ********************************************************************************************************************/
   public function getAddonByID($_addonID) {
-    $queryResult = $this->moduleDatabase->query('row', self::SQL_ADDON_BY_ID, $this->currentApplication, $_addonID);
+    $query = "
+      SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+      FROM `addon`
+      JOIN `client` ON addon.id = client.addonID
+      WHERE ?n = 1
+      AND `id` = ?s
+      AND `type` IN ('extension', 'theme', 'langpack')
+    ";
+    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $_addonID);
 
     if (!$queryResult) {
       return null;
@@ -133,13 +134,21 @@ class classReadManifest {
   * @returns                add-on manifest or null
   ********************************************************************************************************************/
   public function getAddonBySlug($_addonSlug) { 
-    $queryResult = $this->moduleDatabase->query('row', self::SQL_ADDON_BY_SLUG, $this->currentApplication, $_addonSlug);
+    $query = "
+      SELECT addon.*, `license` AS `licenseCode`
+      FROM `addon`
+      JOIN `client` ON addon.id = client.addonID
+      WHERE ?n = 1
+      AND `slug` = ?s
+      AND `type` IN ('extension', 'theme', 'langpack')
+    ";
+    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $_addonSlug);
     
     if (!$queryResult) {
       return null;
     }
     
-    $addonManifest = $this->funcProcessManifest($queryResult, null, true);
+    $addonManifest = $this->funcProcessManifest($queryResult, null, true, $this->excludePotentiallyNonFree);
     
     if (!$addonManifest) {
       return null;
@@ -160,11 +169,12 @@ class classReadManifest {
     $query = null;
     $returnInactive = null;
     $returnUnreviewed = null;
-    
+    $processContent = true;
+
     switch ($_queryType) {
       case 'site-addons-by-category':
         $query = "
-          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`, `license` AS `licenseCode`
           FROM `addon`
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
@@ -175,7 +185,7 @@ class classReadManifest {
         break;
       case 'site-all-extensions':
         $query = "
-          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`, `license` AS `licenseCode`
           FROM `addon`
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
@@ -187,7 +197,7 @@ class classReadManifest {
         break;
       case 'site-search':
         $query = "
-          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`
+          SELECT `id`, `slug`, `type`, `name`, `description`, `url`, `reviewed`, `active`, `license` AS `licenseCode`
           FROM `addon`
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
@@ -199,7 +209,7 @@ class classReadManifest {
       case 'api-search':
         $query = "
           SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
-                 `url`, `reviewed`, `active`, `xpinstall`
+                 `url`, `reviewed`, `active`, `license` AS `licenseCode`, `xpinstall`
           FROM `addon`
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
@@ -209,6 +219,7 @@ class classReadManifest {
         $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'api-get':
+        $this->excludePotentiallyNonFree = null;
         $query = "
           SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
                  `url`, `reviewed`, `active`, `xpinstall`
@@ -223,6 +234,8 @@ class classReadManifest {
       case 'panel-user-addons':
         $returnInactive = true;
         $returnUnreviewed = true;
+        $this->excludePotentiallyNonFree = null;
+        $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `url`, `reviewed`, `active`
           FROM `addon`
@@ -235,6 +248,8 @@ class classReadManifest {
       case 'panel-all-addons':
         $returnInactive = true;
         $returnUnreviewed = true;
+        $this->excludePotentiallyNonFree = null;
+        $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `category`, `url`, `reviewed`, `active`
           FROM `addon`
@@ -245,6 +260,8 @@ class classReadManifest {
       case 'panel-addons-by-type':
         $returnInactive = true;
         $returnUnreviewed = true;
+        $this->excludePotentiallyNonFree = null;
+        $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `category`, `url`, `reviewed`, `active`
           FROM `addon`
@@ -257,14 +274,16 @@ class classReadManifest {
         funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown query type');
     }
 
-    if (!funcCheckVar($queryResults)) {
+    if (!$queryResults) {
       return null;
     }
 
     $manifestData = array();
     
     foreach($queryResults as $_value) {
-      $addonManifest = $this->funcProcessManifest($_value, $returnInactive, $returnUnreviewed);
+      $addonManifest = $this->funcProcessManifest(
+        $_value, $returnInactive, $returnUnreviewed, $this->excludePotentiallyNonFree, $processContent
+      );
 
       if (!$addonManifest) {
         continue;
@@ -274,47 +293,6 @@ class classReadManifest {
     }
 
     return $manifestData;
-  }
-
- /********************************************************************************************************************
-  * Depercated Development API which I am too lazy to SnR for now.. Deal with it
-  ********************************************************************************************************************/
-  public function getSearchResults($_search, $_mode = 0) {
-    $query = null;
-
-    switch ($_mode) {
-      case 0:
-        return $this->getAddons('site-search', $_search);
-        break;
-      case 1:
-         return $this->getAddons('api-search', $_search);
-        break;
-      case 2:
-        return $this->getAddons('api-get', $_search);
-        break;
-      default:
-        funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown mode');
-    }
-  }
-
-  public function getCategory($_categorySlug) {
-    return $this->getAddons('site-addons-by-category', $_categorySlug);
-  }
-
-  public function getAllExtensions() {
-    return $this->getAddons('site-all-extensions');
-  }
-
-  public function getUserAddons($_search) {
-    return $this->getAddons('panel-user-addons', $_search);
-  }
-
-  public function getAllAddons() {
-    return $this->getAddons('panel-all-addons');
-  }
-
-  public function getAddonsByType($_addonType) {
-    return $this->getAddons('panel-addons-by-type', $_addonType);
   }
 
  /********************************************************************************************************************
@@ -353,11 +331,15 @@ class classReadManifest {
   * @returns                    add-on manifest or null
   ********************************************************************************************************************/
   // This is where we do any post-processing on an Add-on Manifest
-  private function funcProcessManifest($addonManifest, $returnInactive = null, $returnUnreviewed = null) {
+  private function funcProcessManifest($addonManifest,
+                                       $returnInactive = null,
+                                       $returnUnreviewed = null,
+                                       $excludePotentiallyNonFree = null,
+                                       $processContent = true) {
     // Cast the int-strings to bool
     $addonManifest['reviewed'] = (bool)$addonManifest['reviewed'];
     $addonManifest['active'] = (bool)$addonManifest['active'];
-    
+
     if (!$addonManifest['active'] && !$returnInactive) {
       return null;
     }
@@ -365,7 +347,26 @@ class classReadManifest {
     if (!$addonManifest['reviewed'] && !$returnUnreviewed) {
       return null;
     }
-    
+
+    // Return null all externals as well as any licenses that are null (unknown), custom (which could be anything),
+    // or copyright for Iceweasel.
+    if ($excludePotentiallyNonFree) {
+      $arrayNonFreeBlacklist = array(
+        'gtranslator-moon-edition',
+        'translatethis'
+      );
+
+      if (in_array($addonManifest['slug'], $arrayNonFreeBlacklist)) {
+        return null;
+      }
+      
+      if ($addonManifest['type'] == 'external' || (!$addonManifest['licenseCode'] || 
+          $addonManifest['licenseCode'] == 'custom' || $addonManifest['licenseCode'] == 'copyright' ||
+          $addonManifest['licenseCode'] == 'pd')) {
+        return null;
+      }
+    }
+
     // Actions on xpinstall key
     if (array_key_exists('xpinstall', $addonManifest)) {
       // JSON Decode xpinstall
@@ -379,26 +380,20 @@ class classReadManifest {
           continue;
         }
 
-        // prettyDate is no longer used so remove it if it exists
-        if (array_key_exists('prettyDate', $addonManifest['xpinstall'][$_key])) {
-          unset($addonManifest['xpinstall'][$_key]['prettyDate']);
-        }
-
-        // Set a human readable date based on mtime
-        $addonManifest['xpinstall'][$_key]['date'] =
-          date('F j, Y' ,$addonManifest['xpinstall'][$_key]['mtime']);
+        // Set a human readable date based on epoch
+        $addonManifest['xpinstall'][$_key]['date'] = date('F j, Y' ,$addonManifest['xpinstall'][$_key]['epoch']);
       }
 
       // Ensure that the xpinstall keys are reverse sorted using an anonymous function and a spaceship
       uasort($addonManifest['xpinstall'], function ($_xpi1, $_xpi2) {
-        return $_xpi2['mtime'] <=> $_xpi1['mtime'];
+        return $_xpi2['epoch'] <=> $_xpi1['epoch'];
       });
     }
 
     // If content exists, process it
-    if (array_key_exists('content', $addonManifest)) {
+    if ($processContent && array_key_exists('content', $addonManifest)) {
       // Check to ensure that there really is content
-      $addonManifest['content'] = funcCheckVar($addonManifest['content']);
+      $addonManifest['content'] = funcUnifiedVariable('var', $addonManifest['content']);
 
       // Process content or assign description to it
       if ($addonManifest['content'] != null) {
@@ -476,12 +471,12 @@ class classReadManifest {
   }
 
  /********************************************************************************************************************
-  * Internal method to process "phoebus.content"
+  * Internal (most of the time) method to process "phoebus.content"
   * 
   * @param $_addonPhoebusContent    raw "phoebus.content"
   * @returns                        processed "phoebus.content"
   ********************************************************************************************************************/
-  private function funcProcessContent($_addonPhoebusContent) {     
+  public function funcProcessContent($_addonPhoebusContent) {     
     // html encode phoebus.content
     $_addonPhoebusContent = htmlentities($_addonPhoebusContent, ENT_XHTML);
 

@@ -69,7 +69,7 @@ class classGenerateContent {
 
     if ($_useSmarty) {
       // Get smartyDebug HTTP GET Argument
-      $this->arraySoftwareState['requestSmartyDebug'] = funcHTTPGetValue('smartyDebug');
+      $this->arraySoftwareState['requestSmartyDebug'] = funcUnifiedVariable('get', 'smartyDebug');
 
       // Initalize Smarty
       $this->libSmarty = new Smarty();
@@ -386,7 +386,7 @@ class classGenerateContent {
         '{%ADDON_TYPE}'         => $_addonType,
         '{%ADDON_ID}'           => $_value['id'],
         '{%ADDON_VERSION}'      => $_addonXPInstall['version'],
-        '{%ADDON_MTIME}'        => $_addonXPInstall['mtime'],
+        '{%ADDON_EPOCH}'        => $_addonXPInstall['epoch'],
         '{%ADDON_NAME}'         => $_value['name'],
         '{%ADDON_CREATOR}'      => $_value['creator'],
         '{%ADDON_CREATORURL}'   => 'about:blank',
