@@ -55,6 +55,7 @@ $arrayAddonsDB = array(
     'imagetoolbox@addons.palemoon.org' => 'image-toolbox',
     'inforss-reloaded@addons.palemoon.org' => 'inforss-reloaded',
     'isadmin@vdtsoftware.ffext' => 'isadmin',
+    'inspector@mozilla.org' => 'dom-inspector',
     'jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs@jetpack' => 'scroll-to-top',
     'jid1-BoFifL9Vbdl2zQ@jetpack' => 'decentraleyes',
     'jid1-KKzOGWgsW3Ao4Q@jetpack' => 'i-dont-care-about-cookies',

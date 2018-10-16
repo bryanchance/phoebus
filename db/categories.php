@@ -241,6 +241,7 @@ $arrayCategoryList08 = array(
 $arrayCategoryList09 = array(
     'title' => 'Web Development',
     'error-console2',
+    'dom-inspector',
     'jsview-revive',
     'fireftp',
     'firessh',
