@@ -25,6 +25,7 @@ $arrayAddonsDB = array(
     'blockcont@mdsy' => 'block-content',
     'bluemoonlinux@addons.palemoon.org' => 'blue-moon-linux',
     'camimoon@lootyhoof-pm' => 'camimoon',
+    'CanvasBlocker@legacy' => 'canvasblocker-legacy',
     'cipherfox@mkfly' => 'cipherfox',
     'classicpasswordeditor@daniel.dawson' => 'classic-password-editor',
     'color-my-tabs@wsdfhjxc' => 'color-my-tabs',

@@ -139,6 +139,7 @@ $arrayCategoryList05 = array(
     'proxy-privacy-ruler',
     'javascriptblock',
     'cookies-control-panel',
+    'canvasblocker-legacy',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
