@@ -120,14 +120,14 @@ const TARGET_APPLICATION_SITE = array(
 // Application IDs are normally in the form of a GUID, however, they
 // can be in the form of a user@host ID as well.
 // Basilisk/Iceweasel/Firefox have the same ID
-// FossaMail/Thunderbird have the same ID
+// Interlink/Thunderbird have the same ID
 const TARGET_APPLICATION_ID = array(
   // MCP
   'palemoon'        => '{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}',
   'basilisk'        => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-  'fossamail'       => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
   // BinOC
   'borealis'        => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
+  'interlink'       => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
   // Hyperbola
   'iceweasel'       => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
   'icedove'         => '{3aa07e56-beb0-47a0-b0cb-c735edd25419}',

@@ -7,7 +7,6 @@
 
 // URI Constants
 const URI_ROOT = '/';
-const URI_INCOMPATIBLE_PAGE = '/incompatible/';
 const URI_ADDON_PAGE = '/addon/';
 const URI_ADDON_RELEASES = '/releases/';
 const URI_ADDON_LICENSE = '/license/';
@@ -90,16 +89,6 @@ switch ($arraySoftwareState['requestPath']) {
     $moduleGenerateContent->addonSite(
       $arraySoftwareState['currentApplication'] . '-frontpage.xhtml', 'Explore Add-ons'
     );
-    break;
-  case URI_INCOMPATIBLE_PAGE:
-    // Pale Moon Incompatible Add-ons Page
-    // If not Pale Moon than 404
-    if ($arraySoftwareState['currentApplication'] != 'palemoon') {
-      funcSend404();
-    }
-
-    // Generate the Incompatible Add-ons Page
-    $moduleGenerateContent->addonSite('palemoon-incompatible.xhtml', 'Incompatible Add-ons');
     break;
   case URI_SEARCH:
     // Search Page

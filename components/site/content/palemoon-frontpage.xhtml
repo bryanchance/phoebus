@@ -10,8 +10,5 @@
 <h3>Language Packs</h3>
 <p>¿Habla español? Parlez-vous français? You can find these and many more to solve your linguistic needs <a href="/language-packs/">here</a>.</p>
 
-<h3>Some of your add-ons not working since you updated to Pale Moon 27?</h3>
-<p>Please check out <a href="/incompatible/">Known Incompatible Add-ons</a>.
-
 <h3>Want your add-on listed here?</h3>
 <p>If you are a developer and want to have your add-on listed on the Pale Moon Add-ons Site, please see <a href="http://developer.palemoon.org/Add-ons:Site">here</a>.</p>

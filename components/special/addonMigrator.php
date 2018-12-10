@@ -290,7 +290,7 @@ function funcLangPacks() {
       copy($_value, './datastore/addons/' . $_slug . '/' . $_xpiName);
       copy(
         './datastore/langpacks/icons/' .
-        str_replace(array('langpack-', '@palemoon.org'), '', $_addonInstallRDF['id']) .
+        str_replace(array('langpack-', '@palemoon.org'), '', $_installManifest['id']) .
         '.png', './datastore/addons/' . $_slug . '/icon.png'
       );
     }
@@ -374,46 +374,54 @@ function funcSQL($_arrayAddons, $_arrayUsers) {
         $_targetApplication = array_keys($_addon['xpinstall'][$_addon['releaseXPI']]['targetApplication']);
 
         foreach ($_targetApplication as $_value2) {
-          switch($_value2) {
-            case TARGET_APPLICATION_ID['toolkit']:
-              $_client['toolkit'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['palemoon']:
-              $_client['palemoon'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['borealis']:
-              $_client['borealis'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['icedove']:
-              $_client['icedove'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['firefox']:
-              $_client['firefox'] = 1;
-              if (array_key_exists('basilisk', $_addon['xpinstall'][$_addon['releaseXPI']]['targetApplication'][TARGET_APPLICATION_ID['firefox']])) {
-                $_client['basilisk'] = 1;
-              }
-              continue;
-            case TARGET_APPLICATION_ID['thunderbird']:
-              $_client['thunderbird'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['seamonkey']:
-              $_client['seamonkey'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['fennec-xul']:
-              $_client['fennec-xul'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['fennec-native']:
-              $_client['fennec-native'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['sunbird']:
-              $_client['sunbird'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['instantbird']:
-              $_client['instantbird'] = 1;
-              continue;
-            case TARGET_APPLICATION_ID['adblock-browser']:
-              $_client['adblock-browser'] = 1;
-              continue;
+          if (TARGET_APPLICATION_ID['toolkit'] == $_value2) {
+            $_client['toolkit'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['palemoon'] == $_value2) {
+            $_client['palemoon'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['firefox'] == $_value2) {
+            $_client['firefox'] = 1;
+            $_client['basilisk'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['borealis'] == $_value2) {
+            $_client['borealis'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['thunderbird'] == $_value2) {
+            $_client['thunderbird'] = 1;
+            $_client['interlink'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['icedove'] == $_value2) {
+            $_client['icedove'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['seamonkey'] == $_value2) {
+            $_client['seamonkey'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['fennec-xul'] == $_value2) {
+            $_client['fennec-xul'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['fennec-native'] == $_value2) {
+            $_client['fennec-native'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['sunbird'] == $_value2) {
+            $_client['sunbird'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['instantbird'] == $_value2) {
+            $_client['instantbird'] = 1;
+          }
+
+          if (TARGET_APPLICATION_ID['adblock-browser'] == $_value2) {
+            $_client['adblock-browser'] = 1;
           }
         }
 

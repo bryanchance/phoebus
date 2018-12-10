@@ -139,13 +139,6 @@ if (in_array($arraySoftwareState['requestAddonID'], BAD_ADDON_IDS)) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// Handle FossaMail Special Case (Send to AMO unconditionally)
-if ($arraySoftwareState['requestAppID'] == TARGET_APPLICATION_ID['fossamail']) {
-  funcSendToAMO(TARGET_APPLICATION_ID['thunderbird'], '38.9');
-}
-
-// --------------------------------------------------------------------------------------------------------------------
-
 // Check for Add-on Updates
 if ($arraySoftwareState['requestAppID'] == $arraySoftwareState['targetApplicationID'] ||
     ($arraySoftwareState['debugMode'] && $arraySoftwareState['orginalApplication'])) {
