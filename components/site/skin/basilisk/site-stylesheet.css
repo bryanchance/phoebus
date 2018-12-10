@@ -312,7 +312,8 @@ a.sitename, a:visited.sitename {
   margin-top: 4px;
   width: 240px;
   height: 60px;
-  border:1px solid #aaaaaa;
+  border: 2px solid #111;
+  border-radius: 3px;
   overflow: hidden;
 }
 

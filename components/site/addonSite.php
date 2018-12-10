@@ -13,17 +13,19 @@ const URI_ADDON_RELEASES = '/releases/';
 const URI_ADDON_LICENSE = '/license/';
 const URI_EXTENSIONS = '/extensions/';
 const URI_THEMES = '/themes/';
+const URI_PERSONAS = '/personas/';
 const URI_SEARCHPLUGINS = '/search-plugins/';
 const URI_LANGPACKS = '/language-packs/';
 const URI_SEARCH = '/search/';
 
 // Include modules
-$arrayIncludes = ['database', 'readManifest', 'generateContent'];
+$arrayIncludes = ['database', 'readManifest', 'persona', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // Instantiate modules
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
+$modulePersona = new classPersona;
 $moduleGenerateContent = new classGenerateContent(true);
 
 // ====================================================================================================================
@@ -158,6 +160,22 @@ switch ($arraySoftwareState['requestPath']) {
 
     // We have themes so generate the page
     $moduleGenerateContent->addonSite('cat-themes', 'Themes', $categoryManifest);
+    break;
+  case URI_PERSONAS:
+    // Personas Category
+    // Check if Themes are enabled
+    funcCheckEnabledFeature('personas');
+
+    // Query SQL and get all personas
+    $categoryManifest = $modulePersona->getPersonas('site-all-personas');
+
+    // If there are no themes then 404
+    if (!$categoryManifest) {
+      funcSend404();
+    }
+
+    // We have personas so generate the page
+    $moduleGenerateContent->addonSite('cat-personas', 'Personas', $categoryManifest);
     break;
   case URI_LANGPACKS:
     // Language Packs Category

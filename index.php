@@ -42,6 +42,7 @@ const MODULES = array(
   'database'        => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
   'mozillaRDF'      => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
+  'persona'        => ROOT_PATH . MODULES_RELPATH . 'classPersona.php',
   'readManifest'    => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'validator'       => ROOT_PATH . MODULES_RELPATH . 'classAddonValidator.php',
   'vc'              => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
@@ -66,7 +67,7 @@ const TARGET_APPLICATION_SITE = array(
     ),
     'features' => array(
       'https', 'extensions', 'extensions-cat', 'themes',
-      'language-packs', 'search-plugins'
+      'personas', 'language-packs', 'search-plugins'
     )
   ),
   'basilisk' => array(
@@ -77,7 +78,7 @@ const TARGET_APPLICATION_SITE = array(
       'dev' => null
     ),
     'features' => array(
-      'https', 'extensions', 'search-plugins'
+      'https', 'extensions', 'search-plugins', 'personas'
     )
   ),
   'borealis' => array(
@@ -99,7 +100,7 @@ const TARGET_APPLICATION_SITE = array(
       'dev' => null
     ),
     'features' => array(
-      'https', 'extensions'
+      'https', 'extensions', 'personas'
     )
   ),
   'icedove' => array(

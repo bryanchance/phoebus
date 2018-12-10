@@ -19,6 +19,7 @@ class classGenerateContent {
   const ADDON_CATEGORY_TEMPLATE = 'addon-category.xhtml';
   const EXTENSION_CATEGORY_TEMPLATE = 'extension-category.xhtml';
   const LANGPACK_CATEGORY_TEMPLATE = 'langpack-category.xhtml';
+  const PERSONA_CATEGORY_TEMPLATE = 'persona-category.xhtml';
   const SEARCHPLUGIN_CATEGORY_TEMPLATE = 'searchplugin-category.xhtml';
   const ADDON_PAGE_TEMPLATE = 'addon-page.xhtml';
   const ADDON_LICENSE_TEMPLATE = 'addon-license.xhtml';
@@ -139,6 +140,9 @@ class classGenerateContent {
       case 'cat-themes':
       case 'search':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
+        break;
+      case 'cat-personas':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::PERSONA_CATEGORY_TEMPLATE);
         break;
       case 'cat-language-packs':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::LANGPACK_CATEGORY_TEMPLATE);

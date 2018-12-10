@@ -43,12 +43,13 @@ const BAD_ADDON_IDS = array(
 );
 
 // Include modules
-$arrayIncludes = ['database', 'readManifest', 'generateContent'];
+$arrayIncludes = ['database', 'readManifest', 'persona', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // Instantiate modules
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
+$modulePersona = new classPersona();
 $moduleGenerateContent = new classGenerateContent();
 
 // ====================================================================================================================
@@ -74,6 +75,25 @@ function funcSendToAMO($_appID, $_appVersion) {
 // ====================================================================================================================
 
 // == | Main | ========================================================================================================
+
+// Deal with Personas before anything else
+$arraySoftwareState['requestPersona'] = funcUnifiedVariable('get', 'persona');
+
+if ($arraySoftwareState['requestPersona']) {
+  $personaManifest = $modulePersona->getPersonaByID($arraySoftwareState['requestPersona']);
+
+  funcSendHeader('json');
+
+  if (!$personaManifest) {
+    print('{}');
+    exit();
+  }
+
+  print(json_encode($personaManifest, 320));
+  exit();
+}
+
+// --------------------------------------------------------------------------------------------------------------------
 
 // Assign HTTP GET arguments to the software state
 $arraySoftwareState['requestAddonID'] = funcUnifiedVariable('get', 'id');
