@@ -83,13 +83,24 @@ const TARGET_APPLICATION_SITE = array(
   ),
   'borealis' => array(
     'enabled' => false,
-    'name' => 'Add-ons - Borealis - Binary Outcast',
+    'name' => 'Borealis Add-ons - Binary Outcast',
     'domain' => array(
       'live' => 'borealis-addons.binaryoutcast.com',
       'dev' => null
     ),
     'features' => array(
       'extensions', 'search-plugins'
+    )
+  ),
+  'interlink' => array(
+    'enabled' => true,
+    'name' => 'Interlink Add-ons - Binary Outcast',
+    'domain' => array(
+      'live' => 'interlink-addons.binaryoutcast.com',
+      'dev' => null
+    ),
+    'features' => array(
+      'extensions'
     )
   ),
   'iceweasel' => array(

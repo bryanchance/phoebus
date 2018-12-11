@@ -84,6 +84,11 @@ else {
 // Use a simple switch case to deal with simple URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_ROOT:
+    // Special Case: Interlink should go to Extensions instead of a front page
+    if ($arraySoftwareState['currentApplication'] == 'interlink') {
+      funcRedirect('/extensions/');
+    }
+
     // Front Page
     // Generate the frontpage from SITE content
     $moduleGenerateContent->addonSite(

@@ -49,7 +49,18 @@ $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']])
 
 // --------------------------------------------------------------------------------------------------------------------
 
+// Special case: Interlink should use Pale Moon's panel access
+if ($arraySoftwareState['currentApplication'] == 'interlink') {
+  funcRedirect('https://addons.palemoon.org/panel/');
+}
+
 // The Panel can ONLY be used on HTTPS
+if (!in_array('https', TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
+  funcError('The Phoebus Panel requires HTTPS, however this application\'s Add-ons Site does not have this feature enabled.</li>' .
+            '<li>To access the Panel please try one of the other Phoebus-based Add-ons Sites.</li>' .
+            '<li>If all else fails you can always use the Panel at the <a href="https://addons.palemoon.org/panel/">Pale Moon Add-ons Site</a>.');
+}
+
 if ($_SERVER['SCHEME'] != 'https') {
   funcRedirect('https://' . $arraySoftwareState['currentDomain'] . '/panel/');
 }
