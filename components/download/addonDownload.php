@@ -43,7 +43,14 @@ function funcDownloadXPI($_addonManifest, $_addonVersion) {
   }
   
   if (file_exists($_addonFile)) {
-    header('Content-Type: application/x-xpinstall');
+    // Non-web browsers should send as an arbitrary binary stream
+    if ($GLOBALS['strRequestBinaryDownload']) {
+      header('Content-Type: application/octet-stream');
+    }
+    else {
+      header('Content-Type: application/x-xpinstall');
+    }
+
     header('Content-Disposition: inline; filename="' . $_versionXPI . '"');
     header('Content-Length: ' . filesize($_addonFile));
     header('Cache-Control: no-cache');
@@ -85,6 +92,7 @@ function funcDownloadSearchPlugin($_searchPluginName) {
 
 $strRequestAddonID = funcUnifiedVariable('get', 'id');
 $strRequestAddonVersion = funcUnifiedVariable('get', 'version');
+$strRequestBinaryDownload = funcUnifiedVariable('get', 'binary');
 
 // Sanity
 if ($strRequestAddonID == null) {
