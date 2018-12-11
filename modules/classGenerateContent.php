@@ -117,38 +117,42 @@ class classGenerateContent {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Read the Site Template
-    $template = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
+    $template = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_TEMPLATE);
 
     // Read the Site Stylesheet
-    $stylesheet = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
+    $stylesheet = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SITE_STYLESHEET);
+
+    if (!$template || !$stylesheet) {
+      funcError('Site Template and/or Stylesheet could not be read or is missing');
+    }
 
     // ----------------------------------------------------------------------------------------------------------------
 
     switch ($_type) {
       case 'addon-page':
       case 'addon-releases':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE);
         break;
       case 'addon-license':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_LICENSE_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_LICENSE_TEMPLATE);
         break;
       case 'cat-extension-category':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::EXTENSION_CATEGORY_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::EXTENSION_CATEGORY_TEMPLATE);
         break;
       case 'cat-all-extensions':
       case 'cat-extensions':
       case 'cat-themes':
       case 'search':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_CATEGORY_TEMPLATE);
         break;
       case 'cat-personas':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::PERSONA_CATEGORY_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::PERSONA_CATEGORY_TEMPLATE);
         break;
       case 'cat-language-packs':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::LANGPACK_CATEGORY_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::LANGPACK_CATEGORY_TEMPLATE);
         break;
       case 'cat-search-plugins':
-        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SEARCHPLUGIN_CATEGORY_TEMPLATE);
+        $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SEARCHPLUGIN_CATEGORY_TEMPLATE);
         break;
       default:
         if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
@@ -157,6 +161,10 @@ class classGenerateContent {
         else {
           funcError('Unkown template or content');
         }
+    }
+
+    if (!$content) {
+      funcError('Content template could not be read or is missing');
     }
 
     // ----------------------------------------------------------------------------------------------------------------
