@@ -35,18 +35,12 @@
 <div>
   {foreach $PAGE_DATA as $key}
   {if $key.type == 'external'}
-    <a href="{$key.url}" target="_blank" title="This add-on is hosted independently"
-  {if $PAGE_TYPE == 'cat-all-extensions'}
-       class="category-extension">
-  {else}
+    <a href="{$key.url}"
+       target="_blank"
+       title="This add-on is hosted independently"
        class="fake-table-row category-addon real-externals">
-  {/if}
   {else}
-  {if $PAGE_TYPE == 'cat-all-extensions'}
-    <a href="{$key.url}" class="category-extension">
-  {else}
-    <a href="{$key.url}" class="fake-table-row category-addon">
-  {/if}
+    <a href="{$key.url}" class="fake-table-row category-addon hosted-extensions">
   {/if}
     <img src="{$key.icon}" class="category-addon-icon alignleft" width="32px" height="32px" />
 

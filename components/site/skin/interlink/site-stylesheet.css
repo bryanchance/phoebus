@@ -387,19 +387,6 @@ background: linear-gradient(to right, rgba(240,240,240,1) 50%,rgba(255,255,255,0
   line-height: normal;
 }
 
-.category-extension {
-    width: 570px;
-    height: 64px;
-    display: inline-block;
-    margin-left: 0px;
-    margin-right: 0px;
-    text-align: left;
-    vertical-align: top;
-    padding: 4px 8px;
-    text-decoration: none;
-    color: black;
-}
-
 .category-addon {
   width: 95%;
   height: 64px; 
