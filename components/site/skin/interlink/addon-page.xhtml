@@ -30,7 +30,7 @@
   {/if}
 
   <p style="text-align: center; padding: 10px; margin-top: 20px; margin-bottom: 20px;">
-    <a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}&binary=1">
+    <a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$PAGE_DATA['xpinstall'][$PAGE_DATA['releaseXPI']]['version']}">
       <img border="0" src="{$BASE_PATH}../palemoon/download.png" alt="" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
       <span>Download Now</span>
     </a>
@@ -40,7 +40,7 @@
 {if $PAGE_TYPE == 'addon-releases'}
   {foreach $PAGE_DATA.xpinstall as $key}
     <div class="fake-table-row category-addon">
-      <div class="alignright" style="margin-top: 8px;"><a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}&binary=1">
+      <div class="alignright" style="margin-top: 8px;"><a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}">
         <img border="0" src="{$BASE_PATH}../palemoon/download.png" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
         <span>Download Now</span>
       </a>
