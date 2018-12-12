@@ -67,7 +67,7 @@ const TARGET_APPLICATION_SITE = array(
     ),
     'features' => array(
       'https', 'extensions', 'extensions-cat', 'themes',
-      'personas', 'language-packs', 'search-plugins', 'disable-xpinstall'
+      'personas', 'language-packs', 'search-plugins'
     )
   ),
   'basilisk' => array(
