@@ -100,7 +100,7 @@ const TARGET_APPLICATION_SITE = array(
       'dev' => null
     ),
     'features' => array(
-      'extensions'
+      'extensions', 'disable-xpinstall'
     )
   ),
   'iceweasel' => array(
@@ -122,7 +122,7 @@ const TARGET_APPLICATION_SITE = array(
       'dev' => null
     ),
     'features' => array(
-      'https', 'extensions'
+      'https', 'extensions', 'disable-xpinstall'
     )
   ),
 );
