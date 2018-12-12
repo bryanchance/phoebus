@@ -44,7 +44,7 @@ function funcDownloadXPI($_addonManifest, $_addonVersion) {
   
   if (file_exists($_addonFile)) {
     // Non-web browsers should send as an arbitrary binary stream
-    if (in_array('disable-xpinstall', TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
+    if (in_array('disable-xpinstall', TARGET_APPLICATION_SITE[$GLOBALS['arraySoftwareState']['currentApplication']]['features'])) {
       header('Content-Type: application/octet-stream');
     }
     else {

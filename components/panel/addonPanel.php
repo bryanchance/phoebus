@@ -55,7 +55,7 @@ if ($arraySoftwareState['currentApplication'] == 'interlink') {
 }
 
 // The Panel can ONLY be used on HTTPS
-if (!in_array('https', TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
+if (!in_array('https', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features'])) {
   funcError('The Phoebus Panel requires HTTPS, however this application\'s Add-ons Site does not have this feature enabled.</li>' .
             '<li>To access the Panel please try one of the other Phoebus-based Add-ons Sites.</li>' .
             '<li>If all else fails you can always use the Panel at the <a href="https://addons.palemoon.org/panel/">Pale Moon Add-ons Site</a>.');
