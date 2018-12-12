@@ -39,7 +39,7 @@
 
 {if $PAGE_TYPE == 'addon-releases'}
   {foreach $PAGE_DATA.xpinstall as $key}
-    <div class="fake-table-row category-addon">
+    <div class="fake-table-row category-addon" style="margin-top: 0px;">
       <div class="alignright" style="margin-top: 8px;"><a class="dllink_green" href="/?component=download&id={$PAGE_DATA.id}&version={$key.version}">
         <img border="0" src="{$BASE_PATH}../palemoon/download.png" style="width: 24px; height: 24px; position: relative; top: 7px; right: 4px;" />
         <span>Download Now</span>
@@ -48,7 +48,7 @@
       <p style="margin-top: 8px;">
         <strong>Version {$key.version}</strong><br />
         <small>Released: {$key.date}<br />
-          Works with Pale Moon {$key['targetApplication'][$APPLICATION_ID]['minVersion']} to
+          Works with Interlink {$key['targetApplication'][$APPLICATION_ID]['minVersion']} to
           {if $key['targetApplication'][$APPLICATION_ID]['maxVersion'] == '*'}
             Unknown
           {else}
