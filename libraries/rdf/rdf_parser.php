@@ -546,7 +546,7 @@ class Rdf_parser {
     $predicate_buffer = '';
 
     if ($this->rdf_parser["statement_handler"]) {
-      $this->rdf_parser["user_data"] = call_user_func($this->rdf_parser["statement_handler"], $this->rdf_parser["user_data"], $subject_type, $subject, $predicate, $ordinal, $object_type, $object, $xml_lang);
+      $this->rdf_parser["user_data"] = call_user_func_array($this->rdf_parser["statement_handler"], array(&$this->rdf_parser["user_data"], $subject_type, $subject, $predicate, $ordinal, $object_type, $object, $xml_lang));
       // $this->rdf_parser["statement_handler"]($this->rdf_parser["user_data"],$subject_type,$subject,$predicate,$ordinal,$object_type,$object,$xml_lang )
       if ($bag_id) {
         if ($statements == '') {
