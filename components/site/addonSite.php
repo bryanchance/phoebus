@@ -6,16 +6,16 @@
 // == | Setup | =======================================================================================================
 
 // URI Constants
-const URI_ROOT = '/';
-const URI_ADDON_PAGE = '/addon/';
-const URI_ADDON_RELEASES = '/releases/';
-const URI_ADDON_LICENSE = '/license/';
-const URI_EXTENSIONS = '/extensions/';
-const URI_THEMES = '/themes/';
-const URI_PERSONAS = '/personas/';
-const URI_SEARCHPLUGINS = '/search-plugins/';
-const URI_LANGPACKS = '/language-packs/';
-const URI_SEARCH = '/search/';
+const URI_ROOT            = '/';
+const URI_ADDON_PAGE      = '/addon/';
+const URI_ADDON_RELEASES  = '/releases/';
+const URI_ADDON_LICENSE   = '/license/';
+const URI_EXTENSIONS      = '/extensions/';
+const URI_THEMES          = '/themes/';
+const URI_PERSONAS        = '/personas/';
+const URI_SEARCHPLUGINS   = '/search-plugins/';
+const URI_LANGPACKS       = '/language-packs/';
+const URI_SEARCH          = '/search/';
 
 // Include modules
 $arrayIncludes = ['database', 'readManifest', 'persona', 'generateContent'];
@@ -34,24 +34,31 @@ $moduleGenerateContent = new classGenerateContent(true);
 /**********************************************************************************************************************
 * Strips path to obtain the slug
 *
-* @param $_path     $arraySoftwareState['requestPath']
-* @param $_prefix   Prefix to strip 
+* @param $aPath     $arraySoftwareState['requestPath']
+* @param $aPrefix   Prefix to strip 
 * @returns          slug
 ***********************************************************************************************************************/
-function funcStripPath($_path, $_prefix) {
-  return str_replace('/', '', str_replace($_prefix, '', $_path));
+function funcStripPath($aPath, $aPrefix) {
+  return str_replace('/', '', str_replace($aPrefix, '', $aPath));
 }
 
 /**********************************************************************************************************************
 * Checks for enabled features
 *
-* @param $_value    feature
+* @param $aFeature    feature
+* @param $aReturn     if true we will return a value else 404
 ***********************************************************************************************************************/
-function funcCheckEnabledFeature($_value) {
-  $_currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
-  if (!in_array($_value, TARGET_APPLICATION_SITE[$_currentApplication]['features'])) {
-    funcSend404();
+function funcCheckEnabledFeature($aFeature, $aReturn = null) {
+  $currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
+  if (!in_array($aFeature, TARGET_APPLICATION_SITE[$currentApplication]['features'])) {
+    if(!$aReturn) {
+      funcSend404();
+    }
+
+    return null;
   }
+
+  return true;
 }
 
 // ====================================================================================================================
@@ -59,6 +66,8 @@ function funcCheckEnabledFeature($_value) {
 // == | Main | ========================================================================================================
 
 // Site Name
+$arraySoftwareState['currentName'] = TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
+
 // When in debug mode it displays the software name and version and if git
 // is detected it will append the branch and short sha1 hash
 // else it will use the name defined in TARGET_APPLICATION_SITE
@@ -74,9 +83,6 @@ if ($arraySoftwareState['debugMode']) {
       'Branch: ' . $_strGitBranch . ' - ' .
       'Commit: ' . substr($_strGitSHA1, 0, 7);
   }
-}
-else {
-  $arraySoftwareState['currentName'] = TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['name'];
 }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -114,14 +120,14 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_EXTENSIONS:
     // Extensions Category (Top Level)
     // Find out if we should use Extension Subcategories or All Extensions
-    $useExtensionSubcategories =
-      in_array('extensions-cat', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
+    $arraySoftwareState['requestAllExtensions'] = funcUnifiedVariable('get', 'all');
+    $useExtensionSubcategories = funcCheckEnabledFeature('extensions-cat', true);
 
-    if ($useExtensionSubcategories) {
+    if ($useExtensionSubcategories && !$arraySoftwareState['requestAllExtensions']) {
       // We are using Extension Subcategories so generate a page that lists all the subcategories
-      $moduleGenerateContent->addonSite(
-        'cat-extension-category', 'Extensions', classReadManifest::EXTENSION_CATEGORY_SLUGS
-      );
+      $moduleGenerateContent->addonSite('cat-extension-category',
+                                        'Extensions',
+                                        classReadManifest::EXTENSION_CATEGORY_SLUGS);
     }
 
     // We are doing an "All Extensions" Page
@@ -134,10 +140,10 @@ switch ($arraySoftwareState['requestPath']) {
     }
 
     // Generate the "All Extensions" Page
-    $moduleGenerateContent->addonSite(
-      'cat-all-extensions', 'Extensions', $categoryManifest,
-      classReadManifest::EXTENSION_CATEGORY_SLUGS
-    );
+    $moduleGenerateContent->addonSite('cat-all-extensions',
+                                      'Extensions',
+                                      $categoryManifest,
+                                      classReadManifest::EXTENSION_CATEGORY_SLUGS);
     break;
   case URI_THEMES:
     // Themes Category
@@ -157,13 +163,13 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_PERSONAS:
     // Personas Category
-    // Check if Themes are enabled
+    // Check if Personas are enabled
     funcCheckEnabledFeature('personas');
 
     // Query SQL and get all personas
     $categoryManifest = $modulePersona->getPersonas('site-all-personas');
 
-    // If there are no themes then 404
+    // If there are no Personas then 404
     if (!$categoryManifest) {
       funcSend404();
     }
@@ -192,7 +198,7 @@ switch ($arraySoftwareState['requestPath']) {
     // See if Search Engine Plugins are enabled
     funcCheckEnabledFeature('search-plugins');
 
-    // Get an array of hardcoded langpacks from readManifest
+    // Get an array of hardcoded Search Engine Plugins from readManifest
     $categoryManifest = $moduleReadManifest->getSearchPlugins();
 
     // If for some reason there aren't any even though there is no error checking in the method, 404
@@ -235,10 +241,9 @@ if (startsWith($arraySoftwareState['requestPath'], URI_EXTENSIONS)) {
   }
 
   // We have extensions so generate the subcategory page
-  $moduleGenerateContent->addonSite(
-    'cat-extensions', 'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
-    $categoryManifest, classReadManifest::EXTENSION_CATEGORY_SLUGS
-  );
+  $moduleGenerateContent->addonSite('cat-extensions',
+                                    'Extensions: ' . classReadManifest::EXTENSION_CATEGORY_SLUGS[$strSlug],
+                                    $categoryManifest, classReadManifest::EXTENSION_CATEGORY_SLUGS);
 }
 // Add-on Page
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADDON_PAGE)) {

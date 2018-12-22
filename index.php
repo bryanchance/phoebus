@@ -26,7 +26,6 @@ const NEW_LINE            = "\n";
 
 // Define components
 const COMPONENTS = array(
-  // 'api'          => ROOT_PATH . COMPONENTS_RELPATH . 'api/addonAPI.php',
   'aus'             => ROOT_PATH . COMPONENTS_RELPATH . 'aus/addonUpdateService.php',
   'discover'        => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download'        => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
@@ -42,7 +41,7 @@ const MODULES = array(
   'database'        => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
   'mozillaRDF'      => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
-  'persona'        => ROOT_PATH . MODULES_RELPATH . 'classPersona.php',
+  'persona'         => ROOT_PATH . MODULES_RELPATH . 'classPersona.php',
   'readManifest'    => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
   'validator'       => ROOT_PATH . MODULES_RELPATH . 'classAddonValidator.php',
   'vc'              => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
@@ -59,71 +58,40 @@ const LIBRARIES = array(
 // the enabled site features
 const TARGET_APPLICATION_SITE = array(
   'palemoon' => array(
-    'enabled' => true,
-    'name' => 'Pale Moon - Add-ons',
-    'domain' => array(
-      'live' => 'addons.palemoon.org',
-      'dev' => 'addons-dev.palemoon.org'
-    ),
-    'features' => array(
-      'https', 'extensions', 'extensions-cat', 'themes',
-      'personas', 'language-packs', 'search-plugins'
-    )
+    'enabled'       => true,
+    'name'          => 'Pale Moon - Add-ons',
+    'domain'        => array('live' => 'addons.palemoon.org', 'dev' => 'addons-dev.palemoon.org'),
+    'features'      => array('https', 'extensions', 'extensions-cat', 'themes', 'personas', 'language-packs', 'search-plugins')
   ),
   'basilisk' => array(
-    'enabled' => true,
-    'name' => 'Basilisk: add-ons',
-    'domain' => array(
-      'live' => 'addons.basilisk-browser.org',
-      'dev' => null
-    ),
-    'features' => array(
-      'https', 'extensions', 'search-plugins', 'personas'
-    )
+    'enabled'       => true,
+    'name'          => 'Basilisk: add-ons',
+    'domain'        => array('live' => 'addons.basilisk-browser.org', 'dev' => null),
+    'features'      => array('https', 'extensions', 'search-plugins', 'personas')
   ),
   'borealis' => array(
-    'enabled' => false,
-    'name' => 'Borealis Add-ons - Binary Outcast',
-    'domain' => array(
-      'live' => 'borealis-addons.binaryoutcast.com',
-      'dev' => null
-    ),
-    'features' => array(
-      'extensions', 'search-plugins'
-    )
+    'enabled'       => false,
+    'name'          => 'Borealis Add-ons - Binary Outcast',
+    'domain'        => array('live' => 'borealis-addons.binaryoutcast.com', 'dev' => null),
+    'features'      => array('extensions', 'search-plugins')
   ),
   'interlink' => array(
-    'enabled' => true,
-    'name' => 'Interlink Add-ons - Binary Outcast',
-    'domain' => array(
-      'live' => 'interlink-addons.binaryoutcast.com',
-      'dev' => null
-    ),
-    'features' => array(
-      'extensions', 'disable-xpinstall'
-    )
+    'enabled'       => true,
+    'name'          => 'Interlink Add-ons - Binary Outcast',
+    'domain'        => array('live' => 'interlink-addons.binaryoutcast.com', 'dev' => null),
+    'features'      => array('extensions', 'disable-xpinstall')
   ),
   'iceweasel' => array(
-    'enabled' => true,
-    'name' => 'Iceweasel Add-ons',
-    'domain' => array(
-      'live' => 'iw.addons.hyperbola.info',
-      'dev' => null
-    ),
-    'features' => array(
-      'https', 'extensions', 'personas'
-    )
+    'enabled'       => true,
+    'name'          => 'Iceweasel Add-ons',
+    'domain'        => array('live' => 'iw.addons.hyperbola.info', 'dev' => null),
+    'features'      => array('https', 'extensions', 'personas')
   ),
   'icedove' => array(
-    'enabled' => true,
-    'name' => 'Icedove Add-ons',
-    'domain' => array(
-      'live' => 'id.addons.hyperbola.info',
-      'dev' => null
-    ),
-    'features' => array(
-      'https', 'extensions', 'disable-xpinstall'
-    )
+    'enabled'       => true,
+    'name'          => 'Icedove Add-ons',
+    'domain'        => array('live' => 'id.addons.hyperbola.info', 'dev' => null),
+    'features'      => array('https', 'extensions', 'disable-xpinstall')
   ),
 );
 
@@ -161,7 +129,7 @@ const TARGET_APPLICATION_ID = array(
 
 // == | Functions | ===================================================================================================
 
-/******************************************************************************
+/**********************************************************************************************************************
 * Error function that will display data (Error Message) as an html page
 *
 * @param $_value    Data to be printed
@@ -169,8 +137,9 @@ const TARGET_APPLICATION_ID = array(
                     0: Default, just print $_value as-is
                     1: Print #_value as a JSON encoded string
                     2: Print $_value as valid php code
-******************************************************************************/
+**********************************************************************************************************************/
 function funcError($_value, $_mode = 0) {
+  // This is basically the orginal funcError behavior for use when pretty toolkit html is not reasonable
   if ($_mode == -1) {
     header('Content-Type: text/plain', false);
     var_export($_value);
@@ -271,14 +240,14 @@ function funcCheckModule($_value) {
 **********************************************************************************************************************/
 function funcSendHeader($_value) {
   $_arrayHeaders = array(
-    '404' => 'HTTP/1.0 404 Not Found',
-    '501' => 'HTTP/1.0 501 Not Implemented',
-    'html' => 'Content-Type: text/html',
-    'text' => 'Content-Type: text/plain',
-    'xml' => 'Content-Type: text/xml',
-    'json' => 'Content-Type: application/json',
-    'css' => 'Content-Type: text/css',
-    'phoebus' => 'X-Phoebus: https://github.com/Pale-Moon-Addons-Team/phoebus/',
+    '404'           => 'HTTP/1.0 404 Not Found',
+    '501'           => 'HTTP/1.0 501 Not Implemented',
+    'html'          => 'Content-Type: text/html',
+    'text'          => 'Content-Type: text/plain',
+    'xml'           => 'Content-Type: text/xml',
+    'json'          => 'Content-Type: application/json',
+    'css'           => 'Content-Type: text/css',
+    'phoebus'       => 'X-Phoebus: https://github.com/Pale-Moon-Addons-Team/phoebus/',
   );
   
   if (!headers_sent() && array_key_exists($_value, $_arrayHeaders)) {
@@ -359,20 +328,20 @@ function contains($haystack, $needle) {
 
 // Define an array that will hold the current application state
 $arraySoftwareState = array(
-  'authentication' => null,
-  'currentApplication' => null,
-  'orginalApplication' => null,
-  'currentName' => null,
-  'currentScheme' => funcUnifiedVariable('server', 'SCHEME'),
-  'currentDomain' => null,
-  'debugMode' => null,
-  'phpServerName' => funcUnifiedVariable('server', 'SERVER_NAME'),
-  'phpRequestURI' => funcUnifiedVariable('server', 'REQUEST_URI'),
-  'requestComponent' => funcUnifiedVariable('get', 'component'),
-  'requestPath' => funcUnifiedVariable('get', 'path'),
-  'requestApplication' => funcUnifiedVariable('get', 'appOverride'),
-  'requestDebugOff' => funcUnifiedVariable('get', 'debugOff'),
-  'requestSearchTerms' => funcUnifiedVariable('get', 'terms')
+  'authentication'      => null,
+  'currentApplication'  => null,
+  'orginalApplication'  => null,
+  'currentName'         => null,
+  'currentScheme'       => funcUnifiedVariable('server', 'SCHEME'),
+  'currentDomain'       => null,
+  'debugMode'           => null,
+  'phpServerName'       => funcUnifiedVariable('server', 'SERVER_NAME'),
+  'phpRequestURI'       => funcUnifiedVariable('server', 'REQUEST_URI'),
+  'requestComponent'    => funcUnifiedVariable('get', 'component'),
+  'requestPath'         => funcUnifiedVariable('get', 'path'),
+  'requestApplication'  => funcUnifiedVariable('get', 'appOverride'),
+  'requestDebugOff'     => funcUnifiedVariable('get', 'debugOff'),
+  'requestSearchTerms'  => funcUnifiedVariable('get', 'terms')
 );
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -380,14 +349,16 @@ $arraySoftwareState = array(
 // Decide which application by domain that the software will be serving
 // and if debug is enabled
 foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
-  if ($arraySoftwareState['phpServerName'] == $_value['domain']['live']) {
-    $arraySoftwareState['currentApplication'] = $_key;
-    $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
-  }
-  elseif ($arraySoftwareState['phpServerName'] == $_value['domain']['dev']) {
-    $arraySoftwareState['currentApplication'] = $_key;
-    $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
-    $arraySoftwareState['debugMode'] = true;
+  switch ($arraySoftwareState['phpServerName']) {
+    case $_value['domain']['live']:
+      $arraySoftwareState['currentApplication'] = $_key;
+      $arraySoftwareState['currentDomain'] = $_value['domain']['live'];
+      break;
+    case $_value['domain']['dev']:
+      $arraySoftwareState['currentApplication'] = $_key;
+      $arraySoftwareState['currentDomain'] = $_value['domain']['dev'];
+      $arraySoftwareState['debugMode'] = true;
+      break;
   }
 
   if ($arraySoftwareState['currentApplication']) {
@@ -395,36 +366,53 @@ foreach (TARGET_APPLICATION_SITE as $_key => $_value) {
   }
 }
 
+// --------------------------------------------------------------------------------------------------------------------
+
 // Items that get changed depending on debug mode
 if ($arraySoftwareState['debugMode']) {
   // We can disable debug mode when on a dev url otherwise if debug mode we want all errors
-  if ($arraySoftwareState['requestDebugOff']) {
-    $arraySoftwareState['debugMode'] = null;
-  }
-  else {
-    // Enable all errors
+  if (!$arraySoftwareState['requestDebugOff']) {
     error_reporting(E_ALL);
     ini_set("display_errors", "on");
   }
+  else {
+    $arraySoftwareState['debugMode'] = null;
+  }
 
   // Override currentApplication by query
-  // If requestApplication is set and it exists in the array constant check if it is
-  // enabled and if so set the currentApplication to that
-  if ($arraySoftwareState['requestApplication'] &&
-      array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE) &&
-      TARGET_APPLICATION_SITE[$arraySoftwareState['requestApplication']]['enabled']) {
-    $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
-    $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
-    $arraySoftwareState['requestApplication'] = null;
+  // If requestApplication is set and it exists in the array constant set the currentApplication to that
+  if ($arraySoftwareState['requestApplication']) {
+    if (array_key_exists($arraySoftwareState['requestApplication'], TARGET_APPLICATION_SITE)) {
+      $arraySoftwareState['orginalApplication'] = $arraySoftwareState['currentApplication'];
+      $arraySoftwareState['currentApplication'] = $arraySoftwareState['requestApplication'];
+    }
+    else {
+      funcError('Invalid application');
+    }
+
+    // The same application shouldn't be appOverriden
+    if ($arraySoftwareState['currentApplication'] == $arraySoftwareState['orginalApplication']) {
+      funcError('It makes no sense to appOverride the same application');
+    }
   }
 }
 
-// If there is no valid currentApplication or currentDomain
-// or if requestApplication is still set then error out
-if (!$arraySoftwareState['currentApplication'] || !$arraySoftwareState['currentDomain'] ||
-    $arraySoftwareState['requestApplication'] ||
-    ($arraySoftwareState['currentApplication'] == $arraySoftwareState['orginalApplication'])) {
-  funcError('Invalid domain or application');
+// --------------------------------------------------------------------------------------------------------------------
+
+// We cannot continue without a valid currentApplication
+if (!$arraySoftwareState['currentDomain']) {
+  funcError('Invalid domain');
+}
+
+// We cannot continue without a valid currentApplication
+if (!$arraySoftwareState['currentApplication']) {
+  funcError('Invalid application');
+}
+
+// We cannot contine if the application is not enabled
+if (!TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['enabled']) {
+  funcError('This ' . ucfirst($arraySoftwareState['currentApplication']) . ' Add-ons Site has been disabled. ' .
+            'Please contact the Phoebus Administrator');
 }
 
 // --------------------------------------------------------------------------------------------------------------------

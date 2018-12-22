@@ -59,15 +59,15 @@ $moduleGenerateContent = new classGenerateContent();
 /**********************************************************************************************************************
 * Sends update request to AMO
 *
-* @param $_appID        Application ID that we are claiming to be
-* @param $_appVersion   Application Version that we are claiming to be
+* @param $aAppID        Application ID that we are claiming to be
+* @param $aAppVersion   Application Version that we are claiming to be
 **********************************************************************************************************************/
-function funcSendToAMO($_appID, $_appVersion) {
+function funcSendToAMO($aAppID, $aAppVersion) {
   funcRedirect( 
     'https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=2' .
     '&id=' . $GLOBALS['arraySoftwareState']['requestAddonID'] .
     '&version=' . $GLOBALS['arraySoftwareState']['requestAddonVersion'] .
-    '&appID=' . $_appID . '&appVersion=' . $_appVersion .
+    '&appID=' . $aAppID . '&appVersion=' . $aAppVersion .
     '&compatMode=' . $GLOBALS['arraySoftwareState']['requestAddonCompatMode']
   );
 }

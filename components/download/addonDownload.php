@@ -17,32 +17,32 @@ $moduleReadManifest = new classReadManifest();
 
 // == | funcDownloadXPI | ===============================================
 
-function funcDownloadXPI($_addonManifest, $_addonVersion) {
-  $_versionXPI = null;
+function funcDownloadXPI($aAddonManifest, $aAddonVersion) {
+  $versionXPI = null;
   
-  if ($_addonVersion == 'latest') {
-    $_versionXPI = $_addonManifest['release'];
-    $_addonFile = $_addonManifest['basePath'] . $_versionXPI;
+  if ($aAddonVersion == 'latest') {
+    $versionXPI = $aAddonManifest['release'];
+    $addonFile = $aAddonManifest['basePath'] . $versionXPI;
   }
   else {
     $_versionMatch = false;
-    foreach ($_addonManifest['xpinstall'] as $_key => $_value) {
-      if (in_array($_addonVersion, $_value)) {
+    foreach ($aAddonManifest['xpinstall'] as $_key => $_value) {
+      if (in_array($aAddonVersion, $_value)) {
         $_versionMatch = true;
-        $_versionXPI = $_key;
+        $versionXPI = $_key;
         break;
       }
     }
     
     if ($_versionMatch == true) { 
-      $_addonFile = $_addonManifest['basePath'] . $_versionXPI;
+      $addonFile = $aAddonManifest['basePath'] . $versionXPI;
     }
     else {
       funcError('Unknown XPI version');
     }
   }
   
-  if (file_exists($_addonFile)) {
+  if (file_exists($addonFile)) {
     // Non-web browsers should send as an arbitrary binary stream
     if (in_array('disable-xpinstall', TARGET_APPLICATION_SITE[$GLOBALS['arraySoftwareState']['currentApplication']]['features'])) {
       header('Content-Type: application/octet-stream');
@@ -51,10 +51,10 @@ function funcDownloadXPI($_addonManifest, $_addonVersion) {
       header('Content-Type: application/x-xpinstall');
     }
 
-    header('Content-Disposition: inline; filename="' . $_versionXPI . '"');
-    header('Content-Length: ' . filesize($_addonFile));
+    header('Content-Disposition: inline; filename="' . $versionXPI . '"');
+    header('Content-Length: ' . filesize($addonFile));
     header('Cache-Control: no-cache');
-    header('X-Accel-Redirect: ' . ltrim($_addonFile, '.'));
+    header('X-Accel-Redirect: ' . ltrim($addonFile, '.'));
   }
   else {
     funcError('XPI file not found');
@@ -68,15 +68,15 @@ function funcDownloadXPI($_addonManifest, $_addonVersion) {
 
 // == | funcDownloadSearchPlugin | ============================================
 
-function funcDownloadSearchPlugin($_searchPluginName) {
-  $_SearchPluginFile = './datastore/searchplugins/' . $_searchPluginName;
+function funcDownloadSearchPlugin($aSearchPluginName) {
+  $searchPluginFile = './datastore/searchplugins/' . $aSearchPluginName;
   
-  if (file_exists($_SearchPluginFile)) {
+  if (file_exists($searchPluginFile)) {
     header('Content-Type: text/xml');
-    header('Content-Disposition: inline; filename="' . $_searchPluginName .'"');
+    header('Content-Disposition: inline; filename="' . $aSearchPluginName .'"');
     header('Cache-Control: no-cache');
     
-    readfile($_SearchPluginFile);
+    readfile($searchPluginFile);
   }
   else {
     funcError('Search Plugin XML file not found');

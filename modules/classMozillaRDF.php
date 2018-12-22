@@ -40,9 +40,6 @@ class classMozillaRDF {
         $id = $data[$targetApp][self::EM_NS."id"];
         $targetArray[$id]['minVersion'] = $data[$targetApp][self::EM_NS.'minVersion'];
         $targetArray[$id]['maxVersion'] = $data[$targetApp][self::EM_NS.'maxVersion'];
-        if (array_key_exists(self::EM_NS.'basilisk', $data[$targetApp])) {
-          $targetArray[$id]['basilisk'] = (bool)$data[$targetApp][self::EM_NS.'basilisk'];
-        }
       }
     }
 

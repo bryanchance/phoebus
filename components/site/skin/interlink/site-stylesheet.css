@@ -124,7 +124,11 @@ hr {
 #BinOC-Header-Logo {
 	width: 339px;
 	height:52px;
+{if $APPLICATION_DEBUG == true}
+	background-image: url('/components/site/skin/interlink/phoebus-header-logo.png');
+{else}
 	background-image: url('/components/site/skin/interlink/binoc-header-logo.png');
+{/if}
 	background-repeat: no-repeat;
 	background-position: left center;
 	float: left;

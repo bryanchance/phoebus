@@ -43,7 +43,7 @@ class classAuthentication {
   /********************************************************************************************************************
   * Performs authentication
   ********************************************************************************************************************/
-  public function authenticate($_logout = null) {
+  public function authenticate($aLogout = null) {
     // Get Username and Password from HTTP Basic Authentication 
     $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
     $strPassword = funcUnifiedVariable('server', 'PHP_AUTH_PW');
@@ -55,7 +55,7 @@ class classAuthentication {
 
     // This will handle a logout situation using a dirty javascript trick
     // It will not work without javascript or on IE but then again neither will the PANEL
-    if ($_logout) {
+    if ($aLogout) {
       $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
       funcSendHeader('html');
       die(

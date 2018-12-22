@@ -6,13 +6,13 @@
 // == | Setup | =======================================================================================================
 
 // Constants
-const URI_PANEL = '/panel/';
-const URI_REG = URI_PANEL . 'registration/';
-const URI_LOGIN = URI_PANEL . 'login/';
-const URI_LOGOUT = URI_PANEL . 'logout/';
-const URI_ACCOUNT = URI_PANEL . 'account/';
-const URI_ADDONS = URI_PANEL . 'addons/';
-const URI_ADMIN = URI_PANEL . 'administration/';
+const URI_PANEL     = '/panel/';
+const URI_REG       = URI_PANEL . 'registration/';
+const URI_LOGIN     = URI_PANEL . 'login/';
+const URI_LOGOUT    = URI_PANEL . 'logout/';
+const URI_ACCOUNT   = URI_PANEL . 'account/';
+const URI_ADDONS    = URI_PANEL . 'addons/';
+const URI_ADMIN     = URI_PANEL . 'administration/';
 
 // Include modules
 $arrayIncludes = ['database', 'auth', 'readManifest', 'generateContent'];
@@ -34,10 +34,11 @@ $moduleGenerateContent = new classGenerateContent(true);
 * @param $_level    Required level
 * @returns          true 404
 ***********************************************************************************************************************/
-function funcCheckAccessLevel($_level) {
-  if ($GLOBALS['arraySoftwareState']['authentication']['level'] >= $_level) {
+function funcCheckAccessLevel($aLevel) {
+  if ($GLOBALS['arraySoftwareState']['authentication']['level'] >= $aLevel) {
     return true;
   }
+
   funcSend404();
 }
 

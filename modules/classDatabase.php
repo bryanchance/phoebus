@@ -65,22 +65,22 @@ class classDatabase {
   * @param    ...       The rest of the arguments. See SafeMySQL
   * @return   array with result or null
   ********************************************************************************************************************/
-  public function query($_queryType, ...$_args) {
+  public function query($aQueryType, ...$aExtraArgs) {
     $result = null;
 
     if (!$this->connection) {
       funcError(__CLASS__ . '::' . __FUNCTION__ . ' - An SQL Connection is required');
     }
 
-    switch ($_queryType) {
+    switch ($aQueryType) {
       case 'row':
-        $result = $this->libSafeMySQL->getRow(...$_args);
+        $result = $this->libSafeMySQL->getRow(...$aExtraArgs);
         break;
       case 'rows':
-        $result = $this->libSafeMySQL->getAll(...$_args);
+        $result = $this->libSafeMySQL->getAll(...$aExtraArgs);
         break;
       case 'normal':
-        $result = $this->libSafeMySQL->query(...$_args);
+        $result = $this->libSafeMySQL->query(...$aExtraArgs);
         break;
       default:
         funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown query type');

@@ -61,17 +61,17 @@ class classPersona {
   * Method to replace a bunch of methods that are virtually identical
   * Mostly those that get an indexed array of manifests
   * 
-  * @param $_queryType      Type of query to be performed
-  * @param $_queryData      Data for the query such as slugs or search terms
+  * @param $aQueryType      Type of query to be performed
+  * @param $aQueryData      Data for the query such as slugs or search terms
   * @returns                indexed array of manifests or null
   ********************************************************************************************************************/
-  public function getPersonas($_queryType, $_queryData = null) {
+  public function getPersonas($aQueryType, $aQueryData = null) {
     $query = null;
     $returnInactive = null;
     $returnUnreviewed = null;
     $processContent = true;
 
-    switch ($_queryType) {
+    switch ($aQueryType) {
       case 'site-all-personas':
         $query = "
           SELECT *
@@ -91,7 +91,7 @@ class classPersona {
           AND `type` IN ('extension', 'theme')
           ORDER BY `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $_queryData);
+        $queryResults = $this->moduleDatabase->query('rows', $query, $aQueryData);
         break;
       case 'panel-all-personas':
         $returnInactive = true;
@@ -132,83 +132,83 @@ class classPersona {
  /********************************************************************************************************************
   * Internal method to post-process an add-on manifest
   * 
-  * @param $addonManifest       add-on manifest
-  * @param $returnInactive      Optional, return inactive add-on instead of null
-  * @param $returnUnreviewed    Optional, return unreviewed add-on instead of null
+  * @param $aPersonaManifest       add-on manifest
+  * @param $aReturnInactive      Optional, return inactive add-on instead of null
+  * @param $aReturnUnreviewed    Optional, return unreviewed add-on instead of null
   * @returns                    add-on manifest or null
   ********************************************************************************************************************/
   // This is where we do any post-processing on an Add-on Manifest
-  private function funcProcessManifest($addonManifest,
-                                       $returnInactive = null,
-                                       $returnUnreviewed = null,
-                                       $excludePotentiallyNonFree = null) {
+  private function funcProcessManifest($aPersonaManifest,
+                                       $aReturnInactive = null,
+                                       $aReturnUnreviewed = null,
+                                       $aExcludePotentiallyNonFree = null) {
     // Cast the int-strings to bool
-    $addonManifest['reviewed'] = (bool)$addonManifest['reviewed'];
-    $addonManifest['active'] = (bool)$addonManifest['active'];
+    $aPersonaManifest['reviewed'] = (bool)$aPersonaManifest['reviewed'];
+    $aPersonaManifest['active'] = (bool)$aPersonaManifest['active'];
 
-    if (!$addonManifest['active'] && !$returnInactive) {
+    if (!$aPersonaManifest['active'] && !$aReturnInactive) {
       return null;
     }
     
-    if (!$addonManifest['reviewed'] && !$returnUnreviewed) {
+    if (!$aPersonaManifest['reviewed'] && !$aReturnUnreviewed) {
       return null;
     }
 
     // Return null all externals as well as any licenses that are null (unknown), custom (which could be anything),
     // or copyright for Iceweasel.
-    if ($excludePotentiallyNonFree) {
+    if ($aExcludePotentiallyNonFree) {
       $arrayNonFreeBlacklist = array();
 
-      if (in_array($addonManifest['id'], $arrayNonFreeBlacklist)) {
+      if (in_array($aPersonaManifest['id'], $arrayNonFreeBlacklist)) {
         return null;
       }
       
-      if ($addonManifest['license'] == 'copyright' ||
-          $addonManifest['license'] == 'pd') {
+      if ($aPersonaManifest['license'] == 'copyright' ||
+          $aPersonaManifest['license'] == 'pd') {
         return null;
       }
     }
    
     // Truncate description if it is too long..
-    $addonManifest['finalDescription'] = $addonManifest['description'];
-    if (array_key_exists('description', $addonManifest) && strlen($addonManifest['description']) >= 235) {
-      $addonManifest['finalDescription'] = substr($addonManifest['description'], 0, 230) . '&hellip;';
+    $aPersonaManifest['finalDescription'] = $aPersonaManifest['description'];
+    if (array_key_exists('description', $aPersonaManifest) && strlen($aPersonaManifest['description']) >= 235) {
+      $aPersonaManifest['finalDescription'] = substr($aPersonaManifest['description'], 0, 230) . '&hellip;';
     }
 
     // Assign Icon, Header, and Footer
     $strPersonaDomainPrefix = 'http://' . $GLOBALS['arraySoftwareState']['currentDomain'];
-    $strPersonaBasePath = DATASTORE_RELPATH . 'personas/' . $addonManifest['id'] . '/';
+    $strPersonaBasePath = DATASTORE_RELPATH . 'personas/' . $aPersonaManifest['id'] . '/';
 
-    $addonManifest['headerURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'header.png';
+    $aPersonaManifest['headerURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'header.png';
     
-    if ($addonManifest['hasFooter']) {
-      $addonManifest['footerURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'footer.png';
+    if ($aPersonaManifest['hasFooter']) {
+      $aPersonaManifest['footerURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'footer.png';
     }
 
-    $addonManifest['iconURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'icon.png';
+    $aPersonaManifest['iconURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'icon.png';
     if (!file_exists('.' . $strPersonaBasePath . 'icon.png')) {
-      $addonManifest['iconURL'] = $strPersonaDomainPrefix . DATASTORE_RELPATH . 'addons/default/theme.png';
+      $aPersonaManifest['iconURL'] = $strPersonaDomainPrefix . DATASTORE_RELPATH . 'addons/default/theme.png';
     }
 
-    $addonManifest['previewURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'preview.png';
+    $aPersonaManifest['previewURL'] = $strPersonaDomainPrefix . $strPersonaBasePath . 'preview.png';
     if (!file_exists('.' . $strPersonaBasePath . 'preview.png')) {
       $this->funcCreatePreview('.' . $strPersonaBasePath);
     }
 
     // Persona Update URL
-    $addonManifest['updateURL'] =
-      str_replace('http://', 'https://', $strPersonaDomainPrefix) . '/?component=aus&persona=' . $addonManifest['id'];
+    $aPersonaManifest['updateURL'] =
+      str_replace('http://', 'https://', $strPersonaDomainPrefix) . '/?component=aus&persona=' . $aPersonaManifest['id'];
 
     // Return Add-on Manifest to internal caller
-    return $addonManifest;
+    return $aPersonaManifest;
   }
 
-  private function funcCreatePreview($_basePath) {
+  private function funcCreatePreview($aBasePath) {
 
     $desiredImageWidth = 240;
     $desiredImageHeight = 60;
 
-    $source_path = $_basePath . 'header.png';
+    $source_path = $aBasePath . 'header.png';
 
     list($source_width, $source_height, $source_type) = getimagesize($source_path);
 
@@ -275,7 +275,7 @@ class classPersona {
      * Alternatively, you can save the image in file-system or database
      */
 
-    imagepng($desired_gdim, $_basePath . 'preview.png');
+    imagepng($desired_gdim, $aBasePath . 'preview.png');
   }
 
 }

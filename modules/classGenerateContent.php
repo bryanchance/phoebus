@@ -37,7 +37,7 @@ class classGenerateContent {
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
   ********************************************************************************************************************/
-  function __construct($_useSmarty = null) {
+  function __construct($aUseSmarty = null) {
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
 
@@ -68,7 +68,7 @@ class classGenerateContent {
 
     // ----------------------------------------------------------------------------------------------------------------
 
-    if ($_useSmarty) {
+    if ($aUseSmarty) {
       // Get smartyDebug HTTP GET Argument
       $this->arraySoftwareState['requestSmartyDebug'] = funcUnifiedVariable('get', 'smartyDebug');
 
@@ -101,12 +101,12 @@ class classGenerateContent {
   /********************************************************************************************************************
   * This will generate HTML content for the SITE component using Smarty
   * 
-  * @param $_type         template or content file
-  * @param $_title        Page title
-  * @param $_data         Used if not null
-  * @param $_extraData    Used if not null
+  * @param $aType         template or content file
+  * @param $aTitle        Page title
+  * @param $aData         Used if not null
+  * @param $aExtraData    Used if not null
   ********************************************************************************************************************/
-  public function addonSite($_type, $_title, $_data = null, $_extraData = null) {
+  public function addonSite($aType, $aTitle, $aData = null, $aExtraData = null) {
     // This function will only serve the SITE component
     if ($this->arraySoftwareState['requestComponent'] != 'site' || !$this->libSmarty) {
       funcError(
@@ -128,7 +128,7 @@ class classGenerateContent {
 
     // ----------------------------------------------------------------------------------------------------------------
 
-    switch ($_type) {
+    switch ($aType) {
       case 'addon-page':
       case 'addon-releases':
         $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::ADDON_PAGE_TEMPLATE);
@@ -155,8 +155,8 @@ class classGenerateContent {
         $content = @file_get_contents($this->arraySoftwareState['componentSkinPath'] . self::SEARCHPLUGIN_CATEGORY_TEMPLATE);
         break;
       default:
-        if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
-          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $_type);
+        if (file_exists($this->arraySoftwareState['componentContentPath'] . $aType)) {
+          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $aType);
         }
         else {
           funcError('Unkown template or content');
@@ -183,16 +183,16 @@ class classGenerateContent {
       $this->arraySoftwareState['currentScheme'] .
       '://' . $this->arraySoftwareState['currentDomain']
     );
-    $this->libSmarty->assign('PAGE_TITLE', $_title);
+    $this->libSmarty->assign('PAGE_TITLE', $aTitle);
     $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
     $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['componentSkinRelPath']);
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('SITE_NAME', $this->arraySoftwareState['currentName']);
     $this->libSmarty->assign('SEARCH_TERMS', $this->arraySoftwareState['requestSearchTerms']);
     $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
-    $this->libSmarty->assign('PAGE_TYPE', $_type);
-    $this->libSmarty->assign('PAGE_DATA', $_data);
-    $this->libSmarty->assign('EXTRA_DATA', $_extraData);
+    $this->libSmarty->assign('PAGE_TYPE', $aType);
+    $this->libSmarty->assign('PAGE_DATA', $aData);
+    $this->libSmarty->assign('EXTRA_DATA', $aExtraData);
 
     // Send html header
     funcSendHeader('html');
@@ -207,11 +207,11 @@ class classGenerateContent {
  /********************************************************************************************************************
   * This will generate HTML content for the PANEL component using Smarty
   * 
-  * @param $_type         template or content file
-  * @param $_title        Page title
-  * @param $_data         Used if not null
+  * @param $aType         template or content file
+  * @param $aTitle        Page title
+  * @param $aData         Used if not null
   ********************************************************************************************************************/
-  public function addonPanel($_type, $_title, $_data = null) {
+  public function addonPanel($aType, $aTitle, $aData = null) {
     // This function will only serve the PANEL component
     if ($this->arraySoftwareState['requestComponent'] != 'panel' || !$this->libSmarty) {
       funcError(
@@ -228,7 +228,7 @@ class classGenerateContent {
 
     // ----------------------------------------------------------------------------------------------------------------
 
-    switch ($_type) {
+    switch ($aType) {
       case 'developer-addons-list':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'developer-addons-list.xhtml');
         break;
@@ -240,8 +240,8 @@ class classGenerateContent {
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'administration-list.xhtml');
         break;
       default:
-        if (file_exists($this->arraySoftwareState['componentContentPath'] . $_type)) {
-          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $_type);
+        if (file_exists($this->arraySoftwareState['componentContentPath'] . $aType)) {
+          $content = file_get_contents($this->arraySoftwareState['componentContentPath'] . $aType);
         }
         else {
           funcError('Unkown template or content');
@@ -260,13 +260,13 @@ class classGenerateContent {
     // Assign Data to Smarty
     $this->libSmarty->assign('APPLICATION_DEBUG', $this->arraySoftwareState['debugMode']);
     $this->libSmarty->assign('SITE_DOMAIN', '//' . $this->arraySoftwareState['currentDomain']);
-    $this->libSmarty->assign('PAGE_TITLE', $_title);
+    $this->libSmarty->assign('PAGE_TITLE', $aTitle);
     $this->libSmarty->assign('PAGE_PATH', $this->arraySoftwareState['requestPath']);
     $this->libSmarty->assign('BASE_PATH', $this->arraySoftwareState['componentSkinRelPath']);
     $this->libSmarty->assign('PHOEBUS_VERSION', SOFTWARE_VERSION);
     $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
-    $this->libSmarty->assign('PAGE_TYPE', $_type);
-    $this->libSmarty->assign('PAGE_DATA', $_data);
+    $this->libSmarty->assign('PAGE_TYPE', $aType);
+    $this->libSmarty->assign('PAGE_DATA', $aData);
 
     if ($this->arraySoftwareState['authentication']) {
       $this->libSmarty->assign('USER_LEVEL', $this->arraySoftwareState['authentication']['level']);
@@ -288,16 +288,16 @@ class classGenerateContent {
   /********************************************************************************************************************
   * This will generate RDF content for the Add-on Update Service
   * 
-  * @param $addonManifest   Add-on Manifest data structure
+  * @param $aAddonManifest   Add-on Manifest data structure
   ********************************************************************************************************************/
-  public function addonUpdateService($addonManifest = null) {
+  public function addonUpdateService($aAddonManifest = null) {
     if ($this->arraySoftwareState['requestComponent'] != 'aus') {
       funcError(
         __CLASS__ . '::' . __FUNCTION__ . ' - This method is designed to work with the AUS component only'
       );
     }
 
-    if (!$addonManifest) {
+    if (!$aAddonManifest) {
       // Send XML header
       funcSendHeader('xml');
 
@@ -310,22 +310,22 @@ class classGenerateContent {
 
     $updateRDF = file_get_contents($this->arraySoftwareState['componentContentPath'] . 'update.rdf');
 
-    $addonXPInstall = $addonManifest['xpinstall'][$addonManifest['releaseXPI']];
+    $addonXPInstall = $aAddonManifest['xpinstall'][$aAddonManifest['releaseXPI']];
     $addonTargetApplication = $addonXPInstall['targetApplication'][$this->arraySoftwareState['targetApplicationID']];
     
     // Language Packs are an 'item' as far as update.rdf is conserned
-    if ($addonManifest['type'] == 'langpack') {
-      $addonManifest['type'] = 'item';
+    if ($aAddonManifest['type'] == 'langpack') {
+      $aAddonManifest['type'] = 'item';
     }
     
     $arrayFilterSubstitute = array(
-      '{%ADDON_TYPE}'       => $addonManifest['type'],
-      '{%ADDON_ID}'         => $addonManifest['id'],
+      '{%ADDON_TYPE}'       => $aAddonManifest['type'],
+      '{%ADDON_ID}'         => $aAddonManifest['id'],
       '{%ADDON_VERSION}'    => $addonXPInstall['version'],
       '{%APPLICATION_ID}'   => $this->arraySoftwareState['targetApplicationID'],
       '{%ADDON_MINVERSION}' => $addonTargetApplication['minVersion'],
       '{%ADDON_MAXVERSION}' => $addonTargetApplication['maxVersion'],
-      '{%ADDON_XPI}'        => $addonManifest['baseURL'] . $addonManifest['id'],
+      '{%ADDON_XPI}'        => $aAddonManifest['baseURL'] . $aAddonManifest['id'],
       '{%ADDON_HASH}'       => $addonXPInstall['hash']
     );
 
@@ -346,10 +346,10 @@ class classGenerateContent {
   /********************************************************************************************************************
   * This will generate XML content for Add-ons Manager Search Results
   * 
-  * @param $searchManifest    Search Result Manifest
+  * @param $aSearchManifest    Search Result Manifest
   ********************************************************************************************************************/
-  public function amSearch($searchManifest = null) {
-    if (!$searchManifest) {
+  public function amSearch($aSearchManifest = null) {
+    if (!$aSearchManifest) {
       // Send XML header
       funcSendHeader('xml');
 
@@ -362,11 +362,11 @@ class classGenerateContent {
 
     $addonXML = file_get_contents($this->arraySoftwareState['componentContentPath'] . 'addon.xml');
 
-    $intResultCount = count($searchManifest);
+    $intResultCount = count($aSearchManifest);
 
     $searchXML = self::XML_TAG . NEW_LINE . '<searchresults total_results="' . $intResultCount .'">' . NEW_LINE;
     
-    foreach ($searchManifest as $_value) {     
+    foreach ($aSearchManifest as $_value) {     
       $_addonXML = $addonXML;
       $_addonType = null;
       
