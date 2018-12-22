@@ -396,10 +396,6 @@ function funcSQL($_arrayAddons, $_arrayUsers) {
             $_client['interlink'] = 1;
           }
 
-          if (TARGET_APPLICATION_ID['icedove'] == $_value2) {
-            $_client['icedove'] = 1;
-          }
-
           if (TARGET_APPLICATION_ID['seamonkey'] == $_value2) {
             $_client['seamonkey'] = 1;
           }
