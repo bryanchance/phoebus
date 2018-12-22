@@ -22,7 +22,7 @@ class classAddonValidator {
   const WEBEXTENSION_MANIFEST = 'manifest.json';
 
   const REGEX_GUID = '/^\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}$/i';
-  const REGEX_ID = '/[a-z0-9-\._]*\@[a-z0-9-\._]+/i';
+  const REGEX_ID = '/[a-z0-9-\._]+\@[a-z0-9-\._]+/i';
 
   const RESTRICTED_IDS = array(
     '-bfc5-fc555c87dbc4}', // Moonchild Productions
