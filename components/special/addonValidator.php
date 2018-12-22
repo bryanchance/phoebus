@@ -137,7 +137,7 @@ function funcValidateRDF() {
         if (preg_match('/^\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}$/i', $_addonInstallRDF['id'])) {
             funcUpdateStatus('isValidIDFormat', true, 'messages', 0);
         }
-        elseif (preg_match('/[a-z0-9-\._]*\@[a-z0-9-\._]+/i', $_addonInstallRDF['id'])) {
+        elseif (preg_match('/[a-z0-9-\._]+\@[a-z0-9-\._]+/i', $_addonInstallRDF['id'])) {
             funcUpdateStatus('isValidIDFormat', true, 'messages', 1);
         }
         else {
