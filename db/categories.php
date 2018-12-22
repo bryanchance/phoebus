@@ -139,6 +139,7 @@ $arrayCategoryList05 = array(
     'proxy-privacy-ruler',
     'javascriptblock',
     'cookies-control-panel',
+    'canvasblocker-legacy',
     'externals' => array(
         'secret-agent' => array(
             'id' => 'ex-006',
@@ -216,6 +217,7 @@ $arrayCategoryList08 = array(
     'statusbar-date-time',
     'cpu-memory-statusbar',
     'statusbar-organizer',
+    'esgst',
     'externals' => array(
         'greasemonkey' => array(
             'id' => 'ex-028',

@@ -4,6 +4,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 $arrayAddonsDB = array(
+    'addon@esgst' => 'esgst',
     'AdvancedNightMode@Off.JustOff' => 'advanced-night-mode',
     'CLEO@guid.customsoftwareconsult.com' => 'cleo',
     'ConfigCommentsk@gracious1.cat' => 'config-comments',
@@ -25,6 +26,7 @@ $arrayAddonsDB = array(
     'blockcont@mdsy' => 'block-content',
     'bluemoonlinux@addons.palemoon.org' => 'blue-moon-linux',
     'camimoon@lootyhoof-pm' => 'camimoon',
+    'CanvasBlocker@legacy' => 'canvasblocker-legacy',
     'cipherfox@mkfly' => 'cipherfox',
     'classicpasswordeditor@daniel.dawson' => 'classic-password-editor',
     'color-my-tabs@wsdfhjxc' => 'color-my-tabs',
