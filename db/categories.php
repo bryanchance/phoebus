@@ -217,6 +217,7 @@ $arrayCategoryList08 = array(
     'statusbar-date-time',
     'cpu-memory-statusbar',
     'statusbar-organizer',
+    'esgst',
     'externals' => array(
         'greasemonkey' => array(
             'id' => 'ex-028',
