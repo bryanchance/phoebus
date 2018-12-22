@@ -81,18 +81,6 @@ const TARGET_APPLICATION_SITE = array(
     'domain'        => array('live' => 'interlink-addons.binaryoutcast.com', 'dev' => null),
     'features'      => array('extensions', 'disable-xpinstall')
   ),
-  'iceweasel' => array(
-    'enabled'       => true,
-    'name'          => 'Iceweasel Add-ons',
-    'domain'        => array('live' => 'iw.addons.hyperbola.info', 'dev' => null),
-    'features'      => array('https', 'extensions', 'personas')
-  ),
-  'icedove' => array(
-    'enabled'       => true,
-    'name'          => 'Icedove Add-ons',
-    'domain'        => array('live' => 'id.addons.hyperbola.info', 'dev' => null),
-    'features'      => array('https', 'extensions', 'disable-xpinstall')
-  ),
 );
 
 // Define Application IDs
@@ -107,9 +95,6 @@ const TARGET_APPLICATION_ID = array(
   // BinOC
   'borealis'        => '{a3210b97-8e8a-4737-9aa0-aa0e607640b9}',
   'interlink'       => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',
-  // Hyperbola
-  'iceweasel'       => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
-  'icedove'         => '{3aa07e56-beb0-47a0-b0cb-c735edd25419}',
   // Mozilla
   'firefox'         => '{ec8030f7-c20a-464f-9b0e-13a3a9e97384}',
   'thunderbird'     => '{3550f703-e582-4d05-9a08-453d09bdfdc6}',

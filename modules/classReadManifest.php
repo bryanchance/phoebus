@@ -9,7 +9,6 @@ class classReadManifest {
   private $moduleDatabase;
   private $currentApplication;
   private $currentAppID;
-  private $excludePotentiallyNonFree;
 
   // ------------------------------------------------------------------------------------------------------------------
 
@@ -78,21 +77,7 @@ class classReadManifest {
     // Assign currentApplication
     $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
     $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
-    $this->excludePotentiallyNonFree = null;
-
-    switch ($GLOBALS['arraySoftwareState']['currentApplication']) {
-      case 'iceweasel':
-        // Iceweasel is a huge hack on the Basilisk application on the Add-ons Site so pretend to be Basilisk
-        $this->currentApplication = 'basilisk';
-        // Exclude potentally non-free add-ons due to f5t GNU requirements
-        $this->excludePotentiallyNonFree = true;
-        break;
-      case 'icedove':
-        // Exclude potentally non-free add-ons due to f5t GNU requirements
-        $this->excludePotentiallyNonFree = true;
-        break;
-    }
-    
+   
     // Assign the global instance of the database class to a class property by reference
     $this->moduleDatabase = &$GLOBALS['moduleDatabase'];
   }
@@ -148,7 +133,7 @@ class classReadManifest {
       return null;
     }
     
-    $addonManifest = $this->funcProcessManifest($queryResult, null, true, $this->excludePotentiallyNonFree);
+    $addonManifest = $this->funcProcessManifest($queryResult, null, true);
     
     if (!$addonManifest) {
       return null;
@@ -219,7 +204,6 @@ class classReadManifest {
         $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'api-get':
-        $this->excludePotentiallyNonFree = null;
         $query = "
           SELECT `id`, `slug`, `type`, `creator`, `releaseXPI`, `name`, `homepageURL`, `description`,
                  `url`, `reviewed`, `active`, `xpinstall`
@@ -234,7 +218,6 @@ class classReadManifest {
       case 'panel-user-addons':
         $returnInactive = true;
         $returnUnreviewed = true;
-        $this->excludePotentiallyNonFree = null;
         $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `url`, `reviewed`, `active`
@@ -248,7 +231,6 @@ class classReadManifest {
       case 'panel-all-addons':
         $returnInactive = true;
         $returnUnreviewed = true;
-        $this->excludePotentiallyNonFree = null;
         $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `category`, `url`, `reviewed`, `active`
@@ -260,7 +242,6 @@ class classReadManifest {
       case 'panel-addons-by-type':
         $returnInactive = true;
         $returnUnreviewed = true;
-        $this->excludePotentiallyNonFree = null;
         $processContent = null;
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `category`, `url`, `reviewed`, `active`
@@ -282,7 +263,7 @@ class classReadManifest {
     
     foreach($queryResults as $_value) {
       $addonManifest = $this->funcProcessManifest(
-        $_value, $returnInactive, $returnUnreviewed, $this->excludePotentiallyNonFree, $processContent
+        $_value, $returnInactive, $returnUnreviewed, $processContent
       );
 
       if (!$addonManifest) {
@@ -334,7 +315,6 @@ class classReadManifest {
   private function funcProcessManifest($addonManifest,
                                        $returnInactive = null,
                                        $returnUnreviewed = null,
-                                       $excludePotentiallyNonFree = null,
                                        $processContent = true) {
     // Cast the int-strings to bool
     $addonManifest['reviewed'] = (bool)$addonManifest['reviewed'];
@@ -346,25 +326,6 @@ class classReadManifest {
     
     if (!$addonManifest['reviewed'] && !$returnUnreviewed) {
       return null;
-    }
-
-    // Return null all externals as well as any licenses that are null (unknown), custom (which could be anything),
-    // or copyright for Iceweasel.
-    if ($excludePotentiallyNonFree) {
-      $arrayNonFreeBlacklist = array(
-        'gtranslator-moon-edition',
-        'translatethis'
-      );
-
-      if (in_array($addonManifest['slug'], $arrayNonFreeBlacklist)) {
-        return null;
-      }
-      
-      if ($addonManifest['type'] == 'external' || (!$addonManifest['licenseCode'] || 
-          $addonManifest['licenseCode'] == 'custom' || $addonManifest['licenseCode'] == 'copyright' ||
-          $addonManifest['licenseCode'] == 'pd')) {
-        return null;
-      }
     }
 
     // Actions on xpinstall key
