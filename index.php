@@ -137,17 +137,21 @@ function funcError($_value, $_mode = 0) {
   print('<h2>' . SOFTWARE_NAME . ' ' . SOFTWARE_VERSION . '</h2>');
 
   switch($_mode) {
-    case 0:
-      print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error</strong></p>');
+    case 1:
+      print('<p class="pulseText" style="text-decoration: blink;"><strong>Unable to comply:</strong></p>');
       print('<ul><li>' . $_value . '</li></ul>');
       break;
-    case 1:
+    case 98:
       print('<p>Output:</p>');
       print('<pre><code>' . json_encode($_value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</code></pre>');
       break;
-    case 2:
+    case 99:
       print('<p>Output:</p>');
       print('<pre>' . var_export($_value, true) . '</pre>');
+      break;
+    default:
+      print('<p class="pulseText" style="text-decoration: blink;"><strong>Fatal Error:</strong></p>');
+      print('<ul><li>' . $_value . '</li></ul>');
       break;
   }
 
