@@ -60,6 +60,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug'], null);
       funcSendHeader('html');
       print($addonManifest['content']);
+      exit();
       break;
     case 'release':
       funcSendHeader('501');
