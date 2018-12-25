@@ -118,7 +118,7 @@ class classReadManifest {
   * @param $_addonSlug      Add-on ID either GUID or user@host
   * @returns                add-on manifest or null
   ********************************************************************************************************************/
-  public function getAddonBySlug($_addonSlug) { 
+  public function getAddonBySlug($aAddonSlug, $aProcessContent = true) { 
     $query = "
       SELECT addon.*, `license` AS `licenseCode`
       FROM `addon`
@@ -127,13 +127,13 @@ class classReadManifest {
       AND `slug` = ?s
       AND `type` IN ('extension', 'theme', 'langpack')
     ";
-    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $_addonSlug);
+    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $aAddonSlug);
     
     if (!$queryResult) {
       return null;
     }
     
-    $addonManifest = $this->funcProcessManifest($queryResult, null, true);
+    $addonManifest = $this->funcProcessManifest($queryResult, null, true, $aProcessContent);
     
     if (!$addonManifest) {
       return null;

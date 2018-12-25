@@ -57,7 +57,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
 
   switch ($arraySoftwareState['requestPanelWhat']) {
     case 'metadata':
-      $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug']);
+      $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug'], null);
       funcError($addonManifest, 98);
     case 'release':
       funcSendHeader('501');
