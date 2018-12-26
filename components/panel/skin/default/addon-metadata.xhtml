@@ -1,10 +1,10 @@
 <h2>{$PAGE_TITLE}</h2>
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
   {if $USER_LEVEL >= 3}
-	<strong>Administration:</strong><br />
+	<strong>Status:</strong><br />
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
-  <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active<br />
-	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Reviewed<br />
+  <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
+	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Reviewed 
   <br />
   {/if}
   <strong>Repository URL:</strong><br />
