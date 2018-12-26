@@ -25,14 +25,15 @@
       {* We don't send the pretty license names to smarty because of length so deal with "PD" *}
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
       
-      (* We want the key name to actually be lowecase *}
+      (* We want the POST key name to actually be lowecase *}
       {assign "LC_LICENSE" $value|lower}
 
-      {if $PAGE_DATA.license|lower == $LC_LICENSE}
-        {if $LC_LICENSE == 'copyright'}
-          {assign "FOUND_LICENSE" 2}
-          {continue}
-        {/if}
+      {if $PAGE_DATA.license|lower == "copyright"}
+        {assign "FOUND_LICENSE" 2}
+        {continue}
+      {/if}
+
+      {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
         {assign "FOUND_LICENSE" 1}
         {continue}
@@ -40,7 +41,7 @@
 
       <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
-    <option value="copywrite" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
+    <option value="copyright" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
 	</select><br />
 	<br />
   <strong>Content:</strong><br />
