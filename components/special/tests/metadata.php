@@ -32,7 +32,7 @@ if (!$post) {
 
   // Reviewed
   $html .= '<label for="addonReviewed">Reviewed</label> ';
-  if ($addonManifest['active']) {
+  if ($addonManifest['reviewed']) {
     $html .= '<input type="checkbox" id="addonReviewed" name="addonReviewed" checked><br />';
   }
   else {
