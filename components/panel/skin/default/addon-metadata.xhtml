@@ -45,7 +45,7 @@
     {/if}
      <option value="{$key}">{$value}</option>
   {/foreach}
-  <option value="unlisted" disabled {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
+  <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
   </select><br />
   <br />
   {/if}
@@ -72,7 +72,7 @@
 
       <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
-    <option value="copyright" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
+    <option value="copyright"{if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
 	</select><br />
 	<br />
   <strong>Search Tags:</strong> <em>(Up to 10 max)</em><br />
