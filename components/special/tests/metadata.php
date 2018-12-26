@@ -34,14 +34,18 @@ if (!$post) {
   <br />
   Repository URL:<br />
   <input name="repository" type="text" size="120" value="@ADDON_REPOURL@" /><br /> 
+  <br />
   Support URL:<br />
   <input name="supportURL" type="text" size="120" value="@ADDON_SUPPORTURL@" /><br />
+  <br />
   Support E-mail:<br />
   <input name="supportEmail" type="text" size="120" value="@ADDON_SUPPORTEMAIL@" /><br /> 
+  <br />
   License: <select name="license">
     @ADDON_LICENSE@
 	</select><br />
-	Content:<br />
+	<br />
+  Content:<br />
 	<textarea name="content" cols="120" rows="25">@ADDON_CONTENT@</textarea><br /> 
 	<br />
   <button type="submit" value="Submit">Submit</button>
