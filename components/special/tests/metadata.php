@@ -19,9 +19,9 @@ if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
   //funcError($addonManifest, 98);
   funcSendHeader('html');
-  $html ='<form accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
+  $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
 	<input name="name" type="text" value="Frank" /><br /> 
-	<textarea cols="30" rows="2">Long text.</textarea><br /> 
+	<textarea cols="30" rows="2" form="form1">Long text.</textarea><br /> 
 	<input name="democheckbox" type="checkbox" value="1" /> Checkbox<br /> 
 	<button type="submit" value="Submit">Submit</button>
 </form>';
