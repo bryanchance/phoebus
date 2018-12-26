@@ -20,8 +20,8 @@ if (!$post) {
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
           '<form action="/special/test/?case=metadata&post=1" method="post">' .
-          '<label for="addonActive">Active</label>' .
-          '<input type="checkbox" id="addonActive">' .
+          '<label for="addonActive">Active</label> ' .
+          '<input type="checkbox" id="addonActive"><br />' .
           '<input type="submit" value="Submit">' .
           '</form>' .
           '</body></html>';
