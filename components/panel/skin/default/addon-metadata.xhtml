@@ -38,7 +38,8 @@
   {/if}
   <br />
   {if $PAGE_DATA.type == 'extension'}
-  <strong>Category:</strong> <select name="category" style="margin-left: 2px;">
+  <strong>Category:</strong><br />
+  <select name="category" style="margin-left: 2px;">
   {assign "FOUND_CATEGORY" 0}
   {foreach $EXTRA_DATA.categories as $key => $value}
     {if $PAGE_DATA.category == $key}
@@ -52,7 +53,8 @@
   </select><br />
   <br />
   {/if}
-  <strong>License:</strong> <select name="license" style="margin-left: 2px;">
+  <strong>License:</strong><br />
+  <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA.licenses as $value}
       {assign "LC_LICENSE" $value|lower}
