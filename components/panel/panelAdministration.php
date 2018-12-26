@@ -72,7 +72,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       }
 
       $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
-                                         'Edit Metadata for ' . $addonManifest['Name'],
+                                         'Edit Metadata for ' . $addonManifest['name'],
                                          $addonManifest,
                                          $moduleReadManifest::LICENSES);
       exit();
