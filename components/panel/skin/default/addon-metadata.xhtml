@@ -34,7 +34,7 @@
   {/if}
   <br />
   {if $PAGE_DATA.type == 'extension'}
-  <strong>Category: <em>(Some Add-ons Sites do not use categories for extensions, however, you should set one anyway)</em><br />
+  <strong>Category:</strong> <em>(Some Add-ons Sites do not use categories for extensions, however, you should set one anyway)</em><br />
   <select name="category" style="width: 175px;">
   {assign "FOUND_CATEGORY" 0}
   {foreach $EXTRA_DATA.categories as $key => $value}
