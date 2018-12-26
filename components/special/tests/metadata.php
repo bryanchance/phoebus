@@ -30,7 +30,7 @@ if (!$post) {
     funcError('This only works for Extensions and Themes that are not external');
   }
 
-  $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
+  $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata" autocomplete="off" method="POST">
 	Administration:<br />
   <input type="hidden" name="slug" value="' . $addonManifest['slug'] . '" />
   <input name="active" type="checkbox" value="1" @ADDON_ACTIVE@/> Active<br />
