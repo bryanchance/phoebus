@@ -23,12 +23,19 @@
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
       {assign "LC_LICENSE" $value|lower}
+
+      {if $value == 'PD'}
+        {assign "value" "Public Domain"}
+      {/if}
+
       {if $PAGE_DATA.license|lower == $LC_LICENSE}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
         {assign "FOUND_LICENSE" 1}
         {continue}
       {/if}
-        <option value="{$LC_LICENSE}">{$value}</option>
+
+
+      <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
 	</select><br />
 	<br />
