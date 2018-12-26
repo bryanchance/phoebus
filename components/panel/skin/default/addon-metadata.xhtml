@@ -1,7 +1,7 @@
 <h2>{$PAGE_TITLE}</h2>
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
   <strong>Status:</strong><br />
-  {if $USER_LEVEL >= 3}
+  {if $USER_LEVEL <= 3}
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
 	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
