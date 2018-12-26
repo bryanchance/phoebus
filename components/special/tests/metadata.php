@@ -13,7 +13,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$post = !empty($_POST);
+$post = empty($_POST);
 
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonByID('abprime', null);
