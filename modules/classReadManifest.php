@@ -515,7 +515,7 @@ class classReadManifest {
   ********************************************************************************************************************/
   private function funcProcessLicense($addonManifest) {
     // Approved Licenses  
-    $_arrayLicenses = array_change_key_case(LICENSES, CASE_LOWER);
+    $_arrayLicenses = array_change_key_case(self::LICENSES, CASE_LOWER);
     $_arrayLicenses['copyright'] = '&copy; ' . date("Y") . ' - ' . $addonManifest['creator'];
      
     // Set to lowercase
