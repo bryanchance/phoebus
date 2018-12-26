@@ -19,7 +19,7 @@
   <strong>Support E-mail:</strong><br />
   <input name="supportEmail" type="text" size="120" value="{$PAGE_DATA.supportEmail}" /><br /> 
   <br />
-  <strong>License:</strong> <select name="license">
+  <strong>License:</strong> <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 1}
     {foreach $EXTRA_DATA as $value}
       {assign "LC_LICENSE" $value|lower}
