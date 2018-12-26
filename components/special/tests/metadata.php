@@ -50,20 +50,7 @@ if (!$post) {
   //<option selected="selected" value="1">Yes</option>
   $strLicenseHTML = '';
   $boolLicenseFound = null;
-  foreach (array_keys($moduleReadManifest::LICENSES) as $_value) {
-    if (strtolower($addonManifest['license']) == strtolower($_value)) {
-      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
-      $boolLicenseFound = true;
-      continue;
-    }
 
-    if (!$boolLicenseFound && $_value == 'COPYRIGHT') {
-      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
-      continue;
-    }
-
-    $strLicenseHTML .= '<option value="' . $_value . '">' . $_value . '</option>';
-  }
 
   $arrayFilterSubstitute = array(
     '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
