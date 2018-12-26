@@ -22,10 +22,7 @@
   <strong>License:</strong> <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
-      {* We don't send the pretty license names to smarty because of length so deal with "PD" *}
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
-      
-      (* We want the POST key name to actually be lowecase *}
       {assign "LC_LICENSE" $value|lower}
 
       {if $PAGE_DATA.license|lower == "copyright"}
