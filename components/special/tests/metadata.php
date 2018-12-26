@@ -71,6 +71,7 @@ if (!$post) {
     '@ADDON_REPOURL@' => funcValueOrEmptyString($addonManifest['repository']),
     '@ADDON_SUPPORTURL@' => funcValueOrEmptyString($addonManifest['supportURL']),
     '@ADDON_SUPPORTEMAIL@' => funcValueOrEmptyString($addonManifest['supportEmail']),
+    '@ADDON_LICENSE@' => $strLicenseHTML,
     '@ADDON_CONTENT@' => funcValueOrEmptyString($addonManifest['content'])
   );
 
