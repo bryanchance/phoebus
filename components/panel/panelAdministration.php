@@ -74,7 +74,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
                                          'Editing Metadata for ' . $addonManifest['name'],
                                          $addonManifest,
-                                         $moduleReadManifest::LICENSES);
+                                         array_keys($moduleReadManifest::LICENSES));
       break;
     case 'release':
       funcSendHeader('501');
