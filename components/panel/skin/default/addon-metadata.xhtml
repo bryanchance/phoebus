@@ -25,16 +25,14 @@
       {* We don't send the pretty license names to smarty because of length so deal with "PD" *}
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
       
-      {* Special case for Copyright which is the last entry in the array *}
-      {if $value == 'COPYRIGHT'}
-        {assign "FOUND_LICENSE" 2}
-        {continue}
-      {/if}
-
       (* We want the key name to actually be lowecase *}
       {assign "LC_LICENSE" $value|lower}
 
       {if $PAGE_DATA.license|lower == $LC_LICENSE}
+        {if $LC_LICENSE == 'COPYRIGHT'}
+          {assign "FOUND_LICENSE" 2}
+          {continue}
+        {/if}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
         {assign "FOUND_LICENSE" 1}
         {continue}
