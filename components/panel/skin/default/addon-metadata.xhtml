@@ -24,7 +24,7 @@
     {foreach $EXTRA_DATA as $value}
     
     {/foreach}
-	</select><br />
+	</select>{if $FOUND_LICENSE}License var is true{/if}<br />
 	<br />
   <strong>Content:</strong><br />
 	<textarea style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea><br /> 
