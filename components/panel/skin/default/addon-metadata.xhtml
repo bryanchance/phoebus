@@ -33,7 +33,7 @@
       {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
         {assign "FOUND_LICENSE" 1}
-        {continue}
+        {break}
       {/if}
 
       <option value="{$LC_LICENSE}">{$value}</option>
