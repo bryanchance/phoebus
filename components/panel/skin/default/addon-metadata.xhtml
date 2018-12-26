@@ -1,25 +1,25 @@
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
   {if $USER_LEVEL >= 3}
-	Administration:<br />
+	<strong>Administration:</strong><br />
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active<br />
 	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Reviewed<br />
   <br />
   {/if}
-  Repository URL:<br />
+  <strong>Repository URL:</strong><br />
   <input name="repository" type="text" size="120" value="{$PAGE_DATA.repository}" /><br /> 
   <br />
-  Support URL:<br />
+  <strong>Support URL:</strong><br />
   <input name="supportURL" type="text" size="120" value="{$PAGE_DATA.supportURL}" /><br />
   <br />
-  Support E-mail:<br />
+  <strong>Support E-mail:</strong><br />
   <input name="supportEmail" type="text" size="120" value="{$PAGE_DATA.supportEmail}" /><br /> 
   <br />
-  License: <select name="license">
+  <strong>License:</strong> <select name="license">
     
 	</select><br />
 	<br />
-  Content:<br />
+  <strong>Content:</strong><br />
 	<textarea name="content" cols="120" rows="25">{$PAGE_DATA.content}</textarea><br /> 
 	<br />
   <button type="submit" value="Submit">Submit</button>
