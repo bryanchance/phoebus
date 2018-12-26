@@ -19,12 +19,30 @@ if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonByID('abprime', null);
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
-          '<form action="/special/test/?case=metadata&post=1" method="post">' .
-          '<label for="addonActive">Active</label> ' .
-          '<input type="checkbox" id="addonActive" name="addonActive"><br />' .
-          '<input type="submit" value="Submit">' .
-          '</form>' .
-          '</body></html>';
+          '<form action="/special/test/?case=metadata&post=1" method="post">';
+
+  // Active
+  $html .= '<label for="addonActive">Active</label> ';
+  if ($addonManifest['active']) {
+    $html .= '<input type="checkbox" id="addonActive" name="addonActive" checked><br />';
+  }
+  else {
+    $html .= '<input type="checkbox" id="addonActive" name="addonActive"><br />';
+  }
+
+  // Reviewed
+  $html .= '<label for="addonReviewed">Reviewed</label> ';
+  if ($addonManifest['active']) {
+    $html .= '<input type="checkbox" id="addonReviewed" name="addonReviewed" checked><br />';
+  }
+  else {
+    $html .= '<input type="checkbox" id="addonReviewed" name="addonReviewed"><br />';
+  }
+
+  $html .= '<label for="addonRepository">Repository</label> ' .
+           '<input type="url" id="addonRepository" value="' . $addonManifest['repository'] . '">';
+
+  $html .= '<input type="submit" value="Submit"></form></body></html>';
   print($html);
 }
 else {
