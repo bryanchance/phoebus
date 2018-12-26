@@ -40,7 +40,7 @@
   {if $PAGE_DATA.type == 'extension'}
   <strong>Category:</strong> <select name="category" style="margin-left: 2px;">
   {assign "FOUND_CATEGORY" 0}
-  {foreach $EXTRA_DATA.licenses as $key => $value}
+  {foreach $EXTRA_DATA.categories as $key => $value}
     {if $PAGE_DATA.category == $key}
       <option selected="selected" value="{$key}">{$value}</option>
       {assign "FOUND_CATEGORY" 1}
