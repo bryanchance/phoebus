@@ -7,8 +7,8 @@
 	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
   <br />
   {else}
-  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top; margin-right: 2px" /> Active 
-  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-right: 2px" /> Reviewed<br />
+  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
+  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
   {/if}
   <br />
   <strong>Repository URL:</strong><br />
