@@ -22,11 +22,10 @@
   <strong>License:</strong> <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
-      {assign "LC_LICENSE" $value|lower}
+      {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
+      {if $value == 'COPYRIGHT'} {assign "value" "Copyright"} {/if}
 
-      {if $value == 'PD'}
-        {assign "value" "Public Domain"}
-      {/if}
+      {assign "LC_LICENSE" $value|lower}
 
       {if $PAGE_DATA.license|lower == $LC_LICENSE}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
@@ -34,8 +33,7 @@
         {continue}
       {/if}
 
-
-      <option value="{$LC_LICENSE}">{$value}</option>
+      <option {if !$FOUND_LICENSE && $value == 'copyright'}selected="selected"{/if} value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
 	</select><br />
 	<br />
