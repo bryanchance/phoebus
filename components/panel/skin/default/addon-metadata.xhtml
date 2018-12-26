@@ -21,10 +21,6 @@
     <td>{$PAGE_DATA.slug}</td>
   </tr>
   <tr>
-    <td style="width: 100px"><strong>Category</strong></td>
-    <td>{$PAGE_DATA.category}</td>
-  </tr>
-  <tr>
     <td style="width: 100px"><strong>Tags</strong></td>
     <td>{$PAGE_DATA.tags}</td>
   </tr>
@@ -41,9 +37,22 @@
   <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
   {/if}
   <br />
+  {if $PAGE_DATA.type == 'extension'}
+  <strong>Category:</strong> <select name="category" style="margin-left: 2px;">
+  {assign "FOUND_CATEGORY" 0}
+  {foreach $EXTRA_DATA.licenses as $key => $value}
+    {if $PAGE_DATA.category == $key}
+      <option selected="selected" value="{$key}">{$value}</option>
+      {assign "FOUND_CATEGORY" 1}
+    {/if}
+  {/foreach}
+  <option value="unlisted" {if $FOUND_LICENSE == 0}selected="selected"{/if}>Unlisted</option>
+  </select>
+  <br />
+  {/if}
   <strong>License:</strong> <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 0}
-    {foreach $EXTRA_DATA as $value}
+    {foreach $EXTRA_DATA.licenses as $value}
       {assign "LC_LICENSE" $value|lower}
       {if $LC_LICENSE == 'pd'} {assign "value" "Public Domain"} {/if}
       {if $LC_LICENSE == 'custom'} {assign "value" "Custom License"} {/if}

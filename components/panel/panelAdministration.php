@@ -72,18 +72,24 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       }
 
       if (empty($_POST)) {
+        $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
+        if ($addonManifest['type'] == 'extension') {
+          $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
+        }
+
         $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
                                            'Editing Metadata for ' . $addonManifest['name'],
                                            $addonManifest,
-                                           array_keys($moduleReadManifest::LICENSES));
+                                           $arrayExtraData);
       }
       else {
         $arrayPostResults = array(
           'slug'          => funcUnifiedVariable('post', 'slug'),
+          'category'      => funcUnifiedVariable('post', 'category'),
+          'license'       => funcUnifiedVariable('post', 'license'),
           'repository'    => funcUnifiedVariable('post', 'repository'),
           'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
           'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
-          'license'       => funcUnifiedVariable('post', 'license'),
           'content'       => funcUnifiedVariable('post', 'content')
         );
 
