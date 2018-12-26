@@ -138,7 +138,10 @@ class classReadManifest {
   * @param $_addonSlug      Add-on ID either GUID or user@host
   * @returns                add-on manifest or null
   ********************************************************************************************************************/
-  public function getAddonBySlug($aAddonSlug, $aProcessContent = true) { 
+  public function getAddonBySlug($aAddonSlug,
+                                 $aProcessContent = true,
+                                 $aReturnInactive = null,
+                                 $aReturnUnreviewed = true) { 
     $query = "
       SELECT addon.*, `license` AS `licenseCode`
       FROM `addon`
@@ -153,7 +156,10 @@ class classReadManifest {
       return null;
     }
     
-    $addonManifest = $this->funcProcessManifest($queryResult, null, true, $aProcessContent);
+    $addonManifest = $this->funcProcessManifest($queryResult,
+                                                $aReturnInactive,
+                                                $aReturnUnreviewed,
+                                                $aProcessContent);
     
     if (!$addonManifest) {
       return null;

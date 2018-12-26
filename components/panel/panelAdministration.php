@@ -61,7 +61,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
         funcError('Not a valid slug');
       }
 
-      $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug'], null);
+      $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug'], null, true);
 
       if (!$addonManifest) {
         funcError('Add-on Manifest is null');
