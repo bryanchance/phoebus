@@ -16,7 +16,7 @@ $moduleReadManifest = new classReadManifest();
 $post = funcUnifiedVariable('get', 'post');
 
 function funcValueOrEmptyString ($aValue) {
-  if ($aValue == true) {
+  if ($aValue === true) {
     return 'checked';
   }
 
