@@ -25,7 +25,6 @@ function funcValueOrEmptyString ($aValue) {
 
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
-  //funcError($addonManifest, 98);
 
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
 	Administration:<br />
