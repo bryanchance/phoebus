@@ -83,7 +83,7 @@ class classReadManifest {
       'MPL-2.0' => 'Mozilla Public License 2.0',
       'MPL-1.1' => 'Mozilla Public License 1.1',
       'PD' => 'Public Domain',
-      'COPYRIGHT' => '&copy;' . ' ' . date("Y")
+      'COPYRIGHT' => ''
     );
 
   /********************************************************************************************************************
@@ -516,7 +516,7 @@ class classReadManifest {
   private function funcProcessLicense($addonManifest) {
     // Approved Licenses  
     $_arrayLicenses = array_change_key_case(LICENSES, CASE_LOWER);
-    $_arrayLicenses['copyright'] = $_arrayLicenses['copyright'] . ' - ' . $addonManifest['creator'];
+    $_arrayLicenses['copyright'] = '&copy; ' . date("Y") . ' - ' . $addonManifest['creator'];
      
     // Set to lowercase
     if ($addonManifest['license'] != null) {
