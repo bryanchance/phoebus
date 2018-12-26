@@ -5,7 +5,6 @@
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
 	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
-  <br />
   {else}
   <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
   <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
@@ -21,7 +20,9 @@
   <input name="supportEmail" type="text" size="120" value="{$PAGE_DATA.supportEmail}" /><br /> 
   <br />
   <strong>License:</strong> <select name="license">
+    {assign
     {foreach $EXTRA_DATA as $value}
+    
     {/foreach}
 	</select><br />
 	<br />
