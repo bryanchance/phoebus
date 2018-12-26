@@ -66,6 +66,26 @@ class classReadManifest {
     //'search-133' => 'pale-moon-add-ons-google.xml'
     );
 
+  // ------------------------------------------------------------------------------------------------------------------
+
+  const LICENSES = aarray(
+      'custom' => 'Custom License',
+      'Apache-2.0' => 'Apache License 2.0',
+      'Apache-1.1' => 'Apache License 1.1',
+      'BSD-3-Clause' => 'BSD 3-Clause',
+      'BSD-2-Clause' => 'BSD 2-Clause',
+      'GPL-3.0' => 'GNU General Public License 3.0',
+      'GPL-2.0' => 'GNU General Public License 2.0',
+      'LGPL-3.0' => 'GNU Lesser General Public License 3.0',
+      'LGPL-2.1' => 'GNU Lesser General Public License 2.1',
+      'AGPL-3.0' => 'GNU Affero General Public License v3',
+      'MIT' => 'MIT License',
+      'MPL-2.0' => 'Mozilla Public License 2.0',
+      'MPL-1.1' => 'Mozilla Public License 1.1',
+      'PD' => 'Public Domain',
+      'COPYRIGHT' => '&copy;' . ' ' . date("Y")
+    );
+
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
   ********************************************************************************************************************/
@@ -494,26 +514,9 @@ class classReadManifest {
   * @returns                 add-on manifest with additional license metadata
   ********************************************************************************************************************/
   private function funcProcessLicense($addonManifest) {
-    // Approved Licenses
-    $_arrayLicenses = array(
-      'custom' => 'Custom License',
-      'Apache-2.0' => 'Apache License 2.0',
-      'Apache-1.1' => 'Apache License 1.1',
-      'BSD-3-Clause' => 'BSD 3-Clause',
-      'BSD-2-Clause' => 'BSD 2-Clause',
-      'GPL-3.0' => 'GNU General Public License 3.0',
-      'GPL-2.0' => 'GNU General Public License 2.0',
-      'LGPL-3.0' => 'GNU Lesser General Public License 3.0',
-      'LGPL-2.1' => 'GNU Lesser General Public License 2.1',
-      'AGPL-3.0' => 'GNU Affero General Public License v3',
-      'MIT' => 'MIT License',
-      'MPL-2.0' => 'Mozilla Public License 2.0',
-      'MPL-1.1' => 'Mozilla Public License 1.1',
-      'PD' => 'Public Domain',
-      'COPYRIGHT' => '&copy;' . ' ' . date("Y") . ' - ' . $addonManifest['creator']
-    );
-    
-    $_arrayLicenses = array_change_key_case($_arrayLicenses, CASE_LOWER);
+    // Approved Licenses  
+    $_arrayLicenses = array_change_key_case(LICENSES, CASE_LOWER);
+    $_arrayLicenses['copyright'] = $_arrayLicenses['copyright'] . ' - ' . $addonManifest['creator'];
      
     // Set to lowercase
     if ($addonManifest['license'] != null) {

@@ -27,8 +27,6 @@ if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
   //funcError($addonManifest, 98);
 
-  funcSendHeader('html');
-
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
 	Administration:<br />
   <input name="active" type="checkbox" value="1" @ADDON_ACTIVE@/> Active<br />
@@ -40,11 +38,32 @@ if (!$post) {
   <input name="supportURL" type="text" size="120" value="@ADDON_SUPPORTURL@" /><br />
   Support E-mail:<br />
   <input name="supportEmail" type="text" size="120" value="@ADDON_SUPPORTEMAIL@" /><br /> 
+  License: <select name="license">
+    @ADDON_LICENSE@
+	</select>
 	Content:<br />
 	<textarea name="content" cols="120" rows="25">@ADDON_CONTENT@</textarea><br /> 
 	<br />
   <button type="submit" value="Submit">Submit</button>
 </form>';
+
+  //<option selected="selected" value="1">Yes</option>
+  $strLicenseHTML = '';
+  $boolLicenseFound = null;
+  foreach (array_keys($moduleReadManifest::LICENSES) as $_value) {
+    if (strtolower($addonManifest['license']) == strtolower($_value)) {
+      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
+      $boolLicenseFound = true;
+      continue;
+    }
+
+    if (!$boolLicenseFound && $_value == 'COPYRIGHT') {
+      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
+      continue;
+    }
+
+    $strLicenseHTML .= '<option value="' . $_value . '">' . $_value . '</option>';
+  }
 
   $arrayFilterSubstitute = array(
     '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
@@ -59,6 +78,11 @@ if (!$post) {
     $html = str_replace($_key, $_value, $html);
   }
 
+  foreach (array_keys($moduleReadManifest::LICENSES)) {
+    
+  }
+
+  funcSendHeader('html');
   print($html);
 }
 else {
