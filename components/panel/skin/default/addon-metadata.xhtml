@@ -23,9 +23,7 @@
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
-      {if $value == 'COPYRIGHT'}
-        <option value="{$LC_LICENSE}" selected="selected">Copyright</option>
-      {/if}
+      {if $value == 'COPYRIGHT'} {continue} {/if}
 
       {assign "LC_LICENSE" $value|lower}
 
@@ -37,6 +35,7 @@
 
       <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
+    <option value="{$LC_LICENSE}" {if !$FOUND_LICENSE}selected="selected"{/if}>Copyright</option>
 	</select><br />
 	<br />
   <strong>Content:</strong><br />
