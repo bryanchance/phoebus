@@ -25,11 +25,14 @@
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
       {assign "LC_LICENSE" $value|lower}
 
-      {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
-        {if $LC_LICENSE == "copyright"}
+      {if $LC_LICENSE == "copyright"}
+        {if $PAGE_DATA.license|lower == "copyright"}
           {assign "FOUND_LICENSE" 2}
-          {continue}
         {/if}
+        {continue}
+      {/if}
+
+      {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
         <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
         {assign "FOUND_LICENSE" 1}
         {continue}
