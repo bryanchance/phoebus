@@ -57,6 +57,26 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
 
   switch ($arraySoftwareState['requestPanelWhat']) {
     case 'metadata':
+      if (!$arraySoftwareState['requestPanelSlug']) {
+        funcError('Not a valid slug');
+      }
+
+      $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
+
+      if (!$addonManifest) {
+        funcError('Add-on Manifest is null');
+      }
+
+      if ($addonManifest['type'] == 'external' || $addonManifest['type'] == 'langpack') {
+        funcError('This only works for Extensions and Themes that are not external or langpacks');
+      }
+
+      $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
+                                         'Edit Metadata for ' . $addonManifest['Name'],
+                                         $addonManifest,
+                                         $moduleReadManifest::LICENSES);
+      exit();
+      break;
     case 'release':
       funcSendHeader('501');
     default:

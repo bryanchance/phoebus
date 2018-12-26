@@ -211,7 +211,7 @@ class classGenerateContent {
   * @param $aTitle        Page title
   * @param $aData         Used if not null
   ********************************************************************************************************************/
-  public function addonPanel($aType, $aTitle, $aData = null) {
+  public function addonPanel($aType, $aTitle, $aData = null, $aExtraData = null) {
     // This function will only serve the PANEL component
     if ($this->arraySoftwareState['requestComponent'] != 'panel' || !$this->libSmarty) {
       funcError(
@@ -238,6 +238,9 @@ class classGenerateContent {
       case 'admin-list-themes':
       case 'admin-list-langpacks':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'administration-list.xhtml');
+        break;
+      case 'admin-edit-addon-metadata':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'addon-metadata.xhtml');
         break;
       default:
         if (file_exists($this->arraySoftwareState['componentContentPath'] . $aType)) {
@@ -267,6 +270,7 @@ class classGenerateContent {
     $this->libSmarty->assign('APPLICATION_ID', $this->arraySoftwareState['targetApplicationID']);
     $this->libSmarty->assign('PAGE_TYPE', $aType);
     $this->libSmarty->assign('PAGE_DATA', $aData);
+    $this->libSmarty->assign('EXTRA_DATA', $aExtraData);
 
     if ($this->arraySoftwareState['authentication']) {
       $this->libSmarty->assign('USER_LEVEL', $this->arraySoftwareState['authentication']['level']);
