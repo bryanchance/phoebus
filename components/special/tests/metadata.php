@@ -10,6 +10,7 @@ $arrayIncludes = ['database', 'readManifest'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // Instantiate modules
+$moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
 $post = null;
