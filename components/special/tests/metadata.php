@@ -40,7 +40,7 @@ if (!$post) {
   }
 
   $html .= '<label for="addonRepository">Repository</label> ' .
-           '<input type="url" id="addonRepository" value="' . $addonManifest['repository'] . '">';
+           '<input type="text" id="addonRepository" value="' . $addonManifest['repository'] . '">';
 
   $html .= '<input type="submit" value="Submit"></form></body></html>';
   print($html);
