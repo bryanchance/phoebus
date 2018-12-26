@@ -23,6 +23,7 @@ if (!$post) {
           '<input type="submit" value="Submit">' .
           '</form>' .
           '</body></html>';
+  print($html);
 
 }
 
