@@ -34,8 +34,12 @@ if (!$post) {
   <input name="active" type="checkbox" value="1" @ADDON_ACTIVE@/> Active<br />
 	<input name="reviewed" type="checkbox" value="1" @ADDON_REVIEWED@ /> Reviewed<br />
   <br />
-  Repository:<br />
+  Repository URL:<br />
   <input name="repository" type="text" size="120" value="@ADDON_REPOURL@" /><br /> 
+  Support URL:<br />
+  <input name="supportURL" type="text" size="120" value="@ADDON_SUPPORTURL@" /><br />
+  Support E-mail:<br />
+  <input name="supportEmail" type="text" size="120" value="@ADDON_SUPPORTEMAIL@" /><br /> 
 	Content:<br />
 	<textarea name="content" cols="120" rows="25">@ADDON_CONTENT@</textarea><br /> 
 	<br />
@@ -46,6 +50,8 @@ if (!$post) {
     '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
     '@ADDON_REVIEWED@' => funcValueOrEmptyString($addonManifest['reviewed']),
     '@ADDON_REPOURL@' => funcValueOrEmptyString($addonManifest['repository']),
+    '@ADDON_SUPPORTURL@' => funcValueOrEmptyString($addonManifest['supportURL']),
+    '@ADDON_SUPPORTEMAIL@' => funcValueOrEmptyString($addonManifest['supportEmail']),
     '@ADDON_CONTENT@' => funcValueOrEmptyString($addonManifest['content'])
   );
 
