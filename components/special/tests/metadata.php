@@ -94,15 +94,16 @@ if (!$post) {
 }
 else {
   $arrayPostResults = array(
-    'slug'          => funcUnifiedVariable('post', 'slug');
-    'active'        => funcUnifiedVariable('post', 'active');
-    'reviewed'      => funcUnifiedVariable('post', 'reviewed');
-    'repository'    => funcUnifiedVariable('post', 'repository');
-    'supportURL'    => funcUnifiedVariable('post', 'supportURL');
-    'supportEmail'  => funcUnifiedVariable('post', 'supportEmail');
-    'license'       => funcUnifiedVariable('post', 'license');
-    'content'       => funcUnifiedVariable('post', 'content');
+    'slug'          => funcUnifiedVariable('post', 'slug'),
+    'active'        => funcUnifiedVariable('post', 'active'),
+    'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
+    'repository'    => funcUnifiedVariable('post', 'repository'),
+    'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
+    'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
+    'license'       => funcUnifiedVariable('post', 'license'),
+    'content'       => funcUnifiedVariable('post', 'content')
   );
+
   funcError($arrayPostResults, 99);
 }
 
