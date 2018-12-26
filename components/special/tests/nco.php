@@ -23,7 +23,7 @@ if ($arrayTest['nonexistingVar'] ?? null) {
   $arrayTest['cond2'] = true;
 }
 
-funcError($arrayTest, 1);
+funcError($arrayTest, 98);
 
 // ====================================================================================================================
 

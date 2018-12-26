@@ -66,7 +66,7 @@ switch ($strStripPath) {
       funcError('Invalid test case');
     }
 
-    break;
+    exit();
   default:
     funcRedirect('/');
 }
