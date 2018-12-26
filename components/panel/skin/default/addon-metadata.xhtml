@@ -29,7 +29,7 @@
       {assign "LC_LICENSE" $value|lower}
 
       {if $PAGE_DATA.license|lower == $LC_LICENSE}
-        {if $LC_LICENSE == 'COPYRIGHT'}
+        {if $LC_LICENSE == 'copyright'}
           {assign "FOUND_LICENSE" 2}
           {continue}
         {/if}
@@ -40,7 +40,7 @@
 
       <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
-    <option value="{$LC_LICENSE}" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
+    <option value="copywrite" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
 	</select><br />
 	<br />
   <strong>Content:</strong><br />
