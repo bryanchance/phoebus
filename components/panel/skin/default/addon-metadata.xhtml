@@ -20,7 +20,7 @@
   <input name="supportEmail" type="text" size="120" value="{$PAGE_DATA.supportEmail}" /><br /> 
   <br />
   <strong>License:</strong> <select name="license">
-    {assign
+    {assign "FOUND_LICENSE" NULL}
     {foreach $EXTRA_DATA as $value}
     
     {/foreach}
