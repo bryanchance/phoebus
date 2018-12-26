@@ -44,7 +44,9 @@
     {if $PAGE_DATA.category == $key}
       <option selected="selected" value="{$key}">{$value}</option>
       {assign "FOUND_CATEGORY" 1}
+      {continue}
     {/if}
+     <option value="{$key}">{$value}</option>
   {/foreach}
   <option value="unlisted" {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
   </select><br />
