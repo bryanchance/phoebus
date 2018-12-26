@@ -71,10 +71,26 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
         funcError('This only works for Extensions and Themes that are not external or langpacks');
       }
 
-      $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
-                                         'Editing Metadata for ' . $addonManifest['name'],
-                                         $addonManifest,
-                                         array_keys($moduleReadManifest::LICENSES));
+      if (empty($_POST)) {
+        $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
+                                           'Editing Metadata for ' . $addonManifest['name'],
+                                           $addonManifest,
+                                           array_keys($moduleReadManifest::LICENSES));
+      }
+      else {
+        $arrayPostResults = array(
+          'slug'          => funcUnifiedVariable('post', 'slug'),
+          'active'        => funcUnifiedVariable('post', 'active'),
+          'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
+          'repository'    => funcUnifiedVariable('post', 'repository'),
+          'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
+          'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
+          'license'       => funcUnifiedVariable('post', 'license'),
+          'content'       => funcUnifiedVariable('post', 'content')
+        );
+
+        funcError($arrayPostResults, 99);
+      }
       break;
     case 'release':
       funcSendHeader('501');
