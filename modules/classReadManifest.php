@@ -68,7 +68,7 @@ class classReadManifest {
 
   // ------------------------------------------------------------------------------------------------------------------
 
-  const LICENSES = aarray(
+  const LICENSES = array(
       'custom' => 'Custom License',
       'Apache-2.0' => 'Apache License 2.0',
       'Apache-1.1' => 'Apache License 1.1',
