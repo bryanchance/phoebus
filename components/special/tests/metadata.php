@@ -76,13 +76,13 @@ if (!$post) {
   }
 
   $arrayFilterSubstitute = array(
-    '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
-    '@ADDON_REVIEWED@' => funcValueOrEmptyString($addonManifest['reviewed']),
-    '@ADDON_REPOURL@' => funcValueOrEmptyString($addonManifest['repository']),
-    '@ADDON_SUPPORTURL@' => funcValueOrEmptyString($addonManifest['supportURL']),
-    '@ADDON_SUPPORTEMAIL@' => funcValueOrEmptyString($addonManifest['supportEmail']),
-    '@ADDON_LICENSE@' => $strLicenseHTML,
-    '@ADDON_CONTENT@' => funcValueOrEmptyString($addonManifest['content'])
+    '@ADDON_ACTIVE@'        => funcValueOrEmptyString($addonManifest['active']),
+    '@ADDON_REVIEWED@'      => funcValueOrEmptyString($addonManifest['reviewed']),
+    '@ADDON_REPOURL@'       => funcValueOrEmptyString($addonManifest['repository']),
+    '@ADDON_SUPPORTURL@'    => funcValueOrEmptyString($addonManifest['supportURL']),
+    '@ADDON_SUPPORTEMAIL@'  => funcValueOrEmptyString($addonManifest['supportEmail']),
+    '@ADDON_LICENSE@'       => $strLicenseHTML,
+    '@ADDON_CONTENT@'       => funcValueOrEmptyString($addonManifest['content'])
   );
 
   foreach ($arrayFilterSubstitute as $_key => $_value) {
@@ -93,10 +93,16 @@ if (!$post) {
   print($html);
 }
 else {
-  $arrayPostResults = array();
-  foreach ($_POST as $_key => $_value) {
-    $arrayPostResults[$_key] = funcUnifiedVariable('var', $_value);
-  }
+  $arrayPostResults = array(
+    'slug'          => funcUnifiedVariable('post', 'slug');
+    'active'        => funcUnifiedVariable('post', 'active');
+    'reviewed'      => funcUnifiedVariable('post', 'reviewed');
+    'repository'    => funcUnifiedVariable('post', 'repository');
+    'supportURL'    => funcUnifiedVariable('post', 'supportURL');
+    'supportEmail'  => funcUnifiedVariable('post', 'supportEmail');
+    'license'       => funcUnifiedVariable('post', 'license');
+    'content'       => funcUnifiedVariable('post', 'content');
+  );
   funcError($arrayPostResults, 99);
 }
 
