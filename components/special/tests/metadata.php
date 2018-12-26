@@ -40,7 +40,7 @@ if (!$post) {
   <input name="supportEmail" type="text" size="120" value="@ADDON_SUPPORTEMAIL@" /><br /> 
   License: <select name="license">
     @ADDON_LICENSE@
-	</select>
+	</select><br />
 	Content:<br />
 	<textarea name="content" cols="120" rows="25">@ADDON_CONTENT@</textarea><br /> 
 	<br />
