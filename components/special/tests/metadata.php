@@ -20,10 +20,15 @@ if (!$post) {
   //funcError($addonManifest, 98);
   funcSendHeader('html');
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
-	<input name="name" type="text" value="Frank" /><br /> 
-	<textarea cols="30" rows="2" name="content">Long text.</textarea><br /> 
-	<input name="democheckbox" type="checkbox" value="1" /> Checkbox<br /> 
-	<button type="submit" value="Submit">Submit</button>
+	<input name="active" type="checkbox" value="1" /> Active<br />
+	<input name="reviewed" type="checkbox" value="1" /> Reviewed<br />
+  <br />
+  Repository:<br />
+  <input name="repository" type="text" value="@ADDON_REPO@" /><br /> 
+	Content:<br />
+	<textarea name="content" cols="30" rows="2">@ADDON_CONTENT@</textarea><br /> 
+	<br />
+  <button type="submit" value="Submit">Submit</button>
 </form>';
   print($html);
 }
