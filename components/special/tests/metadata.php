@@ -15,7 +15,7 @@ $moduleReadManifest = new classReadManifest();
 
 $post = funcUnifiedVariable('get', 'post');
 
-funcValueOrEmptyString ($aValue) {
+function funcValueOrEmptyString ($aValue) {
   return $aValue ?? '';
 }
 
