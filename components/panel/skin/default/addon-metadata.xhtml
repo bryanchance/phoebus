@@ -1,7 +1,7 @@
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
   {if $USER_LEVEL >= 3}
 	Administration:<br />
-  <input type="hidden" name="slug" value="{PAGE_DATA.slug}" />
+  <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active<br />
 	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Reviewed<br />
   <br />
