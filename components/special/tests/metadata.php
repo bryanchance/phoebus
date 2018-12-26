@@ -93,7 +93,11 @@ if (!$post) {
   print($html);
 }
 else {
-  funcError($_POST, 99);
+  $arrayPostResults = array();
+  foreach ($_POST as $_key => $_value) {
+    $arrayPostResults[$key] = funcUnifiedVariable('var', $_value);
+  }
+  funcError($arrayPostResults, 99);
 }
 
 // ====================================================================================================================
