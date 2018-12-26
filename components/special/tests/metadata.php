@@ -52,18 +52,19 @@ if (!$post) {
   $boolLicenseFound = null;
 
   foreach (array_keys($moduleReadManifest::LICENSES) as $_value) {
-    if (strtolower($addonManifest['license']) == strtolower($_value)) {
-      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
+    $_license = strtolower($_value);
+    if (strtolower($addonManifest['license']) == $_license) {
+      $strLicenseHTML .= '<option selected="selected" value="' . $_license . '">' . $_value . '</option>';
       $boolLicenseFound = true;
       continue;
     }
 
     if (!$boolLicenseFound && $_value == 'COPYRIGHT') {
-      $strLicenseHTML .= '<option selected="selected" value="$_value">' . $_value . '</option>';
+      $strLicenseHTML .= '<option selected="selected" value="' . $_license . '">' . $_value . '</option>';
       continue;
     }
 
-    $strLicenseHTML .= '<option value="' . $_value . '">' . $_value . '</option>';
+    $strLicenseHTML .= '<option value="' . $_license . '">' . $_value . '</option>';
   }
 
   $arrayFilterSubstitute = array(
