@@ -49,7 +49,7 @@
     {/if}
      <option value="{$key}">{$value}</option>
   {/foreach}
-  <option value="unlisted" {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
+  <option value="unlisted" disabled {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
   </select><br />
   <br />
   {/if}
