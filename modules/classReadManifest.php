@@ -69,7 +69,6 @@ class classReadManifest {
   // ------------------------------------------------------------------------------------------------------------------
 
   const LICENSES = array(
-      'Custom' => 'Custom License',
       'Apache-2.0' => 'Apache License 2.0',
       'Apache-1.1' => 'Apache License 1.1',
       'BSD-3-Clause' => 'BSD 3-Clause',
@@ -82,6 +81,7 @@ class classReadManifest {
       'MIT' => 'MIT License',
       'MPL-2.0' => 'Mozilla Public License 2.0',
       'MPL-1.1' => 'Mozilla Public License 1.1',
+      'Custom' => 'Custom License',
       'PD' => 'Public Domain',
       'COPYRIGHT' => ''
     );

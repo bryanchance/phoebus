@@ -23,6 +23,7 @@
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
       {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
+      {if $value == 'CUSTOM'} {assign "value" "Custom License"} {/if}
       {assign "LC_LICENSE" $value|lower}
 
       {if $LC_LICENSE == "copyright"}
