@@ -16,7 +16,7 @@ $moduleReadManifest = new classReadManifest();
 $post = funcUnifiedVariable('get', 'post');
 
 if (!$post) {
-  $addonManifest = $moduleReadManifest->getAddonByID('abprime', null);
+  $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
   funcError($addonManifest, 98);
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
