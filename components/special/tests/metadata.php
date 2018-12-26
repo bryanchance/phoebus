@@ -19,31 +19,12 @@ if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
   //funcError($addonManifest, 98);
   funcSendHeader('html');
-  $html = '<html><head><title>Metadata</title></head><body>' .
-          '<form action="/special/test/?case=metadata&post=1" method="post">';
-
-  // Active
-  $html .= '<label for="addonActive">Active</label> ';
-  if ($addonManifest['active']) {
-    $html .= '<input type="checkbox" id="addonActive" name="addonActive" checked><br />';
-  }
-  else {
-    $html .= '<input type="checkbox" id="addonActive" name="addonActive"><br />';
-  }
-
-  // Reviewed
-  $html .= '<label for="addonReviewed">Reviewed</label> ';
-  if ($addonManifest['reviewed']) {
-    $html .= '<input type="checkbox" id="addonReviewed" name="addonReviewed" checked><br />';
-  }
-  else {
-    $html .= '<input type="checkbox" id="addonReviewed" name="addonReviewed"><br />';
-  }
-
-  $html .= '<label for="addonRepository">Repository</label> ' .
-           '<input type="text" id="addonRepository" value="' . $addonManifest['repository'] . '">';
-
-  $html .= '<input type="submit" value="Submit"></form></body></html>';
+  $html ='<form accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
+	<input name="name" type="text" value="Frank" /><br /> 
+	<textarea cols="30" rows="2">Long text.</textarea><br /> 
+	<input name="democheckbox" type="checkbox" value="1" /> Checkbox<br /> 
+	<button type="submit" value="Submit">Submit</button>
+</form>';
   print($html);
 }
 else {
