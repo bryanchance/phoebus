@@ -16,6 +16,10 @@ $moduleReadManifest = new classReadManifest();
 $post = funcUnifiedVariable('get', 'post');
 
 function funcValueOrEmptyString ($aValue) {
+  if ($aValue == true) {
+    return 'checked';
+  }
+
   return $aValue ?? '';
 }
 
@@ -27,8 +31,8 @@ if (!$post) {
 
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
 	Administration:<br />
-  <input name="active" type="checkbox" value="1" /> Active<br />
-	<input name="reviewed" type="checkbox" value="1" /> Reviewed<br />
+  <input name="active" type="checkbox" value="1" @ADDON_ACTIVE@/> Active<br />
+	<input name="reviewed" type="checkbox" value="1" @ADDON_REVIEWED@ /> Reviewed<br />
   <br />
   Repository:<br />
   <input name="repository" type="text" value="@ADDON_REPO@" /><br /> 
