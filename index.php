@@ -183,6 +183,10 @@ function funcUnifiedVariable($_type, $_value, $_allowFalsy = null) {
       break;
     case 'post':
       $finalValue = $_POST[$_value] ?? null;
+
+      if ($finalValue === '1') {
+        $finalValue = true;
+      }
       break;
     case 'server':
       $finalValue = $_SERVER[$_value] ?? null;
@@ -197,7 +201,7 @@ function funcUnifiedVariable($_type, $_value, $_allowFalsy = null) {
       funcError('Incorrect var check');
   }
 
-  if (!$_allowFalsy && (empty($finalValue) || $finalValue === 'none')) {
+  if (!$_allowFalsy && (empty($finalValue) || $finalValue === 'none' || $finalValue === '')) {
     return null;
   }
 
