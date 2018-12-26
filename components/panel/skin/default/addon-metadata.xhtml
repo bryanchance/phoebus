@@ -22,9 +22,9 @@
   <strong>License:</strong> <select name="license" style="margin-left: 2px;">
     {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
-      {if $value == 'PD'} {assign "value" "Public Domain"} {/if}
-      {if $value == 'CUSTOM'} {assign "value" "Custom License"} {/if}
       {assign "LC_LICENSE" $value|lower}
+      {if $LC_LICENSE == 'pd'} {assign "value" "Public Domain"} {/if}
+      {if $LC_LICENSE == 'custom'} {assign "value" "Custom License"} {/if}
 
       {if $LC_LICENSE == "copyright"}
         {if $PAGE_DATA.license|lower == "copyright"}
