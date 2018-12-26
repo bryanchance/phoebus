@@ -52,6 +52,7 @@ if (!$post) {
   $boolLicenseFound = null;
 
 
+
   $arrayFilterSubstitute = array(
     '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
     '@ADDON_REVIEWED@' => funcValueOrEmptyString($addonManifest['reviewed']),
