@@ -20,10 +20,15 @@
   <input name="supportEmail" type="text" size="120" value="{$PAGE_DATA.supportEmail}" /><br /> 
   <br />
   <strong>License:</strong> <select name="license" style="margin-left: 2px;">
-    {assign "FOUND_LICENSE" 1}
+    {assign "FOUND_LICENSE" 0}
     {foreach $EXTRA_DATA as $value}
       {assign "LC_LICENSE" $value|lower}
-      <option value="{$LC_LICENSE}">{$value}</option>
+      {if $PAGE_DATA.license|lower == $LC_LICENSE}
+        <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
+        {$LC_LICENSE = 1}
+        {continue}
+      {/if}
+        <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
 	</select><br />
 	<br />
