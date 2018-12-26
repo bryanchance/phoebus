@@ -20,10 +20,6 @@
     <td style="width: 100px"><strong>Slug</strong></td>
     <td>{$PAGE_DATA.slug}</td>
   </tr>
-  <tr>
-    <td style="width: 100px"><strong>Tags</strong></td>
-    <td>{$PAGE_DATA.tags}</td>
-  </tr>
 </table>
 <br />
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
@@ -79,6 +75,9 @@
     <option value="copyright" {if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
 	</select><br />
 	<br />
+  <strong>Tags</strong> <em>(Up to 10 max)</em><strong>:</strong><br />
+  <input name="repository" type="text" size="80" value="{$PAGE_DATA.repository}" /><br /> 
+  <br />
   <strong>Repository URL:</strong><br />
   <input name="repository" type="text" size="80" value="{$PAGE_DATA.repository}" /><br /> 
   <br />
@@ -93,3 +92,4 @@
 	<br />
   <button type="submit" value="Submit">Submit</button>
 </form>
+
