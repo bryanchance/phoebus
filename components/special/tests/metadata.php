@@ -13,13 +13,13 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$post = $_POST ?? null;
+$post = funcUnifiedVar('get', 'post');
 
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonByID('abprime', null);
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
-          '<form action="/special/test/?case=metadata" method="post">' .
+          '<form action="/special/test/?case=metadata&post=1" method="post">' .
           '<label for="addonActive">Active</label>' .
           '<input type="checkbox" id="addonActive">' .
           '<input type="submit" value="Submit">' .
