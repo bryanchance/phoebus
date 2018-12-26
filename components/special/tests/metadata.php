@@ -13,7 +13,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$post = funcUnifiedVariable('get', 'post');
+$post = funcUnifiedVariable('post', 'slug');
 
 function funcValueOrEmptyString ($aValue) {
   if ($aValue === true) {
@@ -25,9 +25,14 @@ function funcValueOrEmptyString ($aValue) {
 
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
+  
+  if ($addonManifest['type'] == 'external' || $addonManifest['type'] == 'langpack') {
+    funcError('This only works for Extensions and Themes that are not external');
+  }
 
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
 	Administration:<br />
+  <input type="hidden" name="slug" value="' . $addonManifest['slug'] . '" />
   <input name="active" type="checkbox" value="1" @ADDON_ACTIVE@/> Active<br />
 	<input name="reviewed" type="checkbox" value="1" @ADDON_REVIEWED@ /> Reviewed<br />
   <br />
