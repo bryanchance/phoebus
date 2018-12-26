@@ -15,12 +15,19 @@ $moduleReadManifest = new classReadManifest();
 
 $post = funcUnifiedVariable('get', 'post');
 
+funcValueOrEmptyString ($aValue) {
+  return $aValue ?? '';
+}
+
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonBySlug('abprime', null);
   //funcError($addonManifest, 98);
+
   funcSendHeader('html');
+
   $html ='<form id="form1"accept-charset="UTF-8" action="/special/test/?case=metadata&post=1" autocomplete="off" method="POST" target="_blank">
-	<input name="active" type="checkbox" value="1" /> Active<br />
+	Administration:<br />
+  <input name="active" type="checkbox" value="1" /> Active<br />
 	<input name="reviewed" type="checkbox" value="1" /> Reviewed<br />
   <br />
   Repository:<br />
@@ -30,6 +37,18 @@ if (!$post) {
 	<br />
   <button type="submit" value="Submit">Submit</button>
 </form>';
+
+  $arrayFilterSubstitute = array(
+    '@ADDON_ACTIVE@' => funcValueOrEmptyString($addonManifest['active']),
+    '@ADDON_REVIEWED@' => funcValueOrEmptyString($addonManifest['reviewed']),
+    '@ADDON_REPOURL@' => funcValueOrEmptyString($addonManifest['repository']),
+    '@ADDON_CONTENT@' => funcValueOrEmptyString($addonManifest['content'])
+  );
+
+  foreach ($arrayFilterSubstitute as $_key => $_value) {
+    $html = str_replace($_key, $_value, $html);
+  }
+
   print($html);
 }
 else {
