@@ -35,7 +35,7 @@ if (!$post) {
 	<input name="reviewed" type="checkbox" value="1" @ADDON_REVIEWED@ /> Reviewed<br />
   <br />
   Repository:<br />
-  <input name="repository" type="text" value="@ADDON_REPO@" /><br /> 
+  <input name="repository" type="text" value="@ADDON_REPOURL@" /><br /> 
 	Content:<br />
 	<textarea name="content" cols="30" rows="2">@ADDON_CONTENT@</textarea><br /> 
 	<br />
