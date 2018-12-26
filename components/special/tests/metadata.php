@@ -79,10 +79,6 @@ if (!$post) {
     $html = str_replace($_key, $_value, $html);
   }
 
-  foreach (array_keys($moduleReadManifest::LICENSES)) {
-    
-  }
-
   funcSendHeader('html');
   print($html);
 }
