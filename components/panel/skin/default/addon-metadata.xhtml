@@ -8,8 +8,9 @@
   <br />
   {else}
   <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" /> Active 
-  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" /> Reviewed
+  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" /> Reviewed<br />
   {/if}
+  <br />
   <strong>Repository URL:</strong><br />
   <input name="repository" type="text" size="120" value="{$PAGE_DATA.repository}" /><br /> 
   <br />
