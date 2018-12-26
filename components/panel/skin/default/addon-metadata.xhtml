@@ -22,9 +22,10 @@
   <strong>License:</strong> <select name="license">
     {assign "FOUND_LICENSE" 1}
     {foreach $EXTRA_DATA as $value}
-    
+      {assign "LC_LICENSE" $value|lower}
+      <option value="{$LC_LICENSE}">{$value}</option>
     {/foreach}
-	</select>{if $FOUND_LICENSE}License var is true{/if}<br />
+	</select><br />
 	<br />
   <strong>Content:</strong><br />
 	<textarea style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea><br /> 
