@@ -87,8 +87,6 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           'content'       => funcUnifiedVariable('post', 'content')
         );
 
-          $arrayPostResults['active'] = funcUnifiedVariable('post', 'active'),
-          $arrayPostResults['reviewed'] = funcUnifiedVariable('post', 'reviewed'),
         funcError($arrayPostResults, 99);
       }
       break;
