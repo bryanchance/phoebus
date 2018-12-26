@@ -20,11 +20,15 @@ if (!$post) {
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
           '<form action="/special/test/?case=metadata" method="post">' .
+          '<label for="addonActive">Active</label>' .
+          '<input type="checkbox" id="addonActive">' .
           '<input type="submit" value="Submit">' .
           '</form>' .
           '</body></html>';
   print($html);
-
+}
+else {
+  funcError($_POST, 99);
 }
 
 // ====================================================================================================================
