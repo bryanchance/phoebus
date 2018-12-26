@@ -46,7 +46,7 @@
       {assign "FOUND_CATEGORY" 1}
     {/if}
   {/foreach}
-  <option value="unlisted" {if $FOUND_LICENSE == 0}selected="selected"{/if}>Unlisted</option>
+  <option value="unlisted" {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
   </select>
   <br />
   {/if}
