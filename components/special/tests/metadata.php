@@ -17,6 +17,7 @@ $post = funcUnifiedVariable('get', 'post');
 
 if (!$post) {
   $addonManifest = $moduleReadManifest->getAddonByID('abprime', null);
+  funcError($addonManifest, 98);
   funcSendHeader('html');
   $html = '<html><head><title>Metadata</title></head><body>' .
           '<form action="/special/test/?case=metadata&post=1" method="post">';
