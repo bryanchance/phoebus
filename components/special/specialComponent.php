@@ -34,7 +34,9 @@ switch ($strStripPath) {
     phpinfo(32);
     break;
   case 'softwareState':
-    funcError($arraySoftwareState, 1);
+    require_once(MODULES['auth']);
+    $moduleAuth->authenticate();
+    funcError($arraySoftwareState, 98);
     break;
   case 'validate':
   case 'validator':
