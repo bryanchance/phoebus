@@ -222,7 +222,7 @@ a.download-beta:hover {
 }
 
 .addonTable[metadata] tr td:first-child {
-  width: 100px;
+  width: 125px;
   font-weight: bold;
 }
 
