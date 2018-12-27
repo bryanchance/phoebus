@@ -217,11 +217,11 @@ a.download-beta:hover {
     color:#fff;
 }
 
-.addonTable[metadata] > tr > td {
+.addonTable[metadata] tr td {
   height: 22px;
 }
 
-.addonTable[metadata] > tr > td:first-child {
+.addonTable[metadata] tr td:first-child {
   width: 100px;
 }
 
