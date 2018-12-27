@@ -31,8 +31,8 @@
       <input form="addon-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
       <input form="addon-metadata" name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
       {else}
-      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
-      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" /> Active 
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" class="aligntop" style="margin-left: 2px" /> Reviewed<br />
       {/if}
     </td>
   </tr>
@@ -101,7 +101,7 @@
     <td><input form="addon-metadata" name="supportEmail" type="text" size="80" value="{$PAGE_DATA.supportEmail}" /></td>
   </tr>
   <tr>
-    <td style="vertical-align: top;">Add-on Page Content</td>
+    <td class="aligntop">Add-on Page Content</td>
     <td><textarea form="addon-metadata" style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea></td>
   </tr>
 </table>
