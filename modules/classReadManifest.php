@@ -186,6 +186,7 @@ class classReadManifest {
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
           AND `category` = ?s
+          AND NOT `category` = 'unlisted'
           ORDER BY `name`
         ";
         $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication, $_queryData);
@@ -197,7 +198,7 @@ class classReadManifest {
           JOIN `client` ON addon.id = client.addonID
           WHERE ?n = 1
           AND `type` IN ('extension', 'external')
-          AND NOT `category` IN ('unlisted', 'theme', 'langpack')
+          AND NOT `category` IN ('unlisted', 'themes', 'langpack')
           ORDER BY `name`
         ";
         $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication);
