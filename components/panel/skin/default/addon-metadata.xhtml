@@ -5,19 +5,6 @@
     <th>Value</th>
   </tr>
   <tr>
-    <td>Status</td>
-    <td>
-      {if $USER_LEVEL >= 3}
-      <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
-      <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
-      <input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
-      {else}
-      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
-      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
-      {/if}
-    </td>
-  </tr>
-  <tr>
     <td>Name</td>
     <td>{$PAGE_DATA.name}</td>
   </tr>
@@ -32,6 +19,19 @@
   <tr>
     <td>Slug</td>
     <td>{$PAGE_DATA.slug}</td>
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td>
+      {if $USER_LEVEL >= 3}
+      <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
+      <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
+      <input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
+      {else}
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
+      {/if}
+    </td>
   </tr>
   <tr>
     <td>Category</td>
