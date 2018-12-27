@@ -238,3 +238,7 @@ a.download-beta:hover {
 .aligntop {
   vertical-align: top;
 }
+
+.aligntop tr {
+  margin-top: 4px;
+}
