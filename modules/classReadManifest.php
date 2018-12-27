@@ -99,7 +99,7 @@ class classReadManifest {
     $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
    
     // Assign the global instance of the database class to a class property by reference
-    $this->moduleDatabase = &$GLOBALS['moduleDatabase'];
+    $this->moduleDatabase = global $moduleDatabase;
   }
 
  /********************************************************************************************************************

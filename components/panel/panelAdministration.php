@@ -90,7 +90,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           'repository'    => funcUnifiedVariable('post', 'repository'),
           'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
           'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
-          'tags'  => funcUnifiedVariable('post', 'tags'),
+          'tags'          => funcUnifiedVariable('post', 'tags'),
           'content'       => funcUnifiedVariable('post', 'content')
         );
 
