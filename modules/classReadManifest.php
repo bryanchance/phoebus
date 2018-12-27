@@ -170,10 +170,7 @@ class classReadManifest {
   * @param $_addonSlug      Add-on ID either GUID or user@host
   * @returns                add-on manifest or null
   ********************************************************************************************************************/
-  public function getPanelAddonBySlug($aAddonSlug,
-                                      $aProcessContent = null,
-                                      $aReturnInactive = true,
-                                      $aReturnUnreviewed = true) { 
+  public function getPanelAddonBySlug($aAddonSlug) { 
     $query = "SELECT addon.*
               FROM `addon`
               WHERE `slug` = ?s
@@ -185,7 +182,7 @@ class classReadManifest {
       return null;
     }
     
-    $addonManifest = $this->funcProcessManifest($queryResult, null, true, true);
+    $addonManifest = $this->funcProcessManifest($queryResult, true, true, null);
     
     if (!$addonManifest) {
       return null;
