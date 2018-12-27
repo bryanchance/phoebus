@@ -35,6 +35,7 @@ switch ($strStripPath) {
     break;
   case 'softwareState':
     require_once(MODULES['auth']);
+    $moduleAuth = new classAuthentication;
     $moduleAuth->authenticate();
     funcError($arraySoftwareState, 98);
     break;
