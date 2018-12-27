@@ -80,24 +80,31 @@
     </td>
   </tr>
   {/if}
+  <tr>
+    <td>Search Tags</td>
+    <td><input form="addon-metadata" name="tags" type="text" size="80" value="{$PAGE_DATA.tags}" /></td>
+  </tr>
+  <tr>
+    <td>Repository URL</td>
+    <td><input form="addon-metadata" name="repository" type="text" size="80" value="{$PAGE_DATA.repository}" /></td>
+  </tr>
+  <tr>
+    <td>Support URL</td>
+    <td><input form="addon-metadata" name="supportURL" type="text" size="80" value="{$PAGE_DATA.supportURL}" /></td>
+  </tr>
+  <tr>
+    <td>Support E-mail</td>
+    <td><input form="addon-metadata" name="supportEmail" type="text" size="80" value="{$PAGE_DATA.supportEmail}" /></td>
+  </tr>
+  <tr>
+    <td>Add-on Page Content</td>
+    <td><textarea form="addon-metadata" style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea></td>
+  </tr>
 </table>
+
 <br />
+
 <form id="addon-metadata" accept-charset="UTF-8" autocomplete="off" method="POST">
-  <strong>Search Tags:</strong> <em>(Up to 10 max)</em><br />
-  <input name="tags" type="text" size="80" value="{$PAGE_DATA.tags}" /><br /> 
-  <br />
-  <strong>Repository URL:</strong><br />
-  <input name="repository" type="text" size="80" value="{$PAGE_DATA.repository}" /><br /> 
-  <br />
-  <strong>Support URL:</strong><br />
-  <input name="supportURL" type="text" size="80" value="{$PAGE_DATA.supportURL}" /><br />
-  <br />
-  <strong>Support E-mail:</strong><br />
-  <input name="supportEmail" type="text" size="80" value="{$PAGE_DATA.supportEmail}" /><br /> 
-  <br />
-  <strong>Add-on Page Content:</strong> <em>(phoebus.content)</em><br />
-	<textarea style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea><br /> 
-	<br />
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <button type="submit" value="Submit">Submit</button>
 </form>
