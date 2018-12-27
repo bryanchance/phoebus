@@ -23,7 +23,7 @@
   <tr>
     <td style="width: 100px"><strong>Category</strong></td>
     <td>
-      <select name="category" style="width: 175px;">
+      <select form="addon-metadata" name="category" style="width: 175px;">
       {assign "FOUND_CATEGORY" 0}
       {foreach $EXTRA_DATA.categories as $key => $value}
         {if $PAGE_DATA.category == $key}
@@ -39,7 +39,7 @@
   </tr>
 </table>
 <br />
-<form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
+<form id="addon-metadata" accept-charset="UTF-8" autocomplete="off" method="POST">
   <strong>Status:</strong><br />
   {if $USER_LEVEL >= 3}
   <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
