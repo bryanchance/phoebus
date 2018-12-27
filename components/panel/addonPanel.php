@@ -80,7 +80,7 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_LOGIN:
     $moduleAuth->authenticate();
     if (funcCheckAccessLevel(3)) {
-      uncRedirect('/panel/administration/');
+      funcRedirect('/panel/administration/');
     }
 
     funcRedirect('/panel/addons/');
