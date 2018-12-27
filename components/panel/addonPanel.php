@@ -79,7 +79,11 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_LOGIN:
     $moduleAuth->authenticate();
-    funcRedirect('/panel/account/');
+    if (funcCheckAccessLevel(3)) {
+      uncRedirect('/panel/administration/');
+    }
+
+    funcRedirect('/panel/addons/');
     break;
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
