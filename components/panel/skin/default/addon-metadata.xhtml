@@ -51,7 +51,8 @@
          <option value="{$key}">{$value}</option>
       {/foreach}
       <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
-      </select>
+      </select> 
+      <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to choose one)</em>
     </td>
   </tr>
   <tr>
@@ -80,7 +81,7 @@
           <option value="{$LC_LICENSE}">{$value}</option>
         {/foreach}
         <option value="copyright"{if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
-      </select> <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to choose one)</em>
+      </select>
     </td>
   </tr>
   {/if}
