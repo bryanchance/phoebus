@@ -131,7 +131,7 @@ class classReadManifest {
  /********************************************************************************************************************
   * Gets a single manifest for an add-on by slug
   * 
-  * @param $_addonSlug      Add-on ID either GUID or user@host
+  * @param $_addonSlug      Add-on slug
   * @returns                add-on manifest or null
   ********************************************************************************************************************/
   public function getAddonBySlug($aAddonSlug,
@@ -156,6 +156,36 @@ class classReadManifest {
                                                 $aReturnInactive,
                                                 $aReturnUnreviewed,
                                                 $aProcessContent);
+    
+    if (!$addonManifest) {
+      return null;
+    }
+
+    return $addonManifest;
+  }
+
+ /********************************************************************************************************************
+  * Gets a single manifest for an external by slug
+  * 
+  * @param $_addonSlug      Add-on ID either GUID or user@host
+  * @returns                add-on manifest or null
+  ********************************************************************************************************************/
+  public function getPanelAddonBySlug($aAddonSlug,
+                                      $aProcessContent = null,
+                                      $aReturnInactive = true,
+                                      $aReturnUnreviewed = true) { 
+    $query = "SELECT addon.*
+              FROM `addon`
+              WHERE `slug` = ?s
+              AND `type` IN ('extension', 'theme', 'langpack', 'external')";
+
+    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $aAddonSlug);
+    
+    if (!$queryResult) {
+      return null;
+    }
+    
+    $addonManifest = $this->funcProcessManifest($queryResult, null, true, true);
     
     if (!$addonManifest) {
       return null;

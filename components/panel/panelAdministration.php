@@ -61,14 +61,14 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
         funcError('Not a valid slug');
       }
 
-      $addonManifest = $moduleReadManifest->getAddonBySlug($arraySoftwareState['requestPanelSlug'], null, true);
+      $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
 
       if (!$addonManifest) {
         funcError('Add-on Manifest is null');
       }
 
       if ($addonManifest['type'] == 'external' || $addonManifest['type'] == 'langpack') {
-        funcError('This only works for Extensions and Themes that are not external or langpacks');
+        funcError($addonManifest, 98);
       }
 
       if (empty($_POST)) {
