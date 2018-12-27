@@ -17,6 +17,10 @@
     <td>{$PAGE_DATA.description}</td>
   </tr>
   <tr>
+    <td>Homepage URL</td>
+    <td>{if $PAGE_DATA.homepageURL}{$PAGE_DATA.homepageURL}{else}Set em:homepageURL in install.rdf{/if}</td>
+  </tr>
+  <tr>
     <td>Slug</td>
     <td>{$PAGE_DATA.slug}</td>
   </tr>
@@ -83,10 +87,6 @@
   <tr>
     <td>Search Tags</td>
     <td><input form="addon-metadata" name="tags" type="text" size="80" value="{$PAGE_DATA.tags}" /></td>
-  </tr>
-  <tr>
-    <td>Homepage URL</td>
-    <td>{$PAGE_DATA.homepageURL}</td>
   </tr>
   <tr>
     <td>Repository URL</td>
