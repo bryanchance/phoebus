@@ -27,7 +27,7 @@
   <tr>
     <td>Status</td>
     <td>
-      {if $USER_LEVEL <= 3}
+      {if $USER_LEVEL >= 3}
       <input form="addon-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
       <input form="addon-metadata" name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
       {else}
