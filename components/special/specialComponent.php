@@ -34,7 +34,7 @@ switch ($strStripPath) {
     phpinfo(32);
     break;
   case 'softwareState':
-    $arrayIncludes['database', 'auth'];
+    $arrayIncludes = ['database', 'auth'];
     foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]) };
     $moduleAuth = new classAuthentication;
     $moduleAuth->authenticate();
