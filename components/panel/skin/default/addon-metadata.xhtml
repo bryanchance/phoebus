@@ -5,23 +5,36 @@
     <th>Value</th>
   </tr>
   <tr>
-    <td><strong>Name</strong></td>
+    <td>Status</td>
+    <td>
+      {if $USER_LEVEL >= 3}
+      <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
+      <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
+      <input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
+      {else}
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
+      {/if}
+    </td>
+  </tr>
+  <tr>
+    <td>Name</td>
     <td>{$PAGE_DATA.name}</td>
   </tr>
   <tr>
-    <td><strong>Description</strong></td>
+    <td>Description</td>
     <td>{$PAGE_DATA.description}</td>
   </tr>
   <tr>
-    <td><strong>Creator</strong></td>
+    <td>Creator</td>
     <td>{$PAGE_DATA.creator}</td>
   </tr>
   <tr>
-    <td><strong>Slug</strong></td>
+    <td>Slug</td>
     <td>{$PAGE_DATA.slug}</td>
   </tr>
   <tr>
-    <td><strong>Category</strong></td>
+    <td>Category</td>
     <td>
       <select form="addon-metadata" name="category" style="width: 175px;">
       {assign "FOUND_CATEGORY" 0}
@@ -41,14 +54,6 @@
 <br />
 <form id="addon-metadata" accept-charset="UTF-8" autocomplete="off" method="POST">
   <strong>Status:</strong><br />
-  {if $USER_LEVEL >= 3}
-  <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
-  <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
-	<input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
-  {else}
-  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
-  <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
-  {/if}
   <br />
   {if $PAGE_DATA.type == 'extension'}
   <strong>Category:</strong> <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to set one for visablity)</em><br />
