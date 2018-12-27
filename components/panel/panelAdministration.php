@@ -85,6 +85,8 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       else {
         $arrayPostResults = array(
           'slug'          => funcUnifiedVariable('post', 'slug'),
+          'active'        => funcUnifiedVariable('post', 'active'),
+          'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
           'category'      => funcUnifiedVariable('post', 'category'),
           'license'       => funcUnifiedVariable('post', 'license'),
           'repository'    => funcUnifiedVariable('post', 'repository'),
