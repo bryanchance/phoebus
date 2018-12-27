@@ -60,7 +60,7 @@
       {/if}
       <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
       </select> 
-      <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to choose one)</em>
+      {if $PAGE_DATA.type == 'extension'}<em>(Some Add-ons Sites do not currently list extensions by category, however, you need to choose one)</em>{/if}
     </td>
   </tr>
   <tr>
