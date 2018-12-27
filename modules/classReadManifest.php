@@ -6,7 +6,6 @@
 // == | classReadManifest | ===========================================================================================
 
 class classReadManifest {
-  private $moduleDatabase;
   private $currentApplication;
   private $currentAppID;
 
@@ -97,9 +96,6 @@ class classReadManifest {
     // Assign currentApplication
     $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
     $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
-   
-    // Assign the global instance of the database class to a class property by reference
-    $this->moduleDatabase = global $moduleDatabase;
   }
 
  /********************************************************************************************************************
@@ -117,7 +113,7 @@ class classReadManifest {
       AND `id` = ?s
       AND `type` IN ('extension', 'theme', 'langpack')
     ";
-    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $_addonID);
+    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $this->currentApplication, $_addonID);
 
     if (!$queryResult) {
       return null;
@@ -150,7 +146,7 @@ class classReadManifest {
       AND `slug` = ?s
       AND `type` IN ('extension', 'theme', 'langpack')
     ";
-    $queryResult = $this->moduleDatabase->query('row', $query, $this->currentApplication, $aAddonSlug);
+    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $this->currentApplication, $aAddonSlug);
     
     if (!$queryResult) {
       return null;
@@ -192,7 +188,7 @@ class classReadManifest {
           AND `category` = ?s
           ORDER BY `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'site-all-extensions':
         $query = "
@@ -204,7 +200,7 @@ class classReadManifest {
           AND NOT `category` IN ('unlisted', 'theme', 'langpack')
           ORDER BY `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication);
         break;
       case 'site-search':
         $query = "
@@ -215,7 +211,7 @@ class classReadManifest {
           AND `type` IN ('extension', 'theme', 'langpack')
           AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'api-search':
         $query = "
@@ -227,7 +223,7 @@ class classReadManifest {
           AND `type` IN ('extension', 'theme', 'langpack')
           AND MATCH(`tags`) AGAINST(?s IN NATURAL LANGUAGE MODE)
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'api-get':
         $query = "
@@ -239,7 +235,7 @@ class classReadManifest {
           AND `id` IN (?a)
           AND `type` IN ('extension', 'theme', 'langpack')
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $this->currentApplication, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $this->currentApplication, $_queryData);
         break;
       case 'panel-user-addons':
         $returnInactive = true;
@@ -252,7 +248,7 @@ class classReadManifest {
           AND `type` IN ('extension', 'theme')
           ORDER BY `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $_queryData);
         break;
       case 'panel-all-addons':
         $returnInactive = true;
@@ -263,7 +259,7 @@ class classReadManifest {
           FROM `addon`
           ORDER BY `type`, `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query);
         break;
       case 'panel-addons-by-type':
         $returnInactive = true;
@@ -275,7 +271,7 @@ class classReadManifest {
           WHERE `type` = ?s
           ORDER BY `name`
         ";
-        $queryResults = $this->moduleDatabase->query('rows', $query, $_queryData);
+        $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query, $_queryData);
         break;
       default:
         funcError(__CLASS__ . '::' . __FUNCTION__ . ' - Unknown query type');
