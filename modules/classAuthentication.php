@@ -19,7 +19,6 @@
 
 class classAuthentication { 
   private $arraySoftwareState;
-  private $moduleDatabase;
   const SQL_USER_AUTH = "SELECT * FROM `user` WHERE `username` = ?s";
 
   /********************************************************************************************************************
@@ -35,9 +34,6 @@ class classAuthentication {
 
     // Assign current software state to a class property by reference
     $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
-
-    // Assign the global instance of the database class to a class property by reference
-    $this->moduleDatabase = &$GLOBALS['moduleDatabase'];
   }
 
   /********************************************************************************************************************
@@ -75,7 +71,7 @@ class classAuthentication {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Query SQL for a user row
-    $userManifest = $this->moduleDatabase->query('row', self::SQL_USER_AUTH, $strUsername);
+    $userManifest = $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $strUsername);
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels
