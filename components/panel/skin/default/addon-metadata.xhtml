@@ -20,6 +20,23 @@
     <td style="width: 100px"><strong>Slug</strong></td>
     <td>{$PAGE_DATA.slug}</td>
   </tr>
+  <tr>
+    <td style="width: 100px"><strong>Category</strong></td>
+    <td>
+      <select name="category" style="width: 175px;">
+      {assign "FOUND_CATEGORY" 0}
+      {foreach $EXTRA_DATA.categories as $key => $value}
+        {if $PAGE_DATA.category == $key}
+          <option selected="selected" value="{$key}">{$value}</option>
+          {assign "FOUND_CATEGORY" 1}
+          {continue}
+        {/if}
+         <option value="{$key}">{$value}</option>
+      {/foreach}
+      <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
+      </select>
+    </td>
+  </tr>
 </table>
 <br />
 <form id="form1" accept-charset="UTF-8" autocomplete="off" method="POST">
@@ -34,19 +51,8 @@
   {/if}
   <br />
   {if $PAGE_DATA.type == 'extension'}
-  <strong>Category:</strong> <em>(Some Add-ons Sites do not currently list extensions via category, however, please set one anyway)</em><br />
-  <select name="category" style="width: 175px;">
-  {assign "FOUND_CATEGORY" 0}
-  {foreach $EXTRA_DATA.categories as $key => $value}
-    {if $PAGE_DATA.category == $key}
-      <option selected="selected" value="{$key}">{$value}</option>
-      {assign "FOUND_CATEGORY" 1}
-      {continue}
-    {/if}
-     <option value="{$key}">{$value}</option>
-  {/foreach}
-  <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
-  </select><br />
+  <strong>Category:</strong> <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to set one for visablity)</em><br />
+<br />
   <br />
   {/if}
   <strong>License:</strong><br />
