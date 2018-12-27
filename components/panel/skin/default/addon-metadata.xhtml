@@ -40,20 +40,24 @@
     <td>Slug</td>
     <td>{$PAGE_DATA.slug}</td>
   </tr>
-  {if $PAGE_DATA.type == 'extension'}
   <tr>
     <td>Category</td>
     <td>
       <select form="addon-metadata" name="category" style="width: 175px;">
       {assign "FOUND_CATEGORY" 0}
-      {foreach $EXTRA_DATA.categories as $key => $value}
-        {if $PAGE_DATA.category == $key}
-          <option selected="selected" value="{$key}">{$value}</option>
-          {assign "FOUND_CATEGORY" 1}
-          {continue}
-        {/if}
-         <option value="{$key}">{$value}</option>
-      {/foreach}
+      {if $PAGE_DATA.type == 'extension'}
+        {foreach $EXTRA_DATA.categories as $key => $value}
+          {if $PAGE_DATA.category == $key}
+            <option selected="selected" value="{$key}">{$value}</option>
+            {assign "FOUND_CATEGORY" 1}
+            {continue}
+          {/if}
+           <option value="{$key}">{$value}</option>
+        {/foreach}
+      {/if}
+      {if $PAGE_DATA.type == 'theme'}
+        <option value="themes" {if $PAGE_DATA.category == 'themes'}{assign "FOUND_CATEGORY" 1}selected="selected"{/if}>Themes</option>
+      {/if}
       <option value="unlisted" {if $USER_LEVEL <= 1}disabled{/if} {if $FOUND_CATEGORY == 0}selected="selected"{/if}>Unlisted</option>
       </select> 
       <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to choose one)</em>
@@ -89,7 +93,6 @@
       <em>(Open Source licenses are encouraged)
     </td>
   </tr>
-  {/if}
   <tr>
     <td>Repository URL</td>
     <td><input form="addon-metadata" name="repository" type="url" size="80" value="{$PAGE_DATA.repository}" /></td>
