@@ -234,3 +234,7 @@ a.download-beta:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.aligntop {
+  vertical-align: top;
+}
