@@ -24,15 +24,15 @@
     <td>Status</td>
     <td>
       {if $USER_LEVEL >= 3}
-      <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
-      <input name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
-      <input name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
+      <input form="addon-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
+      <input form="addon-metadata" name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
       {else}
       <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" style="vertical-align: top;" /> Active 
       <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" style="vertical-align: top; margin-left: 2px" /> Reviewed<br />
       {/if}
     </td>
   </tr>
+  {if $PAGE_DATA.type == 'extension'}
   <tr>
     <td>Category</td>
     <td>
@@ -50,42 +50,39 @@
       </select>
     </td>
   </tr>
+  <tr>
+    <td>License</td>
+    <td>
+      <select form="addon-metadata" name="license" style="width: 175px;">
+        {assign "FOUND_LICENSE" 0}
+        {foreach $EXTRA_DATA.licenses as $value}
+          {assign "LC_LICENSE" $value|lower}
+          {if $LC_LICENSE == 'pd'} {assign "value" "Public Domain"} {/if}
+          {if $LC_LICENSE == 'custom'} {assign "value" "Custom License"} {/if}
+
+          {if $LC_LICENSE == "copyright"}
+            {if $PAGE_DATA.license|lower == "copyright"}
+              {assign "FOUND_LICENSE" 2}
+            {/if}
+            {continue}
+          {/if}
+
+          {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
+            <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
+            {assign "FOUND_LICENSE" 1}
+            {continue}
+          {/if}
+
+          <option value="{$LC_LICENSE}">{$value}</option>
+        {/foreach}
+        <option value="copyright"{if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
+      </select>
+    </td>
+  </tr>
+  {/if}
 </table>
 <br />
 <form id="addon-metadata" accept-charset="UTF-8" autocomplete="off" method="POST">
-  <strong>Status:</strong><br />
-  <br />
-  {if $PAGE_DATA.type == 'extension'}
-  <strong>Category:</strong> <em>(Some Add-ons Sites do not currently list extensions by category, however, you need to set one for visablity)</em><br />
-<br />
-  <br />
-  {/if}
-  <strong>License:</strong><br />
-  <select name="license" style="width: 175px;">
-    {assign "FOUND_LICENSE" 0}
-    {foreach $EXTRA_DATA.licenses as $value}
-      {assign "LC_LICENSE" $value|lower}
-      {if $LC_LICENSE == 'pd'} {assign "value" "Public Domain"} {/if}
-      {if $LC_LICENSE == 'custom'} {assign "value" "Custom License"} {/if}
-
-      {if $LC_LICENSE == "copyright"}
-        {if $PAGE_DATA.license|lower == "copyright"}
-          {assign "FOUND_LICENSE" 2}
-        {/if}
-        {continue}
-      {/if}
-
-      {if $FOUND_LICENSE == 0 && $PAGE_DATA.license|lower == $LC_LICENSE}
-        <option value="{$LC_LICENSE}" selected="selected">{$value}</option>
-        {assign "FOUND_LICENSE" 1}
-        {continue}
-      {/if}
-
-      <option value="{$LC_LICENSE}">{$value}</option>
-    {/foreach}
-    <option value="copyright"{if $FOUND_LICENSE == 0 || $FOUND_LICENSE == 2}selected="selected"{/if}>Copyright</option>
-	</select><br />
-	<br />
   <strong>Search Tags:</strong> <em>(Up to 10 max)</em><br />
   <input name="tags" type="text" size="80" value="{$PAGE_DATA.tags}" /><br /> 
   <br />
@@ -101,6 +98,7 @@
   <strong>Add-on Page Content:</strong> <em>(phoebus.content)</em><br />
 	<textarea style="width: 100%; resize: none;" name="content" rows="20">{$PAGE_DATA.content}</textarea><br /> 
 	<br />
+  <input type="hidden" name="slug" value="{$PAGE_DATA.slug}" />
   <button type="submit" value="Submit">Submit</button>
 </form>
 
