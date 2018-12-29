@@ -37,6 +37,23 @@ class classAuthentication {
   }
 
   /********************************************************************************************************************
+  * Uses a javascript hack to log a user out
+  ********************************************************************************************************************/
+  public function logout() {
+    //header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
+    header('HTTP/1.0 401 Unauthorized');
+    funcSendHeader('html');
+    die('<html><head>'.
+        '<script>window.location = "/panel/";</script>' .
+        '</head><body>' .
+        '<p>Logging out...</p>' .
+        '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
+        'Additionally, you can just close the browser or clear private data.</p>' .
+        '</body></html>');
+  }
+}
+
+  /********************************************************************************************************************
   * Performs authentication
   ********************************************************************************************************************/
   public function authenticate($aLogout = null) {
@@ -91,23 +108,6 @@ class classAuthentication {
     funcError('You need to enter a valid username and password.');
     exit();
   }
-
-  /********************************************************************************************************************
-  * Uses a javascript hack to log a user out
-  ********************************************************************************************************************/
-  private function logout() {
-    //header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
-    header('HTTP/1.0 401 Unauthorized');
-    funcSendHeader('html');
-    die('<html><head>'.
-        '<script>window.location = "/panel/";</script>' .
-        '</head><body>' .
-        '<p>Logging out...</p>' .
-        '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
-        'Additionally, you can just close the browser or clear private data.</p>' .
-        '</body></html>');
-  }
-}
 
 // ====================================================================================================================
 
