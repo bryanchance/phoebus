@@ -41,7 +41,7 @@ class classAuthentication {
   ********************************************************************************************************************/
   public function logout() {
     $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
-    funcError($strUsername, 98)
+    funcError($strUsername, 98);
     if ($strUsername == 'logout') {
       $this->promptCredentials();
       die();
