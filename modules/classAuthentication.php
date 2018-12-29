@@ -41,7 +41,7 @@ class classAuthentication {
   public function promptCredentials() {
     header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
     header('HTTP/1.0 401 Unauthorized');   
-    funcError('You need to enter a valid username and password.');
+    funcRedirect('/panel/');
     exit();
   }
 
