@@ -42,7 +42,7 @@ class classAuthentication {
   public function logout() {
     if (funcUnifiedVariable('server', 'PHP_AUTH_USER') == 'logout') {
       $this->promptCredentials();
-    };
+    }
 
     $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
 
