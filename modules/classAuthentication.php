@@ -18,7 +18,6 @@
 // == | classAuthentication | =========================================================================================
 
 class classAuthentication { 
-  private $arraySoftwareState;
   const SQL_USER_AUTH = "SELECT * FROM `user` WHERE `username` = ?s";
 
   /********************************************************************************************************************
@@ -31,9 +30,14 @@ class classAuthentication {
         ' - safeMySQL and database are required to be included in the global scope'
       );
     }
+  }
 
-    // Assign current software state to a class property by reference
-    $this->arraySoftwareState = &$GLOBALS['arraySoftwareState'];
+
+  /********************************************************************************************************************
+  * Gets a single user manifest
+  ********************************************************************************************************************/
+  public function getSingleUser ($aUserName) {
+    return $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $aUserName) ?? null;
   }
 
   /********************************************************************************************************************
@@ -52,7 +56,7 @@ class classAuthentication {
     // This will handle a logout situation using a dirty javascript trick
     // It will not work without javascript or on IE but then again neither will the PANEL
     if ($aLogout) {
-      $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
+      $url = 'https://logout:logout@' . $GLOBALS['arraySoftwareState']['currentDomain'] . '/panel/logout/';
       funcSendHeader('html');
       die(
         '<html><head><script>' .
@@ -71,7 +75,7 @@ class classAuthentication {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Query SQL for a user row
-    $userManifest = $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $strUsername);
+    $userManifest = $this->getSingleUser;
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels
@@ -94,7 +98,7 @@ class classAuthentication {
     $userManifest['active'] = (bool)$userManifest['active'];
 
     // Assign the userManifest to the softwareState
-    $this->arraySoftwareState['authentication'] = $userManifest;
+    $GLOBALS['arraySoftwareState']['authentication'] = $userManifest;
 
     // Clear out the userManifest for safety
     $userManifest = null;
