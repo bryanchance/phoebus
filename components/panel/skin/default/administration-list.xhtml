@@ -37,9 +37,11 @@
         {/if}
       </td>
       <td style="width: 16px;">
+        {if $key.type != 'langpack'}
         <a href="{$PAGE_PATH}?task=update&what=metadata&slug={$key.slug}" title="Edit Add-on Metadata">
           <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit Add-on" />
         </a>
+        {/if}
       </td>
       <td style="width: 16px;">
         {if $key.type != 'external' && $key.type != 'langpack'}
