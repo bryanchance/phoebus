@@ -1,4 +1,4 @@
-<h2>{if $PAGE_TYPE == 'admin-list-langpacks'}Language Packs{else}{$PAGE_TITLE|replace:' - Administration':''}</h2>
+<h2>{if $PAGE_TYPE == 'admin-list-langpacks'}Language Packs{else}{$PAGE_TITLE|replace:' - Administration':''}{/if}</h2>
 <p>
   <a href="/panel/administration/?task=list&what=extensions"><img src="{$BASE_PATH}../shared/plugin.png" style="vertical-align: middle; margin-left: 2px; margin-right: 2px"/>Extensions</a> 
   <a href="/panel/administration/?task=list&what=externals"><img src="{$BASE_PATH}../shared/plugin_link.png" style="vertical-align: middle; margin-left: 4px; margin-right: 2px" />Externals</a> 
