@@ -51,6 +51,11 @@ $requestLogout = funcUnifiedVariable('post', 'logout');
 
 // --------------------------------------------------------------------------------------------------------------------
 
+if ($requestLogout) {
+  $moduleAuth->promptCredentials();
+  die();
+}
+
 // Special case: Interlink should use Pale Moon's panel access
 if ($arraySoftwareState['currentApplication'] == 'interlink') {
   funcRedirect('https://addons.palemoon.org/panel/');
@@ -70,10 +75,6 @@ if ($_SERVER['SCHEME'] != 'https') {
 // Use a simple switch case to deal with simple URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_PANEL:
-    if ($requestLogout) {
-      $moduleAuth->promptCredentials();
-      die();
-    }
     $moduleGenerateContent->addonSite('panel-frontpage.xhtml', 'Landing Page');
     break;
   case URI_REG:
