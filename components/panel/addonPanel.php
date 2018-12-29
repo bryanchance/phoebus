@@ -47,7 +47,7 @@ function funcCheckAccessLevel($aLevel) {
 // == | Main | ========================================================================================================
 
 $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']]) . '/';
-$requestLogout = funcUnifiedVariable('get', 'logout');
+$requestLogout = funcUnifiedVariable('post', 'logout');
 
 // --------------------------------------------------------------------------------------------------------------------
 

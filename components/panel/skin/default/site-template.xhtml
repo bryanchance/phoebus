@@ -9,9 +9,9 @@
     </style>
     <script type="application/javascript">
       function logout() {
-        let uri = "https://logout:logout@{$SITE_DOMAIN|replace:'//':''}/panel/?logout=1";
+        let uri = "https://logout:logout@{$SITE_DOMAIN|replace:'//':''}/panel/";
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", uri, false); 
+        xmlHttp.open("POST", uri, false); 
         xmlHttp.send(null);
         window.location = "/panel/";
       }
