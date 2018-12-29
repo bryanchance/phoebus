@@ -196,7 +196,7 @@ class classGenerateContent {
     $this->libSmarty->assign('PAGE_DATA', $aData);
     $this->libSmarty->assign('EXTRA_DATA', $aExtraData);
     
-    if ($GLOBALS['arraySoftwareState'] == 'panel') {
+    if ($GLOBALS['arraySoftwareState']['requestComponent'] == 'panel') {
       $this->libSmarty->assign('USER_LEVEL',
                                $GLOBALS['arraySoftwareState']['authentication']['level'] ?? 0);
     }
