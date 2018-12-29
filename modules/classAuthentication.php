@@ -40,16 +40,19 @@ class classAuthentication {
   * Uses a javascript hack to log a user out
   ********************************************************************************************************************/
   public function logout() {
-    header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
-    header('HTTP/1.0 401 Unauthorized');
+    $this->promptCredentials();
+    $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
     funcSendHeader('html');
-    die('<html><head>'.
-        '<script>window.location = "/panel/";</script>' .
-        '</head><body>' .
+    die('<html><head><script>' .
+        'var xmlHttp = new XMLHttpRequest();' .
+        'xmlHttp.open( "GET", "' . $url . '", false );' .
+        'xmlHttp.send( null );' .
+        'window.location = "/panel/";' .
+        '</script></head><body>' .
         '<p>Logging out...</p>' .
         '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
         'Additionally, you can just close the browser or clear private data.</p>' .
-        '</body></html>');
+        '</body></html>'
   }
 
   /********************************************************************************************************************
