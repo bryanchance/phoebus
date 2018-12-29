@@ -25,10 +25,7 @@ class classAuthentication {
   ********************************************************************************************************************/
   function __construct() {
     if (!funcCheckModule('database')) {
-      funcError(
-        __CLASS__ . '::' . __FUNCTION__ .
-        ' - safeMySQL and database are required to be included in the global scope'
-      );
+      funcError(__CLASS__ . '::' . __FUNCTION__ . ' - module are required to be included in the global scope');
     }
   }
 
