@@ -69,6 +69,7 @@ if ($_SERVER['SCHEME'] != 'https') {
 
 if ($requestLogout) {
   $moduleAuth->promptCredentials();
+  die();
 }
 
 // Use a simple switch case to deal with simple URIs
