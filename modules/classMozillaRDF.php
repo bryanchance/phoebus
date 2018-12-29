@@ -7,7 +7,7 @@ class classMozillaRDF {
   const EM_NS = 'http://www.mozilla.org/2004/em-rdf#';
   const INSTALL_MANIFEST_RESOURCE = 'urn:mozilla:install-manifest';
 
-  $libRdfParser;
+  private $libRdfParser;
 
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
