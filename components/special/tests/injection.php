@@ -13,10 +13,10 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$query = 'INSERT INTO ?n ON DUPLICATE KEY UPDATE SET ?u';
+$query = 'INSERT INTO ?n SET ?u ON DUPLICATE KEY UPDATE ?u';
 $array = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
 
-$moduleDatabase->query('normal', $query, 'addon', $array);
+$moduleDatabase->query('normal', $query, 'addon', $array, $array);
 
 $addonManifest = $moduleReadManifest->getAddonBySlug('abprime');
 funcError($addonManifest, 98);
