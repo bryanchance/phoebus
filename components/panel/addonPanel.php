@@ -85,7 +85,6 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_LOGOUT:
     $moduleAuth->authenticate();
-    funcRedirect('/panel/');
     break;
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
