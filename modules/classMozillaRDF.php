@@ -67,8 +67,14 @@ class classMozillaRDF {
   * @param string $object
   * @param string $xmlLang
   ********************************************************************************************************************/
-  static function installManifestStatementHandler(&$data, $subjectType, $subject, $predicate,
-                $ordinal, $objectType, $object, $xmlLang) {   
+  static function installManifestStatementHandler(&$data,
+                                                  $subjectType,
+                                                  $subject,
+                                                  $predicate,
+                                                  $ordinal,
+                                                  $objectType,
+                                                  $object,
+                                                  $xmlLang) {   
     //single properties - ignoring: iconURL, optionsURL, aboutURL, and anything not listed
     $singleProps = array(
       'id' => 1,
