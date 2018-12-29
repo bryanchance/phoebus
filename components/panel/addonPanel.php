@@ -51,11 +51,6 @@ $requestLogout = funcUnifiedVariable('get', 'logout');
 
 // --------------------------------------------------------------------------------------------------------------------
 
-if ($requestLogout) {
-  $moduleAuth->promptCredentials();
-  funcRedirect('/panel/');
-}
-
 // Special case: Interlink should use Pale Moon's panel access
 if ($arraySoftwareState['currentApplication'] == 'interlink') {
   funcRedirect('https://addons.palemoon.org/panel/');
@@ -70,6 +65,15 @@ if (!in_array('https', TARGET_APPLICATION_SITE[$arraySoftwareState['currentAppli
 
 if ($_SERVER['SCHEME'] != 'https') {
   funcRedirect('https://' . $arraySoftwareState['currentDomain'] . '/panel/');
+}
+
+if ($requestLogout) {
+  $requestAuth = funcUnifiedVariable('server', 'authorization');
+  if (requestAuth) {
+    $moduleAuth->promptCredentials();
+  }
+
+  funcRedirect('/panel/');
 }
 
 // Use a simple switch case to deal with simple URIs
