@@ -37,7 +37,7 @@ switch ($strStripPath) {
     $arrayIncludes = ['database', 'account'];
     foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
     $moduleDatabase = new classDatabase();
-    $moduleAccount = new classAuthentication;
+    $moduleAccount = new classAccount();
     $moduleAccount->authenticate();
     funcError($arraySoftwareState, 98);
     break;

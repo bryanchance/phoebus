@@ -34,15 +34,12 @@ if ($arraySoftwareState['requestPanelTask'] == 'list') {
     case 'externals':
     case 'themes':
     case 'langpacks':
-      $allAddons = $moduleReadManifest->getAddons(
-        'panel-addons-by-type',
-        substr($arraySoftwareState['requestPanelWhat'], 0, -1)
-      );
-      $moduleGenerateContent->addonSite(
-        'admin-list-' . $arraySoftwareState['requestPanelWhat'],
-        'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
-        $allAddons
-      );
+      $allAddons = $moduleReadManifest->getAddons('panel-addons-by-type',
+                                                  substr($arraySoftwareState['requestPanelWhat'], 0, -1));
+
+      $moduleGenerateContent->addonSite('admin-list-' . $arraySoftwareState['requestPanelWhat'],
+                                        'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
+                                        $allAddons);
       break;
     case 'users':
       funcSendHeader('501');
