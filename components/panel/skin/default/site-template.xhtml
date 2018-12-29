@@ -9,7 +9,7 @@
     </style>
     <script type="application/javascript">
       function logout() {
-        let uri = "https://logout:logout@{SITE_DOMAIN|replace:'//':''}/panel/?logout=1";
+        let uri = "https://logout:logout@{$SITE_DOMAIN|replace:'//':''}/panel/?logout=1";
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("GET", url, false); 
         xmlHttp.send(null);
