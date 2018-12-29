@@ -43,6 +43,7 @@ class classAuthentication {
     $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
     if ($strUsername == 'logout') {
       $this->promptCredentials();
+      die();
     }
 
     $url = 'https://logout:logout@' . $GLOBALS['arraySoftwareState']['currentDomain'] . '/panel/logout/';
