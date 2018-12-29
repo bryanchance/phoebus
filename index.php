@@ -37,7 +37,7 @@ const COMPONENTS = array(
 
 // Define modules
 const MODULES = array(
-  'auth'            => ROOT_PATH . MODULES_RELPATH . 'classAuthentication.php',
+  'account'         => ROOT_PATH . MODULES_RELPATH . 'classAccount.php',
   'database'        => ROOT_PATH . MODULES_RELPATH . 'classDatabase.php',
   'generateContent' => ROOT_PATH . MODULES_RELPATH . 'classGenerateContent.php',
   'mozillaRDF'      => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',

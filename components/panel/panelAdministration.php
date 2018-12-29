@@ -11,7 +11,7 @@ $arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
 
 // --------------------------------------------------------------------------------------------------------------------
 
-$moduleAuth->authenticate();
+$moduleAccount->authenticate();
 funcCheckAccessLevel(3);
 
 // --------------------------------------------------------------------------------------------------------------------

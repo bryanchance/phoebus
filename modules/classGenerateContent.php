@@ -3,13 +3,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// == | Setup | =======================================================================================================
-
-// Include required libraries
-require_once(LIBRARIES['smarty']);
-
-// ====================================================================================================================
-
 // == | classGenerateContent | ========================================================================================
 
 class classGenerateContent {
@@ -57,6 +50,9 @@ class classGenerateContent {
     // ----------------------------------------------------------------------------------------------------------------
 
     if ($aUseSmarty) {
+      // Include Smarty
+      require_once(LIBRARIES['smarty']);
+
       // Get smartyDebug HTTP GET Argument
       $GLOBALS['arraySoftwareState']['requestSmartyDebug'] = funcUnifiedVariable('get', 'smartyDebug');
 

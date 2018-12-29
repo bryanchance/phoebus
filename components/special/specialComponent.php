@@ -34,11 +34,11 @@ switch ($strStripPath) {
     phpinfo(32);
     break;
   case 'softwareState':
-    $arrayIncludes = ['database', 'auth'];
+    $arrayIncludes = ['database', 'account'];
     foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
     $moduleDatabase = new classDatabase();
-    $moduleAuth = new classAuthentication;
-    $moduleAuth->authenticate();
+    $moduleAccount = new classAuthentication;
+    $moduleAccount->authenticate();
     funcError($arraySoftwareState, 98);
     break;
   case 'validate':

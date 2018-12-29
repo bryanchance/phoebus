@@ -15,12 +15,12 @@ const URI_ADDONS    = URI_PANEL . 'addons/';
 const URI_ADMIN     = URI_PANEL . 'administration/';
 
 // Include modules
-$arrayIncludes = ['database', 'auth', 'readManifest', 'generateContent'];
+$arrayIncludes = ['database', 'account', 'readManifest', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // Instantiate modules
 $moduleDatabase = new classDatabase();
-$moduleAuth = new classAuthentication();
+$moduleAccount = new classAccount();
 $moduleReadManifest = new classReadManifest();
 $moduleGenerateContent = new classGenerateContent(true);
 
@@ -76,7 +76,7 @@ switch ($arraySoftwareState['requestPath']) {
     funcSendHeader('501');
     break;
   case URI_LOGIN:
-    $moduleAuth->authenticate();
+    $moduleAccount->authenticate();
     if (funcCheckAccessLevel(3)) {
       funcRedirect('/panel/administration/');
     }
@@ -84,10 +84,10 @@ switch ($arraySoftwareState['requestPath']) {
     funcRedirect('/panel/addons/');
     break;
   case URI_LOGOUT:
-    $moduleAuth->authenticate('logout');
+    $moduleAccount->authenticate('logout');
     break;
   case URI_ACCOUNT:
-    $moduleAuth->authenticate();
+    $moduleAccount->authenticate();
     funcCheckAccessLevel(1);
     $moduleGenerateContent->addonSite('developer-account', 'Account Page');
     break;
@@ -97,7 +97,7 @@ switch ($arraySoftwareState['requestPath']) {
 
 // Complex URIs need more complex conditional checking
 if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
-  $moduleAuth->authenticate();
+  $moduleAccount->authenticate();
   funcCheckAccessLevel(1);
   $userAddons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
   $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $userAddons);
