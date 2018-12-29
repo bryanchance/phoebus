@@ -11,13 +11,13 @@
       function logout() {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", 
-                     "{$SITE_DOMAIN|replace:'https//':'https://logout@'}/panel/",
+                     "{$SITE_DOMAIN|replace:'https//':'https://logout:logout@'}/panel/",
                      false); 
         xmlHttp.setRequestHeader('Content-type',
                                  'application/x-www-form-urlencoded');
-        xmlHttp.send("logout=1");
         xmlHttp.send(null);
-        //window.location = "/panel/";
+        document.execCommand('ClearAuthenticationCache', 'false');
+        window.location = "/panel/";
       }
     </script>
   </head>
