@@ -188,6 +188,15 @@ a.download-beta:hover {
   }
 }
 
+.fadeIn {
+  animation: fade 0.2s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Add-on Table */
 
 .addonTable {
