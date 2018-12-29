@@ -189,7 +189,7 @@ a.download-beta:hover {
 }
 
 .fadeIn {
-  animation: fade 0.2s;
+  animation: fade 0.4s;
 }
 
 @keyframes fade {
