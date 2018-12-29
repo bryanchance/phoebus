@@ -13,7 +13,7 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$queryInsert = 'UPDATE INTO ?n SET ?u ON';
+$queryInsert = 'UPDATE ?n SET ?u ON';
 $arrayInsert = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
 
 $moduleDatabase->query('normal', $queryInsert, 'addon', $arrayInsert);
