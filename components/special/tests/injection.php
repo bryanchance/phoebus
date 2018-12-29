@@ -13,13 +13,19 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$query = 'INSERT INTO ?n SET ?u ON DUPLICATE KEY UPDATE ?u';
-$array = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
+$queryInsert = 'INSERT INTO ?n SET ?u ON DUPLICATE KEY UPDATE ?u';
+$arrayInsert = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
 
 $moduleDatabase->query('normal', $query, 'addon', $array, $array);
 
-$addonManifest = $moduleReadManifest->getAddonBySlug('abprime');
-funcError($addonManifest, 98);
+$queryAddon = "SELECT addon.*
+              FROM `addon`
+              WHERE `slug` = ?s
+              AND `type` IN ('extension', 'theme', 'langpack', 'external')";
+
+$queryResult = $moduleDatabase->query('row', $query, 'abprime');
+
+funcError($queryResult, 98);
 
 // ====================================================================================================================
 
