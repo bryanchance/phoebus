@@ -40,7 +40,8 @@ class classAuthentication {
   * Uses a javascript hack to log a user out
   ********************************************************************************************************************/
   public function logout() {
-    if (funcUnifiedVariable('server', 'PHP_AUTH_USER') == 'logout') {
+    $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
+    if ($strUsername == 'logout') {
       $this->promptCredentials();
     }
 
