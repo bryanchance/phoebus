@@ -68,6 +68,7 @@ class classAuthentication {
         'xmlHttp.open( "GET", "' . $url . '", false );' .
         'xmlHttp.send( null );' .
         'window.location = "/panel/";' .
+        'document.execCommand("ClearAuthenticationCache");' .
         '</script></head><body>' .
         '<p>Logging out...</p>' .
         '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
