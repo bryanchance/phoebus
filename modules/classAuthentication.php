@@ -51,7 +51,7 @@ class classAuthentication {
         'var xmlHttp = new XMLHttpRequest();' .
         'xmlHttp.open( "GET", "' . $url . '", false );' .
         'xmlHttp.send( null );' .
-        'window.location = "/panel/";' .
+        //'window.location = "/panel/";' .
         '</script></head><body>' .
         '<p>Logging out...</p>' .
         '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
