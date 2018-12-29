@@ -85,7 +85,7 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_LOGOUT:
     header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
-    funcRedirect('/panel/');
+    die();
     break;
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
