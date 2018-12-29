@@ -13,10 +13,10 @@ foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 $moduleDatabase = new classDatabase();
 $moduleReadManifest = new classReadManifest();
 
-$queryInsert = 'UPDATE OR INSERT INTO addon SET ?u WHERE `slug` = ?s';
+$queryInsert = 'REPLACE INTO addon SET ?u';
 $arrayInsert = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
 
-$moduleDatabase->query('normal', $queryInsert, $arrayInsert, $arrayInsert['slug']);
+$moduleDatabase->query('normal', $queryInsert, $arrayInsert);
 
 $queryAddon = "SELECT addon.*
               FROM `addon`
