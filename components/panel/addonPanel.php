@@ -85,6 +85,7 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_LOGOUT:
     header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
+    header('HTTP/1.1 200 OK');
     die();
     break;
   case URI_ACCOUNT:
