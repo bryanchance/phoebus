@@ -7,19 +7,6 @@
     <style type="text/css">
       {%SITE_STYLESHEET}
     </style>
-    <script type="application/javascript">
-      function logout() {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", 
-                     "{$SITE_DOMAIN|replace:'https//':'https://logout@'}/panel/logout/",
-                     false); 
-        xmlHttp.setRequestHeader('Content-type',
-                                 'application/x-www-form-urlencoded');
-        xmlHttp.send(null);
-        document.execCommand('ClearAuthenticationCache', 'false');
-        //window.location = "/panel/";
-      }
-    </script>
   </head>
   <body>
     <div id="container">
@@ -33,7 +20,7 @@
         {/if}
         <a href="/panel/addons/">Your Add-ons</a> 
         <a href="/panel/account/">Your Account</a> 
-        <a href="javascript:void(0);" onclick="logout();">Logout</a>
+        <a href="/panel/logout/">Logout</a>
       {else}
         <a href="/panel/registration/">Register</a>
         <a href="/panel/login/">Login</a>

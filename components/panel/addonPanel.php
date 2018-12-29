@@ -84,8 +84,7 @@ switch ($arraySoftwareState['requestPath']) {
     funcRedirect('/panel/addons/');
     break;
   case URI_LOGOUT:
-    $moduleAuth->promptCredentials();
-    die();
+    $moduleAuth->authenticate('logout');
     break;
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
