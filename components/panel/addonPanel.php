@@ -68,10 +68,7 @@ if ($_SERVER['SCHEME'] != 'https') {
 }
 
 if ($requestLogout) {
-  if (!funcUnifiedVariable('server', 'authorization')) {
-    $moduleAuth->promptCredentials();
-  }
-
+  $moduleAuth->promptCredentials();
   funcRedirect('/panel/');
 }
 
