@@ -51,7 +51,6 @@ class classAuthentication {
         'Additionally, you can just close the browser or clear private data.</p>' .
         '</body></html>');
   }
-}
 
   /********************************************************************************************************************
   * Performs authentication
@@ -108,7 +107,7 @@ class classAuthentication {
     funcError('You need to enter a valid username and password.');
     exit();
   }
-
+}
 // ====================================================================================================================
 
 ?>
