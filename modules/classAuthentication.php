@@ -60,7 +60,7 @@ class classAuthentication {
     // This will handle a logout situation using a dirty javascript trick
     // It will not work without javascript or on IE but then again neither will the PANEL
     if ($aLogout) {
-      $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
+      $url = 'https://logout:logout@' . $GLOBALS['arraySoftwareState']['currentDomain'] . '/panel/logout/';
       funcSendHeader('html');
       die(
         '<html><head><script>' .
