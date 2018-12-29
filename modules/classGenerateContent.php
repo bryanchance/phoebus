@@ -182,11 +182,9 @@ class classGenerateContent {
 
     // Assign Data to Smarty
     $this->libSmarty->assign('APPLICATION_DEBUG', $GLOBALS['arraySoftwareState']['debugMode']);
-    $this->libSmarty->assign(
-      'SITE_DOMAIN',
-      $GLOBALS['arraySoftwareState']['currentScheme'] .
-      '://' . $GLOBALS['arraySoftwareState']['currentDomain']
-    );
+    $this->libSmarty->assign('SITE_DOMAIN',
+                             $GLOBALS['arraySoftwareState']['currentScheme'] . '://' .
+                             $GLOBALS['arraySoftwareState']['currentDomain']);
     $this->libSmarty->assign('PAGE_TITLE', $aTitle);
     $this->libSmarty->assign('PAGE_PATH', $GLOBALS['arraySoftwareState']['requestPath']);
     $this->libSmarty->assign('BASE_PATH', $GLOBALS['arraySoftwareState']['componentSkinRelPath']);
@@ -197,7 +195,11 @@ class classGenerateContent {
     $this->libSmarty->assign('PAGE_TYPE', $aType);
     $this->libSmarty->assign('PAGE_DATA', $aData);
     $this->libSmarty->assign('EXTRA_DATA', $aExtraData);
-    $this->libSmarty->assign('USER_LEVEL', $GLOBALS['arraySoftwareState']['authentication']['level'] ?? null);
+    
+    if ($GLOBALS['arraySoftwareState'] == 'panel') {
+      $this->libSmarty->assign('USER_LEVEL',
+                               $GLOBALS['arraySoftwareState']['authentication']['level'] ?? 0);
+    }
 
     // Send html header
     funcSendHeader('html');
