@@ -40,7 +40,7 @@ class classAuthentication {
   * Uses a javascript hack to log a user out
   ********************************************************************************************************************/
   public function logout() {
-    //header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
+    header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
     header('HTTP/1.0 401 Unauthorized');
     funcSendHeader('html');
     die('<html><head>'.
