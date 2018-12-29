@@ -197,6 +197,7 @@ class classGenerateContent {
     $this->libSmarty->assign('PAGE_TYPE', $aType);
     $this->libSmarty->assign('PAGE_DATA', $aData);
     $this->libSmarty->assign('EXTRA_DATA', $aExtraData);
+    $this->libSmarty->assign('USER_LEVEL', $GLOBALS['arraySoftwareState']['authentication']['level'] ?? null);
 
     // Send html header
     funcSendHeader('html');
