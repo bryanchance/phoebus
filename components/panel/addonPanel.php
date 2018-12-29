@@ -84,8 +84,8 @@ switch ($arraySoftwareState['requestPath']) {
     funcRedirect('/panel/addons/');
     break;
   case URI_LOGOUT:
-    header('HTTP/1.0 401 Unauthorized');
-    die();
+    header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
+    funcRedirect('/panel/');
     break;
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
