@@ -285,7 +285,7 @@ class classReadManifest {
         $query = "
           SELECT `id`, `slug`, `type`, `name`, `category`, `url`, `reviewed`, `active`
           FROM `addon`
-          ORDER BY `type`, `name`
+          ORDER BY `name`
         ";
         $queryResults = $GLOBALS['moduleDatabase']->query('rows', $query);
         break;
