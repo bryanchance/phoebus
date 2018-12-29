@@ -37,7 +37,10 @@ class classGenerateContent {
 
     // Component Path
     $componentPath = dirname(COMPONENTS[$GLOBALS['arraySoftwareState']['requestComponent']]);
-   
+
+    // Component Content Path (for static content)
+    $GLOBALS['arraySoftwareState']['componentContentPath'] = $componentPath . '/content/';
+
     // Current Skin
     $skin = 'default';
 
@@ -47,7 +50,6 @@ class classGenerateContent {
       $skin = $GLOBALS['arraySoftwareState']['currentApplication'];
     }
 
-    $GLOBALS['arraySoftwareState']['componentContentPath'] = $componentPath . '/content/';
     $GLOBALS['arraySoftwareState']['componentSkinPath'] = $componentPath . '/skin/' . $skin . '/';
     $GLOBALS['arraySoftwareState']['componentSkinRelPath'] = 
       str_replace(ROOT_PATH, '', $GLOBALS['arraySoftwareState']['componentSkinPath']);
