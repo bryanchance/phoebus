@@ -11,7 +11,7 @@
       function logout() {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", 
-                     "{$SITE_DOMAIN|replace:'https//':'https://logout:logout@'}/panel/",
+                     "{$SITE_DOMAIN|replace:'https//':'https://logout@'}/panel/",
                      false); 
         xmlHttp.setRequestHeader('Content-type',
                                  'application/x-www-form-urlencoded');
