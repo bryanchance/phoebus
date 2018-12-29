@@ -75,7 +75,7 @@ if ($requestLogout) {
 // Use a simple switch case to deal with simple URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_PANEL:
-    $moduleGenerateContent->addonPanel('panel-frontpage.xhtml', 'Landing Page');
+    $moduleGenerateContent->addonSite('panel-frontpage.xhtml', 'Landing Page');
     break;
   case URI_REG:
     funcSendHeader('501');
@@ -91,7 +91,7 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
     funcCheckAccessLevel(1);
-    $moduleGenerateContent->addonPanel('developer-account', 'Account Page');
+    $moduleGenerateContent->addonSite('developer-account', 'Account Page');
     break;
 }
 
@@ -102,7 +102,7 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
   $moduleAuth->authenticate();
   funcCheckAccessLevel(1);
   $userAddons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
-  $moduleGenerateContent->addonPanel('developer-addons-list', 'Your Add-ons', $userAddons);
+  $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $userAddons);
 }
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
   require_once($strComponentPath . 'panelAdministration.php');

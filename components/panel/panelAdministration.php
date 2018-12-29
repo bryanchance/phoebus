@@ -17,7 +17,7 @@ funcCheckAccessLevel(3);
 // --------------------------------------------------------------------------------------------------------------------
 
 if ($arraySoftwareState['requestPath'] == URI_ADMIN && !$arraySoftwareState['requestPanelTask']) {
-  $moduleGenerateContent->addonPanel('admin-frontpage.xhtml', 'Administration');
+  $moduleGenerateContent->addonSite('admin-frontpage.xhtml', 'Administration');
 }
 
 if ($arraySoftwareState['requestPanelTask'] == 'list') {
@@ -28,7 +28,7 @@ if ($arraySoftwareState['requestPanelTask'] == 'list') {
   switch ($arraySoftwareState['requestPanelWhat']) {
     case 'all':
       $allAddons = $moduleReadManifest->getAddons('panel-all-addons');
-      $moduleGenerateContent->addonPanel('administration-list', 'All Add-ons - Administration', $allAddons);
+      $moduleGenerateContent->addonSite('administration-list', 'All Add-ons - Administration', $allAddons);
       break;
     case 'extensions':
     case 'externals':
@@ -38,7 +38,7 @@ if ($arraySoftwareState['requestPanelTask'] == 'list') {
         'panel-addons-by-type',
         substr($arraySoftwareState['requestPanelWhat'], 0, -1)
       );
-      $moduleGenerateContent->addonPanel(
+      $moduleGenerateContent->addonSite(
         'admin-list-' . $arraySoftwareState['requestPanelWhat'],
         'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
         $allAddons
@@ -77,7 +77,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
         }
 
-        $moduleGenerateContent->addonPanel('admin-edit-addon-metadata',
+        $moduleGenerateContent->addonSite('admin-edit-addon-metadata',
                                            'Editing Metadata for ' . $addonManifest['name'],
                                            $addonManifest,
                                            $arrayExtraData);
