@@ -18,8 +18,6 @@
 // == | classAuthentication | =========================================================================================
 
 class classAuthentication { 
-  const SQL_USER_AUTH = "SELECT * FROM `user` WHERE `username` = ?s";
-
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
   ********************************************************************************************************************/
@@ -34,7 +32,8 @@ class classAuthentication {
   * Gets a single user manifest
   ********************************************************************************************************************/
   public function getSingleUser ($aUserName) {
-    return $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $aUserName);
+    $query = "SELECT * FROM `user` WHERE `username` = ?s";
+    return $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
   }
 
   /********************************************************************************************************************
