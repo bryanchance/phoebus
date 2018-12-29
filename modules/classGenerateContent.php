@@ -359,7 +359,7 @@ class classGenerateContent {
   ********************************************************************************************************************/
   private function getContentFile($aFilename, $aSource = 'skin') {
     $aSource = ucfirst($aSource);
-    return @file_get_contents($GLOBALS['arraySoftwareState']['component' . $aSource . 'Path'] . $aFilename) ?? null;
+    return @file_get_contents($GLOBALS['arraySoftwareState']['component' . $aSource . 'Path'] . $aFilename);
   }
 }
 
