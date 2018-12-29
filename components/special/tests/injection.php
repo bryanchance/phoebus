@@ -20,7 +20,7 @@ $moduleDatabase->query('normal', $queryInsert, $arrayInsert);
 
 $queryAddon = "SELECT addon.*
               FROM `addon`
-              WHERE `slug` = ?s;
+              WHERE `slug` = ?s";
 
 $queryResult = $moduleDatabase->query('row', $queryAddon, 'abprime');
 
