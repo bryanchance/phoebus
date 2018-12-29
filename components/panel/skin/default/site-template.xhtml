@@ -11,7 +11,7 @@
       function logout() {
         let uri = "https://logout:logout@{$SITE_DOMAIN|replace:'//':''}/panel/?logout=1";
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", url, false); 
+        xmlHttp.open("GET", uri, false); 
         xmlHttp.send(null);
         window.location = "/panel/";
       }
