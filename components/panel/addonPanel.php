@@ -69,7 +69,7 @@ if ($_SERVER['SCHEME'] != 'https') {
 
 if ($requestLogout) {
   $requestAuth = funcUnifiedVariable('server', 'authorization');
-  if (requestAuth) {
+  if ($requestAuth) {
     $moduleAuth->promptCredentials();
   }
 
