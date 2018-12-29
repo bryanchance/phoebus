@@ -47,8 +47,13 @@ function funcCheckAccessLevel($aLevel) {
 // == | Main | ========================================================================================================
 
 $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']]) . '/';
+$requestLogout = funcUnifiedVariable('get', 'logout');
 
 // --------------------------------------------------------------------------------------------------------------------
+
+if ($requestLogout) {
+  $moduleAuth->promptCredentials()
+}
 
 // Special case: Interlink should use Pale Moon's panel access
 if ($arraySoftwareState['currentApplication'] == 'interlink') {
@@ -73,9 +78,6 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_REG:
     funcSendHeader('501');
-    break;
-  case URI_LOGOUT:
-    $moduleAuth->logout();
     break;
   case URI_LOGIN:
     $moduleAuth->authenticate();

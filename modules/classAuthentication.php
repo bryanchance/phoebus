@@ -27,7 +27,6 @@ class classAuthentication {
     }
   }
 
-
   /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
@@ -37,29 +36,13 @@ class classAuthentication {
   }
 
   /********************************************************************************************************************
-  * Uses a javascript hack to log a user out
+  * Prompts for credentals or shows 401
   ********************************************************************************************************************/
-  public function logout() {
-    $strUsername = funcUnifiedVariable('server', 'PHP_AUTH_USER');
-    if ($strUsername == 'logout') {
-      $this->promptCredentials();
-      funcError($strUsername, 98);
-      die();
-    }
-
-    $url = 'https://logout:logout@' . $GLOBALS['arraySoftwareState']['currentDomain'] . '/panel/logout/';
-
-    funcSendHeader('html');
-    die('<html><head><script>' .
-        'var xmlHttp = new XMLHttpRequest();' .
-        'xmlHttp.open( "GET", "' . $url . '", false );' .
-        'xmlHttp.send( null );' .
-        //'window.location = "/panel/";' .
-        '</script></head><body>' .
-        '<p>Logging out...</p>' .
-        '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
-        'Additionally, you can just close the browser or clear private data.</p>' .
-        '</body></html>');
+  public function promptCredentials() {
+    header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
+    header('HTTP/1.0 401 Unauthorized');   
+    funcError('You need to enter a valid username and password.');
+    exit();
   }
 
   /********************************************************************************************************************
@@ -106,16 +89,6 @@ class classAuthentication {
     $userManifest = null;
 
     return true;
-  }
-
-  /********************************************************************************************************************
-  * Prompts for credentals or shows 401
-  ********************************************************************************************************************/
-  private function promptCredentials() {
-    header('WWW-Authenticate: Basic realm="' . SOFTWARE_NAME . '"');
-    header('HTTP/1.0 401 Unauthorized');   
-    funcError('You need to enter a valid username and password.');
-    exit();
   }
 }
 // ====================================================================================================================

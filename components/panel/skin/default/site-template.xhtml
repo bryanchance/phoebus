@@ -7,6 +7,15 @@
     <style type="text/css">
       {%SITE_STYLESHEET}
     </style>
+    <script type="application/javascript">
+      function logout() {
+        let uri = "https://logout:logout@{SITE_DOMAIN|replace:'//':''}/panel/?logout=1";
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", url, false); 
+        xmlHttp.send(null);
+        window.location = "/panel/";
+      }
+    </script>
   </head>
   <body>
     <div id="container">
@@ -20,13 +29,14 @@
         {/if}
         <a href="/panel/addons/">Your Add-ons</a> 
         <a href="/panel/account/">Your Account</a> 
-        <a href="/panel/logout/">Logout</a>
+        <a href="#" onclick="logout();">Logout</a>
       {else}
         <a href="/panel/registration/">Register</a>
         <a href="/panel/login/">Login</a>
       {/if}
     </nav>
     <hr class="menu">
+    <noscript>The Phoebus Panel relies on a targeted amount of javascript. Please enable it.</noscript>
     {%PAGE_CONTENT}
     </div>
     <br />
