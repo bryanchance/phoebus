@@ -44,7 +44,7 @@ class classAuthentication {
       $this->promptCredentials();
     }
 
-    $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
+    $url = 'https://logout:logout@' . $GLOBALS['arraySoftwareState']['currentDomain'] . '/panel/logout/';
 
     funcSendHeader('html');
     die('<html><head><script>' .
