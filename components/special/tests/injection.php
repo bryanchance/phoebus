@@ -16,7 +16,7 @@ $moduleReadManifest = new classReadManifest();
 $queryInsert = 'INSERT INTO ?n SET ?u ON DUPLICATE KEY UPDATE ?u';
 $arrayInsert = ['slug' => 'abprime', 'name' => 'ABShit', 'xpinstall' => "' DROP * FROM addon"];
 
-$moduleDatabase->query('normal', $query, 'addon', $array, $array);
+$moduleDatabase->query('normal', $queryInsert, 'addon', $arrayInsert, $arrayInsert);
 
 $queryAddon = "SELECT addon.*
               FROM `addon`
