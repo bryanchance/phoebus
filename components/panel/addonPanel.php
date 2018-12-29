@@ -75,7 +75,7 @@ switch ($arraySoftwareState['requestPath']) {
     funcSendHeader('501');
     break;
   case URI_LOGOUT:
-    $moduleAuth->authenticate(true);
+    $moduleAuth->logout();
     break;
   case URI_LOGIN:
     $moduleAuth->authenticate();
