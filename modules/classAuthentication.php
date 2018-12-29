@@ -56,7 +56,7 @@ class classAuthentication {
         '<p>Logging out...</p>' .
         '<p>If you are not redirected you also are not logged out. Enable Javascript or stop using IE/Edge!<br>' .
         'Additionally, you can just close the browser or clear private data.</p>' .
-        '</body></html>'
+        '</body></html>');
   }
 
   /********************************************************************************************************************
