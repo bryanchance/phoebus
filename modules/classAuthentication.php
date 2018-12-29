@@ -37,8 +37,9 @@ class classAuthentication {
   * Gets a single user manifest
   ********************************************************************************************************************/
   public function getSingleUser ($aUserName) {
-    //$userManifest = 
-    return $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $aUserName);
+    $userManifest = $GLOBALS['moduleDatabase']->query('row', self::SQL_USER_AUTH, $aUserName)
+    $funcError($userManifest, 98);
+    //return ;
   }
 
   /********************************************************************************************************************
