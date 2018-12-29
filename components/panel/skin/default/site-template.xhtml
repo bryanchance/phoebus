@@ -13,6 +13,8 @@
         xmlHttp.open("POST", 
                      "https://logout:logout@{$SITE_DOMAIN|replace:'//':''}/panel/",
                      false); 
+        xmlHttp.setRequestHeader('Content-type',
+                                 'application/x-www-form-urlencoded');
         xmlHttp.send("logout=1");
         //window.location = "/panel/";
       }
