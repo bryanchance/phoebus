@@ -40,8 +40,12 @@ class classAuthentication {
   * Uses a javascript hack to log a user out
   ********************************************************************************************************************/
   public function logout() {
-    $this->promptCredentials();
+    if (funcUnifiedVariable('server', 'PHP_AUTH_USER') == 'logout') {
+      $this->promptCredentials();
+    };
+
     $url = 'https://logout:logout@' . $this->arraySoftwareState['currentDomain'] . '/panel/logout/';
+
     funcSendHeader('html');
     die('<html><head><script>' .
         'var xmlHttp = new XMLHttpRequest();' .
