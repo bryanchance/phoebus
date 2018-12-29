@@ -23,7 +23,7 @@ $queryAddon = "SELECT addon.*
               WHERE `slug` = ?s
               AND `type` IN ('extension', 'theme', 'langpack', 'external')";
 
-$queryResult = $moduleDatabase->query('row', $query, 'abprime');
+$queryResult = $moduleDatabase->query('row', $queryAddon, 'abprime');
 
 funcError($queryResult, 98);
 
