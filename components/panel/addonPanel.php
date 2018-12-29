@@ -53,6 +53,7 @@ $requestLogout = funcUnifiedVariable('get', 'logout');
 
 if ($requestLogout) {
   $moduleAuth->promptCredentials();
+  die();
 }
 
 // Special case: Interlink should use Pale Moon's panel access
