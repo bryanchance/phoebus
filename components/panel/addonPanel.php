@@ -88,7 +88,7 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_ACCOUNT:
     $moduleAuth->authenticate();
     funcCheckAccessLevel(1);
-    $moduleGenerateContent->addonPanel('panel-frontpage.xhtml', 'Account Page');
+    $moduleGenerateContent->addonPanel('developer-account', 'Account Page');
     break;
 }
 

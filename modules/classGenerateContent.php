@@ -229,6 +229,9 @@ class classGenerateContent {
     // ----------------------------------------------------------------------------------------------------------------
 
     switch ($aType) {
+      case 'developer-account':
+        $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'developer-account.xhtml');
+        break;
       case 'developer-addons-list':
         $content = file_get_contents($this->arraySoftwareState['componentSkinPath'] . 'developer-addons-list.xhtml');
         break;
