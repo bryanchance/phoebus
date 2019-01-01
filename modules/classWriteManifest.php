@@ -26,7 +26,7 @@ class classWriteManifest {
       //unset($aPostData['content']);
     }
 
-    return strcmp($aAddonManifest['content'], $aPostData['content']);
+    return strcasecmp($aAddonManifest['content'], $aPostData['content']);
   }
 
 }
