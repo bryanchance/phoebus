@@ -13,7 +13,7 @@ class classWriteManifest {
       funcError(__CLASS__ . '::' . __FUNCTION__ . ' - database is required to be included in the global scope');
     }
 
-    $this->$postData = array(
+    $this->postData = array(
       'slug'          => funcUnifiedVariable('post', 'slug'),
       'active'        => funcUnifiedVariable('post', 'active'),
       'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
@@ -31,45 +31,45 @@ class classWriteManifest {
 
   public function updateAddonMetadata($aAddonManifest) {
     // Sanity
-    if (!$this->$postData['slug']) {
+    if (!$this->postData['slug']) {
       funcError('Slug was not found in POST');
     }
 
-    if ($this->$postData['slug'] != $addonManifest['slug']) {
+    if ($this->postData['slug'] != $addonManifest['slug']) {
       funcError('POST Slug does not match GET/Manifest Slug');
     }
 
     // Hackers are a superstitious cowardly lot
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
-      unset($this->$postData['active']);
-      unset($this->$postData['reviewed']);
+      unset($this->postData['active']);
+      unset($this->postData['reviewed']);
 
-      if (!in_array($this->$postData['slug'], $GLOBALS['arraySoftwareState']['authentication']['addons'])) {
+      if (!in_array($this->postData['slug'], $GLOBALS['arraySoftwareState']['authentication']['addons'])) {
         funcError('You do not own this add-on. Stop trying to fuck with other people\'s shit!');
       }
 
-      unset($this->$postData['slug']);
+      unset($this->postData['slug']);
     }
 
     // Remove stuff that is the same
     // Content will always be sent to SQL even if null least for now
-    foreach ($this->$postData as $_key => $_value) {
+    foreach ($this->postData as $_key => $_value) {
       if ($aAddonManifest[$_key] == $_value) {
-        unset($this->$postData[$_key]);
+        unset($this->postData[$_key]);
       }
     }
 
-    if (empty($this->$postData)) {
-      $this->$postData['content'] = null;
+    if (empty($this->postData)) {
+      $this->postData['content'] = null;
     }
 
-    if ($this->$postData['slug'] ?? false) {
+    if ($this->postData['slug'] ?? false) {
       funcError('Slug is still existing in post data');
     }
 
     // Insert the new manifest data into the database
     $query = "UPDATE `addon` SET ?u WHERE `slug` = ?s";
-    $GLOBALS['moduleDatabase']->query('normal', $query, $this->$postData, $aAddonManifest['slug']);
+    $GLOBALS['moduleDatabase']->query('normal', $query, $this->postData, $aAddonManifest['slug']);
 
     return true;
   }
