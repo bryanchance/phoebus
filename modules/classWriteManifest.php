@@ -11,7 +11,7 @@ class classWriteManifest {
     }
   }
 
-  public function updateAddonMetadata($aAddonManifest, ) {
+  public function updateAddonMetadata($aAddonManifest, $aPostData) {
     $slug = $aPostData['slug'];
     unset($aPostData['slug']);
 
