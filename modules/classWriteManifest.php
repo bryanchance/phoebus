@@ -22,11 +22,7 @@ class classWriteManifest {
       funcError('Slug is still existing in post data');
     }
 
-    if (strcmp($aAddonManifest['content'], $aPostData['content'])) {
-      //unset($aPostData['content']);
-    }
-
-    return strcasecmp($aAddonManifest['content'], $aPostData['content']);
+    return $aPostData;
   }
 
 }
