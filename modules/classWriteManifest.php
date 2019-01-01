@@ -23,7 +23,7 @@ class classWriteManifest {
     }
 
     if ($aPostData['content'] ?? false && strcmp($aAddonManifest['content'], $aPostData['content']) {
-      $aPostData['content'];
+      unset($aPostData['content']);
     }
 
     return $aPostData;
