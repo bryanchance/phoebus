@@ -12,13 +12,18 @@ class classWriteManifest {
   }
 
   public function updateAddonMetadata($aAddonManifest, $aPostData) {
-    $slug = $aPostData['slug'];
-    unset($aPostData['slug']);
-
     foreach ($aPostData as $_key => $_value) {
       if ($aAddonManifest[$_key] == $_value) {
         unset($aPostData[$_key]);
       }
+    }
+
+    if ($aPostData['slug'] ?? false) {
+      funcError('Slug is still existing in post data');
+    }
+
+    if ($aPostData['content'] ?? false && strcmp($aAddonManifest['content'], $aPostData['content']) {
+      $aPostData['content'];
     }
 
     return $aPostData;
