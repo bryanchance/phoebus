@@ -35,7 +35,6 @@ class classWriteManifest {
       funcError('Slug was not found in POST');
     }
 
-    funcError([$this->postData['slug'], $aAddonManifest['slug']], 98);
     if ($this->postData['slug'] != $aAddonManifest['slug']) {
       funcError('POST Slug does not match GET/Manifest Slug');
     }
