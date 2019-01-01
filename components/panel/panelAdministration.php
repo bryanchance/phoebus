@@ -69,7 +69,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       }
 
       if ($boolHasPostData) {
-        $arrayPostResults = array(
+        $arrayPostData = array(
           'slug'          => funcUnifiedVariable('post', 'slug'),
           'active'        => funcUnifiedVariable('post', 'active'),
           'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
@@ -82,7 +82,12 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           'content'       => funcUnifiedVariable('post', 'content')
         );
 
-        funcError($arrayPostResults, 99);
+        if (!$arrayPostData['slug'] ||
+            $arrayPostData['slug'] != $arraySoftwareState['requestPanelSlug']) {
+          funcError('Invalid slug on GET/POST');
+        }
+
+        funcError($arrayPostData, 99);
       }
 
       $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
