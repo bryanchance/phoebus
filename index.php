@@ -43,6 +43,7 @@ const MODULES = array(
   'mozillaRDF'      => ROOT_PATH . MODULES_RELPATH . 'classMozillaRDF.php',
   'persona'         => ROOT_PATH . MODULES_RELPATH . 'classPersona.php',
   'readManifest'    => ROOT_PATH . MODULES_RELPATH . 'classReadManifest.php',
+  'writeManifest'   => ROOT_PATH . MODULES_RELPATH . 'classWriteManifest.php',
   'validator'       => ROOT_PATH . MODULES_RELPATH . 'classAddonValidator.php',
   'vc'              => ROOT_PATH . MODULES_RELPATH . 'nsIVersionComparator.php',
 );

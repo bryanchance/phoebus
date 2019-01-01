@@ -2,33 +2,27 @@
 // == | classReadManifest | ===================================================
 
 class classWriteManifest {
-  private $libSQL;
-  private $currentApplication;
-  private $currentAppID;
-
-  // Some SQL Constants
-
-  // ------------------------------------------------------------------------------------------------------------------
-
-  // Initalize class
+  /********************************************************************************************************************
+  * Class constructor that sets inital state of things
+  ********************************************************************************************************************/
   function __construct() {  
-    if (!funcCheckModule('sql') || !funcCheckModule('sql-creds') ||
-        !array_key_exists('arraySQLCreds', $GLOBALS)) {
-      funcError(
-      __CLASS__ . '::' . __FUNCTION__ .
-      ' - sql and sql-creds are required to be included in the global scope'
-      );
+    if (!funcCheckModule('database')) {
+      funcError(__CLASS__ . '::' . __FUNCTION__ . ' - database is required to be included in the global scope');
     }
-    
-    // Assign currentApplication by reference
-    $this->currentApplication = $GLOBALS['arraySoftwareState']['currentApplication'];
-    $this->currentAppID = TARGET_APPLICATION_ID[$GLOBALS['arraySoftwareState']['currentApplication']];
-
-    // Create a new instance of the SafeMysql class
-    $this->libSQL = new SafeMysql($GLOBALS['arraySQLCreds']);
   }
 
-  // ------------------------------------------------------------------------------------------------------------------
+  public function updateAddonMetadata($aAddonManifest, $aPostData) {
+    $slug = $aPostData['slug'];
+    unset($aPostData['slug']);
+
+    foreach ($aPostData as $_key => $_value) {
+      if ($aAddonManifest[$_key] == $_value) {
+        unset($aPostData[$_key];
+      }
+    }
+
+    return $aPostData;
+  }
 
 // ====================================================================================================================
 

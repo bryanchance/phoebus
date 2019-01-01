@@ -15,14 +15,15 @@ const URI_ADDONS    = URI_PANEL . 'addons/';
 const URI_ADMIN     = URI_PANEL . 'administration/';
 
 // Include modules
-$arrayIncludes = ['database', 'account', 'readManifest', 'generateContent'];
+$arrayIncludes = ['database', 'account', 'readManifest', 'writeManifest', 'generateContent'];
 foreach ($arrayIncludes as $_value) { require_once(MODULES[$_value]); }
 
 // Instantiate modules
-$moduleDatabase = new classDatabase();
-$moduleAccount = new classAccount();
-$moduleReadManifest = new classReadManifest();
-$moduleGenerateContent = new classGenerateContent(true);
+$moduleDatabase         = new classDatabase();
+$moduleAccount          = new classAccount();
+$moduleReadManifest     = new classReadManifest();
+$moduleWriteManifest    = new classWriteManifest();
+$moduleGenerateContent  = new classGenerateContent('smarty');
 
 // ====================================================================================================================
 
@@ -47,7 +48,7 @@ function funcCheckAccessLevel($aLevel) {
 // == | Main | ========================================================================================================
 
 $strComponentPath = dirname(COMPONENTS[$arraySoftwareState['requestComponent']]) . '/';
-$requestLogout = funcUnifiedVariable('post', 'logout');
+$boolHasPostData = !empty($_POST);
 
 // --------------------------------------------------------------------------------------------------------------------
 

@@ -8,7 +8,7 @@
 $arraySoftwareState['requestPanelTask'] = funcUnifiedVariable('get', 'task');
 $arraySoftwareState['requestPanelWhat'] = funcUnifiedVariable('get', 'what');
 $arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
-$boolHasPostData = !empty($_POST);
+
 // --------------------------------------------------------------------------------------------------------------------
 
 $moduleAccount->authenticate();
@@ -86,7 +86,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           funcError('Invalid slug on GET/POST');
         }
 
-        funcError($arrayPostData, 99);
+        funcError($moduleWriteManifest->updateAddonMetadata($addonManifest, $arrayPostData), 99);
       }
 
       $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
