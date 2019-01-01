@@ -11,17 +11,21 @@ class classWriteManifest {
     }
   }
 
-  public function updateAddonMetadata($aAddonManifest, $aPostData) {
+  public function updateAddonMetadata($aAddonManifest, ) {
     $slug = $aPostData['slug'];
     unset($aPostData['slug']);
 
     foreach ($aPostData as $_key => $_value) {
-      if ($aAddonManifest[$_key] == $_value) {
+      if ($_key != 'content' && $aAddonManifest[$_key] == $_value) {
         unset($aPostData[$_key]);
+      }
+
+      if ($_key == 'content' && (!$_value || strcmp($aAddonManifest['content'], $aPostData['content']))) {
+        unset($aPostData['content']);
       }
     }
 
-    return $aAddonManifest['content'] === $aPostData['content'];
+    return $aPostData;
   }
 
 }
