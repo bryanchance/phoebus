@@ -68,7 +68,7 @@ class classWriteManifest {
     }
 
     // Insert the new manifest data into the database
-    $query = "UPDATE `addon` SET ?u WHERE `slug` = ?s"
+    $query = "UPDATE `addon` SET ?u WHERE `slug` = ?s";
     $GLOBALS['moduleDatabase']->query('normal', $query, $this->$postData, $aAddonManifest['slug']);
 
     return true;
