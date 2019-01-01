@@ -8,7 +8,7 @@
 $arraySoftwareState['requestPanelTask'] = funcUnifiedVariable('get', 'task');
 $arraySoftwareState['requestPanelWhat'] = funcUnifiedVariable('get', 'what');
 $arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
-
+$boolHasPost = !empty($_POST);
 // --------------------------------------------------------------------------------------------------------------------
 
 $moduleAccount->authenticate();
@@ -68,18 +68,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
         funcError($addonManifest, 98);
       }
 
-      if (empty($_POST)) {
-        $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
-        if ($addonManifest['type'] == 'extension') {
-          $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
-        }
-
-        $moduleGenerateContent->addonSite('admin-edit-addon-metadata',
-                                           'Editing Metadata for ' . $addonManifest['name'],
-                                           $addonManifest,
-                                           $arrayExtraData);
-      }
-      else {
+      if ($hasPost) {
         $arrayPostResults = array(
           'slug'          => funcUnifiedVariable('post', 'slug'),
           'active'        => funcUnifiedVariable('post', 'active'),
@@ -95,6 +84,16 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
 
         funcError($arrayPostResults, 99);
       }
+
+      $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
+      if ($addonManifest['type'] == 'extension') {
+        $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
+      }
+
+      $moduleGenerateContent->addonSite('admin-edit-addon-metadata',
+                                         'Editing Metadata for ' . $addonManifest['name'],
+                                         $addonManifest,
+                                         $arrayExtraData);
       break;
     case 'release':
       funcSendHeader('501');
