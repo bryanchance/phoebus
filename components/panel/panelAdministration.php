@@ -8,7 +8,7 @@
 $arraySoftwareState['requestPanelTask'] = funcUnifiedVariable('get', 'task');
 $arraySoftwareState['requestPanelWhat'] = funcUnifiedVariable('get', 'what');
 $arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
-$boolHasPost = !empty($_POST);
+$boolHasPostData = !empty($_POST);
 // --------------------------------------------------------------------------------------------------------------------
 
 $moduleAccount->authenticate();
@@ -68,7 +68,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
         funcError($addonManifest, 98);
       }
 
-      if ($hasPost) {
+      if ($boolHasPostData) {
         $arrayPostResults = array(
           'slug'          => funcUnifiedVariable('post', 'slug'),
           'active'        => funcUnifiedVariable('post', 'active'),
