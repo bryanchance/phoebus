@@ -20,7 +20,7 @@ class classWriteManifest {
         unset($aPostData[$_key]);
       }
 
-      if ($_key == 'content' && (!$_value || strcmp($aAddonManifest['content'], $aPostData['content']))) {
+      if ($_key == 'content' && (!$_value || !strcmp($aAddonManifest['content'], $aPostData['content']))) {
         unset($aPostData['content']);
       }
     }
