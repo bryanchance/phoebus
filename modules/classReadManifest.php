@@ -402,7 +402,7 @@ class classReadManifest {
     }
 
     // Remove whitespace from description and html encode
-    if ($addonManifest['description']) {
+    if ($addonManifest['description'] ?? false) {
       $addonManifest['description'] = htmlentities(trim($addonManifest['description']), ENT_XHTML);
     }
 
