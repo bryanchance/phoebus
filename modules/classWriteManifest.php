@@ -16,12 +16,8 @@ class classWriteManifest {
     unset($aPostData['slug']);
 
     foreach ($aPostData as $_key => $_value) {
-      if ($_key != 'content' && $aAddonManifest[$_key] == $_value) {
+      if ($aAddonManifest[$_key] == $_value) {
         unset($aPostData[$_key]);
-      }
-
-      if ($_key == 'content' && (!$_value || !strcmp($aAddonManifest['content'], $aPostData['content']))) {
-        unset($aPostData['content']);
       }
     }
 
