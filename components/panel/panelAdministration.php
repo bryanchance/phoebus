@@ -82,8 +82,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
           'content'       => funcUnifiedVariable('post', 'content')
         );
 
-        if (!$arrayPostData['slug'] ||
-            $arrayPostData['slug'] != $arraySoftwareState['requestPanelSlug']) {
+        if (!$arrayPostData['slug'] || $arrayPostData['slug'] != $arraySoftwareState['requestPanelSlug']) {
           funcError('Invalid slug on GET/POST');
         }
 
