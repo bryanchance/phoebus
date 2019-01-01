@@ -401,9 +401,9 @@ class classReadManifest {
       });
     }
 
-    // Remove whitespace from description
+    // Remove whitespace from description and html encode
     if ($addonManifest['description']) {
-      $addonManifest['description'] = ltrim($addonManifest['description']);
+      $addonManifest['description'] = htmlentities(trim($addonManifest['description']), ENT_XHTML);
     }
 
     // If content exists, process it
@@ -416,7 +416,7 @@ class classReadManifest {
         $addonManifest['content'] = $this->funcProcessContent($addonManifest['content']);
       }
       else {
-        $addonManifest['content'] = nl2br($addonManifest['description']);
+        $addonManifest['content'] = $addonManifest['description'];
       }
     }
 
