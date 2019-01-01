@@ -70,7 +70,12 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
 
       if ($boolHasPostData) {
         $boolUpdate = $moduleWriteManifest->updateAddonMetadata($addonManifest);
-        funcError($moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']), 98);
+
+        if (!$boolUpdate) {
+          funcError('Something has gone horribly wrong');
+        }
+
+        funcRedirect('/panel/administration/?task=update&what=metadata&slug=' . $addonManifest['slug']);
       }
 
       $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
