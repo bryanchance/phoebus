@@ -21,7 +21,7 @@ class classWriteManifest {
       }
     }
 
-    return $aAddonManifest['content'] == $aPostData['content'];
+    return $aAddonManifest['content'] === $aPostData['content'];
   }
 
 }
