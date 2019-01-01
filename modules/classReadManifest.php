@@ -401,6 +401,11 @@ class classReadManifest {
       });
     }
 
+    // Remove whitespace from description
+    if ($addonManifest['description']) {
+      $addonManifest['description'] = ltrim($addonManifest['description']);
+    }
+
     // If content exists, process it
     if ($processContent && array_key_exists('content', $addonManifest)) {
       // Check to ensure that there really is content
