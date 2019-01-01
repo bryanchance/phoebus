@@ -11,18 +11,39 @@ class classWriteManifest {
     }
   }
 
-  public function updateAddonMetadata($aAddonManifest, $aPostData) {
-    foreach ($aPostData as $_key => $_value) {
+  public function updateAddonMetadata($aAddonManifest) {
+    $arrayPostData = array(
+      'slug'          => funcUnifiedVariable('post', 'slug'),
+      'active'        => funcUnifiedVariable('post', 'active'),
+      'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
+      'category'      => funcUnifiedVariable('post', 'category'),
+      'license'       => funcUnifiedVariable('post', 'license'),
+      'repository'    => funcUnifiedVariable('post', 'repository'),
+      'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
+      'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
+      'tags'          => funcUnifiedVariable('post', 'tags'),
+      'content'       => funcUnifiedVariable('post', 'content')
+    );
+
+    if (!$arrayPostData['slug'] || $arrayPostData['slug'] != $GLOBALS['arraySoftwareState']['requestPanelSlug']) {
+      funcError('Invalid slug on GET/POST');
+    }
+    
+    foreach ($arrayPostData as $_key => $_value) {
       if ($aAddonManifest[$_key] == $_value) {
-        unset($aPostData[$_key]);
+        unset($arrayPostData[$_key]);
       }
     }
 
-    if ($aPostData['slug'] ?? false) {
+    if ($arrayPostData['slug'] ?? false) {
       funcError('Slug is still existing in post data');
     }
 
-    return $aPostData;
+    if (empty($arrayPostData)) {
+      $arrayPostData['content'] = null;
+    }
+
+    return $arrayPostData;
   }
 
 }

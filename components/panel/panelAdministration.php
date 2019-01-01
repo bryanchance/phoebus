@@ -69,24 +69,7 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       }
 
       if ($boolHasPostData) {
-        $arrayPostData = array(
-          'slug'          => funcUnifiedVariable('post', 'slug'),
-          'active'        => funcUnifiedVariable('post', 'active'),
-          'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
-          'category'      => funcUnifiedVariable('post', 'category'),
-          'license'       => funcUnifiedVariable('post', 'license'),
-          'repository'    => funcUnifiedVariable('post', 'repository'),
-          'supportURL'    => funcUnifiedVariable('post', 'supportURL'),
-          'supportEmail'  => funcUnifiedVariable('post', 'supportEmail'),
-          'tags'          => funcUnifiedVariable('post', 'tags'),
-          'content'       => funcUnifiedVariable('post', 'content')
-        );
-
-        if (!$arrayPostData['slug'] || $arrayPostData['slug'] != $arraySoftwareState['requestPanelSlug']) {
-          funcError('Invalid slug on GET/POST');
-        }
-
-        funcError($moduleWriteManifest->updateAddonMetadata($addonManifest, $arrayPostData), 99);
+        funcError($moduleWriteManifest->updateAddonMetadata($addonManifest), 99);
       }
 
       $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
