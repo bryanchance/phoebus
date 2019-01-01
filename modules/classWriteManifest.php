@@ -17,7 +17,7 @@ class classWriteManifest {
 
     foreach ($aPostData as $_key => $_value) {
       if ($aAddonManifest[$_key] == $_value) {
-        unset($aPostData[$_key];
+        unset($aPostData[$_key]);
       }
     }
 
