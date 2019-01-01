@@ -69,7 +69,8 @@ elseif ($arraySoftwareState['requestPanelTask'] == 'update') {
       }
 
       if ($boolHasPostData) {
-        funcError($moduleWriteManifest->updateAddonMetadata($addonManifest), 99);
+        $boolUpdate = $moduleWriteManifest->updateAddonMetadata($addonManifest);
+        funcError($moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']), 98);
       }
 
       $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
