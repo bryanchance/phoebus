@@ -32,16 +32,16 @@
     <td>{$PAGE_DATA.username}</td>
   </tr>
   <tr>
-    <td>Password</td>
-    <td><input form="account-metadata" name="password" type="password" size="80" placeholder="New Password" minlength="8" maxlength="128" autocomplete="off"/></td>
-  </tr>
-  <tr>
     <td>Display Name</td>
     <td><input form="account-metadata" name="displayName" type="text" size="80" value="{$PAGE_DATA.displayName}" required/></td>
   </tr>
   <tr>
     <td>E-mail</td>
-    <td><input form="account-metadata" name="email" type="text" size="80" value="{$PAGE_DATA.email}" required/></td>
+    <td><input form="account-metadata" name="email" type="email" size="80" value="{$PAGE_DATA.email}" required/></td>
+  </tr>
+  <tr>
+    <td>Password</td>
+    <td><input form="account-metadata" name="password" type="password" size="80" placeholder="New Password" minlength="8" maxlength="128" autocomplete="off"/></td>
   </tr>
 <!--
   <tr>
