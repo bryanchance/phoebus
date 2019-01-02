@@ -151,7 +151,7 @@ class classGenerateContent {
       case 'admin-list-externals':
       case 'admin-list-themes':
       case 'admin-list-langpacks':
-        $content = $this->getContentFile('administration-list.xhtml');
+        $content = $this->getContentFile('administration-addon-list.xhtml');
         break;
       case 'developer-edit-addon-metadata':
       case 'admin-edit-addon-metadata':

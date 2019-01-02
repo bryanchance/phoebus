@@ -1,7 +1,57 @@
 <h2>{$PAGE_TITLE}</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec feugiat nisl pretium fusce id velit. Arcu cursus euismod quis viverra nibh cras. Pellentesque sit amet porttitor eget dolor morbi non arcu risus. Ullamcorper sit amet risus nullam eget felis eget nunc lobortis. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Donec et odio pellentesque diam volutpat commodo. Praesent tristique magna sit amet. Nunc congue nisi vitae suscipit tellus mauris a. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Vestibulum rhoncus est pellentesque elit ullamcorper. Nullam ac tortor vitae purus faucibus ornare suspendisse. Tortor at risus viverra adipiscing at in tellus. Varius duis at consectetur lorem. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum.</p>
+<table class="addonTable single-row" metadata>
+  <tr>
+    <th>Property</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td><img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" /> Active</td>
+  </tr>
+  <tr>
+    <td>Level</td>
+    <td>
+      {if $PAGE_DATA.level == 1}
+        1 - Add-on Developer 
+      {elseif $PAGE_DATA.level == 2}
+        2 - Advanced/Legacy Add-on Developer
+      {elseif $PAGE_DATA.level == 3}
+        3 - Add-ons Team Member
+      {elseif $PAGE_DATA.level == 4}
+        4 - Add-ons Team Leader
+      {elseif $PAGE_DATA.level == 5}
+        5 - Phoebus Administrator
+      {else}
+        Unknown
+      {/if}
+    </td>
+  </tr>
+  <tr>
+    <td>Username</td>
+    <td>{$PAGE_DATA.username}</td>
+  </tr>
+  <tr>
+    <td>Password</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Display Name</td>
+    <td>{if $PAGE_DATA.displayName}</td>
+  </tr>
+  <tr>
+    <td>E-mail</td>
+    <td>{$PAGE_DATA.email}</td>
+  </tr>
+  <tr>
+    <td>Repository URL</td>
+    <td><!-- <input form="account-metadata" name="repository" type="url" size="80" value="" /> --></td>
+  </tr>
+</table>
 
-<p>Duis at consectetur lorem donec massa sapien faucibus et. Ornare suspendisse sed nisi lacus sed. In nulla posuere sollicitudin aliquam. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Magna eget est lorem ipsum dolor sit. Elit pellentesque habitant morbi tristique senectus. Id diam vel quam elementum pulvinar etiam non quam. Pellentesque id nibh tortor id aliquet lectus proin. In nulla posuere sollicitudin aliquam. Tellus in metus vulputate eu scelerisque.</[>
+<br />
 
-<p>Non enim praesent elementum facilisis leo. Fermentum dui faucibus in ornare quam viverra orci sagittis eu. Turpis egestas sed tempus urna et pharetra pharetra massa massa. Non odio euismod lacinia at quis. Sed lectus vestibulum mattis ullamcorper. Feugiat in ante metus dictum at tempor. Urna nec tincidunt praesent semper. Sit amet justo donec enim diam vulputate ut. Purus in mollis nunc sed. In est ante in nibh mauris cursus. Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien.</p>
+<form id="account-metadata" accept-charset="UTF-8" autocomplete="off" method="POST" >
+  <input type="hidden" name="slug" value="abprime" />
+  <button type="submit" value="Submit" style="float: right;">Update</button><br />
+</form>
