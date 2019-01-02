@@ -112,8 +112,8 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
 
   // Serve the Developer Add-ons page
   if ($arraySoftwareState['requestPath'] == URI_ADDONS && !$arraySoftwareState['requestPanelTask']) {
-    $userAddons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
-    $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $userAddons);
+    $addons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
+    $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $addons);
   }
 
   funcSendHeader('501');
@@ -139,12 +139,12 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
         case 'externals':
         case 'themes':
         case 'langpacks':
-          $allAddons = $moduleReadManifest->getAddons('panel-addons-by-type',
-                                                      substr($arraySoftwareState['requestPanelWhat'], 0, -1));
+          $addons = $moduleReadManifest->getAddons('panel-addons-by-type',
+                                                   substr($arraySoftwareState['requestPanelWhat'], 0, -1));
 
           $moduleGenerateContent->addonSite('admin-list-' . $arraySoftwareState['requestPanelWhat'],
                                             'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
-                                            $allAddons);
+                                            $addons);
           break;
         case 'users':
           funcSendHeader('501');
