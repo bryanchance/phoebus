@@ -143,7 +143,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
                                                    substr($arraySoftwareState['requestPanelWhat'], 0, -1));
 
           $moduleGenerateContent->addonSite('admin-list-' . $arraySoftwareState['requestPanelWhat'],
-                                            'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
+                                            ucfirst($arraySoftwareState['requestPanelWhat']) . ' - Administration',
                                             $addons);
           break;
         case 'users':
