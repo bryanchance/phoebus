@@ -25,6 +25,12 @@ $moduleReadManifest     = new classReadManifest();
 $moduleWriteManifest    = new classWriteManifest();
 $moduleGenerateContent  = new classGenerateContent('smarty');
 
+// Request arguments
+$arraySoftwareState['requestPanelTask'] = funcUnifiedVariable('get', 'task');
+$arraySoftwareState['requestPanelWhat'] = funcUnifiedVariable('get', 'what');
+$arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
+
+
 // ====================================================================================================================
 
 // == | Functions | ===================================================================================================
@@ -35,12 +41,16 @@ $moduleGenerateContent  = new classGenerateContent('smarty');
 * @param $_level    Required level
 * @returns          true 404
 ***********************************************************************************************************************/
-function funcCheckAccessLevel($aLevel) {
+function funcCheckAccessLevel($aLevel, $aReturnNull = null) {
   if ($GLOBALS['arraySoftwareState']['authentication']['level'] >= $aLevel) {
     return true;
   }
 
-  funcSend404();
+  if (!$aReturnNull) {
+    funcSend404();
+  }
+
+  return null;
 }
 
 // ====================================================================================================================
@@ -78,7 +88,10 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_LOGIN:
     $moduleAccount->authenticate();
-    funcRedirect('/panel/addons/');
+    if (funcCheckAccessLevel(3, true)) {
+      funcRedirect(URI_ADMIN);
+    }
+    funcRedirect(URI_ACCOUNT);
     break;
   case URI_LOGOUT:
     $moduleAccount->authenticate('logout');
@@ -96,11 +109,110 @@ switch ($arraySoftwareState['requestPath']) {
 if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
   $moduleAccount->authenticate();
   funcCheckAccessLevel(1);
-  $userAddons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
-  $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $userAddons);
+
+  // Serve the Developer Add-ons page
+  if ($arraySoftwareState['requestPath'] == URI_ADDONS && !$arraySoftwareState['requestPanelTask']) {
+   $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $userAddons);
+  }
+
+  funcSendHeader('501');
 }
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
-  require_once($strComponentPath . 'panelAdministration.php');
+  // Challenge
+  $moduleAccount->authenticate();
+  funcCheckAccessLevel(3);
+
+  // Serve the Adminsitration landing page
+  if ($arraySoftwareState['requestPath'] == URI_ADMIN && !$arraySoftwareState['requestPanelTask']) {
+    $moduleGenerateContent->addonSite('admin-frontpage.xhtml', 'Administration');
+  }
+
+  switch ($arraySoftwareState['requestPanelTask']) {
+    case 'list':
+      if (!$arraySoftwareState['requestPanelWhat']) {
+        funcError('You did not specify what you want to list');
+      }
+
+      switch ($arraySoftwareState['requestPanelWhat']) {
+        case 'extensions':
+        case 'externals':
+        case 'themes':
+        case 'langpacks':
+          $allAddons = $moduleReadManifest->getAddons('panel-addons-by-type',
+                                                      substr($arraySoftwareState['requestPanelWhat'], 0, -1));
+
+          $moduleGenerateContent->addonSite('admin-list-' . $arraySoftwareState['requestPanelWhat'],
+                                            'All ' . $arraySoftwareState['requestPanelWhat'] . ' - Administration',
+                                            $allAddons);
+          break;
+        case 'users':
+          funcSendHeader('501');
+        default:
+          funcError('Invalid list request');
+      }
+      break;
+    case 'update':
+      if (!$arraySoftwareState['requestPanelWhat'] || !$arraySoftwareState['requestPanelSlug']) {
+        funcError('You did not specify what you want to update');
+      }
+
+      switch ($arraySoftwareState['requestPanelWhat']) {
+        case 'metadata':
+          // Check for valid slug
+          if (!$arraySoftwareState['requestPanelSlug']) {
+            funcError('You did not specify a slug');
+          }
+
+          // Get the manifest
+          $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
+
+          // Check if manifest is valid
+          if (!$addonManifest) {
+            funcError('Add-on Manifest is null');
+          }
+
+          // Extenrals and Langpacks need special handling so just send back the manifest for now
+          if ($addonManifest['type'] == 'external' || $addonManifest['type'] == 'langpack') {
+            funcError($addonManifest, 98);
+          }
+
+          // We have post data so we should update the manifest data via classWriteManifest
+          if ($boolHasPostData) {
+            $boolUpdate = $moduleWriteManifest->updateAddonMetadata($addonManifest);
+
+            // If an error happened stop.
+            if (!$boolUpdate) {
+              funcError('Something has gone horribly wrong');
+            }
+
+            // Manifest updated go somewhere
+            funcRedirect('/panel/administration/?task=update&what=metadata&slug=' . $addonManifest['slug']);
+          }
+
+          // Create an array to hold extra data to send to smarty
+          // Such as the list of licenses
+          $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
+
+          // Extensions need the associative array of extension categories as well
+          if ($addonManifest['type'] == 'extension') {
+            $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
+          }
+
+          // Generate the edit add-on metadata page
+          $moduleGenerateContent->addonSite('admin-edit-addon-metadata',
+                                             'Editing Metadata for ' . $addonManifest['name'],
+                                             $addonManifest,
+                                             $arrayExtraData);
+          break;
+        case 'release':
+          funcSendHeader('501');
+        default:
+          funcError('Invalid update request');
+      }
+      break;
+    default:
+      funcSendHeader('501');
+  }
 }
 
 funcSend404();
