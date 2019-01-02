@@ -142,7 +142,7 @@ class classGenerateContent {
         break;
       case 'developer-account':
       case 'admin-edit-account-metadata':
-        $content = $this->getContentFile('developer-account.xhtml');
+        $content = $this->getContentFile('account-metadata.xhtml');
         break;
       case 'developer-addons-list':
         $content = $this->getContentFile('developer-addons-list.xhtml');
