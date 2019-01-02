@@ -91,7 +91,7 @@ switch ($arraySoftwareState['requestPath']) {
     if (funcCheckAccessLevel(3, true)) {
       funcRedirect(URI_ADMIN);
     }
-    funcRedirect(URI_ACCOUNT);
+    funcRedirect(URI_ADDONS);
     break;
   case URI_LOGOUT:
     $moduleAccount->authenticate('logout');
