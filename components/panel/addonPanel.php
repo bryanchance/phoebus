@@ -98,9 +98,10 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_ACCOUNT:
     $moduleAccount->authenticate();
-    funcCheckAccessLevel(1);
-    funcError($GLOBALS['arraySoftwareState']['authentication'], 98);
-    //$moduleGenerateContent->addonSite('developer-account', 'Account Page');
+    if ($boolHasPostData) {
+      funcError($_POST, 98);
+    }
+    $moduleGenerateContent->addonSite('developer-account', 'Account Page', $arraySoftwareState['authentication']);
     break;
 }
 
