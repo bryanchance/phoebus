@@ -43,11 +43,6 @@ class classWriteManifest {
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
       unset($this->postData['active']);
       unset($this->postData['reviewed']);
-
-      if (!in_array($this->postData['slug'], $GLOBALS['arraySoftwareState']['authentication']['addons'])) {
-        funcError('You do not own this add-on. Stop trying to fuck with other people\'s shit!');
-      }
-
       unset($this->postData['slug']);
     }
 

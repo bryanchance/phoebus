@@ -62,7 +62,7 @@ $boolHasPostData = !empty($_POST);
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// Special case: Interlink should use Pale Moon's panel access
+// Special case: Interlink should use Pale Moon's panel access at least until I get a cert
 if ($arraySoftwareState['currentApplication'] == 'interlink') {
   funcRedirect('https://addons.palemoon.org/panel/');
 }
@@ -116,7 +116,64 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
     $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $addons);
   }
 
-  funcSendHeader('501');
+  switch ($arraySoftwareState['requestPanelTask']) {
+    case 'update':
+      switch ($arraySoftwareState['requestPanelWhat']) {
+        case 'metadata':
+          // Check for valid slug
+          if (!$arraySoftwareState['requestPanelSlug']) {
+            funcError('You did not specify a slug');
+          }
+
+          // Get the manifest
+          $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
+
+          // Check if manifest is valid
+          if (!$addonManifest || !in_array($addonManifest['type'], ['extension', 'theme'])) {
+            funcError('Add-on Manifest is null');
+          }
+
+          if (!in_array($arraySoftwareState['requestPanelSlug'], $arraySoftwareState['authentication']['addons'])) {
+            funcError('You do not own this add-on. Stop trying to fuck with other people\'s shit!');
+          }
+
+          // We have post data so we should update the manifest data via classWriteManifest
+          if ($boolHasPostData) {
+            $boolUpdate = $moduleWriteManifest->updateAddonMetadata($addonManifest);
+
+            // If an error happened stop.
+            if (!$boolUpdate) {
+              funcError('Something has gone horribly wrong');
+            }
+
+            // Manifest updated go somewhere
+            funcRedirect(URI_ADDONS);
+          }
+
+          // Create an array to hold extra data to send to smarty
+          // Such as the list of licenses
+          $arrayExtraData = array('licenses' => array_keys($moduleReadManifest::LICENSES));
+
+          // Extensions need the associative array of extension categories as well
+          if ($addonManifest['type'] == 'extension') {
+            $arrayExtraData['categories'] = $moduleReadManifest::EXTENSION_CATEGORY_SLUGS;
+          }
+
+          // Generate the edit add-on metadata page
+          $moduleGenerateContent->addonSite('developer-edit-addon-metadata',
+                                             'Editing Metadata for ' . $addonManifest['name'],
+                                             $addonManifest,
+                                             $arrayExtraData);
+          break;
+        case 'release':
+          funcSendHeader('501');
+        default:
+          funcError('Invalid update request');
+      }
+      break;
+    default:
+      funcSendHeader('501');
+  }
 }
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
   // Challenge
