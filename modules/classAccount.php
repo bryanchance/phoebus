@@ -23,7 +23,7 @@ class classAccount {
   ********************************************************************************************************************/
   function __construct() {
     if (!funcCheckModule('database')) {
-      funcError(__CLASS__ . '::' . __FUNCTION__ . ' - module are required to be included in the global scope');
+      funcError(__CLASS__ . '::' . __FUNCTION__ . ' - database module is required to be included in the global scope');
     }
   }
 

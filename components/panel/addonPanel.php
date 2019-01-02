@@ -99,13 +99,15 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_ACCOUNT:
     $moduleAccount->authenticate();
     funcCheckAccessLevel(1);
-    $moduleGenerateContent->addonSite('developer-account', 'Account Page');
+    funcError($GLOBALS['arraySoftwareState']['authentication'], 98);
+    //$moduleGenerateContent->addonSite('developer-account', 'Account Page');
     break;
 }
 
 // --------------------------------------------------------------------------------------------------------------------
 
 // Complex URIs need more complex conditional checking
+// Add-on Developer Code Path
 if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
   $moduleAccount->authenticate();
   funcCheckAccessLevel(1);
@@ -175,6 +177,7 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
       funcSendHeader('501');
   }
 }
+// Administration Code Path
 elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
   // Challenge
   $moduleAccount->authenticate();
