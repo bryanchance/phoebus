@@ -172,9 +172,13 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
             funcError('Add-on Manifest is null');
           }
 
-          // Extenrals and Langpacks need special handling so just send back the manifest for now
-          if ($addonManifest['type'] == 'external' || $addonManifest['type'] == 'langpack') {
+          // Extenrals need special handling so just send back the manifest for now
+          if ($addonManifest['type'] == 'external') {
             funcError($addonManifest, 98);
+          }
+
+          if ($addonManifest['type'] == 'langpack') {
+            funcError('Language Packs are not handled using this function. Stop being a moron.');
           }
 
           // We have post data so we should update the manifest data via classWriteManifest
