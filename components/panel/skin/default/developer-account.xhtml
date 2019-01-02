@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <td>Password</td>
-    <td><input form="account-metadata" name="password" type="password" size="80" placeholder="New Password" minlength="8" maxlength="128" /></td>
+    <td><input form="account-metadata" name="password" type="password" size="80" placeholder="New Password" minlength="8" maxlength="128" autocomplete="off"/></td>
   </tr>
   <tr>
     <td>Display Name</td>
@@ -54,5 +54,6 @@
 <br />
 
 <form id="account-metadata" accept-charset="UTF-8" autocomplete="off" method="POST" >
+  <input type="hidden" name="username" value="{$PAGE_DATA.username}" />
   <button type="submit" value="Submit" style="float: right;">Update</button><br />
 </form>
