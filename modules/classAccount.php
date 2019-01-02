@@ -30,7 +30,7 @@ class classAccount {
   /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
-  public function getSingleUser ($aUserName) {
+  private function getSingleUser($aUserName) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
     return $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
   }
