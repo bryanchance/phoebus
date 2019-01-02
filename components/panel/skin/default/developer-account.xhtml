@@ -1,3 +1,16 @@
+<script>
+  function enableChangePassword() {
+    var elm = getElementById("account-password");
+    elm.setAttribute('form', 'account-metadata');
+    elm.setAttribute('type', 'password');
+    elm.setAttribute('size', '80');
+    elm.setAttribute('placeholder', 'New Password');
+    elm.setAttribute('minlength', '8');
+    elm.setAttribute('maxlength', '128');
+    elm.setAttribute('autocomplete', 'off');
+    elm.removeAttribute('label');
+  }
+</script>
 <h2>{$PAGE_TITLE}</h2>
 
 <table class="addonTable single-row" metadata>
@@ -41,7 +54,8 @@
   </tr>
   <tr>
     <td>Password</td>
-    <td><input id="account-password" form="account-metadata" name="password" type="button" size="80" placeholder="Change Password" minlength="8" maxlength="128" autocomplete="off"/></td>
+    <td><input id="account-password" name="password" type="button" label="Change password..." onclick="enableChangePassword();" />
+    </td>
   </tr>
 <!--
   <tr>
