@@ -8,7 +8,7 @@
     elm.setAttribute('minlength', '8');
     elm.setAttribute('maxlength', '128');
     elm.setAttribute('autocomplete', 'off');
-    elm.removeAttribute('label');
+    elm.removeAttribute('value');
   }
 </script>
 <h2>{$PAGE_TITLE}</h2>
@@ -54,7 +54,7 @@
   </tr>
   <tr>
     <td>Password</td>
-    <td><input id="account-password" name="password" type="button" label="Change password..." onclick="enableChangePassword();" />
+    <td><input id="account-password" name="password" type="button" value="Change password..." onclick="enableChangePassword();" />
     </td>
   </tr>
 <!--
