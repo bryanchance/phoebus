@@ -141,6 +141,7 @@ class classGenerateContent {
         $content = $this->getContentFile('searchplugin-category.xhtml');
         break;
       case 'developer-account':
+      case 'admin-edit-account-metadata':
         $content = $this->getContentFile('developer-account.xhtml');
         break;
       case 'developer-addons-list':
