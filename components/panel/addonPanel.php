@@ -187,7 +187,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
             }
 
             // Manifest updated go somewhere
-            funcRedirect('/panel/administration/?task=update&what=metadata&slug=' . $addonManifest['slug']);
+            funcRedirect(URI_ADMIN . '?task=list&what=' . $addonManifest['type'] . 's');
           }
 
           // Create an array to hold extra data to send to smarty
