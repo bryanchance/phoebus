@@ -3,7 +3,7 @@
     var elm = document.getElementById('account-password');
     elm.setAttribute('form', 'account-metadata');
     elm.setAttribute('type', 'password');
-    elm.setAttribute('size', '80');
+    elm.setAttribute('size', '30');
     elm.setAttribute('placeholder', 'New Password');
     elm.setAttribute('minlength', '8');
     elm.setAttribute('maxlength', '128');
@@ -46,23 +46,17 @@
   </tr>
   <tr>
     <td>Display Name</td>
-    <td><input form="account-metadata" name="displayName" type="text" size="80" value="{$PAGE_DATA.displayName}" required/></td>
+    <td><input form="account-metadata" name="displayName" type="text" size="30" value="{$PAGE_DATA.displayName}" required/></td>
   </tr>
   <tr>
     <td>E-mail Address</td>
-    <td><input form="account-metadata" name="email" type="email" size="80" value="{$PAGE_DATA.email}" required/></td>
+    <td><input form="account-metadata" name="email" type="email" size="30" value="{$PAGE_DATA.email}" required/></td>
   </tr>
   <tr>
     <td>Password</td>
     <td><input id="account-password" name="password" type="button" value="Change&hellip;" onclick="enableChangePassword();" />
     </td>
   </tr>
-<!--
-  <tr>
-    <td>Repository URL</td>
-    <td><input form="account-metadata" name="repository" type="url" size="80" value="" /></td>
-  </tr>
--->
 </table>
 
 <br />
