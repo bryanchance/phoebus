@@ -22,15 +22,15 @@
       <td class="cell-ellipsis">{if $key.displayName}{$key.displayName}{else}NULL{/if}</td>
       <td class="cell-ellipsis">{if $key.email}{$key.email}{else}NULL{/if}</td>
       <td>
-        {if $PAGE_DATA.level == 1}
+        {if $key.level == 1}
           1 - Add-on Developer 
-        {elseif $PAGE_DATA.level == 2}
+        {elseif $key.level == 2}
           2 - Advanced/Legacy Add-on Developer
-        {elseif $PAGE_DATA.level == 3}
+        {elseif $key.level == 3}
           3 - Add-ons Team Member
-        {elseif $PAGE_DATA.level == 4}
+        {elseif $key.level == 4}
           4 - Add-ons Team Leader
-        {elseif $PAGE_DATA.level == 5}
+        {elseif $key.level == 5}
           5 - Phoebus Administrator
         {else}
           Unknown
