@@ -33,18 +33,28 @@
   <tr>
     <td>Level</td>
     <td>
-      {if $PAGE_DATA.level == 1}
-        1 - Add-on Developer 
-      {elseif $PAGE_DATA.level == 2}
-        2 - Advanced/Legacy Add-on Developer
-      {elseif $PAGE_DATA.level == 3}
-        3 - Add-ons Team Member
-      {elseif $PAGE_DATA.level == 4}
-        4 - Add-ons Team Leader
-      {elseif $PAGE_DATA.level == 5}
-        5 - Phoebus Administrator
+      {if $USER_LEVEL >= 3}
+        <select form="account-metadata" name="level" style="width: 175px;">
+          <option {if $PAGE_DATA == 1}selected="selected"{/if}value="1">1 - Add-on Developer</option>
+          <option {if $PAGE_DATA == 2}selected="selected"{/if}value="2">2 - Advanced/Legacy Add-on Developer</option>
+          <option {if $PAGE_DATA == 3}selected="selected"{/if}value="3">3 - Add-ons Team Member</option>
+          <option {if $PAGE_DATA == 4}selected="selected"{/if}value="4">4 - Add-ons Team Leader</option>
+          <option {if $PAGE_DATA == 5}selected="selected"{/if}value="5">5 - Phoebus Administrator</option>
+        </select>
       {else}
-        Unknown
+        {if $PAGE_DATA.level == 1}
+          1 - Add-on Developer 
+        {elseif $PAGE_DATA.level == 2}
+          2 - Advanced/Legacy Add-on Developer
+        {elseif $PAGE_DATA.level == 3}
+          3 - Add-ons Team Member
+        {elseif $PAGE_DATA.level == 4}
+          4 - Add-ons Team Leader
+        {elseif $PAGE_DATA.level == 5}
+          5 - Phoebus Administrator
+        {else}
+          Unknown
+        {/if}
       {/if}
     </td>
   </tr>
