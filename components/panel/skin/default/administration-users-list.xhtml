@@ -21,7 +21,21 @@
       <td class="cell-ellipsis">{$key.username}</td>
       <td class="cell-ellipsis">{if $key.displayName}{$key.displayName}{else}NULL{/if}</td>
       <td class="cell-ellipsis">{if $key.email}{$key.email}{else}NULL{/if}</td>
-      <td>{$key.level}</td>
+      <td>
+        {if $PAGE_DATA.level == 1}
+          1 - Add-on Developer 
+        {elseif $PAGE_DATA.level == 2}
+          2 - Advanced/Legacy Add-on Developer
+        {elseif $PAGE_DATA.level == 3}
+          3 - Add-ons Team Member
+        {elseif $PAGE_DATA.level == 4}
+          4 - Add-ons Team Leader
+        {elseif $PAGE_DATA.level == 5}
+          5 - Phoebus Administrator
+        {else}
+          Unknown
+        {/if}
+      </td>
       <td style="text-align: center; width: 64px;">
         {if $key.active}
           <img src="{$BASE_PATH}../shared/accept.png" />
@@ -30,7 +44,7 @@
         {/if}
       </td>
       <td style="width: 48px;">
-        <a href="{$PAGE_PATH}?task=update&what=user&username={$key.username}" class="aligncenter" title="Edit User Metadata">
+        <a href="{$PAGE_PATH}?task=update&what=user&username={$key.username}" title="Edit User Metadata">
           <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit User Metadata" />
         </a>
       </td>
