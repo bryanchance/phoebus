@@ -1,16 +1,28 @@
 <h2>{$PAGE_TITLE}</h2>
 <table class="addonTable single-row">
   <tr>
+    <th colspan="2" style="text-align: center;"></th>
     <th>Name</th>
     <th>Slug</th>
     <th>ID</th>
     <th style="text-align: center;">Type</th>
     <th style="text-align: center;">Active</th>
     <th style="text-align: center;">Reviewed</th>
-    <th colspan="3" style="text-align: center;"></th>
   </tr>
   {foreach $PAGE_DATA as $key}
     <tr>
+      <td style="width: 16px;">
+        <a href="{if $USER_LEVEL >= 3}{$PAGE_PATH|replace:'/addons/':'/administration/'}{else}{$PAGE_PATH}{/if}?task=update&what=metadata&slug={$key.slug}" title="Edit Add-on Metadata">
+          <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit Add-on" />
+        </a>
+      </td>
+      <td style="width: 20px;">
+        {if $key.type != 'external'}
+        <a href="{if $USER_LEVEL >= 3}{$PAGE_PATH|replace:'/addons/':'/administration/'}{else}{$PAGE_PATH}{/if}?task=update&what=release&slug={$key.slug}" title="Release a new version of this Add-on">
+          <img src="{$BASE_PATH}../shared/plugin_add.png" alt="New Version" />
+        </a>
+        {/if}
+      </td>
       <td class="cell-ellipsis">{$key.name}</td>
       <td class="cell-ellipsis">{$key.slug}</td>
       <td>{$key.id}</td>
@@ -36,23 +48,6 @@
         {else}
           <img src="{$BASE_PATH}../shared/delete.png" />
         {/if}
-      </td>
-      <td style="width: 16px;">
-        <a href="{if $USER_LEVEL >= 3}{$PAGE_PATH|replace:'/addons/':'/administration/'}{else}{$PAGE_PATH}{/if}?task=update&what=metadata&slug={$key.slug}" title="Edit Add-on Metadata">
-          <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit Add-on" />
-        </a>
-      </td>
-      <td style="width: 16px;">
-        {if $key.type != 'external'}
-        <a href="{if $USER_LEVEL >= 3}{$PAGE_PATH|replace:'/addons/':'/administration/'}{else}{$PAGE_PATH}{/if}?task=update&what=release&slug={$key.slug}" title="Release a new version of this Add-on">
-          <img src="{$BASE_PATH}../shared/plugin_add.png" alt="New Version" />
-        </a>
-        {/if}
-      </td>
-      <td style="width: 16px;">
-        <a href="{$key.url}" target="_blank" title="View this Add-on's Page on the Add-ons Site">
-          <img src="{$BASE_PATH}../shared/world_link.png" alt="View Add-on" />
-        </a>
       </td>
     </tr>
   {/foreach}
