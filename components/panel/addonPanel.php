@@ -303,7 +303,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
         }
 
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: inline; filename="' . ltrim($strPathXPI, '.') . '"');
+        header('Content-Disposition: inline; filename="' . $addonManifest['releaseXPI'] . '"');
         header('Content-Length: ' . filesize($strPathXPI));
         header('Cache-Control: no-cache');
         header('X-Accel-Redirect: ' . ltrim($strPathXPI, '.'));
