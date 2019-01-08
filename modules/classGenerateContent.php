@@ -202,6 +202,13 @@ class classGenerateContent {
                                $GLOBALS['arraySoftwareState']['authentication']['level'] ?? 0);
     }
 
+    // The Panel should NEVER be cached
+    if ($GLOBALS['arraySoftwareState']['component'] == 'panel') {
+      header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+      header("Cache-Control: post-check=0, pre-check=0", false);
+      header("Pragma: no-cache");
+    }
+
     // Send html header
     funcSendHeader('html');
     
