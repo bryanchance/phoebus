@@ -2,7 +2,7 @@
 <table class="addonTable single-row">
   <tr>
     <th colspan="2" style="text-align: center;"></th>
-    <th colspan="2">Name</th>
+    <th>Name</th>
     <th>Slug</th>
     <th>ID</th>
     <th style="text-align: center;">Active</th>
@@ -22,7 +22,7 @@
         </a>
         {/if}
       </td>
-      <td>
+      <td class="cell-ellipsis">
         {if $key.type == 'extension'}
           <img src="{$BASE_PATH}../shared/plugin.png" title="Extension" />
         {elseif $key.type == 'external'}
@@ -30,8 +30,8 @@
         {elseif $key.type == 'theme'}
           <img src="{$BASE_PATH}../shared/palette.png" title="Theme" />
         {/if}
+        {$key.name}
       </td>
-      <td class="cell-ellipsis">{$key.name}</td>
       <td class="cell-ellipsis">{$key.slug}</td>
       <td>{$key.id}</td>
       <td style="text-align: center; width: 64px;">
