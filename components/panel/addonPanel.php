@@ -296,7 +296,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           funcError('The Add-on manifest is blank');
         }
 
-        $strPathXPI = $addonManifest['basepath'] . $addonManifest['releaseXPI'];
+        $strPathXPI = $addonManifest['basePath'] . $addonManifest['releaseXPI'];
         funcError($strPathXPI, 99);
 
         if (!file_exists($strPathXPI)) {
