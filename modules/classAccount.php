@@ -41,8 +41,8 @@ class classAccount {
                                                       $GLOBALS['arraySoftwareState']['authentication']['level']);
 
     foreach ($allUsers as $_key => $_value) {
+      unset($allUsers[$_key]['password'];
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
-      unset($allUsers[$_key]['addons']
     }
 
     return $allUsers;
