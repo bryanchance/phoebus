@@ -288,6 +288,11 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           funcError('Invalid update request');
       }
       break;
+    case 'download':
+      if ($arraySoftwareState['requestPanelWhat'] == 'xpi' && $arraySoftwareState['requestPanelSlug']) {
+        funcError('Download XPI');
+        break;
+      }
     default:
       funcSendHeader('501');
   }
