@@ -32,7 +32,8 @@ class classAccount {
   ********************************************************************************************************************/
   private function getSingleUser($aUserName, $aIncludePassword = null) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
-    $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName)
+    $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
+
     if (!$aIncludePassword) {
       unset($userManifest['password']);
     }
@@ -96,7 +97,7 @@ class classAccount {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Query SQL for a user row
-    $userManifest = $this->getSingleUser($strUsername);
+    $userManifest = $this->getSingleUser($strUsername, true);
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels
