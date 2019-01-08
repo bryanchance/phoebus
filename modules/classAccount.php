@@ -28,6 +28,18 @@ class classAccount {
   }
 
   /********************************************************************************************************************
+  * Gets all users at or below the requesting user level
+  ********************************************************************************************************************/
+  public function getUsers() {
+    $query = "SELECT * FROM `user` WHERE `level` <= ?i";
+    $allUsers = $GLOBALS['moduleDatabase']->query('rows',
+                                                      $query,
+                                                      $GLOBALS['arraySoftwareState']['authentication']['level']);
+
+    return $allUsers;
+  }
+
+  /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
   private function getSingleUser($aUserName, $aIncludePassword = null) {
@@ -39,18 +51,6 @@ class classAccount {
     }
 
     return $userManifest;
-  }
-
-  /********************************************************************************************************************
-  * Gets a single user manifest
-  ********************************************************************************************************************/
-  private function getUsers() {
-    $query = "SELECT * FROM `user` WHERE `level` <= ?i";
-    $allUsers = $GLOBALS['moduleDatabase']->query('rows',
-                                                      $query,
-                                                      $GLOBALS['arraySoftwareState']['authentication']['level']);
-
-    return $allUsers;
   }
 
   /********************************************************************************************************************
