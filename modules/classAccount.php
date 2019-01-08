@@ -53,13 +53,17 @@ class classAccount {
   /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
-  private function getSingleUser($aUserName) {
+  public function getSingleUser($aUserName, $aRemovePassword = null) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
     $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
 
     $userManifest['addons'] = json_decode($userManifest['addons']);
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
+
+    if ($aRemovePassword) {
+      unset($userManifest['password'];
+    }
     return $userManifest;
   }
 

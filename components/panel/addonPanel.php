@@ -100,7 +100,7 @@ switch ($arraySoftwareState['requestPath']) {
     $moduleAccount->authenticate();
     // Users level 3 or above should use the administration codepath
     if (funcCheckAccessLevel(3, true)) {
-      //funcRedirect(URI_ADMIN . '?task=update&what=user&slug=' . $arraySoftwareState['authentication']['username']);
+      funcRedirect(URI_ADMIN . '?task=update&what=user&slug=' . $arraySoftwareState['authentication']['username']);
     }
 
     // Deal with writing the updated user manifest
@@ -284,6 +284,21 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           break;
         case 'release':
           funcSendHeader('501');
+        case 'user':
+          // Check for valid slug
+          if (!$arraySoftwareState['requestPanelSlug']) {
+            funcError('You did not specify a slug (username)');
+          }
+
+          $userManifest = $moduleAccount->getSingleUser($arraySoftwareState['requestPanelSlug'], true);
+
+          // Check if manifest is valid
+          if (!$userManifest) {
+            funcError('User Manifest is null');
+          }
+
+          funcError($userManifest, 99);
+          break;
         default:
           funcError('Invalid update request');
       }
