@@ -119,6 +119,11 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
     $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $addons);
   }
 
+  // Users level 3 and above should redirect to the administration codepath
+  if (funcCheckAccessLevel(3, true)) {
+    funcRedirect(str_replace(URI_ADDONS, URI_ADMIN, $arraySoftwareState['phpRequestURI']);
+  }
+
   switch ($arraySoftwareState['requestPanelTask']) {
     case 'update':
       switch ($arraySoftwareState['requestPanelWhat']) {
