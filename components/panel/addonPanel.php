@@ -235,7 +235,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           $addons = $moduleReadManifest->getAddons('panel-user-addons', $userManifest['addons']) ?? [];
           $moduleGenerateContent->addonSite('admin-user-addons-list',
-                                            $userManifest['username] . '\'s Add-ons',
+                                            $userManifest['username'] . '\'s Add-ons',
                                             $addons);
         break;
         default:
