@@ -348,10 +348,6 @@ function funcUsers() {
       $_temp['level'] = 2;
     }
 
-    if (empty($_json['addons'])) {
-      continue;
-    }
-
     $_temp['addons'] = json_encode($_json['addons']);
     $arrayFinalUsers[] = $_temp;
     print('Processed User: ' . $_temp['username'] . NEW_LINE);
