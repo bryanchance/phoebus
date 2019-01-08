@@ -6,11 +6,11 @@
 // == | INFO | ========================================================================================================
 
 /* Phoebus User Levels
-  Level 1 - Registered Developer
-  Level 2 - Advanced/Legacy Developer
+  Level 1 - Add-on Developer
+  Level 2 - Advanced/Legacy Add-on Developer
   Level 3 - Add-ons Team Member
   Level 4 - Add-ons Team Leader
-  Level 5 - Administrator
+  Level 5 - Phoebus Administrator
 */
 
 // ====================================================================================================================
@@ -42,6 +42,7 @@ class classAccount {
 
     foreach ($allUsers as $_key => $_value) {
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
+      unset($allUsers[$_key]['addons']
     }
 
     return $allUsers;
@@ -50,15 +51,9 @@ class classAccount {
   /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
-  private function getSingleUser($aUserName, $aIncludePassword = null) {
+  private function getSingleUser($aUserName) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
-    $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
-
-    if (!$aIncludePassword) {
-      unset($userManifest['password']);
-    }
-
-    return $userManifest;
+    return $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);;
   }
 
   /********************************************************************************************************************
@@ -105,7 +100,7 @@ class classAccount {
     // ----------------------------------------------------------------------------------------------------------------
 
     // Query SQL for a user row
-    $userManifest = $this->getSingleUser($strUsername, true);
+    $userManifest = $this->getSingleUser($strUsername);
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels

@@ -208,7 +208,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
                                             $addons);
           break;
         case 'users':
-          funcError($moduleAccount->getUsers(), 98);
+          funcError($moduleAccount->getUsers(), 99);
         default:
           funcError('Invalid list request');
       }
