@@ -121,7 +121,7 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
 
   // Serve the Developer Add-ons page
   if ($arraySoftwareState['requestPath'] == URI_ADDONS && !$arraySoftwareState['requestPanelTask']) {
-    $addons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']);
+    $addons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']) ?? [];
     $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $addons);
   }
 
