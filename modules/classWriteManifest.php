@@ -49,7 +49,7 @@ class classWriteManifest {
     // Remove stuff that is the same
     // Content will always be sent to SQL even if null least for now
     foreach ($this->postData as $_key => $_value) {
-      if ($aAddonManifest[$_key] == $_value) {
+      if ($_key != 'content' && $aAddonManifest[$_key] == $_value) {
         unset($this->postData[$_key]);
       }
     }
