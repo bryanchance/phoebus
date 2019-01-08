@@ -43,8 +43,8 @@ class classAccount {
     foreach ($allUsers as $_key => $_value) {
       unset($allUsers[$_key]['password']);
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
-      $allUsers[$_key]['active'] = (bool)$allUsers['active'];
-      $allUsers[$_key]['level'] = (int)$allUsers['level'];
+      $allUsers[$_key]['active'] = (bool)$_value['active'];
+      $allUsers[$_key]['level'] = (int)$_value['level'];
     }
 
     return $allUsers;
