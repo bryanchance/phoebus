@@ -21,7 +21,14 @@
   </tr>
   <tr>
     <td>Status</td>
-    <td><img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" /> Active</td>
+    <td>
+      {if $USER_LEVEL >= 3}
+      <input form="addon-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} />
+      {else}
+      <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" />
+      {/if}
+      Active
+    </td>
   </tr>
   <tr>
     <td>Level</td>
