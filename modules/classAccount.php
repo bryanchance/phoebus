@@ -62,7 +62,7 @@ class classAccount {
     $userManifest['level'] = (int)$userManifest['level'];
 
     if ($aRemovePassword) {
-      unset($userManifest['password'];
+      unset($userManifest['password']);
     }
     return $userManifest;
   }
