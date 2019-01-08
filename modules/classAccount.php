@@ -118,8 +118,8 @@ class classAccount {
     // We need to JSON decode the Add-ons list
     $userManifest['addons'] = json_decode($userManifest['addons']);
 
-    // Boolean cast int booleans
     $userManifest['active'] = (bool)$userManifest['active'];
+    $userManifest['level'] = (int)$userManifest['level'];
 
     // Assign the userManifest to the softwareState
     $GLOBALS['arraySoftwareState']['authentication'] = $userManifest;
