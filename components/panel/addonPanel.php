@@ -235,7 +235,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           $addons = $moduleReadManifest->getAddons('panel-user-addons', $userManifest['addons']) ?? [];
           $moduleGenerateContent->addonSite('admin-user-addons-list',
-                                            $userManifest['displayName'] ?? $userManifest['username'] . '\'s Add-ons',
+                                            ($userManifest['displayName'] ?? $userManifest['username']) . '\'s Add-ons',
                                             $addons);
         break;
         default:
@@ -320,7 +320,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           }
 
           $moduleGenerateContent->addonSite('admin-edit-account-metadata',
-                                            'Editing Account ' . $userManifest['displayName'] ?? $userManifest['username'],
+                                            'Editing Account ' . ($userManifest['displayName'] ?? $userManifest['username']),
                                             $userManifest);
           break;
         default:
