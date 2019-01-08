@@ -348,7 +348,7 @@ function funcUsers() {
       $_temp['level'] = 2;
     }
 
-    if (!$_json['addons']) {
+    if (empty($_json['addons'])) {
       continue;
     }
 
