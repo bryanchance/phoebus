@@ -288,27 +288,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           funcError('Invalid update request');
       }
       break;
-    case 'download':
-      if ($arraySoftwareState['requestPanelWhat'] == 'xpi' && $arraySoftwareState['requestPanelSlug']) {
-        $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
-
-        if (!$addonManifest) {
-          funcError('The Add-on manifest is blank');
-        }
-
-        $strPathXPI = $addonManifest['basePath'] . $addonManifest['releaseXPI'];
-
-        if (!file_exists($strPathXPI)) {
-          funcError('Release XPI does not physically exist');
-        }
-
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: inline; filename="' . $addonManifest['releaseXPI'] . '"');
-        header('Content-Length: ' . filesize($strPathXPI));
-        header('Cache-Control: no-cache');
-        header('X-Accel-Redirect: ' . ltrim($strPathXPI, '.'));
-        break;
-      }
     default:
       funcSendHeader('501');
   }
