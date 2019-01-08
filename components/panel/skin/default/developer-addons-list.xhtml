@@ -1,7 +1,7 @@
 <h2>{$PAGE_TITLE}</h2>
 <table class="addonTable single-row">
   <tr>
-    <th colspan="2">Name</th>
+    <th>Name</th>
     <th>Slug</th>
     <th>ID</th>
     <th>Type</th>
@@ -11,19 +11,18 @@
   </tr>
   {foreach $PAGE_DATA as $key}
     <tr>
-      <td style="width: 18px">
-        {if $key.type == 'extension'}
-          <img src="{$BASE_PATH}../shared/plugin.png" style="vertical-align: middle; margin-right: 2px"/>
-        {elseif $key.type == 'external'}
-          <img src="{$BASE_PATH}../shared/plugin_link.png" style="vertical-align: middle; margin-right: 2px" />
-        {elseif $key.type == 'theme'}
-          <img src="{$BASE_PATH}../shared/palette.png" style="vertical-align: middle; margin-right: 2px" />
-        {/if}
-      </td>
       <td class="cell-ellipsis">{$key.name}</td>
       <td class="cell-ellipsis">{$key.slug}</td>
       <td>{$key.id}</td>
-      <td>{$key.type}</td>
+      <td>
+        {if $key.type == 'extension'}
+          <img src="{$BASE_PATH}../shared/plugin.png" title="Extension" style="vertical-align: middle; margin-right: 2px"/>
+        {elseif $key.type == 'external'}
+          <img src="{$BASE_PATH}../shared/plugin_link.png" title="External" style="vertical-align: middle; margin-right: 2px" />
+        {elseif $key.type == 'theme'}
+          <img src="{$BASE_PATH}../shared/palette.png" title="Theme" style="vertical-align: middle; margin-right: 2px" />
+        {/if}
+      </td>
       <td style="text-align: center; width: 64px;">
         {if $key.active}
           <img src="{$BASE_PATH}../shared/accept.png" />
