@@ -31,6 +31,10 @@ class classAccount {
   * Gets all users at or below the requesting user level
   ********************************************************************************************************************/
   public function getUsers() {
+    if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
+      funcError('I have no idea how you managed to get here but seriously you need to piss off...');
+    }
+
     $query = "SELECT * FROM `user` WHERE `level` <= ?i";
     $allUsers = $GLOBALS['moduleDatabase']->query('rows',
                                                       $query,
