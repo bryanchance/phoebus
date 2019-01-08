@@ -302,7 +302,9 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
             funcError($_POST, 98);
           }
 
-          $moduleGenerateContent->addonSite('admin-edit-account-metadata', 'Editing Account ' $userManifest['username'], $userManifest);
+          $moduleGenerateContent->addonSite('admin-edit-account-metadata',
+                                            'Editing Account ' . $userManifest['username'],
+                                            $userManifest);
           break;
         default:
           funcError('Invalid update request');
