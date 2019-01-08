@@ -2,10 +2,10 @@
 <table class="addonTable single-row">
   <tr>
     <th colspan="2" style="text-align: center;"></th>
+    <th style="text-align: center;">Type</th>
     <th>Name</th>
     <th>Slug</th>
     <th>ID</th>
-    <th style="text-align: center;">Type</th>
     <th style="text-align: center;">Active</th>
     <th style="text-align: center;">Reviewed</th>
   </tr>
@@ -23,9 +23,6 @@
         </a>
         {/if}
       </td>
-      <td class="cell-ellipsis">{$key.name}</td>
-      <td class="cell-ellipsis">{$key.slug}</td>
-      <td>{$key.id}</td>
       <td style="text-align: center; width: 64px;">
         {if $key.type == 'extension'}
           <img src="{$BASE_PATH}../shared/plugin.png" title="Extension" style="vertical-align: middle; margin-right: 2px"/>
@@ -35,6 +32,9 @@
           <img src="{$BASE_PATH}../shared/palette.png" title="Theme" style="vertical-align: middle; margin-right: 2px" />
         {/if}
       </td>
+      <td class="cell-ellipsis">{$key.name}</td>
+      <td class="cell-ellipsis">{$key.slug}</td>
+      <td>{$key.id}</td>
       <td style="text-align: center; width: 64px;">
         {if $key.active}
           <img src="{$BASE_PATH}../shared/accept.png" />
