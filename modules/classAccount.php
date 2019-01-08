@@ -37,8 +37,8 @@ class classAccount {
 
     $query = "SELECT * FROM `user` WHERE `level` <= ?i";
     $allUsers = $GLOBALS['moduleDatabase']->query('rows',
-                                                      $query,
-                                                      $GLOBALS['arraySoftwareState']['authentication']['level']);
+                                                  $query,
+                                                  $GLOBALS['arraySoftwareState']['authentication']['level']);
 
     foreach ($allUsers as $_key => $_value) {
       unset($allUsers[$_key]['password']);
