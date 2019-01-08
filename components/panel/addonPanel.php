@@ -297,6 +297,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
             funcError('User Manifest is null');
           }
 
+          $addons = $moduleReadManifest->getAddons('panel-user-addons', $userManifest['addons']) ?? [];
+
           // Deal with writing the updated user manifest
           if ($boolHasPostData) {
             funcError($_POST, 98);
@@ -304,7 +306,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           $moduleGenerateContent->addonSite('admin-edit-account-metadata',
                                             'Editing Account ' . $userManifest['username'],
-                                            $userManifest);
+                                            $userManifest,
+                                            $addons);
           break;
         default:
           funcError('Invalid update request');
