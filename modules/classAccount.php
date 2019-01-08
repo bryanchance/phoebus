@@ -117,16 +117,12 @@ class classAccount {
     }
 
     // We don't need the password anymore at this point so kill it
-    $strPassword = null;
     unset($userManifest['password']);
 
     // ----------------------------------------------------------------------------------------------------------------
 
     // Assign the userManifest to the softwareState
     $GLOBALS['arraySoftwareState']['authentication'] = $userManifest;
-
-    // Clear out the userManifest for safety
-    $userManifest = null;
 
     return true;
   }
