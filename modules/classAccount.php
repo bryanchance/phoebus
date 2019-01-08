@@ -36,6 +36,10 @@ class classAccount {
                                                       $query,
                                                       $GLOBALS['arraySoftwareState']['authentication']['level']);
 
+    foreach ($allUsers as $_key => $_value) {
+      $allUsers[$_key]['addons'] = json_decode($_value['addons']);
+    }
+
     return $allUsers;
   }
 
