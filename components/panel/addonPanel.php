@@ -292,12 +292,12 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
       if ($arraySoftwareState['requestPanelWhat'] == 'xpi' && $arraySoftwareState['requestPanelSlug']) {
         $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
 
-        funcError($addonManifest, 99);
         if (!$addonManifest) {
           funcError('The Add-on manifest is blank');
         }
 
         $strPathXPI = $addonManifest['basepath'] . $addonManifest['releaseXPI'];
+        funcError($strPathXPI, 99);
 
         if (!file_exists($strPathXPI)) {
           funcError('Release XPI does not physically exist');
