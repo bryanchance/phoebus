@@ -121,6 +121,11 @@ if (startsWith($arraySoftwareState['requestPath'], URI_ADDONS)) {
 
   // Serve the Developer Add-ons page
   if ($arraySoftwareState['requestPath'] == URI_ADDONS && !$arraySoftwareState['requestPanelTask']) {
+    // Users level 3 or above should use the administration codepath
+    if (funcCheckAccessLevel(3, true)) {
+      funcRedirect(URI_ADMIN . '?task=list&what=user-addons&slug=' . $arraySoftwareState['authentication']['username']);
+    }
+
     $addons = $moduleReadManifest->getAddons('panel-user-addons', $arraySoftwareState['authentication']['addons']) ?? [];
     $moduleGenerateContent->addonSite('developer-addons-list', 'Your Add-ons', $addons);
   }
