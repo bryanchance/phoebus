@@ -292,6 +292,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
       if ($arraySoftwareState['requestPanelWhat'] == 'xpi' && $arraySoftwareState['requestPanelSlug']) {
         $addonManifest = $moduleReadManifest->getPanelAddonBySlug($arraySoftwareState['requestPanelSlug']);
 
+        funcError($addonManifest, 99);
         if (!$addonManifest) {
           funcError('The Add-on manifest is blank');
         }
