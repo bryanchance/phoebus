@@ -302,7 +302,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           funcError('Release XPI does not physically exist');
         }
 
-        header('Content-Type: application/zip');
+        header('Content-Type: application/octet-stream');
         header('Content-Disposition: inline; filename="' . ltrim($strPathXPI, '.') . '"');
         header('Content-Length: ' . filesize($strPathXPI));
         header('Cache-Control: no-cache');
