@@ -30,9 +30,26 @@ class classAccount {
   /********************************************************************************************************************
   * Gets a single user manifest
   ********************************************************************************************************************/
-  private function getSingleUser($aUserName) {
+  private function getSingleUser($aUserName, $aIncludePassword = null) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
-    return $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
+    $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName)
+    if (!$aIncludePassword) {
+      unset($userManifest['password']);
+    }
+
+    return $userManifest;
+  }
+
+  /********************************************************************************************************************
+  * Gets a single user manifest
+  ********************************************************************************************************************/
+  private function getUsers() {
+    $query = "SELECT * FROM `user` WHERE `level` <= ?i";
+    $allUsers = $GLOBALS['moduleDatabase']->query('rows',
+                                                      $query,
+                                                      $GLOBALS['arraySoftwareState']['authentication']['level']);
+
+    return $allUsers;
   }
 
   /********************************************************************************************************************
