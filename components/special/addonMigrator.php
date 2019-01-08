@@ -344,8 +344,12 @@ function funcUsers() {
     $_temp['level'] = 1;
 
     // Users with five or more add-ons get Level 2 status
-    if (count($_json['addons']) >= 5 && !in_array($_temp['username'], ['srazzano', 'riiis']) {
+    if (count($_json['addons']) >= 5 && !in_array($_temp['username'], ['srazzano', 'riiis'])) {
       $_temp['level'] = 2;
+    }
+
+    if (!$_json['addons']) {
+      continue;
     }
 
     $_temp['addons'] = json_encode($_json['addons']);
