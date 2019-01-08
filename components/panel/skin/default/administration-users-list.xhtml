@@ -9,15 +9,20 @@
 </p>
 <table class="addonTable single-row">
   <tr>
+    <th style="text-align: center;">Actions</th>
     <th>Username</th>
     <th>Display Name</th>
     <th>E-mail</th>
     <th>Level</th>
     <th style="text-align: center;">Active</th>
-    <th style="text-align: center;">Actions</th>
   </tr>
   {foreach $PAGE_DATA as $key}
     <tr>
+      <td style="width: 48px;">
+        <a href="{$PAGE_PATH}?task=update&what=user&slug={$key.username}" title="Edit User Metadata">
+          <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit User Metadata" />
+        </a>
+      </td>
       <td class="cell-ellipsis">{$key.username}</td>
       <td class="cell-ellipsis">{if $key.displayName}{$key.displayName}{else}NULL{/if}</td>
       <td class="cell-ellipsis">{if $key.email}{$key.email}{else}NULL{/if}</td>
@@ -42,11 +47,6 @@
         {else}
           <img src="{$BASE_PATH}../shared/delete.png" />
         {/if}
-      </td>
-      <td style="width: 48px;">
-        <a href="{$PAGE_PATH}?task=update&what=user&slug={$key.username}" title="Edit User Metadata">
-          <img src="{$BASE_PATH}../shared/pencil.png" alt="Edit User Metadata" />
-        </a>
       </td>
     </tr>
   {/foreach}
