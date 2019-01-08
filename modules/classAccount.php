@@ -43,6 +43,8 @@ class classAccount {
     foreach ($allUsers as $_key => $_value) {
       unset($allUsers[$_key]['password']);
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
+      $allUsers[$_key]['active'] = (bool)$userManifest['active'];
+      $allUsers[$_key]['level'] = (int)$userManifest['level'];
     }
 
     return $allUsers;
@@ -53,7 +55,12 @@ class classAccount {
   ********************************************************************************************************************/
   private function getSingleUser($aUserName) {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
-    return $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);;
+    $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
+
+    $userManifest['addons'] = json_decode($userManifest['addons']);
+    $userManifest['active'] = (bool)$userManifest['active'];
+    $userManifest['level'] = (int)$userManifest['level'];
+    return $userManifest;
   }
 
   /********************************************************************************************************************
@@ -114,12 +121,6 @@ class classAccount {
     unset($userManifest['password']);
 
     // ----------------------------------------------------------------------------------------------------------------
-
-    // We need to JSON decode the Add-ons list
-    $userManifest['addons'] = json_decode($userManifest['addons']);
-
-    $userManifest['active'] = (bool)$userManifest['active'];
-    $userManifest['level'] = (int)$userManifest['level'];
 
     // Assign the userManifest to the softwareState
     $GLOBALS['arraySoftwareState']['authentication'] = $userManifest;
