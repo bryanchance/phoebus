@@ -98,6 +98,12 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_ACCOUNT:
     $moduleAccount->authenticate();
+    // Users level 3 or above should use the administration codepath
+    if (funcCheckAccessLevel(3, true)) {
+      funcRedirect(URI_ADMIN . '?task=update&what=user&slug=' . $arraySoftwareState['authentication']['username']);
+    }
+
+    // Deal with writing the updated user manifest
     if ($boolHasPostData) {
       funcError($_POST, 98);
     }
