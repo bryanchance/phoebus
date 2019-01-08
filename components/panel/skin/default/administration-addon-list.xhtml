@@ -9,7 +9,7 @@
 </p>
 <table class="addonTable single-row">
   <tr>
-    <th colspan="3" style="text-align: center;">Actions</th>
+    <th colspan="2" style="text-align: center;">Actions</th>
     <th>Name</th>
     <th>Slug</th>
     <th>ID</th>
@@ -26,17 +26,12 @@
         </a>
         {/if}
       </td>
-      <td style="width: 16px;">
+      <td style="width: 18px;">
         {if $key.type != 'external' && $key.type != 'langpack'}
         <a href="{$PAGE_PATH}?task=update&what=release&slug={$key.slug}" title="Release a new version of this Add-on">
           <img src="{$BASE_PATH}../shared/plugin_add.png" alt="New Version" />
         </a>
         {/if}
-      </td>
-      <td style="width: 16px;">
-        <a href="{$key.url}" target="_blank" title="View this Add-on's Page on the Add-ons Site">
-          <img src="{$BASE_PATH}../shared/world_link.png" alt="View Add-on" />
-        </a>
       </td>
       <td class="cell-ellipsis">{$key.name}</td>
       <td class="cell-ellipsis">{$key.slug}</td>
