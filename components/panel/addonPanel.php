@@ -297,7 +297,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
         }
 
         $strPathXPI = $addonManifest['basePath'] . $addonManifest['releaseXPI'];
-        funcError($strPathXPI, 99);
 
         if (!file_exists($strPathXPI)) {
           funcError('Release XPI does not physically exist');
