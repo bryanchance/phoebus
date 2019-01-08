@@ -145,6 +145,7 @@ class classGenerateContent {
         $content = $this->getContentFile('account-metadata.xhtml');
         break;
       case 'developer-addons-list':
+      case 'admin-user-addons-list':
         $content = $this->getContentFile('developer-addons-list.xhtml');
         break;
       case 'administration-list':

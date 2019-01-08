@@ -221,6 +221,23 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
         case 'users':
           $users = $moduleAccount->getUsers();
           $moduleGenerateContent->addonSite('admin-list-users', 'Users - Administration', $users);
+        case 'user-addons':
+          if (!$arraySoftwareState['requestPanelSlug']) {
+            funcError('You did not specify a slug (username)');
+          }
+
+          $userManifest = $moduleAccount->getSingleUser($arraySoftwareState['requestPanelSlug'], true);
+
+          // Check if manifest is valid
+          if (!$userManifest) {
+            funcError('User Manifest is null');
+          }
+
+          $addons = $moduleReadManifest->getAddons('panel-user-addons', $userManifest['addons']) ?? [];
+          $moduleGenerateContent->addonSite('admin-user-addons-list',
+                                            $userManifest['username] . '\'s Add-ons',
+                                            $addons);
+        break;
         default:
           funcError('Invalid list request');
       }
@@ -297,8 +314,6 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
             funcError('User Manifest is null');
           }
 
-          $addons = $moduleReadManifest->getAddons('panel-user-addons', $userManifest['addons']) ?? [];
-
           // Deal with writing the updated user manifest
           if ($boolHasPostData) {
             funcError($_POST, 98);
@@ -306,8 +321,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           $moduleGenerateContent->addonSite('admin-edit-account-metadata',
                                             'Editing Account ' . $userManifest['username'],
-                                            $userManifest,
-                                            $addons);
+                                            $userManifest);
           break;
         default:
           funcError('Invalid update request');
