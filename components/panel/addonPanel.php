@@ -321,7 +321,8 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           //funcError([$userManifest['username'], $arraySoftwareState['authentication']['username']], 99);
           // Do not allow editing of users at or above a user level unless they are you or you are level 5
           if ($userManifest['level'] >= $arraySoftwareState['authentication']['level']) {
-            if ($userManifest['username'] != $arraySoftwareState['authentication']['username']) {
+            if ($userManifest['username'] != $arraySoftwareState['authentication']['username'] ||
+                $arraySoftwareState['authentication']['level'] != 5) {
               funcError('You attempted to alter a user account that is the same or higher rank as you but not you. You\'re in trouble!');
             }
           }
