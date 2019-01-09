@@ -35,12 +35,12 @@ class classAccount {
       funcError('I have no idea how you managed to get here but seriously you need to piss off...');
     }
 
-    $query = "SELECT * FROM `user` WHERE `level` < ?i OR `username` = ?s OR ?i = 5";
+    $query = "SELECT * FROM `user` WHERE ?i = 5 OR `level` < ?i OR `username` = ?s";
     $allUsers = $GLOBALS['moduleDatabase']->query('rows',
                                                   $query,
                                                   $GLOBALS['arraySoftwareState']['authentication']['level'],
-                                                  $GLOBALS['arraySoftwareState']['authentication']['username'],
-                                                  $GLOBALS['arraySoftwareState']['authentication']['level']);
+                                                  $GLOBALS['arraySoftwareState']['authentication']['level'],
+                                                  $GLOBALS['arraySoftwareState']['authentication']['username']);
 
     foreach ($allUsers as $_key => $_value) {
       unset($allUsers[$_key]['password']);
