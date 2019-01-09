@@ -318,7 +318,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
           if (!$userManifest) {
             funcError('User Manifest is null');
           }
-
+          funcError([$userManifest['username'], $arraySoftwareState['authentication']['username']], 99);
           // Do not allow editing of users at or above a user level unless they are you or you are level 5
           if ($userManifest['username'] != $arraySoftwareState['authentication']['username'] ||
               $userManifest['level'] >= $arraySoftwareState['authentication']['level']) {
