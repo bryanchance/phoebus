@@ -47,9 +47,9 @@
         <select form="account-metadata" name="level" style="width: 202px;">
           <option {if $PAGE_DATA.level == 1}selected="selected" {/if}value="1">1 - Add-on Developer</option>
           <option {if $PAGE_DATA.level == 2}selected="selected" {/if}value="2">2 - Advanced/Legacy Developer</option>
-          <option {if $PAGE_DATA.level == 3}selected="selected" {/if}value="3">3 - Add-ons Team Member</option>
+          <option {if $PAGE_DATA.level == 3}selected="selected" disabled {/if}value="3">3 - Add-ons Team Member</option>
           {if $USER_LEVEL >= 4}
-          <option {if $PAGE_DATA.level == 4}selected="selected" {/if}value="4">4 - Add-ons Team Leader</option>
+          <option {if $PAGE_DATA.level == 4}selected="selected" disabled {/if}value="4">4 - Add-ons Team Leader</option>
           {/if}
           {if $USER_LEVEL >= 5}
           <option {if $PAGE_DATA.level == 5}selected="selected" {/if}value="5">5 - Phoebus Administrator</option>
