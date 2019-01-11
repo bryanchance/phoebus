@@ -9,7 +9,7 @@ ini_set("sendmail_from", "phoebus@addons.palemoon.org");
 
 $sendmail = mail('email@mattatobin.com', 'Phoebus sendmail test case', 'Test');
 
-funcError($sendmail, 99);
+funcError([$sendmail, ini_get("sendmail_from")], 99);
 
 // ====================================================================================================================
 
