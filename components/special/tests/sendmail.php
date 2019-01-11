@@ -7,8 +7,12 @@
 
 ini_set("sendmail_from", "phoebus@addons.palemoon.org");
 
-$headers = array();
-$headers[] = 'From: Phoebus <phoebus@addons.palemoon.org>';
+$headers = array(
+    'From' => 'phoebus@addons.palemoon.org',
+    'Reply-To' => 'phoebus@addons.palemoon.org',
+    'X-Mailer' => 'PHP/' . phpversion()
+);
+
 $sendmail = mail('email@mattatobin.com', 'Phoebus sendmail test case', 'Test', $headers);
 
 funcError([$sendmail, ini_get("sendmail_from")], 99);
