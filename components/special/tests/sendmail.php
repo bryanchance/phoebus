@@ -5,7 +5,6 @@
 
 // == | Main | ========================================================================================================
 
-ini_set("SMTP", "vmx.palemoon.org");
 ini_set("sendmail_from", "phoebus@addons.palemoon.org");
 
 $sendmail = mail('email@mattatobin.com', 'Phoebus sendmail test case', 'Test');
