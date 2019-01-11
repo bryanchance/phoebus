@@ -8,7 +8,7 @@
 ini_set("sendmail_from", "phoebus@addons.palemoon.org");
 
 $headers = array(
-    'From' => 'phoebus@addons.palemoon.org',
+    'From' => 'Phoebus Account Registration <phoebus@addons.palemoon.org>',
     'Reply-To' => 'phoebus@addons.palemoon.org',
     'X-Mailer' => 'PHP/' . phpversion()
 );
