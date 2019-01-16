@@ -121,8 +121,6 @@ img.textbottom {
 .mozmenu {
   background: url("{$BASE_PATH}logo.png") no-repeat;
   height: 70px;
-  min-height: 70px;
-  height: 70px;
   border-radius: 8px;
   margin-bottom: 8px;
 }
@@ -132,6 +130,7 @@ img.textbottom {
   min-height: 26px;
   max-height: 26px;
   display: inline-block;
+  float: right;
   list-style-type: none;
   margin: 0;
   padding: 0;
