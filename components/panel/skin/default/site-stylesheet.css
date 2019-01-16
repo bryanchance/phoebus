@@ -121,9 +121,11 @@ img.textbottom {
 .mozmenu {
   background: url("{$BASE_PATH}logo.png") no-repeat;
   height: 70px;
-  width: 100%;
   border-radius: 8px;
   margin-bottom: 8px;
+}
+
+.mozmenu ul {
   float: right;
 }
 
