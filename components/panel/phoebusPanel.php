@@ -102,21 +102,16 @@ switch ($arraySoftwareState['requestPath']) {
     funcCheckAccessLevel(1);
     require_once($strComponentPath . 'developer.php');
     break;
+  default:
+    if (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
+      $moduleAccount->authenticate();
+      funcCheckAccessLevel(3);
+      require_once($strComponentPath . 'administration.php');
+    }
+
+    // No clue send 404
+    funcSend404();
 }
-
-// --------------------------------------------------------------------------------------------------------------------
-
-// Complex URIs need more complex conditional checking
-// Administration Code Path
-if (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
-  // Challenge
-  $moduleAccount->authenticate();
-  funcCheckAccessLevel(3);
-  require_once($strComponentPath . 'administration.php');
-}
-
-// No clue send 404
-funcSend404();
 
 // ====================================================================================================================
 
