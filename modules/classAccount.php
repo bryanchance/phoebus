@@ -76,7 +76,11 @@ class classAccount {
       funcError('Username is still existing in post data');
     }
 
-    funcError([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], 99);
+    // Insert the new manifest data into the database
+    $query = "UPDATE `user` SET ?u WHERE `username` = ?s";
+    $GLOBALS['moduleDatabase']->query('normal', $query, $this->postData, $aUserManifest['username']);
+
+    return true;
   }
 
   /********************************************************************************************************************
