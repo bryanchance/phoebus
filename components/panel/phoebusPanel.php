@@ -78,7 +78,7 @@ if ($_SERVER['SCHEME'] != 'https') {
   funcRedirect('https://' . $arraySoftwareState['currentDomain'] . '/panel/');
 }
 
-// Use a simple switch case to deal with simple URIs
+// Handle URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_PANEL:
     $moduleGenerateContent->addonSite('panel-frontpage.xhtml', 'Landing Page');
