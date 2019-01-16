@@ -64,7 +64,7 @@ class classAccount {
       if ($GLOBALS['arraySoftwareState']['authentication']['level'] != 5 &&
           $this->postData['level'] >= $GLOBALS['arraySoftwareState']['authentication']['level']) {
         switch ($GLOBALS['arraySoftwareState']['authentication']['username']) {
-          $this->postData['username']:
+          case $this->postData['username']:
             if ($this->postData['level'] < $GLOBALS['arraySoftwareState']['authentication']['level']) {
               break;
             }
