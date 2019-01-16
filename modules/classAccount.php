@@ -17,7 +17,9 @@
 
 // == | classAuthentication | =========================================================================================
 
-class classAccount { 
+class classAccount {
+  private $postData;
+
   /********************************************************************************************************************
   * Class constructor that sets inital state of things
   ********************************************************************************************************************/
@@ -25,6 +27,22 @@ class classAccount {
     if (!funcCheckModule('database')) {
       funcError(__CLASS__ . '::' . __FUNCTION__ . ' - database module is required to be included in the global scope');
     }
+
+    $this->postData = array(
+      'username'      => funcUnifiedVariable('post', 'username'),
+      'password'      => funcUnifiedVariable('post', 'password'),
+      'active'        => funcUnifiedVariable('post', 'active'),
+      'level'         => funcUnifiedVariable('post', 'level'),
+      'displayName'   => funcUnifiedVariable('post', 'displayName'),
+      'email'         => funcUnifiedVariable('post', 'email'),
+    );
+  }
+
+  /********************************************************************************************************************
+  * Update a user manifest
+  ********************************************************************************************************************/
+  public function updateUserManifest($aUserManifest) {
+    funcError([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], 99);
   }
 
   /********************************************************************************************************************

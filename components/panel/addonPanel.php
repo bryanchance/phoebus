@@ -328,7 +328,7 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           // Deal with writing the updated user manifest
           if ($boolHasPostData) {
-            funcError($_POST, 98);
+            $moduleAccount->updateUserManifest($userManifest);
           }
 
           $moduleGenerateContent->addonSite('admin-edit-account-metadata',
