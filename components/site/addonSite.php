@@ -214,6 +214,7 @@ switch ($arraySoftwareState['requestPath']) {
   case URI_ADDON_LICENSE:
     // These have no content so send the client back to root
     funcRedirect(URI_ROOT);
+    break;
   default:
     // Complex URIs need more complex conditional checking
     // Extension Subcategories
