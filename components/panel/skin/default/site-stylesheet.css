@@ -137,7 +137,9 @@ img.textbottom {
   color: white;
   font-weight: bold;
   font-size: 14px;
-  padding-right: 6px;
+  margin-right: 6px;
+  padding: 4px;
+  background-color: #697388; 
 }
 
 .mozmenu ul li a,
