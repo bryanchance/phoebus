@@ -101,7 +101,7 @@ $arraySoftwareState['requestAddonVersion'] = funcUnifiedVariable('get', 'version
 $arraySoftwareState['requestAppID'] = funcUnifiedVariable('get', 'appID');
 $arraySoftwareState['requestAppVersion'] = funcUnifiedVariable('get', 'appVersion');
 $arraySoftwareState['requestAddonCompatMode'] = funcUnifiedVariable('get', 'compatMode');
-(bool)$arraySoftwareState['requestMozXPIUpdate'] = funcUnifiedVariable('server', 'HTTP_MOZ_XPI_UPDATE') ?? funcUnifiedVariable('get', 'updateOverride');
+$arraySoftwareState['requestMozXPIUpdate'] = funcUnifiedVariable('server', 'HTTP_MOZ_XPI_UPDATE') ?? funcUnifiedVariable('get', 'updateOverride');
 
 // --------------------------------------------------------------------------------------------------------------------
 
