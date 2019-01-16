@@ -129,7 +129,6 @@ img.textbottom {
   height: 26px;
   min-height: 26px;
   max-height: 26px;
-  display: inline-block;
   float: right;
   list-style-type: none;
   margin: 0;
@@ -137,7 +136,7 @@ img.textbottom {
   color: white;
   font-weight: bold;
   font-size: 14px;
-  margin-top: 41px;
+  margin-top: 42px;
   margin-right: 1px;
   padding: 2px 8px 0px 8px;
   background-color: #697388;
