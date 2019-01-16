@@ -65,7 +65,7 @@ class classAccount {
     }
 
     if (empty($this->postData)) {
-      $this->postData = null;
+      return true;
     }
 
     if ($this->postData['password']) {
@@ -75,8 +75,6 @@ class classAccount {
     if ($this->postData['username'] ?? false) {
       funcError('Username is still existing in post data');
     }
-
-    // return if null cause no changes needed
 
     funcError([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], 99);
   }
