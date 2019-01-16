@@ -50,6 +50,10 @@ class classAccount {
       funcError('POST Slug does not match GET/Manifest Slug');
     }
 
+    if ($this->postData['level'] === 0) {
+      $this->postData['level'] = $aUserManifest['level'];
+    }
+
     // Hackers are a superstitious cowardly lot
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
       unset($this->postData['active']);
