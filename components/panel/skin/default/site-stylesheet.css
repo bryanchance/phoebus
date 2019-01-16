@@ -136,10 +136,10 @@ img.textbottom {
   padding: 0;
   color: white;
   font-weight: bold;
-  font-size: 14px;
-  margin-top: 60px;
+  font-size: 12px;
+  margin-top: 42px;
   margin-right: 2px;
-  padding: 4px;
+  padding: 4px 4px 4px 4px;
   background-color: #697388;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
