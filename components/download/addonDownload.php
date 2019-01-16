@@ -45,7 +45,7 @@ function funcDownloadXPI($aAddonManifest, $aAddonVersion, $aBinaryStream = null)
    
   if (file_exists($addonFile)) {
     // Non-web browsers should send as an arbitrary binary stream
-    if () {
+    if ($aBinaryStream) {
       header('Content-Type: application/octet-stream');
     }
     else {
