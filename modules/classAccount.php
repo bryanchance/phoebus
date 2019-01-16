@@ -53,6 +53,7 @@ class classAccount {
     // Hackers are a superstitious cowardly lot
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
       unset($this->postData['active']);
+      unset($this->postData['level']);
       unset($this->postData['slug']);
     }
 
