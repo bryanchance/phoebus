@@ -136,13 +136,13 @@
     <div id="Discover-Wrapper">
       <div id="Discover-Header">
         <div id="Discover-Header-Content">
-          <img src="{%IMAGE_DISCOVER}" height= "90px" style="float:left; text-align:left; margin-right:25px; margin-left: 25px; margin-top: 20px; margin-bottom: 25px;" />
+          <img src="{%BASE_PATH}/skin/discover-logo.png?{%EPOCH}" height= "90px" style="float:left; text-align:left; margin-right:25px; margin-left: 25px; margin-top: 20px; margin-bottom: 25px;" />
           <span style="font-size: 24px; display: block; padding-top: 20px;">What are Add-ons?</span>
           <span style="display: block; padding-top: 5px; padding-right: 25px;">
-            Add-ons let you customize Pale Moon with extra functionality or a different look.
+            Add-ons let you customize {$APPLICATION_NAME} with extra functionality or a different look.
           </span>
           <span style="display: block; padding-top: 5px; padding-bottom: 20px; padding-right: 25px;">  
-            There are several types of add-ons. Extensions expand the capabilities of the browser, themes allow you to personalize Pale Moon's visual aesthetic, and plugins further extend the browser with specialized external components such as the Adobe Flash Player.
+            There are several types of add-ons. Extensions expand the capabilities of the {%APPLICATION_TYPE}, themes allow you to personalize {%APPLICATION_NAME}'s visual aesthetic, and plugins further extend the {%APPLICATION_TYPE} with specialized external components such as the Adobe Flash Player.
           </span>
         </div>
       </div>
@@ -150,13 +150,13 @@
         <div id="Discover-Content-Left">
           <div class="Discover-Content-Body">
             <p style="text-align: center;">
-              <strong>You can take advantage of Pale Moon's exceptional extensibility by installing add-ons from your choice of the following repositories:</strong>
+              <strong>You can take advantage of {%APPLICATION_NAME}'s exceptional extensibility by installing add-ons from your choice of the following repositories:</strong>
             </p>
             <div style="width: 100%; text-align:center; vertical-align: top;">
-              <a class="amobutton" href="http://addons.palemoon.org/" target="_blank">
-                <img class="alignleft" src="{%IMAGE_PALEMOON}" />
-                <p><strong>Pale Moon Add-ons Site</strong></p>
-                <p><small>Browse add-ons for Pale Moon</small></p>
+              <a class="amobutton" href="http://{SITE_DOMAIN}/" target="_blank">
+                <img class="alignleft" src="{%BASE_PATH}/skin/{%APPLICATION_SHORTNAME}.png?{%EPOCH}" />
+                <p><strong>{%APPLICATION_NAME} Add-ons Site</strong></p>
+                <p><small>Browse add-ons for {%APPLICATION_NAME}</small></p>
               </a>
             </div>
           </div>
