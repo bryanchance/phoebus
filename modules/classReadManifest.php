@@ -151,12 +151,40 @@ class classReadManifest {
     if (!$queryResult) {
       return null;
     }
-    
+  
     $addonManifest = $this->funcProcessManifest($queryResult,
                                                 $aReturnInactive,
                                                 $aReturnUnreviewed,
                                                 $aProcessContent);
     
+    if (!$addonManifest) {
+      return null;
+    }
+
+    return $addonManifest;
+  }
+
+ /********************************************************************************************************************
+  * Gets a single reduced manifest for an add-on by ID
+  * 
+  * @param $_addonID        Add-on ID either GUID or user@host
+  * @returns                reduced add-on manifest or null
+  ********************************************************************************************************************/
+  public function getPanelAddonByID($_addonID) {
+    $query = "
+      SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
+      FROM `addon`
+      AND `id` = ?s
+      AND `type` IN ('extension', 'theme', 'langpack')
+    ";
+    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $this->currentApplication, $_addonID);
+
+    if (!$queryResult) {
+      return null;
+    }
+
+    $addonManifest = $this->funcProcessManifest($queryResult, true, true, null);
+
     if (!$addonManifest) {
       return null;
     }
@@ -181,7 +209,7 @@ class classReadManifest {
     if (!$queryResult) {
       return null;
     }
-    
+
     $addonManifest = $this->funcProcessManifest($queryResult, true, true, null);
     
     if (!$addonManifest) {
