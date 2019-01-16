@@ -1,4 +1,9 @@
 <?php
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL
+
+// == | Main | ========================================================================================================
 
 // Serve the Adminsitration landing page
 if ($arraySoftwareState['requestPath'] == URI_ADMIN && !$arraySoftwareState['requestPanelTask']) {
@@ -150,5 +155,7 @@ switch ($arraySoftwareState['requestPanelTask']) {
   default:
     funcSendHeader('501');
 }
+
+// ====================================================================================================================
 
 ?>

@@ -78,6 +78,8 @@ if ($_SERVER['SCHEME'] != 'https') {
   funcRedirect('https://' . $arraySoftwareState['currentDomain'] . '/panel/');
 }
 
+// --------------------------------------------------------------------------------------------------------------------
+
 // Handle URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_PANEL:
