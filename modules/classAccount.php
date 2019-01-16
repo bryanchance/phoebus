@@ -61,6 +61,10 @@ class classAccount {
       unset($this->postData['slug']);
     }
 
+    if ($this->postData['level'] >= $arraySoftwareState['authentication']['level']) {
+      funcError('You cannot assign the same or higher level as yourself');
+    }      
+
     if ($this->postData['password']) {
       $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
     }
