@@ -58,7 +58,9 @@ class classAccount {
 
     // Remove stuff that is the same
     foreach ($this->postData as $_key => $_value) {
-      unset($this->postData[$_key]);
+      if ($aUserManifest[$_key] == $_value) {
+        unset($this->postData[$_key]);
+      }
     }
 
     if (empty($this->postData)) {
