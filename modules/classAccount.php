@@ -42,6 +42,35 @@ class classAccount {
   * Update a user manifest
   ********************************************************************************************************************/
   public function updateUserManifest($aUserManifest) {
+    if (!$this->postData['username']) {
+      funcError('Username was not found in POST');
+    }
+
+    if ($this->postData['username'] != $aUserManifest['username']) {
+      funcError('POST Slug does not match GET/Manifest Slug');
+    }
+
+    // Hackers are a superstitious cowardly lot
+    if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
+      unset($this->postData['active']);
+      unset($this->postData['slug']);
+    }
+
+    // Remove stuff that is the same
+    foreach ($this->postData as $_key => $_value) {
+      unset($this->postData[$_key]);
+    }
+
+    if (empty($this->postData)) {
+      $this->postData = null;
+    }
+
+    if ($this->postData['username'] ?? false) {
+      funcError('Username is still existing in post data');
+    }
+
+    // return if null cause no changes needed
+
     funcError([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], 99);
   }
 
