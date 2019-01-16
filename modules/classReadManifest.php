@@ -174,7 +174,7 @@ class classReadManifest {
     $query = "
       SELECT `id`, `slug`, `type`, `releaseXPI`, `reviewed`, `active`, `xpinstall`
       FROM `addon`
-      AND `id` = ?s
+      WHERE `id` = ?s
       AND `type` IN ('extension', 'theme', 'langpack')
     ";
     $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $_addonID);
