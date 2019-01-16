@@ -9,11 +9,7 @@
     </style>
   </head>
   <body>
-    <div id="container" style="display: none;">
-      <noscript>
-        <h1 class="pulseText" style="text-align: center">Javascript is REQUIRED!</h2>
-        <hr width="100%"/>
-      </noscript>
+    <div id="container">
       <h1>Phoebus Panel</h2>
       <!-- <img src="{$BASE_PATH}logo.png" style="margin-bottom: 8px;"/> -->
       <hr class="menu">
@@ -31,10 +27,16 @@
         {/if}
       </nav>
       <hr class="menu">
-      <noscript>The Phoebus Panel relies on a targeted amount of javascript. Please enable it.</noscript>
-      <div class="fadeIn">
+      <h1 id="js-warning" class="pulseText" style="text-align: center;">Javascript is REQUIRED!</h2>
+      <div id="content" class="fadeIn" style="display: none;">
         {%PAGE_CONTENT}
       </div>
+      <script>
+        var warn = document.getElementById('js-warning');
+        var content = document.getElementById('content');
+        warn.remove();
+        content.removeAttribute('style');
+      </script>
     </div>
     <br />
     <p style="text-align: center;">
