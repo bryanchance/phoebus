@@ -30,7 +30,7 @@ const COMPONENTS = array(
   'discover'        => ROOT_PATH . COMPONENTS_RELPATH . 'discover/discoverPane.php',
   'download'        => ROOT_PATH . COMPONENTS_RELPATH . 'download/addonDownload.php',
   'integration'     => ROOT_PATH . COMPONENTS_RELPATH . 'api/amIntegration.php',
-  'panel'           => ROOT_PATH . COMPONENTS_RELPATH . 'panel/addonPanel.php',
+  'panel'           => ROOT_PATH . COMPONENTS_RELPATH . 'panel/phoebusPanel.php',
   'site'            => ROOT_PATH . COMPONENTS_RELPATH . 'site/addonSite.php',
   'special'         => ROOT_PATH . COMPONENTS_RELPATH . 'special/specialComponent.php'
 );
