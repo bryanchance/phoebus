@@ -145,6 +145,10 @@ img.textbottom {
   border-top-right-radius: 10px;
 }
 
+.mozmenu ul li:last-child {
+  margin-right: 8px;
+}
+
 .mozmenu ul li a,
 .mozmenu ul li a:hover,
 .mozmenu ul li a:visited {
