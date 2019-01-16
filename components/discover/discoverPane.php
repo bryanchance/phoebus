@@ -32,7 +32,7 @@ $arrayFilterSubstitute = array(
   '{%APPLICATION_NAME}' => $strApplication,
   '{%APPLICATION_SHORTNAME}' => $arraySoftwareState['currentApplication'],
   '{%APPLICATION_TYPE}' => $strAppType,
-  '{%EPOCH}' => time();
+  '{%EPOCH}' => time()
 );
 
 foreach ($arrayFilterSubstitute as $_key => $_value) {
