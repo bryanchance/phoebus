@@ -32,7 +32,7 @@ class classAccount {
       'username'      => funcUnifiedVariable('post', 'username'),
       'password'      => funcUnifiedVariable('post', 'password'),
       'active'        => (bool)funcUnifiedVariable('post', 'active'),
-      'level'         => funcUnifiedVariable('post', 'level'),
+      'level'         => (int)funcUnifiedVariable('post', 'level'),
       'displayName'   => funcUnifiedVariable('post', 'displayName'),
       'email'         => funcUnifiedVariable('post', 'email'),
     );
