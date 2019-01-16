@@ -157,7 +157,7 @@ img.textbottom {
   text-decoration: none;
 }
 
-.mozmenu ul li a:hover {
+.mozmenu ul li:hover {
   background-color: #747f96;
 }
 
