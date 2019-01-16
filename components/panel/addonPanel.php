@@ -328,7 +328,15 @@ elseif (startsWith($arraySoftwareState['requestPath'], URI_ADMIN)){
 
           // Deal with writing the updated user manifest
           if ($boolHasPostData) {
-            $moduleAccount->updateUserManifest($userManifest);
+            $boolUpdate = $moduleAccount->updateUserManifest($userManifest);
+
+            // If an error happened stop.
+            if (!$boolUpdate) {
+              funcError('Something has gone horribly wrong');
+            }
+
+            // Manifest updated go somewhere
+            funcRedirect(URI_ADMIN . '?task=list&what=users');
           }
 
           $moduleGenerateContent->addonSite('admin-edit-account-metadata',

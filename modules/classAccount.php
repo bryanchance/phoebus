@@ -57,6 +57,10 @@ class classAccount {
       unset($this->postData['slug']);
     }
 
+    if ($this->postData['password']) {
+      $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
+    }
+
     // Remove stuff that is the same
     foreach ($this->postData as $_key => $_value) {
       if ($aUserManifest[$_key] == $_value) {
@@ -65,11 +69,7 @@ class classAccount {
     }
 
     if (empty($this->postData)) {
-      $this->postData = null;
-    }
-
-    if ($this->postData && $this->postData['password']) {
-      $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
+      return true;
     }
 
     if ($this->postData['username'] ?? false) {
