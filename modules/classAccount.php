@@ -68,7 +68,7 @@ class classAccount {
       $this->postData = null;
     }
 
-    if ($this->postData['password']) {
+    if ($this->postData && $this->postData['password']) {
       $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
     }
 
