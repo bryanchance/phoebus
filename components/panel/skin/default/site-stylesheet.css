@@ -151,9 +151,14 @@ img.textbottom {
 
 .mozmenu ul li a,
 .mozmenu ul li a:hover,
+.mozmenu ul li a:active,
 .mozmenu ul li a:visited {
   color: white;
   text-decoration: none;
+}
+
+.mozmenu ul li a:hover {
+  background-color: #747f96;
 }
 
 a.active {
