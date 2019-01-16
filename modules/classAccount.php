@@ -54,8 +54,8 @@ class classAccount {
       $this->postData['level'] = $aUserManifest['level'];
     }
 
-    if ($this->postData['level'] >= $arraySoftwareState['authentication']['level'] &&
-        $arraySoftwareState['authentication']['level'] != 5) {
+    if ($arraySoftwareState['authentication']['level'] != 5 &&
+        $this->postData['level'] >= $arraySoftwareState['authentication']['level']) {
       funcError('Nope, not gonna let you set a user level that is the same or higher than your current one...');
     }
 
