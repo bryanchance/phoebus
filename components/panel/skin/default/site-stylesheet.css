@@ -141,7 +141,7 @@ img.textbottom {
   padding: 4px;
   background-color: #697388;
   border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-right-radius: 8px;
 }
 
 .mozmenu ul li a,
