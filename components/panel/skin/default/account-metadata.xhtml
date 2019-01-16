@@ -12,6 +12,7 @@
     elm.removeAttribute('value');
   }
 </script>
+
 <h2>{$PAGE_TITLE}</h2>
 {if $USER_LEVEL >= 3}
 {assign "SUBMENU_STYLE" "vertical-align: middle; margin-left: 2px; margin-right: 2px"}
@@ -78,11 +79,11 @@
   </tr>
   <tr>
     <td>Display Name</td>
-    <td><input form="account-metadata" name="displayName" type="text" size="30" value="{$PAGE_DATA.displayName}" {if $USER_LEVEL < 3}required{/if} /></td>
+    <td><input form="account-metadata" name="displayName" type="text" size="30" value="{$PAGE_DATA.displayName}" {if $USER_LEVEL < 3}required{/if} /> {$USER_LEVEL < 3}<em>* Required</em>{/if}</td>
   </tr>
   <tr>
     <td>E-mail Address</td>
-    <td><input form="account-metadata" name="email" type="email" size="30" value="{$PAGE_DATA.email}" {if $USER_LEVEL < 3}required{/if} /></td>
+    <td><input form="account-metadata" name="email" type="email" size="30" value="{$PAGE_DATA.email}" {if $USER_LEVEL < 3}required{/if} /> {$USER_LEVEL < 3}<em>* Required</em>{/if}</td>
   </tr>
   <tr>
     <td>Password</td>
