@@ -58,7 +58,7 @@ class classAccount {
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
       unset($this->postData['active']);
       unset($this->postData['level']);
-      unset($this->postData['slug']);
+      unset($this->postData['username']);
     }
     else {
       if ($GLOBALS['arraySoftwareState']['authentication']['level'] != 5 &&
