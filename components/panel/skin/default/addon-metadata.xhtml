@@ -9,7 +9,8 @@
     <td>
       {if $USER_LEVEL >= 3}
       <input form="addon-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} /> Active 
-      <input form="addon-metadata" name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed<br />
+      <input form="addon-metadata" name="reviewed" type="checkbox" value="1" {if $PAGE_DATA.reviewed}checked{/if} /> Reviewed 
+      Release XPI: <a href="/?component=download&id={$PAGE_DATA.id}&panel=1">{$PAGE_DATA.releaseXPI}</a>
       {else}
       <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" /> Active 
       <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.reviewed}accept{else}delete{/if}.png" class="aligntop" style="margin-left: 2px" /> Reviewed<br />
