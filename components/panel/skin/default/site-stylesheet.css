@@ -125,12 +125,16 @@ img.textbottom {
   margin-bottom: 8px;
 }
 
-.mozmenu ul li {
+.mozmenu ul {
   float: right;
-  background: transparent url("{$BASE_PATH}header_tab.gif") 100% -600px no-repeat;
-  padding: 0 6px 0 0;
-  margin: 0 1px 0 0;
   border-bottom: 1px solid #515358;
+}
+
+.mozmenu ul li {
+  color: white;
+  font-weight: bold;
+  size: 12px;
+  padding: 0 6px 0 0;
 }
 
 a.active {
