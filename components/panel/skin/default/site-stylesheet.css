@@ -123,6 +123,7 @@ img.textbottom {
   height: 70px;
   border-radius: 8px;
   margin-bottom: 8px;
+  float: right;
 }
 
 .mozmenu ul li {
@@ -130,7 +131,6 @@ img.textbottom {
   min-height: 26px;
   max-height: 26px;
   display: inline-block;
-  float: right;
   list-style-type: none;
   margin: 0;
   padding: 0;
