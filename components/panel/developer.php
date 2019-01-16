@@ -32,7 +32,7 @@ switch ($arraySoftwareState['requestPath']) {
       funcRedirect(URI_ACCOUNT);
     }
 
-    $moduleGenerateContent->addonSite('developer-account', 'Account Page', $arraySoftwareState['authentication']);
+    $moduleGenerateContent->addonSite('developer-account', 'Your Account', $arraySoftwareState['authentication']);
     break;
   case URI_ADDONS:
     // Serve the Developer Add-ons page
