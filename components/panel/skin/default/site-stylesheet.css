@@ -131,6 +131,9 @@ img.textbottom {
 
 .mozmenu ul li {
   float: right;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   color: white;
   font-weight: bold;
   size: 12px;
