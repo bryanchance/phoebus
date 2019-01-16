@@ -54,17 +54,25 @@ class classAccount {
       $this->postData['level'] = $aUserManifest['level'];
     }
 
-    if ($GLOBALS['arraySoftwareState']['authentication']['level'] != 5 &&
-        $this->postData['level'] >= $GLOBALS['arraySoftwareState']['authentication']['level']) {
-      funcError('Nope, not gonna let you set a user level that is the same or higher than your current one...');
-    }
-
     // Hackers are a superstitious cowardly lot
     if ($GLOBALS['arraySoftwareState']['authentication']['level'] < 3) {
       unset($this->postData['active']);
       unset($this->postData['level']);
       unset($this->postData['slug']);
-    }  
+    }
+    else {
+      if ($GLOBALS['arraySoftwareState']['authentication']['level'] != 5 &&
+          $this->postData['level'] >= $GLOBALS['arraySoftwareState']['authentication']['level']) {
+        switch ($GLOBALS['arraySoftwareState']['authentication']['username']) {
+          $this->postData['username']:
+            if ($this->postData['level'] < $GLOBALS['arraySoftwareState']['authentication']['level']) {
+              break;
+            }
+          default:
+            funcError('Seriously, did you think manipulating user levels was going to work? I\'m disappointed!');
+        }
+      }
+    }
 
     if ($this->postData['password']) {
       $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
