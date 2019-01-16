@@ -47,7 +47,7 @@ function funcCheckAccessLevel($aLevel, $aReturnNull = null) {
   }
 
   if (!$aReturnNull) {
-    funcRedirect('/panel/');
+    funcRedirect('/panel/login/');
   }
 
   return null;
