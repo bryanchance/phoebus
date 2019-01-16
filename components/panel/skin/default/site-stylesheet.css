@@ -118,6 +118,22 @@ img.textbottom {
   width: 100%;
 }
 
+.mozmenu {
+  background: url("{$BASE_PATH}logo.png") no-repeat;
+  height: 70px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.mozmenu ul li {
+  float: right;
+  background: transparent url("{$BASE_PATH}header_tab.gif") 100% -600px no-repeat;
+  padding: 0 6px 0 0;
+  margin: 0 1px 0 0;
+  border-bottom: 1px solid #515358;
+}
+}
+
 a.active {
   font-weight: 700;
 }
