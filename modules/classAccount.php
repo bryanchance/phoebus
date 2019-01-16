@@ -68,6 +68,10 @@ class classAccount {
       $this->postData = null;
     }
 
+    if ($this->postData['password']) {
+      $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
+    }
+
     if ($this->postData['username'] ?? false) {
       funcError('Username is still existing in post data');
     }
