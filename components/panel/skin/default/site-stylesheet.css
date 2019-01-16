@@ -139,6 +139,12 @@ img.textbottom {
   size: 14px;
 }
 
+.mozmenu ul li a,
+.mozmenu ul li a:hover,
+.mozmenu ul li a:visited {
+  color: white;
+}
+
 a.active {
   font-weight: 700;
 }
