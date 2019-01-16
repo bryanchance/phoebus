@@ -8,7 +8,7 @@
 $strApplication = ucfist($arraySoftwareState['currentApplication']);
 
 if ($strApplication == 'Palemoon') {
-  $strApplication = 'Pale Moon'
+  $strApplication = 'Pale Moon';
 }
 
 $strAppType = 'application';
