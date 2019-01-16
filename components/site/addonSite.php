@@ -87,7 +87,7 @@ if ($arraySoftwareState['debugMode']) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-// Use a simple switch case to deal with simple URIs
+// Handle URIs
 switch ($arraySoftwareState['requestPath']) {
   case URI_ROOT:
     // Special Case: Interlink should go to Extensions instead of a front page
