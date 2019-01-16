@@ -137,11 +137,12 @@ img.textbottom {
   color: white;
   font-weight: bold;
   font-size: 14px;
+  margin-top: 60px;
   margin-right: 2px;
   padding: 4px;
   background-color: #697388;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .mozmenu ul li a,
