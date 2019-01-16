@@ -93,7 +93,7 @@ function funcDownloadSearchPlugin($aSearchPluginName) {
 
 $strRequestAddonID = funcUnifiedVariable('get', 'id');
 $strRequestAddonVersion = funcUnifiedVariable('get', 'version') ?? 'latest';
-$strRequestPanel = funcUnifiedVariable('get', 'panel');
+$boolRequestPanel = funcUnifiedVariable('get', 'panel');
 $boolRequestBinaryStream = in_array('disable-xpinstall', TARGET_APPLICATION_SITE[$arraySoftwareState['currentApplication']]['features']);
                     
 
@@ -108,7 +108,7 @@ if (array_key_exists($strRequestAddonID, classReadManifest::SEARCH_PLUGINS_DB)) 
   funcDownloadSearchPlugin(classReadManifest::SEARCH_PLUGINS_DB[$strRequestAddonID]);
 }
 else {
-  if ($strRequestPanel) {
+  if ($boolRequestPanel) {
     $addonManifest = $moduleReadManifest->getPanelAddonByID($strRequestAddonID);
     $boolRequestBinaryStream = true;
   }

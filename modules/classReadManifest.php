@@ -177,7 +177,7 @@ class classReadManifest {
       AND `id` = ?s
       AND `type` IN ('extension', 'theme', 'langpack')
     ";
-    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $this->currentApplication, $_addonID);
+    $queryResult = $GLOBALS['moduleDatabase']->query('row', $query, $_addonID);
 
     if (!$queryResult) {
       return null;
