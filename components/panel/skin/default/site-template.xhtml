@@ -27,16 +27,16 @@
         {/if}
       </nav>
       <hr class="menu">
-      <h1 id="js-warning" class="pulseText" style="text-align: center;">Javascript is REQUIRED!</h2>
-      <div id="content" class="fadeIn" style="display: none;">
-        {%PAGE_CONTENT}
-      </div>
       <script>
         var warn = document.getElementById('js-warning');
         var content = document.getElementById('content');
         warn.remove();
         content.removeAttribute('style');
       </script>
+      <h1 id="js-warning" class="pulseText" style="text-align: center;">Javascript is REQUIRED!</h2>
+      <div id="content" class="fadeIn" style="display: none;">
+        {%PAGE_CONTENT}
+      </div>
     </div>
     <br />
     <p style="text-align: center;">
