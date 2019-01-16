@@ -266,8 +266,8 @@ a.download-beta:hover {
 }
 
 .addonTable tr:first-child {
-    background:#515358;
-    color:#fff;
+    background: #2a3753;
+    color: #fff;
 }
 
 .addonTable[metadata] tr td {
