@@ -127,11 +127,11 @@ img.textbottom {
 
 .mozmenu ul {
   border-bottom: 1px solid #515358;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .mozmenu ul li {
-  display: table-cell;
-  vertical-align: middle;
   float: right;
   list-style-type: none;
   margin: 0;
