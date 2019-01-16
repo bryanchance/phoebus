@@ -122,7 +122,7 @@ img.textbottom {
   background: url("{$BASE_PATH}logo.png") no-repeat;
   height: 70px;
   min-height: 70px;
-  max-height: 70px;
+  height: 70px;
   border-radius: 8px;
   margin-bottom: 8px;
 }
@@ -138,7 +138,7 @@ img.textbottom {
   color: white;
   font-weight: bold;
   font-size: 14px;
-  margin-top: 0px;
+  margin-top: 41px;
   margin-right: 1px;
   padding: 2px 8px 0px 8px;
   background-color: #697388;
