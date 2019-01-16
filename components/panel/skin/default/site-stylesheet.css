@@ -122,7 +122,7 @@ img.textbottom {
   background: url("{$BASE_PATH}logo.png") no-repeat;
   height: 70px;
   border-radius: 8px;
-  margin-top: 8px;
+  margin-top: 0px;
   margin-bottom: 8px;
 }
 
