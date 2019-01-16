@@ -76,7 +76,7 @@ class classAccount {
       funcError('Username is still existing in post data');
     }
 
-    funcError([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], 99);
+    print(var_export([$GLOBALS['arraySoftwareState']['authentication'], $this->postData], true);
   }
 
   /********************************************************************************************************************
