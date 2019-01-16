@@ -65,7 +65,7 @@ class classAccount {
     }
 
     if (empty($this->postData)) {
-      return true;
+      $this->postData = null;
     }
 
     if ($this->postData['password']) {
