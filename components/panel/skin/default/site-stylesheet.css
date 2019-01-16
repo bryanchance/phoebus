@@ -126,11 +126,11 @@ img.textbottom {
 }
 
 .mozmenu ul {
-  float: right;
   border-bottom: 1px solid #515358;
 }
 
 .mozmenu ul li {
+  float: right;
   color: white;
   font-weight: bold;
   size: 12px;
