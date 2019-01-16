@@ -424,8 +424,7 @@ elseif (startsWith($arraySoftwareState['phpRequestURI'], '/special/')) {
 // --------------------------------------------------------------------------------------------------------------------
 
 // Load component based on requestComponent
-if ($arraySoftwareState['requestComponent'] &&
-    array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
+if ($arraySoftwareState['requestComponent'] && array_key_exists($arraySoftwareState['requestComponent'], COMPONENTS)) {
   require_once(COMPONENTS[$arraySoftwareState['requestComponent']]);
 }
 else {
