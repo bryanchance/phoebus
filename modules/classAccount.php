@@ -50,7 +50,7 @@ class classAccount {
       funcError('POST Slug does not match GET/Manifest Slug');
     }
 
-    if ($this->postData['level'] === 0) {
+    if (!in_array($this->postData['level'], [1, 2, 3, 4, 5])) {
       $this->postData['level'] = $aUserManifest['level'];
     }
 
