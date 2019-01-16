@@ -130,6 +130,8 @@ img.textbottom {
 }
 
 .mozmenu ul li {
+  display: table-cell;
+  vertical-align: middle;
   float: right;
   list-style-type: none;
   margin: 0;
