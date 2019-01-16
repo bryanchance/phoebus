@@ -103,10 +103,26 @@ switch ($arraySoftwareState['requestPath']) {
       funcRedirect(URI_ADMIN . '?task=update&what=user&slug=' . $arraySoftwareState['authentication']['username']);
     }
 
+    $userManifest = $moduleAccount->getSingleUser($arraySoftwareState['authentication']['username'], true);
+
+    // Check if manifest is valid
+    if (!$userManifest) {
+      funcError('User Manifest is null');
+    }
+
     // Deal with writing the updated user manifest
     if ($boolHasPostData) {
-      funcError($_POST, 98);
+      $boolUpdate = $moduleAccount->updateUserManifest($userManifest);
+
+      // If an error happened stop.
+      if (!$boolUpdate) {
+        funcError('Something has gone horribly wrong');
+      }
+
+      // Manifest updated go somewhere
+      funcRedirect(URI_ACCOUNT);
     }
+
     $moduleGenerateContent->addonSite('developer-account', 'Account Page', $arraySoftwareState['authentication']);
     break;
 }
