@@ -125,10 +125,6 @@ img.textbottom {
   margin-bottom: 8px;
 }
 
-.mozmenu ul {
-  border-bottom: 1px solid #515358;
-}
-
 .mozmenu ul li {
   height: 26px;
   min-height: 26px;
@@ -146,6 +142,7 @@ img.textbottom {
   background-color: #697388;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom: 1px solid #515358;
 }
 
 .mozmenu ul:last-child {
