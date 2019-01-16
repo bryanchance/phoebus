@@ -31,7 +31,7 @@ class classAccount {
     $this->postData = array(
       'username'      => funcUnifiedVariable('post', 'username'),
       'password'      => funcUnifiedVariable('post', 'password'),
-      'active'        => funcUnifiedVariable('post', 'active'),
+      'active'        => (bool)funcUnifiedVariable('post', 'active'),
       'level'         => funcUnifiedVariable('post', 'level'),
       'displayName'   => funcUnifiedVariable('post', 'displayName'),
       'email'         => funcUnifiedVariable('post', 'email'),

@@ -15,8 +15,8 @@ class classWriteManifest {
 
     $this->postData = array(
       'slug'          => funcUnifiedVariable('post', 'slug'),
-      'active'        => funcUnifiedVariable('post', 'active'),
-      'reviewed'      => funcUnifiedVariable('post', 'reviewed'),
+      'active'        => (bool)funcUnifiedVariable('post', 'active'),
+      'reviewed'      => (bool)funcUnifiedVariable('post', 'reviewed'),
       'category'      => funcUnifiedVariable('post', 'category'),
       'license'       => funcUnifiedVariable('post', 'license'),
       'repository'    => funcUnifiedVariable('post', 'repository'),
