@@ -5,7 +5,7 @@
 
 // == | Main | ================================================================
 
-$strApplication = ucfist($arraySoftwareState['currentApplication']);
+$strApplication = ucfirst($arraySoftwareState['currentApplication']);
 
 if ($strApplication == 'Palemoon') {
   $strApplication = 'Pale Moon';
