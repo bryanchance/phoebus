@@ -184,10 +184,6 @@ function funcUnifiedVariable($_type, $_value, $_allowFalsy = null) {
       break;
     case 'post':
       $finalValue = $_POST[$_value] ?? null;
-
-      if ($finalValue === '1') {
-        $finalValue = true;
-      }
       break;
     case 'server':
       $finalValue = $_SERVER[$_value] ?? null;
