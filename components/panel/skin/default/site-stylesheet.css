@@ -144,7 +144,7 @@ img.textbottom {
 .mozmenu ul li a:hover,
 .mozmenu ul li a:visited {
   color: white;
-  decoration: none;
+  text-decoration: none;
 }
 
 a.active {
