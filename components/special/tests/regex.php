@@ -1,6 +1,6 @@
 <?php
 
-$regex = '/[^-a-z0-9_\-]/';
+$regex = '/[^a-z0-9_\-]/';
 
 $arrayUsernames = array(
   'mattatobin',
