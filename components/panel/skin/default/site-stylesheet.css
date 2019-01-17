@@ -258,7 +258,7 @@ a.download-beta:hover {
   padding-bottom: 2px;
 }
 
-.single-row tr:nth-child(odd) {
+.single-row tr:nth-child(odd):not[normal] {
   background:#eee;
 }
 
