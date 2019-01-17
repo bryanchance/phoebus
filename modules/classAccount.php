@@ -48,13 +48,13 @@ class classAccount {
     if (!$this->postData['username'] ||
         strlen($this->postData['username']) < 3 ||
         strlen($this->postData['username']) > 32) {
-      funcError('You did not specify a valid username. Usernames must be 3+ chars not exceeding 32 chars.')
+      funcError('You did not specify a valid username. Usernames must be 3+ chars not exceeding 32 chars.');
     }
 
     if (!$this->postData['password'] ||
         strlen($this->postData['password']) < 8 ||
         strlen($this->postData['password']) > 64 ) {
-      funcError('You did not specify a valid password. Passwords must be 8+ chars not exceeding 64 chars.')
+      funcError('You did not specify a valid password. Passwords must be 8+ chars not exceeding 64 chars.');
     }
 
     $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
