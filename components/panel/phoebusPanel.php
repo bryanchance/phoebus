@@ -30,7 +30,6 @@ $arraySoftwareState['requestPanelTask'] = funcUnifiedVariable('get', 'task');
 $arraySoftwareState['requestPanelWhat'] = funcUnifiedVariable('get', 'what');
 $arraySoftwareState['requestPanelSlug'] = funcUnifiedVariable('get', 'slug');
 
-
 // ====================================================================================================================
 
 // == | Functions | ===================================================================================================
@@ -87,6 +86,10 @@ switch ($arraySoftwareState['requestPath']) {
     break;
   case URI_REG:
     //funcSendHeader('501');
+    if ($boolHasPostData) {
+      $moduleAccount->registerUser();
+    }
+
     $moduleGenerateContent->addonSite('panel-account-registration', 'Register an account');
     break;
   case URI_LOGIN:
