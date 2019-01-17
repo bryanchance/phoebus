@@ -47,7 +47,7 @@ class classAccount {
     $this->postData['active'] = null;
     $this->postData['level'] = 1;
 
-    $username = preg_replace($regex, '', $this->postData['username'];
+    $username = preg_replace($regex, '', $this->postData['username']);
     if (!$this->postData['username'] ||
         strlen($this->postData['username']) < 3 ||
         strlen($this->postData['username']) > 32 ||
