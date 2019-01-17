@@ -13,7 +13,7 @@ $arrayUsernames = array(
 $arrayFinalUsernames = [];
 
 foreach ($arrayUsernames as $_value) {
-  $arrayFinalUsernames[] = preg_replace($regex, $_value);
+  $arrayFinalUsernames[] = preg_replace($regex, '', $_value);
 }
 
 funcError([$arrayUsernames, $arrayFinalUsernames], 99);
