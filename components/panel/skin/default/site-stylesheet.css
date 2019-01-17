@@ -247,7 +247,6 @@ a.download-beta:hover {
 .addonTable {
   width: 100%;
   border-spacing: 0px 0px;
-  background: transparent;
 }
 
 .addonTable th {
@@ -267,7 +266,7 @@ a.download-beta:hover {
   background:#eee;
 }
 
-.addonTable tr:first-child:not[normal] {
+.addonTable tr:first-child: {
     background: #2a3753;
     color: #fff;
 }
