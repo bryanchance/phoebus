@@ -41,6 +41,30 @@ class classAccount {
   /********************************************************************************************************************
   * Update a user manifest
   ********************************************************************************************************************/
+  public function registerUser() {
+    $this->postData['active'] = null;
+    $this->postData['level'] = 1;
+
+    if (!$this->postData['username'] ||
+        strlen($this->postData['username']) < 3 ||
+        strlen($this->postData['username']) > 32) {
+      funcError('You did not specify a valid username. Usernames must be 3+ chars not exceeding 32 chars.')
+    }
+
+    if (!$this->postData['password'] ||
+        strlen($this->postData['password']) < 8 ||
+        strlen($this->postData['password']) > 64 ) {
+      funcError('You did not specify a valid password. Passwords must be 8+ chars not exceeding 64 chars.')
+    }
+
+    $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
+
+
+  }
+
+  /********************************************************************************************************************
+  * Update a user manifest
+  ********************************************************************************************************************/
   public function updateUserManifest($aUserManifest) {
     if (!$this->postData['username']) {
       funcError('Username was not found in POST');
@@ -117,9 +141,12 @@ class classAccount {
 
     foreach ($allUsers as $_key => $_value) {
       unset($allUsers[$_key]['password']);
-      $allUsers[$_key]['addons'] = json_decode($_value['addons']);
       $allUsers[$_key]['active'] = (bool)$_value['active'];
       $allUsers[$_key]['level'] = (int)$_value['level'];
+      $allUsers[$_key]['addons'] = json_decode($_value['addons']);
+      if ($_value['data']) {
+        $allUsers[$_key]['data'] = json_decode($_value['data']);
+      }
     }
 
     return $allUsers;
@@ -135,6 +162,9 @@ class classAccount {
     $userManifest['addons'] = json_decode($userManifest['addons']);
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
+    if ($userManifest['data']) {
+      $userManifest['data'] = json_decode($userManifest['data']);
+    }
 
     if ($aRemovePassword) {
       unset($userManifest['password']);

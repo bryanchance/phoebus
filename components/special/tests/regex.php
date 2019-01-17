@@ -1,0 +1,19 @@
+<?php
+
+$regex = '/[^-a-z0-9_\-]/'
+
+$arrayUsernames = array(
+  'mattatobin',
+  'cabbage-12',
+  'banana_24',
+  'BEER',
+  'vodka@(*#'
+);
+
+$arrayFinalUsernames = [];
+
+foreach ($arrayUsernames as $_value) {
+  $arrayFinalUsernames[] = preg_replace($regex, $_value);
+}
+
+?>
