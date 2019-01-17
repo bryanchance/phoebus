@@ -42,13 +42,19 @@ class classAccount {
   * Update a user manifest
   ********************************************************************************************************************/
   public function registerUser() {
+    $regex = '/[^a-z0-9_\-]/';
+
     $this->postData['active'] = null;
     $this->postData['level'] = 1;
 
+    $username = preg_replace($regex, '', $this->postData['username'];
     if (!$this->postData['username'] ||
         strlen($this->postData['username']) < 3 ||
-        strlen($this->postData['username']) > 32) {
-      funcError('You did not specify a valid username. Usernames must be 3+ chars not exceeding 32 chars.');
+        strlen($this->postData['username']) > 32 ||
+        $this->postData['username'] !== $username) {
+      funcError('You did not specify a valid username.</li>' .
+                '<li>Usernames must be 3+ chars not exceeding 32 chars.</li>' .
+                '<li>Please use only lower case letters, numbers, and/or underscore (_) or dash (-)');
     }
 
     if (!$this->postData['password'] ||
@@ -59,7 +65,29 @@ class classAccount {
 
     $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
 
+    if (!$this->postData['email']) {
+      funcError('You did not specify a valid email address. You will not be able to activate your account without one');
+    }
 
+    if (!$this->postData['displayName']) {
+      funcError('You did not specify a display name.');
+    }
+
+    $query = "SELECT `username`, `email` FROM `user` WHERE `username` = ?s OR `email` = ?s";
+    (bool)$isUsernameOrEmailExisting = $GLOBALS['moduleDatabase']->query('rows',
+                                                                         $query,
+                                                                         $this->postData['username'],
+                                                                         $this->postData['email']);
+
+    if ($isUsernameOrEmailExisting) {
+      funcError('Your username or email address already exists in our database. Please select another.</li>' .
+                '<li>You may only have one account.');
+    }
+
+    $hash = hash('sha256', time() . $this->postData['username'] . $this->postData['email'] . time());
+    $this->postData['data'] = json_encode(array('verification' => $hash), 448);
+
+    funcError($this->postData, 99);
   }
 
   /********************************************************************************************************************
