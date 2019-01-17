@@ -74,7 +74,7 @@ if (!in_array('https', TARGET_APPLICATION_SITE[$arraySoftwareState['currentAppli
             '<li>If all else fails you can always use the Panel at the <a href="https://addons.palemoon.org/panel/">Pale Moon Add-ons Site</a>.');
 }
 
-if ($_SERVER['SCHEME'] != 'https') {
+if ($arraySoftwareState['currentScheme'] != 'https') {
   funcRedirect('https://' . $arraySoftwareState['currentDomain'] . '/panel/');
 }
 
