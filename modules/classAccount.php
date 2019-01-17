@@ -44,7 +44,7 @@ class classAccount {
   public function registerUser() {
     $regex = '/[^a-z0-9_\-]/';
 
-    $this->postData['active'] = null;
+    $this->postData['active'] = false;
     $this->postData['level'] = 1;
 
     $username = preg_replace($regex, '', $this->postData['username']);
