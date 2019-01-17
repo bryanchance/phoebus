@@ -1,6 +1,6 @@
 <?php
 
-$regex = '/[^-a-z0-9_\-]/'
+$regex = '/[^-a-z0-9_\-]/';
 
 $arrayUsernames = array(
   'mattatobin',
@@ -16,4 +16,5 @@ foreach ($arrayUsernames as $_value) {
   $arrayFinalUsernames[] = preg_replace($regex, $_value);
 }
 
+funcError([$arrayUsernames, $arrayFinalUsernames], 99);
 ?>
