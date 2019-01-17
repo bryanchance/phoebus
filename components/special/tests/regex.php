@@ -7,7 +7,9 @@ $arrayUsernames = array(
   'cabbage-12',
   'banana_24',
   'BEER',
-  'vodka@(*#'
+  'vodka@(*#',
+  '_vulcan',
+  '-gamera'
 );
 
 $arrayFinalUsernames = [];
