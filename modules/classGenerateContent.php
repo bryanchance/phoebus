@@ -140,6 +140,9 @@ class classGenerateContent {
       case 'cat-search-plugins':
         $content = $this->getContentFile('searchplugin-category.xhtml');
         break;
+      case 'panel-account-registration':
+         $content = $this->getContentFile('account-registration.xhtml');
+         break;
       case 'developer-account':
       case 'admin-edit-account-metadata':
         $content = $this->getContentFile('account-metadata.xhtml');

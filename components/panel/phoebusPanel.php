@@ -86,7 +86,8 @@ switch ($arraySoftwareState['requestPath']) {
     $moduleGenerateContent->addonSite('panel-frontpage.xhtml', 'Landing Page');
     break;
   case URI_REG:
-    funcSendHeader('501');
+    //funcSendHeader('501');
+    $moduleGenerateContent->addonSite('panel-account-registration', 'Register an account');
     break;
   case URI_LOGIN:
     $moduleAccount->authenticate();
