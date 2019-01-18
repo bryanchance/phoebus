@@ -308,6 +308,7 @@ function funcUsers() {
   $arrayGlobJSON = glob('../.vsftpd/users/*.json');
   $arrayAdmins = json_decode(file_get_contents(ADMIN_JSON_FILE), true);
   $arrayFinalUsers = array();
+  $time = time();
 
   // Process Administrators
   // "addons-team" is not actually an administrator but it is stored in this json so..
@@ -315,7 +316,7 @@ function funcUsers() {
     $_temp = $_value;
     $_temp['addons'] = json_encode($_temp['addons'], 320);
     $extraData = array(
-      'registered' => time(),
+      'registered' => $time,
       'verification' => null
     );
     $_temp['extraData'] = json_encode($extraData, 320);
@@ -355,7 +356,7 @@ function funcUsers() {
 
     $_temp['addons'] = json_encode($_json['addons'], 320);
     $extraData = array(
-      'registered' => time(),
+      'registered' => $time,
       'verification' => null
     );
     $_temp['extraData'] = json_encode($extraData, 320);
