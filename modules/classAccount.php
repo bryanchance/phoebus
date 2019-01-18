@@ -139,7 +139,11 @@ class classAccount {
       if ($aUserManifest['extraData']['verification'] && $this->postData['active']) {
         $this->postData['extraData'] = $aUserManifest['extraData'];
         $this->postData['extraData']['verification'] = null;
+
+        unset($aUserManifest['extraData']['regDate']);
         $aUserManifest['extraData'] = json_encode($aUserManifest['extraData'], 320);
+
+        unset($this->postData['extraData']['regDate']);
         $this->postData['extraData'] = json_encode($this->postData['extraData'], 320);
       }
     }
