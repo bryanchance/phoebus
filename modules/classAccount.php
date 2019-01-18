@@ -80,7 +80,7 @@ class classAccount {
                                                                          $this->postData['email']);
 
     if ($isUsernameOrEmailExisting) {
-      funcError('Your username or email address already exists in our database. Please select another.</li>' .
+      funcError('Your username or email address is not available. Please select another.</li>' .
                 '<li>You may only have one account.');
     }
 
