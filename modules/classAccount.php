@@ -88,7 +88,7 @@ class classAccount {
     $hash = hash('sha256', time() . $this->postData['username'] . $this->postData['email'] . $code);
 
     $extraData = array(
-      'registered' => time(),
+      'regEpoch' => time(),
       'verification' => $hash
     );
 
@@ -179,6 +179,7 @@ class classAccount {
       $allUsers[$_key]['active'] = (bool)$_value['active'];
       $allUsers[$_key]['level'] = (int)$_value['level'];
       $allUsers[$_key]['extraData'] = json_decode($_value['extraData']);
+      $allUsers[$_key]['extraData']['regDate'] = date('F j, Y', $allUsers[$_key]['extraData']['regEpoch']);
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
     }
 
@@ -195,6 +196,7 @@ class classAccount {
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
     $userManifest['extraData'] = json_decode($userManifest['extraData']);
+    $userManifest['extraData']['regDate'] = date('F j, Y', $userManifest['extraData']['regEpoch']);
     $userManifest['addons'] = json_decode($userManifest['addons']);
 
     if ($aRemovePassword) {

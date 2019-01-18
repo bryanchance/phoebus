@@ -316,7 +316,7 @@ function funcUsers() {
     $_temp = $_value;
     $_temp['addons'] = json_encode($_temp['addons'], 320);
     $extraData = array(
-      'registered' => $time,
+      'regEpoch' => $time,
       'verification' => null
     );
     $_temp['extraData'] = json_encode($extraData, 320);
@@ -356,7 +356,7 @@ function funcUsers() {
 
     $_temp['addons'] = json_encode($_json['addons'], 320);
     $extraData = array(
-      'registered' => $time,
+      'regEpoch' => $time,
       'verification' => null
     );
     $_temp['extraData'] = json_encode($extraData, 320);
