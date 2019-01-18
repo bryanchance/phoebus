@@ -272,6 +272,8 @@ class classAccount {
       $this->promptCredentials();
     }
 
+    // Deal with inactive users.. If inactive but not validated then send to validation page
+    // else prompt forever
     if (!$userManifest['active']) {
       if ($userManifest['extraData']['verification']) {
         funcRedirect(URI_VERIFY);
@@ -279,6 +281,13 @@ class classAccount {
 
       $userManifest = null;
       $this->promptCredentials();
+    }
+
+    // Levels 1 and 2 need to add their email and displayName so force them
+    if ($userManifest['level'] < 3 && $GLOBALS['arraySoftwareState']['requestPath'] != URI_ACCOUNT) {
+      if (!$userManifest['email'] || !$userManifest['displayName']) {
+        funcRedirect(URI_ACCOUNT);
+      }
     }
 
     // We don't need the password anymore at this point so kill it
