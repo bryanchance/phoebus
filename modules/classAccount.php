@@ -267,10 +267,16 @@ class classAccount {
 
     // If nothing from SQL or the user isn't active or the password doesn't match
     // then reprompt until the user cancels
-    if (!$userManifest || !password_verify($strPassword, $userManifest['password']) || !$userManifest['active']) {
-      if (($userManifest['extraData']['validation'] ?? false)) {
+    if (!$userManifest || !password_verify($strPassword, $userManifest['password'])) {
+      $userManifest = null;
+      $this->promptCredentials();
+    }
+
+    if (!$userManifest['active']) {
+      if ($userManifest['extraData']['verification']) {
         funcRedirect(URI_VERIFY);
       }
+
       $userManifest = null;
       $this->promptCredentials();
     }
