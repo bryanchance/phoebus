@@ -88,6 +88,7 @@ switch ($arraySoftwareState['requestPath']) {
     //funcSendHeader('501');
     if ($boolHasPostData) {
       $moduleAccount->registerUser();
+      funcError('Done');
     }
 
     $moduleGenerateContent->addonSite('panel-account-registration', 'Registration');
