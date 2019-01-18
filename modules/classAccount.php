@@ -134,6 +134,9 @@ class classAccount {
     }
 
     if ($this->postData['password']) {
+      if (strlen($this->postData['password']) < 8 || strlen($this->postData['password']) > 64 ) {
+        funcError('You did not specify a valid password. Passwords must be 8+ chars not exceeding 64 chars.');
+      }
       $this->postData['password'] = password_hash($this->postData['password'], PASSWORD_BCRYPT);
     }
 
