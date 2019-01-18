@@ -196,6 +196,7 @@ class classAccount {
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
     $_json = json_decode($userManifest['extraData']);
+    funcError($json, -1)
     $_json['regDate'] = date('F j, Y', $_json['regEpoch']);
     $userManifest['extraData'] = $_json;
     $userManifest['addons'] = json_decode($userManifest['addons']);
