@@ -8,6 +8,7 @@
 // Constants
 const URI_PANEL     = '/panel/';
 const URI_REG       = URI_PANEL . 'registration/';
+const URI_VERIFY    = URI_PANEL . 'verification/';
 const URI_LOGIN     = URI_PANEL . 'login/';
 const URI_LOGOUT    = URI_PANEL . 'logout/';
 const URI_ACCOUNT   = URI_PANEL . 'account/';
@@ -93,6 +94,8 @@ switch ($arraySoftwareState['requestPath']) {
 
     $moduleGenerateContent->addonSite('panel-account-registration', 'Registration');
     break;
+  case URI_VERIFY:
+    funcSendHeader('501');
   case URI_LOGIN:
     $moduleAccount->authenticate();
     if (funcCheckAccessLevel(3, true)) {
