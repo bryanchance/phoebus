@@ -36,7 +36,7 @@ switch ($arraySoftwareState['requestPath']) {
       }
 
       // Manifest updated go somewhere
-      funcRedirect(URI_ACCOUNT);
+      funcRedirect(URI_DEV);
     }
 
     $moduleGenerateContent->addonSite('developer-account', 'Your Account', $arraySoftwareState['authentication']);
