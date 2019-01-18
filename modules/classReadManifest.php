@@ -467,7 +467,7 @@ class classReadManifest {
     }
 
     // Set Datastore Paths     
-    if ($addonManifest['type'] == 'external') {
+    if ($addonManifest['type'] == 'external' && contains($addonManifest['id'], '@ex-')) {
       // Extract the legacy external id
       $_oldID = preg_replace('/(.*)\@(.*)/iU', '$2', $addonManifest['id']);
 
