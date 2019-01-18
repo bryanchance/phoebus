@@ -135,6 +135,11 @@ class classAccount {
             funcError('Seriously, did you think manipulating user levels was going to work? I\'m disappointed!');
         }
       }
+
+      if ($aUserManifest['extraData']['verification'] && $this->postData['active']) {
+        $this->postData['extraData'] = $aUserManifest['extraData'];
+        $this->postData['extraData']['verification'] = null;
+      }
     }
 
     if ($this->postData['password']) {
