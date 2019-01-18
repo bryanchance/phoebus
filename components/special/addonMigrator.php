@@ -313,12 +313,12 @@ function funcUsers() {
   // "addons-team" is not actually an administrator but it is stored in this json so..
   foreach ($arrayAdmins as $_value) {
     $_temp = $_value;
-    $_temp['addons'] = json_encode($_temp['addons']);
+    $_temp['addons'] = json_encode($_temp['addons'], 320);
     $extraData = array(
       'registered' => time(),
-      'verification' => $hash,
+      'verification' => null
     );
-    $temp['extraData'] = json_encode($extraData, 448);
+    $temp['extraData'] = json_encode($extraData, 320);
     $arrayFinalUsers[] = $_temp;
     print('Processed Administrator: ' . $_temp['username'] . NEW_LINE);
   }
@@ -353,12 +353,12 @@ function funcUsers() {
       $_temp['level'] = 2;
     }
 
-    $_temp['addons'] = json_encode($_json['addons']);
+    $_temp['addons'] = json_encode($_json['addons'], 320);
     $extraData = array(
       'registered' => time(),
-      'verification' => $hash,
+      'verification' => null
     );
-    $temp['extraData'] = json_encode($extraData, 448);
+    $temp['extraData'] = json_encode($extraData, 320);
     $arrayFinalUsers[] = $_temp;
     print('Processed User: ' . $_temp['username'] . NEW_LINE);
   }
