@@ -54,7 +54,7 @@
       </td>
     </tr>
   {foreachelse}
-  <tr><td colspan="8" style="text-align: center;"><strong>There are no Extensions or Themes</strong></td></tr>
+  <tr><td colspan="8" style="text-align: center;"><strong>{if $USER_LEVEL >= 3}This user has{else}You have{/if} no Extensions or Themes</strong></td></tr>
   {/foreach}
 </table>
 {$key = null}
