@@ -178,7 +178,7 @@ class classAccount {
       unset($allUsers[$_key]['password']);
       $allUsers[$_key]['active'] = (bool)$_value['active'];
       $allUsers[$_key]['level'] = (int)$_value['level'];
-      $allUsers[$_key]['extraData'] = json_decode($_value['extraData']);
+      $allUsers[$_key]['extraData'] = json_decode($_value['extraData'], true);
       $allUsers[$_key]['extraData']['regDate'] = date('F j, Y', $allUsers[$_key]['extraData']['regEpoch']);
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
     }
