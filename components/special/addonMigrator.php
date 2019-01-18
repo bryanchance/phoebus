@@ -314,6 +314,10 @@ function funcUsers() {
   foreach ($arrayAdmins as $_value) {
     $_temp = $_value;
     $_temp['addons'] = json_encode($_temp['addons']);
+    $_temp['extraData'] = array(
+      'registered' => time(),
+      'verification' => null
+    );
     $arrayFinalUsers[] = $_temp;
     print('Processed Administrator: ' . $_temp['username'] . NEW_LINE);
   }
@@ -349,6 +353,10 @@ function funcUsers() {
     }
 
     $_temp['addons'] = json_encode($_json['addons']);
+    $_temp['extraData'] = array(
+      'registered' => time(),
+      'verification' => null
+    );
     $arrayFinalUsers[] = $_temp;
     print('Processed User: ' . $_temp['username'] . NEW_LINE);
   }

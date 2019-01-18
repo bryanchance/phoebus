@@ -86,7 +86,13 @@ class classAccount {
 
     $code = funcUnifiedVariable('var', @file_get_contents(ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/secret.code')) ?? time();
     $hash = hash('sha256', time() . $this->postData['username'] . $this->postData['email'] . $code);
-    $this->postData['data'] = json_encode(array('verification' => $hash), 448);
+
+    $extraData = array(
+      'registered' => time(),
+      'verification' => $hash
+    );
+
+    $this->postData['extraData'] = json_encode($extraData, 448);
 
     funcError($this->postData, 99);
   }
@@ -172,10 +178,8 @@ class classAccount {
       unset($allUsers[$_key]['password']);
       $allUsers[$_key]['active'] = (bool)$_value['active'];
       $allUsers[$_key]['level'] = (int)$_value['level'];
+      $allUsers[$_key]['extraData'] = json_decode($_value['extraData']);
       $allUsers[$_key]['addons'] = json_decode($_value['addons']);
-      if ($_value['data']) {
-        $allUsers[$_key]['data'] = json_decode($_value['data']);
-      }
     }
 
     return $allUsers;
@@ -188,12 +192,10 @@ class classAccount {
     $query = "SELECT * FROM `user` WHERE `username` = ?s";
     $userManifest = $GLOBALS['moduleDatabase']->query('row', $query, $aUserName);
 
-    $userManifest['addons'] = json_decode($userManifest['addons']);
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
-    if ($userManifest['data']) {
-      $userManifest['data'] = json_decode($userManifest['data']);
-    }
+    $userManifest['extraData'] = json_decode($userManifest['extraData']);
+    $userManifest['addons'] = json_decode($userManifest['addons']);
 
     if ($aRemovePassword) {
       unset($userManifest['password']);
