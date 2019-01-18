@@ -35,11 +35,10 @@
     <td>
       {if $USER_LEVEL >= 3}
       <input form="account-metadata" name="active" type="checkbox" value="1" {if $PAGE_DATA.active}checked{/if} />
-      {if $PAGE_DATA.extraData.verification} - Unverified{/if}
       {else}
       <img src="{$BASE_PATH}../shared/{if $PAGE_DATA.active}accept{else}delete{/if}.png" class="aligntop" />
       {/if}
-      Active
+      Active {if $PAGE_DATA.extraData.verification} | <strong>Unverified</strong>{/if}
     </td>
   </tr>
   <tr>
