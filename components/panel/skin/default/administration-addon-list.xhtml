@@ -32,7 +32,8 @@
           <a href="{$PAGE_PATH}?task=update&what=release&slug={$key.slug}" title="Release a new version of this Add-on">
             <img src="{$BASE_PATH}../shared/plugin_add.png" alt="New Version" />
           </a>
-          {else}
+          {/if}
+          {if $key.type == 'external'}
           <a href="{$key.url}" target="_blank" title="View external site">
             <img src="{$BASE_PATH}../shared/world.png" alt="External Link" />
           </a>
