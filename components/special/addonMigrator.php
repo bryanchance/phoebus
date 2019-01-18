@@ -318,7 +318,7 @@ function funcUsers() {
       'registered' => time(),
       'verification' => null
     );
-    $temp['extraData'] = json_encode($extraData, 320);
+    $_temp['extraData'] = json_encode($extraData, 320);
     $arrayFinalUsers[] = $_temp;
     print('Processed Administrator: ' . $_temp['username'] . NEW_LINE);
   }
@@ -358,7 +358,7 @@ function funcUsers() {
       'registered' => time(),
       'verification' => null
     );
-    $temp['extraData'] = json_encode($extraData, 320);
+    $_temp['extraData'] = json_encode($extraData, 320);
     $arrayFinalUsers[] = $_temp;
     print('Processed User: ' . $_temp['username'] . NEW_LINE);
   }
