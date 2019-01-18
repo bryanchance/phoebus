@@ -84,6 +84,8 @@ class classAccount {
                 '<li>You may only have one account.');
     }
 
+    $code = funcUnifiedVariable('var', @file_get_contents(ROOT_PATH . DATASTORE_RELPATH . 'pm-admin/secret.code') ?? time();
+    funcError($code, 99);
     $hash = hash('sha256', time() . $this->postData['username'] . $this->postData['email'] . time());
     $this->postData['data'] = json_encode(array('verification' => $hash), 448);
 
