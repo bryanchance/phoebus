@@ -19,6 +19,8 @@
           <li><a href="/panel/addons/">Your Add-ons</a></li>
           {if $USER_LEVEL >= 3}
             <li><a href="/panel/administration/">Administration</a></li>
+          {else}
+            <li><a href="/panel/developer/">Developer</a></li>
           {/if}
         {else}
           <li><a href="/panel/login/">Login</a></li>
