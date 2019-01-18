@@ -140,7 +140,7 @@ class classAccount {
         $this->postData['extraData'] = $aUserManifest['extraData'];
         $this->postData['extraData']['verification'] = null;
         $aUserManifest['extraData'] = json_encode($aUserManifest['extraData'], 320);
-        $this->postData['extraData'] = json_encode($aUserManifest['extraData'], 320);
+        $this->postData['extraData'] = json_encode($this->postData['extraData'], 320);
       }
     }
 
