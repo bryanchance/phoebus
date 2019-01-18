@@ -93,6 +93,7 @@ class classAccount {
     );
 
     $this->postData['extraData'] = json_encode($extraData, 320);
+    $this->postData['addons'] = '{}';
 
     $query = "INSERT INTO `user` SET ?u";
     $GLOBALS['moduleDatabase']->query('normal', $query, $this->postData);
