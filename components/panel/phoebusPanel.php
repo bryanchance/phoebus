@@ -11,6 +11,7 @@ const URI_REG       = URI_PANEL . 'registration/';
 const URI_VERIFY    = URI_PANEL . 'verification/';
 const URI_LOGIN     = URI_PANEL . 'login/';
 const URI_LOGOUT    = URI_PANEL . 'logout/';
+const URI_DEV       = URI_PANEL . 'developer/';
 const URI_ACCOUNT   = URI_PANEL . 'account/';
 const URI_ADDONS    = URI_PANEL . 'addons/';
 const URI_ADMIN     = URI_PANEL . 'administration/';
@@ -101,11 +102,12 @@ switch ($arraySoftwareState['requestPath']) {
     if (funcCheckAccessLevel(3, true)) {
       funcRedirect(URI_ADMIN);
     }
-    funcRedirect(URI_ADDONS);
+    funcRedirect(URI_DEV);
     break;
   case URI_LOGOUT:
     $moduleAccount->authenticate('logout');
     break;
+  case URI_DEV:
   case URI_ACCOUNT:
   case URI_ADDONS:
     $moduleAccount->authenticate();

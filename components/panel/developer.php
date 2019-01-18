@@ -6,6 +6,13 @@
 // == | Main | ========================================================================================================
 
 switch ($arraySoftwareState['requestPath']) {
+  case URI_DEV:
+    if (funcCheckAccessLevel(3, true)) {
+      funcRedirect(URI_ADMIN);
+    }
+
+    $moduleGenerateContent->addonSite('developer-frontpage.xhtml', 'Add-on Developer');
+    break;
   case URI_ACCOUNT:
     // Users level 3 or above should use the administration codepath
     if (funcCheckAccessLevel(3, true)) {
