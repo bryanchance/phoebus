@@ -92,7 +92,7 @@ class classAccount {
       'verification' => $hash
     );
 
-    $this->postData['extraData'] = json_encode($extraData, 448);
+    $this->postData['extraData'] = json_encode($extraData, 320);
 
     funcError($this->postData, 99);
   }
