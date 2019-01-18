@@ -78,6 +78,10 @@
     <td>{$PAGE_DATA.username}</td>
   </tr>
   <tr>
+    <td>Registered</td>
+    <td>{$PAGE_DATA.extraData.regDate} <em>(NOTE: Migrated FTP Users will have the date their account was migrated)</em></td>
+  </tr>
+  <tr>
     <td>Display Name</td>
     <td><input form="account-metadata" name="displayName" type="text" size="30" value="{$PAGE_DATA.displayName}" {if $USER_LEVEL < 3}required{/if} /> {if $USER_LEVEL < 3}<em>* Required</em>{/if}</td>
   </tr>
