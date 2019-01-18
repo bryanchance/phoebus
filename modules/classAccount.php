@@ -195,8 +195,9 @@ class classAccount {
 
     $userManifest['active'] = (bool)$userManifest['active'];
     $userManifest['level'] = (int)$userManifest['level'];
-    $userManifest['extraData'] = json_decode($userManifest['extraData']);
-    $userManifest['extraData']['regDate'] = date('F j, Y', $userManifest['extraData']['regEpoch']);
+    $_json = json_decode($userManifest['extraData']);
+    $_json['regDate'] = date('F j, Y', $_json['regDate']['regEpoch']);
+    $userManifest['extraData'] = $_json;
     $userManifest['addons'] = json_decode($userManifest['addons']);
 
     if ($aRemovePassword) {
