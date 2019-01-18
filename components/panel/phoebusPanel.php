@@ -90,7 +90,7 @@ switch ($arraySoftwareState['requestPath']) {
       $moduleAccount->registerUser();
     }
 
-    $moduleGenerateContent->addonSite('panel-account-registration', 'Register an account');
+    $moduleGenerateContent->addonSite('panel-account-registration', 'Registration');
     break;
   case URI_LOGIN:
     $moduleAccount->authenticate();
